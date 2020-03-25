@@ -5,7 +5,6 @@
     <string name="register_field_hint">Nombre de usuario</string>
     <string name="done">Hecho</string>
     <string name="platform_title">Plataforma:</string>
-    <string name="platform">Plataforma</string>
     <string name="punctuation_title">Puntuación:</string>
     <string name="ask_punctuation">Puntuar serie:</string>
     <string name="add">Añadir</string>
@@ -19,7 +18,6 @@
     <string name="add_serie_title">Rellena los siguientes campos:</string>
     <string name="serie">Serie</string>
     <string name="category_title">Categoria:</string>
-    <string name="category">Categoria</string>
     <string name="template_user_creator">Añadida por %s, %s</string>
     <string name="template_scorers">Han puntuado esta serie %d persona/s</string>
     <string name="already_scored">¡Ya puntuada!</string>
@@ -35,4 +33,15 @@
     <string name="delete_confirmation_cancel">Cancelar</string>
     <string name="dashboard_last_added_title">Últimas añadidas:</string>
     <string name="dashboard_all_series_title">Todas la series:</string>
+    <string name="images_found">Imágenes encontradas:</string>
+    <string name="filters">Filtros:</string>
+    <string name="category">Categoria</string>
+    <string name="score">Puntuación</string>
+    <string name="platform">Plataforma</string>
+    <string name="order">Orden:</string>
+    <string name="order_recent_to_old">Fecha (de reciente a antigua)</string>
+    <string name="order_old_to_recent">Fecha (de antigua a reciente)</string>
+    <string name="cancel">Cancelar</string>
+    <string name="filter">Filtrar</string>
+    <string name="share">Compartir</string>
 </resources>
