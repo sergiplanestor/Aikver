@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1085736439629",
+    "firebase_url": "https://aikver-2603e.firebaseio.com",
+    "project_id": "aikver-2603e",
+    "storage_bucket": "aikver-2603e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085736439629:android:ad0f06ca677d23e1c7f104",
+        "android_client_info": {
+          "package_name": "bemobile.splanes.com.aikver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085736439629-6ihlkbtt24kkt9j93nd3uqgpnvtjh5vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8p1EzRL3fr7QB-W2ZA-phaTOyP0TGXUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085736439629-6ihlkbtt24kkt9j93nd3uqgpnvtjh5vc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

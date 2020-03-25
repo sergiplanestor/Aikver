@@ -1,0 +1,117 @@
+<resources>
+
+<!-- =========================================================================================== -->
+<!-- App Themes                                                                                  -->
+<!-- =========================================================================================== -->
+    
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/comfortaa_medium</item>
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Text Styles                                                                                 -->
+<!-- =========================================================================================== -->
+
+    <style name="Text">
+        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Text.Light">
+        <item name="android:fontFamily">@font/comfortaa_light</item>
+    </style>
+
+    <style name="Text.SemiBold">
+        <item name="android:fontFamily">@font/comfortaa_semibold</item>
+    </style>
+
+    <style name="Text.Bold">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+
+    <style name="Text.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Header">
+        <item name="android:fontFamily">@font/comfortaa_semibold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="Header.Small">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="Header.Splash">
+        <item name="android:fontFamily">@font/pacifico_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">50dp</item>
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Bottom Sheet Dialog                                                                         -->
+<!-- =========================================================================================== -->
+
+    <style name="SearchViewStyle">
+        <item name="queryBackground">@null</item>
+        <item name="android:queryBackground">@null</item>
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Spinner                                                                                     -->
+<!-- =========================================================================================== -->
+
+    <style name="AppSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Button                                                                                      -->
+<!-- =========================================================================================== -->
+
+    <style name="AppButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="rippleColor">@color/colorAccent</item>
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Pop up                                                                                      -->
+<!-- =========================================================================================== -->
+
+    <style name="AppPopupTheme">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowBackground">@drawable/component_popup_bkg</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
+<!-- =========================================================================================== -->
+<!-- Bottom Sheet Dialog                                                                         -->
+<!-- =========================================================================================== -->
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_bkg</item>
+    </style>
+
+</resources>

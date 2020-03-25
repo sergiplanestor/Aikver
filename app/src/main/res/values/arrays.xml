@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories">
+        <item>Acción</item>
+        <item>Comedia</item>
+        <item>Ciencia Ficción</item>
+        <item>Deporte</item>
+        <item>Documental</item>
+        <item>Fantasia</item>
+        <item>Histórica</item>
+        <item>Romantica</item>
+        <item>Terror</item>
+        <item>Thriller</item>
+    </string-array>
+
+</resources>
