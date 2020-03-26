@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.CheckBox
+import android.widget.FrameLayout
 import android.widget.RadioButton
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.FragmentManager
@@ -14,12 +16,14 @@ import bemobile.splanes.com.aikver.R
 import bemobile.splanes.com.aikver.presentation.common.widget.AppSpinner
 import bemobile.splanes.com.aikver.presentation.common.widget.ScoreView
 import bemobile.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FiltersBottomSheet(
     private val onFilterSet: (response: FiltersModel) -> Unit,
     private val filtersModel: FiltersModel? = null
-): BottomSheetDialogFragment() {
+) : BottomSheetDialogFragment() {
 
     private lateinit var categoryCheckBox: CheckBox
     private lateinit var categorySpinner: AppSpinner
@@ -81,6 +85,25 @@ class FiltersBottomSheet(
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.viewTreeObserver.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val bottomDialog = dialog as BottomSheetDialog?
+                    val bottomSheet =
+                        bottomDialog?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+                    if (bottomSheet != null) {
+                        val behavior = BottomSheetBehavior.from(bottomSheet)
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                        behavior.peekHeight = 0
+                    }
+                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
+        )
     }
 
     private fun bindViews(view: View) {
