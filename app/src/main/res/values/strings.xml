@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Aikver</string>
     <string name="register">Registro</string>
-    <string name="register_help">Introduce tu nombre para poder identificarte!</string>
-    <string name="register_field_hint">Nombre de usuario</string>
+    <string name="register_user_field_hint">Nombre de usuario</string>
+    <string name="register_username_description">
+        Bienvenid@ a Aikver, únicamente es necesario que introduzcas un nombre para poder identificarte.
+    </string>
+    <string name="register_group_description">
+        De manera opcional puedes crear tu propio grupo, al cual tus amigos y conocidos podrán unirse y empezar
+        a compartir series y peliculas. Si lo prefieres, puedes unirte a más grupos o crear los tuyos propios más adelante
+        en la sección de usuario!
+    </string>
+    <string name="optional_field">Campo opcional</string>
+    <string name="register_group_field_hint">Nombre del grupo</string>
     <string name="done">Hecho</string>
     <string name="platform_title">Plataforma:</string>
     <string name="punctuation_title">Puntuación:</string>
@@ -44,4 +53,8 @@
     <string name="cancel">Cancelar</string>
     <string name="filter">Filtrar</string>
     <string name="share">Compartir</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_dashboard">Contenido</string>
+    <string name="title_add">Añadir</string>
 </resources>

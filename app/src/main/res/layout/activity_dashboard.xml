@@ -48,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.serieviewer.SerieViewer
+            <revolhope.splanes.com.aikver.presentation.common.widget.serieviewer.SerieViewer
                 android:id="@+id/lastSerieViewer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.serieviewer.SerieViewer
+            <revolhope.splanes.com.aikver.presentation.common.widget.serieviewer.SerieViewer
                 android:id="@+id/allSerieViewer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

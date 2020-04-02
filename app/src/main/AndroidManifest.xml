@@ -1,48 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bemobile.splanes.com.aikver">
+    package="revolhope.splanes.com.aikver">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name="revolhope.splanes.com.aikver.framework.app.AikverApp"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:name=".framework.app.AikverApp"
         android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".presentation.splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="revolhope.splanes.com.aikver.presentation.menu.MenuActivity"
+            android:label="@string/title_activity_menu" />
 
+        <activity
+            android:name="revolhope.splanes.com.aikver.presentation.splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".presentation.register.RegisterActivity"
+            android:name="revolhope.splanes.com.aikver.presentation.register.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:name=".presentation.dashboard.DashboardActivity"
+            android:name="revolhope.splanes.com.aikver.presentation.dashboard.DashboardActivity"
             android:theme="@style/AppTheme" />
-
         <activity
-            android:name=".presentation.addserie.AddSerieActivity"
+            android:name="revolhope.splanes.com.aikver.presentation.addserie.AddSerieActivity"
             android:label="@string/add_activity_title"
             android:theme="@style/AppTheme" />
-
         <activity
-            android:name=".presentation.searchserie.SearchResultsActivity"
+            android:name="revolhope.splanes.com.aikver.presentation.searchserie.SearchResultsActivity"
             android:label="@string/filter_activity_title"
-            android:theme="@style/AppTheme"/>
-
+            android:theme="@style/AppTheme" />
     </application>
+
 </manifest>

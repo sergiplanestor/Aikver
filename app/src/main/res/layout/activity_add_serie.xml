@@ -75,7 +75,7 @@
 
             </LinearLayout>
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
+            <revolhope.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
                 android:id="@+id/platformViewer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.AppSpinner
+            <revolhope.splanes.com.aikver.presentation.common.widget.AppSpinner
                 android:id="@+id/categorySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/categorySpinner" />
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.ScoreView
+            <revolhope.splanes.com.aikver.presentation.common.widget.ScoreView
                 android:id="@+id/scoreView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

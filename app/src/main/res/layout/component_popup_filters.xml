@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:text="@string/category"/>
 
-        <bemobile.splanes.com.aikver.presentation.common.widget.AppSpinner
+        <revolhope.splanes.com.aikver.presentation.common.widget.AppSpinner
             android:id="@+id/categorySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_weight="1"
             android:text="@string/score" />
 
-        <bemobile.splanes.com.aikver.presentation.common.widget.ScoreView
+        <revolhope.splanes.com.aikver.presentation.common.widget.ScoreView
             android:id="@+id/scoreView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:text="@string/platform" />
 
-        <bemobile.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
+        <revolhope.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
             android:id="@+id/platformView"
             android:layout_width="0dp"
             android:layout_height="match_parent"

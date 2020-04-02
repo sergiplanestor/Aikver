@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:requiresFadingEdge="vertical" />
 
-    <bemobile.splanes.com.aikver.presentation.common.widget.imagepager.CrumbView
+    <revolhope.splanes.com.aikver.presentation.common.widget.imagepager.CrumbView
         android:id="@+id/crumbView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

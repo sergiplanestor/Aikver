@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <bemobile.splanes.com.aikver.presentation.common.widget.ScoreView
+            <revolhope.splanes.com.aikver.presentation.common.widget.ScoreView
                 android:id="@+id/scoreView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
 
     <include layout="@layout/include_loader" />
 
-    <bemobile.splanes.com.aikver.presentation.common.widget.ResultView
+    <revolhope.splanes.com.aikver.presentation.common.widget.ResultView
         android:id="@+id/resultView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
