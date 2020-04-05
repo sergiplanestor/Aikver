@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Aikver</string>
     <string name="register">Registro</string>
+    <string name="login">Login</string>
     <string name="register_user_field_hint">Nombre de usuario</string>
     <string name="register_username_description">
         Bienvenid@ a Aikver, únicamente es necesario que introduzcas un nombre para poder identificarte.
@@ -10,6 +11,15 @@
         a compartir series y peliculas. Si lo prefieres, puedes unirte a más grupos o crear los tuyos propios más adelante
         en la sección de usuario!
     </string>
+    <string name="register_link">Registrarme</string>
+    <string name="register_user_not_registered">
+        No se ha encontrado ningún usuario almacenado, inicia sesión manualmente o regístrate.
+    </string>
+    <string name="login_long">Iniciar sesión</string>
+    <string name="login_username_description">
+        Introduce tu nombre de usuario para poder iniciar sesión
+    </string>
+
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>
     <string name="done">Hecho</string>

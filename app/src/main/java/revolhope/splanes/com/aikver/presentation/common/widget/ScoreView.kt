@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
-import revolhope.splanes.com.aikver.framework.app.dpToPx
 import kotlinx.android.synthetic.main.component_score_view.view.*
+import revolhope.splanes.com.aikver.presentation.common.dpToPx
 
 /**
  * @author sergiplanes on 2020-02-21

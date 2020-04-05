@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.domain.Platform
-import revolhope.splanes.com.aikver.framework.app.dpToPx
+import revolhope.splanes.com.aikver.presentation.common.dpToPx
 
 class PlatformAdapter(
     private val context: Context,
@@ -53,10 +53,10 @@ class PlatformAdapter(
         holder.cardView.layoutParams =
             LinearLayout.LayoutParams(dimension.toInt(), dimension.toInt()).apply {
                 setMargins(
-                    holder.cardView.dpToPx(context, 5),
-                    holder.cardView.dpToPx(context, 5),
-                    holder.cardView.dpToPx(context, 5),
-                    holder.cardView.dpToPx(context, 5)
+                    dpToPx(context, 5),
+                    dpToPx(context, 5),
+                    dpToPx(context, 5),
+                    dpToPx(context, 5)
                 )
             }
 

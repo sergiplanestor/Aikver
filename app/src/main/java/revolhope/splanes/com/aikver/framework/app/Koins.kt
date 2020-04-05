@@ -13,6 +13,13 @@ import revolhope.splanes.com.aikver.interactor.*
 import revolhope.splanes.com.aikver.presentation.detailsserie.DetailsSerieViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import revolhope.splanes.com.aikver.interactor.user.DoLoginUseCase
+import revolhope.splanes.com.aikver.interactor.user.GetUserUseCase
+import revolhope.splanes.com.aikver.interactor.user.RegisterUserUseCase
+import revolhope.splanes.com.aikver.interactor.user.SaveUserLocalUseCase
+import revolhope.splanes.com.aikver.presentation.init.login.LoginViewModel
+import revolhope.splanes.com.aikver.presentation.init.register.RegisterViewModel
+import revolhope.splanes.com.aikver.presentation.init.splash.SplashViewModel
 
 /* Repositories */
 val repositoryModule = module(override = true) {
@@ -28,9 +35,14 @@ val dataSourceModule = module(override = true) {
 
 /* UseCases */
 val useCaseModule = module(override = true) {
+
+    /* User use cases */
     factory { GetUserUseCase(get()) }
     factory { RegisterUserUseCase(get()) }
     factory { DoLoginUseCase(get()) }
+    factory { SaveUserLocalUseCase(get()) }
+
+    /* Series use cases */
     factory { AddSerieUseCase(get()) }
     factory { GetSeriesUseCase(get()) }
     factory { GetRecentSeriesUseCase(get()) }
@@ -46,5 +58,8 @@ val helperModule = module(override = true) {
 }
 
 val viewModelModule = module(override = true) {
+    viewModel { SplashViewModel(get(), get()) }
+    viewModel { RegisterViewModel(get()) }
+    viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { DetailsSerieViewModel(get(), get()) }
 }

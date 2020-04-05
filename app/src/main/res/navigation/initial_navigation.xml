@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/initial_navigation"
+    app:startDestination="@+id/navigation_splash">
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="revolhope.splanes.com.aikver.presentation.init.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splash_to_register"
+            app:destination="@id/navigation_register" />
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="revolhope.splanes.com.aikver.presentation.init.register.RegisterFragment"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_register_to_splash"
+            app:destination="@id/navigation_splash" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="revolhope.splanes.com.aikver.presentation.init.login.LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_splash"
+            app:destination="@id/navigation_splash" />
+    </fragment>
+
+</navigation>

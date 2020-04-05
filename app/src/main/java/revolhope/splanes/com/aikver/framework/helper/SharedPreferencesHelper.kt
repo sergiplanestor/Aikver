@@ -33,7 +33,8 @@ class SharedPreferencesHelper(context: Context) {
 // Helper methods
 // =================================================================================================
 
-    fun putString(key: String, value: String) = mSharedPrefs.edit().run { putString(key, value) }.apply()
+    fun putString(key: String, value: String) =
+        mSharedPrefs.edit().run { putString(key, value) }.apply()
 
-    fun getString(key: String) : String? = mSharedPrefs.getString(key, null)
+    fun getString(key: String): String? = mSharedPrefs.getString(key, null)
 }

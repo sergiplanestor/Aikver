@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.domain.Platform
-import revolhope.splanes.com.aikver.framework.app.dpToPx
 import kotlinx.android.synthetic.main.component_platform_viewer.view.*
+import revolhope.splanes.com.aikver.presentation.common.dpToPx
 
 class PlatformViewer @JvmOverloads constructor(
 

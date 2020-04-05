@@ -11,7 +11,7 @@ class UserService(
     private val firebaseHelper: FirebaseHelper
 ) : UserDataSource {
 
-    override fun fetchUser(
+    override suspend fun fetchUser(
         onSuccess: (user: User?) -> Unit,
         onFailure: (throwable: Throwable) -> Unit
     ) {
@@ -22,14 +22,17 @@ class UserService(
             key = SharedPreferencesHelper.PREF_PWD
         )
 
-        if (username != null && password != null) {
+        if (username != null && password != null) onSuccess(User(username, password))
+        else onSuccess(null)
+    }
 
-            onSuccess(User(username, password))
-
-        } else {
-
-            onSuccess(null)
-        }
+    override suspend fun saveUserLocal(
+        username: String,
+        onSuccess: (success: Boolean) -> Unit,
+        onFailure: (throwable: Throwable) -> Unit
+    ) {
+        saveUserSharedPreferences(username, CryptoHelper.sha256(username))
+        onSuccess(true)
     }
 
     override suspend fun insertUser(
@@ -42,16 +45,7 @@ class UserService(
             username = username,
             password = pwd,
             onSuccess = { success ->
-                if (success) {
-                    sharedPreferencesHelper.putString(
-                        key = SharedPreferencesHelper.PREF_USR,
-                        value = username
-                    )
-                    sharedPreferencesHelper.putString(
-                        key = SharedPreferencesHelper.PREF_PWD,
-                        value = pwd
-                    )
-                }
+                if (success) saveUserSharedPreferences(username, pwd)
                 onSuccess(success)
             },
             onError = onFailure
@@ -68,5 +62,16 @@ class UserService(
             password = user.pwd,
             onSuccess = onSuccess,
             onError = onFailure)
+    }
+
+    private fun saveUserSharedPreferences(username: String, pwd: String) {
+        sharedPreferencesHelper.putString(
+            key = SharedPreferencesHelper.PREF_USR,
+            value = username
+        )
+        sharedPreferencesHelper.putString(
+            key = SharedPreferencesHelper.PREF_PWD,
+            value = pwd
+        )
     }
 }

@@ -4,8 +4,14 @@ import revolhope.splanes.com.aikver.domain.User
 
 interface UserDataSource {
 
-    fun fetchUser(
+    suspend fun fetchUser(
         onSuccess: (user: User?) -> Unit,
+        onFailure: (throwable: Throwable) -> Unit
+    )
+
+    suspend fun saveUserLocal(
+        username: String,
+        onSuccess: (success: Boolean) -> Unit,
         onFailure: (throwable: Throwable) -> Unit
     )
 
