@@ -8,9 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-inline fun launchAsync(
+fun launchAsync(
     context: CoroutineContext = Dispatchers.IO,
-    crossinline action: suspend () -> Unit
+    action: suspend () -> Unit
 ) {
     CoroutineScope(context).launch {
         action.invoke()

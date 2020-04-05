@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.imagepager
+/*
 
 import android.content.Context
 import android.transition.ChangeBounds
@@ -54,4 +55,4 @@ class ImagePager @JvmOverloads constructor(
     }
 
     fun getSelectedLink(): String = links[viewPager2.currentItem]
-}
+}*/

@@ -1,13 +1,14 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet
+/*
 
-import revolhope.splanes.com.aikver.domain.Platform
+import bemobile.splanes.com.core.domain.Platform
 import java.io.Serializable
 
 data class FiltersModel(
     val input: String? = null,
     val category: String? = null,
     val score: Int? = null,
-    val platform: Platform? = null,
+    val platform: bemobile.splanes.com.core.domain.Platform? = null,
     val orderBy: OrderBy = OrderBy.DESCENDING
 ): Serializable {
 
@@ -15,4 +16,4 @@ data class FiltersModel(
         ASCENDING,
         DESCENDING
     }
-}
+}*/

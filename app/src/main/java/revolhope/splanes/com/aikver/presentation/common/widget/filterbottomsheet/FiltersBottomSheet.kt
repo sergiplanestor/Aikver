@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet
+/*
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -124,4 +125,4 @@ class FiltersBottomSheet(
         )
 
     fun show(fragmentManager: FragmentManager) = show(fragmentManager, this::javaClass.name)
-}
+}*/

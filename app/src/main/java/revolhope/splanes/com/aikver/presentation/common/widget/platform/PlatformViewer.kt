@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.platform
+/*
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +8,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Platform
+import bemobile.splanes.com.core.domain.Platform
 import kotlinx.android.synthetic.main.component_platform_viewer.view.*
 import revolhope.splanes.com.aikver.presentation.common.dpToPx
 
@@ -19,7 +20,7 @@ class PlatformViewer @JvmOverloads constructor(
 
 ) : LinearLayout(context, attrs, defStyleAttr), OnPlatformClick {
 
-    private var selectedPlatform: Platform? = null
+    private var selectedPlatform: bemobile.splanes.com.core.domain.Platform? = null
     private var imageDimension: Float? = null
 
     init {
@@ -59,17 +60,17 @@ class PlatformViewer @JvmOverloads constructor(
         title.visibility = if (showTitle) View.VISIBLE else View.GONE
     }
 
-    override fun onPlatformClick(platform: Platform) {
+    override fun onPlatformClick(platform: bemobile.splanes.com.core.domain.Platform) {
         selectedPlatform = platform
     }
 
-    fun getSelectedPlatform(): Platform? {
+    fun getSelectedPlatform(): bemobile.splanes.com.core.domain.Platform? {
         return selectedPlatform
     }
 
-    fun setSelectedPlatform(platform: Platform?) {
+    fun setSelectedPlatform(platform: bemobile.splanes.com.core.domain.Platform?) {
         if (platform != null) {
             (recycler.adapter as PlatformAdapter).setItemSelected(platform.name)
         }
     }
-}
+}*/

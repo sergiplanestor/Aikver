@@ -1,10 +1,11 @@
 package revolhope.splanes.com.aikver.presentation.dashboard
+/*
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.domain.Serie
-import revolhope.splanes.com.aikver.interactor.GetRecentSeriesUseCase
-import revolhope.splanes.com.aikver.interactor.GetSeriesUseCase
+import bemobile.splanes.com.core.domain.Serie
+import bemobile.splanes.com.core.interactor.GetRecentSeriesUseCase
+import bemobile.splanes.com.core.interactor.GetSeriesUseCase
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -16,9 +17,9 @@ class DashboardViewModel : BaseViewModel(), KoinComponent {
     private val mGetRecentSeriesUseCase: GetRecentSeriesUseCase by inject()
     private val mGetSeriesUseCase: GetSeriesUseCase by inject()
 
-    fun getRecentSeries(forceCall: Boolean = false): LiveData<List<Serie>> {
+    fun getRecentSeries(forceCall: Boolean = false): LiveData<List<bemobile.splanes.com.core.domain.Serie>> {
 
-        val liveData =  MutableLiveData<List<Serie>>()
+        val liveData =  MutableLiveData<List<bemobile.splanes.com.core.domain.Serie>>()
 
         runBlocking(Dispatchers.IO) {
             mGetRecentSeriesUseCase.invoke(
@@ -30,9 +31,9 @@ class DashboardViewModel : BaseViewModel(), KoinComponent {
         return liveData
     }
 
-    fun getAllSeries(forceCall: Boolean = false): LiveData<List<Serie>> {
+    fun getAllSeries(forceCall: Boolean = false): LiveData<List<bemobile.splanes.com.core.domain.Serie>> {
 
-        val liveData =  MutableLiveData<List<Serie>>()
+        val liveData =  MutableLiveData<List<bemobile.splanes.com.core.domain.Serie>>()
 
         runBlocking(Dispatchers.IO) {
             mGetSeriesUseCase.invoke(
@@ -44,4 +45,4 @@ class DashboardViewModel : BaseViewModel(), KoinComponent {
         return liveData
     }
 
-}
+}*/

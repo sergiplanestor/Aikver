@@ -4,15 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.widget.AppLoader
 
-abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
-
-// =================================================================================================
-// Navigation extra
-// =================================================================================================
+abstract class BaseActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_NAV_LATERAL = "nav.lateral"
@@ -23,7 +18,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 // =================================================================================================
 
     private var appLoader: AppLoader? = null
-    private lateinit var viewModel : VM
     private var isFirstOnResume = true
 
 // =================================================================================================
@@ -33,8 +27,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
-        initializeViewModel()
-        appLoader = findViewById<AppLoader?>(R.id.appLoader)
+        appLoader = findViewById(R.id.appLoader)
         initializeViews()
     }
 
@@ -53,7 +46,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         overrideTransition()
     }
 
-    fun BaseActivity<VM>.finishPush() {
+    fun finishPush() {
         finish()
         overrideTransition()
     }
@@ -85,11 +78,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         // Nothing to do here.
     }
 
-    protected fun showLoader() {
+    fun showLoader() {
         appLoader?.play()
     }
 
-    protected fun hideLoader() {
+    fun hideLoader() {
         runOnUiThread {
             appLoader?.stop()
         }
@@ -164,22 +157,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     }
 
 // =================================================================================================
-// ViewModel
-// =================================================================================================
-
-    private fun initializeViewModel() {
-        viewModel = ViewModelProvider(this).get(getViewModelClass())
-    }
-
-    fun getViewModel() : VM {
-        return this.viewModel
-    }
-
-// =================================================================================================
 // Abstract methods
 // =================================================================================================
 
     abstract fun getLayoutRes() : Int
-
-    abstract fun getViewModelClass() : Class<VM>
 }

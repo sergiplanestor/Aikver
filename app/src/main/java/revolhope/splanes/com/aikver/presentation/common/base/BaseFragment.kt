@@ -33,13 +33,9 @@ abstract class BaseFragment: Fragment() {
 
     }
 
-    fun showLoader() {
-        TODO()
-    }
+    fun showLoader() = (activity as BaseActivity?)?.showLoader()
 
-    fun hideLoader() {
-        // TODO()
-    }
+    fun hideLoader() = with(activity as BaseActivity?) { this?.runOnUiThread { hideLoader() } }
 
     abstract fun getLayoutResource() : Int
 }

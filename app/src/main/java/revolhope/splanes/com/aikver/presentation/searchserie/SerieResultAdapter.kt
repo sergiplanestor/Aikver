@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.searchserie
+/*
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.presentation.common.widget.ScoreView
 import com.bumptech.glide.Glide
 
 class SerieResultAdapter(
-    private val dataset: List<Serie>,
-    private val onClickListener: (Serie) -> Unit
+    private val dataset: List<bemobile.splanes.com.core.domain.Serie>,
+    private val onClickListener: (bemobile.splanes.com.core.domain.Serie) -> Unit
 ) : RecyclerView.Adapter<SerieResultAdapter.ViewHolder>() {
 
 
@@ -49,4 +50,4 @@ class SerieResultAdapter(
         val scoreView: ScoreView = itemView.findViewById(R.id.scoreView)
         val platformImage: ImageView = itemView.findViewById(R.id.platformImageView)
     }
-}
+}*/

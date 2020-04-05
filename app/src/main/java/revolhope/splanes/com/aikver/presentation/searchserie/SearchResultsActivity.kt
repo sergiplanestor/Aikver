@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.searchserie
+/*
 
 import android.view.Menu
 import android.view.View
@@ -6,7 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet.FiltersBottomSheet
 import revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet.FiltersModel
@@ -58,7 +59,7 @@ class SearchResultsActivity : BaseActivity<SearchResultsViewModel>(), View.OnCli
 // Clicks
 // =================================================================================================
 
-    private fun onSerieClick(serie: Serie) =
+    private fun onSerieClick(serie: bemobile.splanes.com.core.domain.Serie) =
         DetailsSerieBottomSheet(serie).show(supportFragmentManager)
 
     override fun onClick(view: View?) {
@@ -88,4 +89,4 @@ class SearchResultsActivity : BaseActivity<SearchResultsViewModel>(), View.OnCli
 
     override fun getViewModelClass(): Class<SearchResultsViewModel> =
         SearchResultsViewModel::class.java
-}
+}*/

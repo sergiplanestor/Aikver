@@ -37,7 +37,7 @@ android {
             it.buildConfigField 'String', 'API_BASE_URL', apiBaseUrl
         }
     }
-    viewBinding.enabled = true
+
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 
@@ -61,7 +61,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "com.google.code.gson:gson:$gson_version"
     implementation "androidx.navigation:navigation-fragment:$navigation_version"
     implementation "androidx.navigation:navigation-ui:$navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
@@ -87,6 +86,9 @@ dependencies {
 
     /* Shimmer */
     implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
+    /* Core project */
+    implementation project(':core')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

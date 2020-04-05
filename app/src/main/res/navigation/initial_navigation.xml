@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_splash"
-        android:name="revolhope.splanes.com.aikver.presentation.init.splash.SplashFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.onboarding.splash.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splash_to_register"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_register"
-        android:name="revolhope.splanes.com.aikver.presentation.init.register.RegisterFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.onboarding.register.RegisterFragment"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_register_to_splash"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_login"
-        android:name="revolhope.splanes.com.aikver.presentation.init.login.LoginFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.onboarding.login.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_login_to_splash"

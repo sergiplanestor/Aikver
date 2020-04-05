@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.platform
+/*
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Platform
+import bemobile.splanes.com.core.domain.Platform
 import revolhope.splanes.com.aikver.presentation.common.dpToPx
 
 class PlatformAdapter(
@@ -20,11 +21,23 @@ class PlatformAdapter(
 
     private var currentSelected: Int = -1
 
-    private val platforms: List<Platform> = listOf(
-        Platform(R.drawable.platform_movistar, "Movistar+"),
-        Platform(R.drawable.platform_hbo, "HBO"),
-        Platform(R.drawable.platform_netflix, "Netflix"),
-        Platform(R.drawable.platform_amazon, "Amazon Prime")
+    private val platforms: List<bemobile.splanes.com.core.domain.Platform> = listOf(
+        bemobile.splanes.com.core.domain.Platform(
+            R.drawable.platform_movistar,
+            "Movistar+"
+        ),
+        bemobile.splanes.com.core.domain.Platform(
+            R.drawable.platform_hbo,
+            "HBO"
+        ),
+        bemobile.splanes.com.core.domain.Platform(
+            R.drawable.platform_netflix,
+            "Netflix"
+        ),
+        bemobile.splanes.com.core.domain.Platform(
+            R.drawable.platform_amazon,
+            "Amazon Prime"
+        )
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -88,4 +101,4 @@ class PlatformAdapter(
             changeState()
         }
     }
-}
+}*/

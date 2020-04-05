@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.detailsserie
+/*
 
 import android.os.Bundle
 import android.transition.TransitionManager
@@ -13,7 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.FragmentManager
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.framework.helper.SharedPreferencesHelper
 import revolhope.splanes.com.aikver.presentation.common.widget.AppLoader
 import revolhope.splanes.com.aikver.presentation.common.widget.ResultView
@@ -27,7 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DetailsSerieBottomSheet(private val serie: Serie): BottomSheetDialogFragment() {
+class DetailsSerieBottomSheet(private val serie: bemobile.splanes.com.core.domain.Serie): BottomSheetDialogFragment() {
 
     private val sharedPreferencesHelper: SharedPreferencesHelper by inject()
     private val viewModel: DetailsSerieViewModel by viewModel()
@@ -105,7 +106,7 @@ class DetailsSerieBottomSheet(private val serie: Serie): BottomSheetDialogFragme
     private fun getDate(millis: Long): String =
         SimpleDateFormat("dd/MM/yy", Locale.ENGLISH).format(millis)
 
-    private fun onUpdateClick(serie: Serie) {
+    private fun onUpdateClick(serie: bemobile.splanes.com.core.domain.Serie) {
         if (activity != null) {
             showLoader()
             viewModel.updateSerie(serie).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
@@ -116,7 +117,7 @@ class DetailsSerieBottomSheet(private val serie: Serie): BottomSheetDialogFragme
         }
     }
 
-    private fun onDeleteClick(serie: Serie)     {
+    private fun onDeleteClick(serie: bemobile.splanes.com.core.domain.Serie)     {
         if (activity != null) {
             Popup.show(childFragmentManager, PopupModel(
                 title = getString(R.string.delete_confirmation_title),
@@ -157,4 +158,4 @@ class DetailsSerieBottomSheet(private val serie: Serie): BottomSheetDialogFragme
     fun show(fm: FragmentManager) {
         show(fm, this::javaClass.name)
     }
-}
+}*/

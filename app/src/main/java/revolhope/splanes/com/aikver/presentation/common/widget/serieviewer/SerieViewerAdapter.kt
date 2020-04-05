@@ -1,13 +1,14 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.serieviewer
+/*
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 
 class SerieViewerAdapter(
-    private val mItems: MutableList<Serie>,
-    private val listener: (serie: Serie) -> Unit
+    private val mItems: MutableList<bemobile.splanes.com.core.domain.Serie>,
+    private val listener: (serie: bemobile.splanes.com.core.domain.Serie) -> Unit
 ): RecyclerView.Adapter<SerieViewerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -28,11 +29,11 @@ class SerieViewerAdapter(
         }
     }
 
-    fun updateItems(mItems: List<Serie>) {
+    fun updateItems(mItems: List<bemobile.splanes.com.core.domain.Serie>) {
         this.mItems.clear()
         this.mItems.addAll(mItems)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view)
-}
+}*/

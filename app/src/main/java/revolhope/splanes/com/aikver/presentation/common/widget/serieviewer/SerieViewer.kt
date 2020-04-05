@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.serieviewer
+/*
 
 import android.content.Context
 import android.transition.Fade
@@ -8,7 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import kotlinx.android.synthetic.main.component_serie_viewer.view.*
 
 class SerieViewer @JvmOverloads constructor(
@@ -24,7 +25,7 @@ class SerieViewer @JvmOverloads constructor(
         showShimmer()
     }
 
-    fun updateItems(items: List<Serie>, onSerieClick: (serie: Serie) -> Unit) {
+    fun updateItems(items: List<bemobile.splanes.com.core.domain.Serie>, onSerieClick: (serie: bemobile.splanes.com.core.domain.Serie) -> Unit) {
         if (items.isEmpty()) {
             showEmptyState()
         } else {
@@ -80,4 +81,4 @@ class SerieViewer @JvmOverloads constructor(
             duration = 800
         }
     )
-}
+}*/

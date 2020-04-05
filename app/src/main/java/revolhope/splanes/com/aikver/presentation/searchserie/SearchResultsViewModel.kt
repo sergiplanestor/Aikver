@@ -1,10 +1,11 @@
 package revolhope.splanes.com.aikver.presentation.searchserie
+/*
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.framework.app.launchAsync
-import revolhope.splanes.com.aikver.interactor.GetSeriesUseCase
+import bemobile.splanes.com.core.interactor.GetSeriesUseCase
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet.FiltersModel
 import org.koin.core.KoinComponent
@@ -14,9 +15,9 @@ class SearchResultsViewModel: BaseViewModel(), KoinComponent {
 
     private val mGetSeriesUseCase: GetSeriesUseCase by inject()
 
-    fun search(model: FiltersModel): LiveData<List<Serie>> {
+    fun search(model: FiltersModel): LiveData<List<bemobile.splanes.com.core.domain.Serie>> {
 
-        val liveData = MutableLiveData<List<Serie>>()
+        val liveData = MutableLiveData<List<bemobile.splanes.com.core.domain.Serie>>()
 
         launchAsync {
             mGetSeriesUseCase.invoke(
@@ -40,4 +41,4 @@ class SearchResultsViewModel: BaseViewModel(), KoinComponent {
 
         return liveData
     }
-}
+}*/

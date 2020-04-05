@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.dashboard
+/*
 
 import android.content.Intent
 import android.view.View
@@ -6,7 +7,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.domain.Serie
 import revolhope.splanes.com.aikver.presentation.addserie.AddSerieActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.widget.filterbottomsheet.FiltersBottomSheet
@@ -93,7 +93,7 @@ class DashboardActivity : BaseActivity<DashboardViewModel>(), View.OnClickListen
         }
     }
 
-    private fun onSerieClick(serie: Serie) =
+    private fun onSerieClick(serie: bemobile.splanes.com.core.domain.Serie) =
         DetailsSerieBottomSheet(serie).show(supportFragmentManager)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -108,4 +108,4 @@ class DashboardActivity : BaseActivity<DashboardViewModel>(), View.OnClickListen
     override fun getLayoutRes(): Int = R.layout.activity_dashboard
 
     override fun getViewModelClass(): Class<DashboardViewModel> = DashboardViewModel::class.java
-}
+}*/

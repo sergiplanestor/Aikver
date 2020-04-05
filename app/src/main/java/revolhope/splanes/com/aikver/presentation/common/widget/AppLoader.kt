@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import revolhope.splanes.com.aikver.R
 import kotlinx.android.synthetic.main.component_app_loader.view.*
+import revolhope.splanes.com.aikver.R
 
 class AppLoader @JvmOverloads constructor(
 

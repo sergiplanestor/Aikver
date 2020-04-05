@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.menu.addserie.NotificationsFragment">
+    tools:context=".presentation.feature.menu.addcontent.AddContentFragment">
 
     <TextView
         android:id="@+id/text_notifications"

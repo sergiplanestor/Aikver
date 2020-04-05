@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.serieviewer
+/*
 
 import android.content.Context
 import android.util.AttributeSet
@@ -30,4 +31,4 @@ class SerieView @JvmOverloads constructor(
             setStarSize(20)
         }
     }
-}
+}*/

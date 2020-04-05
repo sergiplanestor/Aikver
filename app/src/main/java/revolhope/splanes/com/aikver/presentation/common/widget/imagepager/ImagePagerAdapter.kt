@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.imagepager
+/*
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -59,4 +60,4 @@ class ImagePagerAdapter(
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
-}
+}*/

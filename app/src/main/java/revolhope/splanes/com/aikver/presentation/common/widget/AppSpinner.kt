@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.common.widget
+/*
 
 import android.content.Context
 import android.util.AttributeSet
@@ -57,4 +58,4 @@ class AppSpinner @JvmOverloads constructor(
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         this.mItemSelected = mItems[position]
     }
-}
+}*/

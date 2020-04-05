@@ -1,12 +1,13 @@
 package revolhope.splanes.com.aikver.presentation.addserie
+/*
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.domain.Platform
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Platform
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.framework.helper.ImageLoaderHelper
 import revolhope.splanes.com.aikver.framework.helper.SharedPreferencesHelper
-import revolhope.splanes.com.aikver.interactor.AddSerieUseCase
+import bemobile.splanes.com.core.interactor.AddSerieUseCase
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -35,7 +36,7 @@ class AddSerieViewModel : BaseViewModel(), KoinComponent {
     fun addSerie(
         title: String?,
         imageUrl: String?,
-        platform: Platform?,
+        platform: bemobile.splanes.com.core.domain.Platform?,
         category: String?,
         score: Int
     ) : LiveData<Boolean> {
@@ -45,7 +46,7 @@ class AddSerieViewModel : BaseViewModel(), KoinComponent {
         runBlocking(Dispatchers.IO) {
             val user = sharedPreferencesHelper.getString(SharedPreferencesHelper.PREF_USR)
             addSerieUseCase.invoke(
-                serie = Serie(
+                serie = bemobile.splanes.com.core.domain.Serie(
                     title = title!!,
                     imageUrl = imageUrl,
                     platform = platform,
@@ -63,4 +64,4 @@ class AddSerieViewModel : BaseViewModel(), KoinComponent {
 
         return liveData
     }
-}
+}*/

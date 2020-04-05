@@ -1,11 +1,12 @@
 package revolhope.splanes.com.aikver.presentation.detailsserie
+/*
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.domain.Serie
+import bemobile.splanes.com.core.domain.Serie
 import revolhope.splanes.com.aikver.framework.app.launchAsync
-import revolhope.splanes.com.aikver.interactor.DeleteSerieUseCase
-import revolhope.splanes.com.aikver.interactor.UpdateSerieUseCase
+import bemobile.splanes.com.core.interactor.DeleteSerieUseCase
+import bemobile.splanes.com.core.interactor.UpdateSerieUseCase
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 
 class DetailsSerieViewModel(
@@ -13,7 +14,7 @@ class DetailsSerieViewModel(
     private val deleteSerieUseCase: DeleteSerieUseCase
 ): BaseViewModel() {
 
-    fun updateSerie(serie: Serie): LiveData<Boolean> {
+    fun updateSerie(serie: bemobile.splanes.com.core.domain.Serie): LiveData<Boolean> {
 
         val liveData = MutableLiveData<Boolean>()
         launchAsync {
@@ -28,7 +29,7 @@ class DetailsSerieViewModel(
         return liveData
     }
 
-    fun deleteSerie(serie: Serie): LiveData<Boolean> {
+    fun deleteSerie(serie: bemobile.splanes.com.core.domain.Serie): LiveData<Boolean> {
 
         val liveData = MutableLiveData<Boolean>()
         launchAsync {
@@ -42,4 +43,4 @@ class DetailsSerieViewModel(
         }
         return liveData
     }
-}
+}*/

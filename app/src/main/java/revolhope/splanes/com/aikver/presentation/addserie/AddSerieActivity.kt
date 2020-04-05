@@ -1,4 +1,5 @@
 package revolhope.splanes.com.aikver.presentation.addserie
+/*
 
 import android.transition.AutoTransition
 import android.transition.TransitionManager
@@ -102,4 +103,4 @@ class AddSerieActivity : BaseActivity<AddSerieViewModel>(), View.OnClickListener
     override fun getLayoutRes(): Int = R.layout.activity_add_serie
 
     override fun getViewModelClass(): Class<AddSerieViewModel> = AddSerieViewModel::class.java
-}
+}*/

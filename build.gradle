@@ -36,6 +36,12 @@ buildscript {
     /* Shimmer */
     ext.shimmer_version = '0.5.0@aar'
 
+    /* OkHttp */
+    ext.okhttp_version = '3.14.0'
+
+    /* Retrofit */
+    ext.retrofit_version = '2.7.1'
+
     repositories {
         google()
         jcenter()
