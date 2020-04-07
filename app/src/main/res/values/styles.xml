@@ -61,6 +61,12 @@
         <item name="android:textSize">50dp</item>
     </style>
 
+    <style name="ToolbarText">
+        <item name="android:fontFamily">@font/pacifico_regular</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
     <!-- =========================================================================================== -->
     <!-- Bottom Sheet Dialog                                                                         -->
     <!-- =========================================================================================== -->
@@ -114,12 +120,33 @@
     </style>
 
     <!-- =========================================================================================== -->
-    <!-- Button style                                                                        -->
+    <!-- Button style                                                                                -->
     <!-- =========================================================================================== -->
 
     <style name="ButtonLink" parent="Text">
-        <item name="android:textColor">@android:color/holo_blue_dark</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:padding">4dp</item>
+    </style>
+
+    <!-- =========================================================================================== -->
+    <!-- TextInput                                                                            -->
+    <!-- =========================================================================================== -->
+
+    <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/colorPrimaryDark</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTextInputText">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_primary_dark</item>
+        <item name="android:textColorHighlight">@color/colorAccent</item>
+        <item name="theme">@style/AppTextInputTextTheme</item>
+    </style>
+
+    <style name="AppTextInputTextTheme">
+        <item name="android:colorControlActivated">@color/colorAccent</item>
     </style>
 
 </resources>
