@@ -4,9 +4,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_menu.*
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
+import revolhope.splanes.com.core.domain.model.User
 
 class MenuActivity : BaseActivity() {
 
@@ -16,8 +17,8 @@ class MenuActivity : BaseActivity() {
 
     override fun initializeViews() {
         super.initializeViews()
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
+        setSupportActionBar(toolbar)
         val navController = findNavController(R.id.nav_host_fragment_menu)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -27,6 +28,8 @@ class MenuActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    fun getUser() : User? = intent.extras?.getSerializable(EXTRA_USR) as User?
 
     override fun getLayoutRes(): Int = R.layout.activity_menu
 }
