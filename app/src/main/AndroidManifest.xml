@@ -18,6 +18,7 @@
 
         <activity
             android:name="revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_menu" />
 
         <activity
@@ -30,17 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity
-            android:name="revolhope.splanes.com.aikver.presentation.dashboard.DashboardActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="revolhope.splanes.com.aikver.presentation.addserie.AddSerieActivity"
-            android:label="@string/add_activity_title"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="revolhope.splanes.com.aikver.presentation.searchserie.SearchResultsActivity"
-            android:label="@string/filter_activity_title"
-            android:theme="@style/AppTheme" />-->
     </application>
 
 </manifest>
