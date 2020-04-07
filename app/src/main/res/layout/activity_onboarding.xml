@@ -68,4 +68,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <include layout="@layout/include_loader" />
+
 </androidx.constraintlayout.widget.ConstraintLayout >
