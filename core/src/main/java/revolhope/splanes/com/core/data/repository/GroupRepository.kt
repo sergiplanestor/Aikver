@@ -4,7 +4,10 @@ import revolhope.splanes.com.core.domain.model.User
 import revolhope.splanes.com.core.domain.model.UserGroup
 
 interface GroupRepository {
-    suspend fun fetchUserGroups(user: User) : List<UserGroup>
+
+    // suspend fun fetchUserGroup(user:User, userGroupId: String) : UserGroup?
+
+    // suspend fun fetchUserGroups(user: User, limitTo: Int = -1) : List<UserGroup>
 
     suspend fun insertUserGroup(userGroup: UserGroup) : Boolean
 

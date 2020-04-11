@@ -1,9 +1,9 @@
 package revolhope.splanes.com.core.domain.model
 
-import java.io.Serializable
-
 data class User(
     val id: String,
+    var avatar: UserAvatar,
     val username: String,
-    val userGroups: MutableList<String> = mutableListOf()
-) : Serializable
+    var selectedUserGroup: UserGroup?,
+    val userGroups: MutableList<UserGroup>
+)

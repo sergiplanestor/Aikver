@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         observe(viewModel.userLoginResult) {
             hideLoader()
             with(activity as OnBoardingActivity?) {
-                if (it) this?.navToDashBoard(viewModel.getUser())
+                if (it) this?.navToDashBoard()
                 else this?.showError()
             }
         }

@@ -7,9 +7,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserGroup
-import java.lang.Exception
+import revolhope.splanes.com.core.data.entity.UserEntity
+import revolhope.splanes.com.core.data.entity.UserGroupEntity
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -36,15 +35,16 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 .addOnCompleteListener { cont.resume(it.isSuccessful) }
         }
 
-    override suspend fun insertUser(user: User): Boolean =
+    override suspend fun insertUser(userEntity: UserEntity): Boolean =
         suspendCoroutine { cont ->
-            database.getReference(REF_USER).child(user.id).setValue(Gson().toJson(user))
-            { error, _ ->
-                cont.resume(error == null)
-            }
+            database.getReference(REF_USER)
+                .child(userEntity.id ?: "")
+                .setValue(Gson().toJson(userEntity)) { error, _ ->
+                    cont.resume(error == null)
+                }
         }
 
-    override suspend fun fetchUser(id: String): User? =
+    override suspend fun fetchUser(id: String): UserEntity? =
         suspendCoroutine { cont ->
             database.getReference(REF_USER).child(id)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -55,7 +55,7 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                             cont.resume(
                                 Gson().fromJson(
                                     dataSnapshot.value as String,
-                                    User::class.java
+                                    UserEntity::class.java
                                 )
                             )
                         } catch (e: Exception) {
@@ -65,7 +65,7 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 })
         }
 
-    override suspend fun fetchUserByName(username: String): User? =
+    override suspend fun fetchUserByName(username: String): UserEntity? =
         suspendCoroutine { cont ->
             database.getReference(REF_USER)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,9 +73,9 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         try {
-                            var user: User?
+                            var user: UserEntity?
                             for (snap in dataSnapshot.children) {
-                                user = Gson().fromJson(snap.value as String, User::class.java)
+                                user = Gson().fromJson(snap.value as String, UserEntity::class.java)
                                 if (user?.username == username) {
                                     cont.resume(user)
                                     return
@@ -89,14 +89,54 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 })
         }
 
-    override suspend fun insertUserGroup(userGroup: UserGroup): Boolean =
+    override suspend fun insertUserGroup(userGroupEntity: UserGroupEntity): Boolean =
         suspendCoroutine { cont ->
             database.getReference(REF_GROUP)
-                .child(userGroup.id)
-                .setValue(Gson().toJson(userGroup)) { error, _ ->
+                .child(userGroupEntity.userAdmin ?: "")
+                .child(userGroupEntity.id ?: "")
+                .setValue(Gson().toJson(userGroupEntity)) { error, _ ->
                     cont.resume(error == null)
                 }
         }
+
+    override suspend fun fetchUserGroup(
+        userEntity: UserEntity,
+        userGroupId: String
+    ): UserGroupEntity? =
+        suspendCoroutine { cont ->
+            database.getReference(REF_GROUP)
+                .child(userEntity.id ?: "")
+                .child(userGroupId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) =
+                        cont.resume(
+                            (dataSnapshot.value as String?)?.let {
+                                Gson().fromJson(it, UserGroupEntity::class.java)
+                            }
+                        )
+                })
+        }
+
+    override suspend fun fetchUserGroups(
+        userEntity: UserEntity,
+        limitTo: Int
+    ): List<UserGroupEntity>? =
+        suspendCoroutine { cont ->
+            database.getReference(REF_GROUP)
+                .child(userEntity.id ?: "")
+                .run { if (limitTo != -1) this.limitToLast(limitTo) else this }
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) =
+                        cont.resume(dataSnapshot.children.map {
+                            Gson().fromJson(it.value as String, UserGroupEntity::class.java)
+                        })
+                })
+        }
+
 
     override suspend fun logout() = auth.signOut()
 }

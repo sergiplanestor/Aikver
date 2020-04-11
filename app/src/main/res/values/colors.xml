@@ -6,6 +6,7 @@
 
     <color name="backgroundDark">#37474F</color>
     <color name="backgroundLight">#78909C</color>
+    <color name="colorGray">#757575</color>
 
     <color name="colorAccentAlpha">#8000B8D4</color>
     <color name="whiteAlpha50">#80FFFFFF</color>

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,20 +22,20 @@ abstract class BaseFragment: Fragment() {
     }
 
     open fun initViews() {
-
+        // Nothing to do here
     }
 
     open fun initObservers() {
-
+        // Nothing to do here
     }
 
     open fun loadData() {
-
+        // Nothing to do here
     }
 
     fun showLoader() = (activity as BaseActivity?)?.showLoader()
 
     fun hideLoader() = with(activity as BaseActivity?) { this?.runOnUiThread { hideLoader() } }
 
-    abstract fun getLayoutResource() : Int
+    abstract fun getLayoutResource(): Int
 }

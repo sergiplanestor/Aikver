@@ -42,19 +42,13 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
         }
         observe(viewModel.userLoginResult) { success ->
             if (success) {
-                viewModel.getUser()
+                (activity as OnBoardingActivity?)?.navToDashBoard()
             } else {
                 activity?.runOnUiThread {
                     lottieAnimationView.setAnimation(R.raw.anim_error_connection)
                     lottieAnimationView.playAnimation()
                     descriptionTextView.text = getString(R.string.splash_text_error)
                 }
-            }
-        }
-        observe(viewModel.user) { user ->
-            with(activity as OnBoardingActivity?) {
-                if (user != null) this?.navToDashBoard(user)
-                else this?.showError()
             }
         }
     }

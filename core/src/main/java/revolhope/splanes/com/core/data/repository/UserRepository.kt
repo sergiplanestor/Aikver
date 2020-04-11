@@ -1,6 +1,8 @@
 package revolhope.splanes.com.core.data.repository
 
 import revolhope.splanes.com.core.domain.model.User
+import revolhope.splanes.com.core.domain.model.UserAvatar
+import revolhope.splanes.com.core.domain.model.UserAvatarTypes
 import revolhope.splanes.com.core.domain.model.UserLogin
 
 interface UserRepository {
@@ -17,7 +19,13 @@ interface UserRepository {
 
     suspend fun fetchUserByName(username: String) : User?
 
+    suspend fun fetchUserAvatarTypes() : UserAvatarTypes?
+
+    suspend fun insertUserAvatar(avatar: UserAvatar) : Boolean
+
     suspend fun insertUser(user: User) : Boolean
+
+    suspend fun updateUser(user: User) : Boolean
 
     suspend fun doLogout()
 

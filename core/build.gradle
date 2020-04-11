@@ -9,16 +9,16 @@ dependencies {
     api "com.google.code.gson:gson:$gson_version"
 
     /* OkHttp */
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     /* Retrofit */
-    implementation("com.squareup.retrofit2:retrofit:$retrofit_version") {
+    api("com.squareup.retrofit2:retrofit:$retrofit_version") {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
     }
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 }
 
 sourceCompatibility = "8"

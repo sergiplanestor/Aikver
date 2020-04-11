@@ -28,7 +28,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
         appLoader = findViewById(R.id.appLoader)
-        initializeViews()
+        initViews()
+        initObservers()
     }
 
     override fun onResume() {
@@ -59,23 +60,27 @@ abstract class BaseActivity : AppCompatActivity() {
                 return true
             }
         }
-        return super.onOptionsItemSelected(item)
+        return item?.let { super.onOptionsItemSelected(item) } ?: false
     }
 
 // =================================================================================================
 // Views
 // =================================================================================================
 
-    open fun initializeViews() {
-        // Nothing to do here.
+    open fun initViews() {
+        // Nothing to do here
+    }
+
+    open fun initObservers() {
+        // Nothing to do here
     }
 
     open fun loadData() {
-        // Nothing to do here.
+        // Nothing to do here
     }
 
     open fun reloadData() {
-        // Nothing to do here.
+        // Nothing to do here
     }
 
     fun showLoader() {
@@ -101,12 +106,12 @@ abstract class BaseActivity : AppCompatActivity() {
         navigate(null, clazz, bundle = bundle)
     }
 
-    fun <T> navigateUp(clazz: Class<T>, bundle: Bundle? = null) {
-        navigate(NavigationTransition.BOTTOM_TO_TOP, clazz, bundle = bundle)
+    fun <T> navigateUp(clazz: Class<T>, bundle: Bundle? = null, isForResult: Boolean = false) {
+        navigate(NavigationTransition.BOTTOM_TO_TOP, clazz, isForResult, bundle)
     }
 
-    fun <T> navigateUpFinishing(clazz: Class<T>) {
-        navigateUp(clazz)
+    fun <T> navigateUpFinishing(clazz: Class<T>, bundle: Bundle? = null) {
+        navigateUp(clazz, bundle)
         finish()
     }
 

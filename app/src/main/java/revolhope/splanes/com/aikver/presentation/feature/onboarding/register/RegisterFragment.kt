@@ -38,7 +38,7 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
         observe(viewModel.user) {
             hideLoader()
             with(activity as OnBoardingActivity?) {
-                if (it != null) this?.navToDashBoard(it)
+                if (it != null) this?.navToDashBoard()
                 else this?.showError()
             }
         }

@@ -10,7 +10,7 @@ object Popup {
     fun showError(
         context: Context,
         fm: FragmentManager,
-        onErrorAction: View.OnClickListener
+        onErrorAction: View.OnClickListener = View.OnClickListener {  }
     ) = show(
         fm = fm,
         model = PopupModel(

@@ -3,23 +3,23 @@ package revolhope.splanes.com.aikver.presentation.feature.onboarding
 import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.activity_onboarding.*
+import kotlinx.android.synthetic.main.activity_onboarding.back
+import kotlinx.android.synthetic.main.activity_onboarding.rootLayout
+import kotlinx.android.synthetic.main.activity_onboarding.titleTextView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.Popup
 import revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity
-import revolhope.splanes.com.core.domain.model.User
 
 class OnBoardingActivity : BaseActivity() {
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
-    override fun initializeViews() {
-        super.initializeViews()
+    override fun initViews() {
+        super.initViews()
         rootLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         back.setOnClickListener { onBackClick() }
     }
@@ -37,8 +37,8 @@ class OnBoardingActivity : BaseActivity() {
             build()
         })
 
-    fun navToDashBoard(user: User) {
-        navigateUp(MenuActivity::class.java, bundleOf(MenuActivity.EXTRA_USR to user))
+    fun navToDashBoard() {
+        navigateUpFinishing(MenuActivity::class.java)
     }
 
     fun showError() {

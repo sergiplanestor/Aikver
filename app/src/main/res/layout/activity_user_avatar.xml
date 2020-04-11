@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/closeButton"
+                android:layout_width="@dimen/size_40dp"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:background="@drawable/button_selector"
+                android:padding="@dimen/margin_8dp"
+                android:src="@drawable/ic_close"
+                android:tint="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/titleTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/titleTextView" />
+
+            <TextView
+                android:id="@+id/titleTextView"
+                style="@style/Text.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_24dp"
+                android:textSize="20dp"
+                android:text="@string/profile_avatar_activity_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/closeButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/avatarPreview"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/margin_35dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/eyesTitle"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_35dp"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                android:text="@string/profile_avatar_choose_eyes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/eyesSpinner"
+                app:layout_constraintTop_toBottomOf="@id/avatarPreview" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/eyesSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/eyesTitle"
+                app:layout_constraintBottom_toBottomOf="@id/eyesTitle" />
+
+            <TextView
+                android:id="@+id/noseTitle"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                android:text="@string/profile_avatar_choose_nose"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/noseSpinner"
+                app:layout_constraintTop_toBottomOf="@id/eyesTitle" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/noseSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/noseTitle"
+                app:layout_constraintBottom_toBottomOf="@id/noseTitle" />
+
+            <TextView
+                android:id="@+id/mouthTitle"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                android:text="@string/profile_avatar_choose_mouth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/mouthSpinner"
+                app:layout_constraintTop_toBottomOf="@id/noseTitle" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/mouthSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/mouthTitle"
+                app:layout_constraintBottom_toBottomOf="@id/mouthTitle" />
+
+            <TextView
+                android:id="@+id/colorTitle"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                android:text="@string/profile_avatar_choose_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mouthTitle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/colorRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                app:layout_constraintStart_toStartOf="@id/colorTitle"
+                app:layout_constraintEnd_toEndOf="@id/colorTitle"
+                app:layout_constraintTop_toBottomOf="@id/colorTitle" />
+
+            <Button
+                android:id="@+id/doneButton"
+                style="@style/AppButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:layout_marginBottom="@dimen/margin_15dp"
+                android:text="@string/done"
+                app:layout_constraintTop_toBottomOf="@id/colorRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/include_loader" />
+
+</FrameLayout>
+

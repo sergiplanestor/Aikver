@@ -19,6 +19,20 @@
     <string name="login_username_description">
         Introduce tu nombre de usuario para poder iniciar sesión
     </string>
+    <string name="profile_selected_group">Grupo seleccionado:</string>
+    <string name="profile_no_selected_group">
+        Vaya, parece que no tienes ningún grupo seleccionado aún.
+        Para empezar a añadir contenido, crea un grupo haciendo click aquí
+    </string>
+    <string name="profile_group_members_title">Miembros del grupo:</string>
+    <string name="profile_admin_group">Administrar grupos</string>
+    <string name="profile_create_group">Crear grupo</string>
+    <string name="you">Tú</string>
+    <string name="profile_avatar_choose_eyes">Tipo de ojos:</string>
+    <string name="profile_avatar_choose_nose">Tipo de nariz:</string>
+    <string name="profile_avatar_choose_mouth">Tipo de boca:</string>
+    <string name="profile_avatar_choose_color">Color:</string>
+    <string name="profile_avatar_activity_title">Personaliza tu Avatar</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>
