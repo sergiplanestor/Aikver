@@ -75,6 +75,6 @@ val viewModelModule = module(override = true) {
     viewModel { RegisterViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { ProfileViewModel(get()) }
-    viewModel { UserAvatarViewModel(get(), get()) }
+    viewModel { UserAvatarViewModel(get(), get(), get()) }
     //viewModel { DetailsSerieViewModel(get(), get()) }
 }

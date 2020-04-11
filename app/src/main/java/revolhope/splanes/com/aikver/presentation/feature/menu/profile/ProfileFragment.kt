@@ -40,7 +40,6 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     private fun bindUserCardView(user: User) {
         profileAvatarImageView.loadAvatar(user.avatar)
-        //profileAvatarImageView.loadCircular("https://api.adorable.io/avatars/face/eyes9/${user.id}.png")
         profileUserNameTextView.text = user.username
     }
 
@@ -64,26 +63,8 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        (activity as BaseActivity?)?.navigateUp(UserAvatarActivity::class.java, isForResult = true)
+        (activity as BaseActivity?)?.navigateUp(UserAvatarActivity::class.java)
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_profile
 }
-
-/*
-    TODO: Avatar's api
-    "https://api.adorable.io/avatars/285/${user.id}.png"
-    "https://robohash.org/${user.id}.png?set=set4"
-    "https://avatars.dicebear.com/v2/bottts/${user.id}.svg?options[mood][]=happy"
-
-
-    TODO: Avatar's url
-    deadpool -> https://www.pngkey.com/png/full/468-4685836_funny-avatar-png-graphic-transparent-library-dream-league.png
-    homer -> https://revistadiners.com.co/wp-content/uploads/2016/03/homero_800x669.jpg
-    sakura -> https://forosdz.com/imagenes/sakura-avatar-png.36745/
-    breaking bad -> https://i3.sndcdn.com/avatars-000329792062-ffya5t-t500x500.jpg
-    olaf -> https://www.stickpng.com/assets/images/589ee4e964b351149f22a871.png
-    anonymous -> https://c7.uihere.com/files/574/309/291/anonymous-icon-v-for-vendetta-png-transparent-image.jpg
-    star trek -> https://f1.pngfuel.com/png/589/296/843/facebook-logo-hat-star-trek-star-trek-the-role-playing-game-roleplaying-game-drawing-avatar-cone-png-clip-art.png
-    groot -> https://cdn130.picsart.com/297590663053201.png?type=webp&to=min&r=640
-*/
