@@ -14,30 +14,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/closeButton"
-                android:layout_width="@dimen/size_40dp"
-                android:layout_height="@dimen/size_40dp"
-                android:layout_marginStart="@dimen/margin_15dp"
-                android:background="@drawable/button_selector"
-                android:padding="@dimen/margin_8dp"
-                android:src="@drawable/ic_close"
-                android:tint="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/titleTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/titleTextView" />
-
-            <TextView
-                android:id="@+id/titleTextView"
-                style="@style/Text.Bold"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_24dp"
-                android:textSize="20dp"
-                android:text="@string/profile_avatar_activity_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/closeButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="?actionBarSize"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <revolhope.splanes.com.aikver.presentation.common.widget.AppSimpleToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.appbar.AppBarLayout>
 
 
             <ImageView
@@ -46,7 +36,7 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="@dimen/margin_35dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView

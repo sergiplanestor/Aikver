@@ -100,12 +100,12 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
         }
 
     override suspend fun fetchUserGroup(
-        userEntity: UserEntity,
+        userId: String,
         userGroupId: String
     ): UserGroupEntity? =
         suspendCoroutine { cont ->
             database.getReference(REF_GROUP)
-                .child(userEntity.id ?: "")
+                .child(userId)
                 .child(userGroupId)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
@@ -124,19 +124,31 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
         limitTo: Int
     ): List<UserGroupEntity>? =
         suspendCoroutine { cont ->
+
             database.getReference(REF_GROUP)
-                .child(userEntity.id ?: "")
-                .run { if (limitTo != -1) this.limitToLast(limitTo) else this }
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
 
-                    override fun onDataChange(dataSnapshot: DataSnapshot) =
-                        cont.resume(dataSnapshot.children.map {
-                            Gson().fromJson(it.value as String, UserGroupEntity::class.java)
-                        })
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                        val keys = dataSnapshot.children.filter { data ->
+                            userEntity.userGroups?.any { it.userAdmin == data.key } ?: false
+                        }
+
+                        val groupList = mutableListOf<UserGroupEntity>()
+                        keys.forEach { key ->
+                            val groups = key.children.filter { group ->
+                                userEntity.userGroups?.any { it.id == group.key } ?: false
+                            }
+                            groupList.addAll(groups.map {
+                                Gson().fromJson(it.value as String, UserGroupEntity::class.java)
+                            })
+                        }
+
+                        cont.resume(groupList)
+                    }
                 })
         }
-
 
     override suspend fun logout() = auth.signOut()
 }

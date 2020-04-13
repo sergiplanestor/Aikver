@@ -11,7 +11,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.Toolbar
 import revolhope.splanes.com.aikver.R
 
-class AppToolbar @JvmOverloads constructor(
+class AppMenuToolbar @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -23,7 +23,7 @@ class AppToolbar @JvmOverloads constructor(
         this.addView(textSwitcher.apply {
             layoutParams = LayoutParams(Gravity.CENTER)
             setFactory {
-                TextView(ContextThemeWrapper(context, R.style.ToolbarText)).apply {
+                TextView(ContextThemeWrapper(context, R.style.ToolbarMenuText)).apply {
                     layoutParams = FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT

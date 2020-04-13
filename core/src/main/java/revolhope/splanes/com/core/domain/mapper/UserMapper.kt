@@ -16,8 +16,8 @@ object UserMapper {
             id = model.id,
             avatar = model.avatar.let(::fromUserAvatarModelToEntity),
             username = model.username,
-            selectedUserGroup = model.selectedUserGroup?.id,
-            userGroups = model.userGroups.map { it.id }.toMutableList()
+            selectedUserGroup = model.selectedUserGroup?.let(UserGroupMapper::fromModelToEntity),
+            userGroups = model.userGroups.map(UserGroupMapper::fromModelToEntity).toMutableList()
         )
 
     fun fromUserEntityToUserModel(entity: UserEntity, userGroups: List<UserGroup>) =
@@ -25,7 +25,7 @@ object UserMapper {
             id = entity.id ?: "",
             avatar = entity.avatar?.let(::fromUserAvatarEntityToModel) ?: UserAvatar(),
             username = entity.username ?: "",
-            selectedUserGroup = userGroups.find { it.id == entity.selectedUserGroup },
+            selectedUserGroup = userGroups.find { it.id == entity.selectedUserGroup?.id },
             userGroups = userGroups.toMutableList()
         )
 

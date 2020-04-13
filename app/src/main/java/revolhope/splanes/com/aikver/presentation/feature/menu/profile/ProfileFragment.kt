@@ -8,25 +8,43 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.loadCircular
 import revolhope.splanes.com.aikver.presentation.common.visibility
+import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.Popup
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.AddMemberDialog
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity
 import revolhope.splanes.com.core.domain.model.User
 
 class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     private val viewModel: ProfileViewModel by viewModel()
 
+    private var user: User? = null
+
     override fun initViews() {
         super.initViews()
         profileAvatarImageView.setOnClickListener(this)
+        adminGroupsButton.setOnClickListener(this)
     }
 
     override fun initObservers() {
         super.initObservers()
-        observe(viewModel.user, ::bindViews)
+        observe(viewModel.user) {
+            hideLoader()
+            user = it
+            bindViews(it)
+        }
+        observe(viewModel.addMemberResult) { result ->
+            if (result) {
+                viewModel.fetchUser()
+            } else if (context != null) {
+                Popup.showError(context!!, childFragmentManager)
+            }
+        }
     }
 
     private fun bindViews(user: User?) {
@@ -51,6 +69,13 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         if (group != null) {
             selectedGroupImageView.loadCircular(group.icon)
             selectedGroupNameTextView.text = group.name
+            if (group.userGroupAdmin.userId == user.id) {
+                selectedGroupAddMemberButton.visible()
+                selectedGroupAddMemberButton.setOnClickListener { onAddMemberClick() }
+            } else {
+                selectedGroupAddMemberButton.invisible()
+            }
+
             selectedGroupMembersRecyclerView.layoutManager = LinearLayoutManager(context)
             selectedGroupMembersRecyclerView.adapter =
                 UserGroupMembersAdapter(user.id, group.members)
@@ -59,11 +84,28 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     override fun loadData() {
         super.loadData()
+        showLoader()
         viewModel.fetchUser()
     }
 
+    private fun onAddMemberClick() =
+        AddMemberDialog(::onAddMemberDialogResponse)
+            .show(childFragmentManager, AddMemberDialog::class.java.name)
+
+    private fun onAddMemberDialogResponse(username: String) {
+        showLoader()
+        viewModel.addMember(username, user?.selectedUserGroup)
+    }
+
     override fun onClick(view: View?) {
-        (activity as BaseActivity?)?.navigateUp(UserAvatarActivity::class.java)
+        when (view?.id) {
+            R.id.profileAvatarImageView -> {
+                (activity as BaseActivity?)?.navigateUp(UserAvatarActivity::class.java)
+            }
+            R.id.adminGroupsButton -> {
+                (activity as BaseActivity?)?.navigateUp(ManageGroupsActivity::class.java)
+            }
+        }
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_profile

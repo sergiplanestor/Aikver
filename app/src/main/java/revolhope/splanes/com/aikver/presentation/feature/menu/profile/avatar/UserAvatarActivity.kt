@@ -4,14 +4,15 @@ import android.app.Activity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_user_avatar.avatarPreview
-import kotlinx.android.synthetic.main.activity_user_avatar.closeButton
 import kotlinx.android.synthetic.main.activity_user_avatar.colorRecyclerView
 import kotlinx.android.synthetic.main.activity_user_avatar.doneButton
 import kotlinx.android.synthetic.main.activity_user_avatar.eyesSpinner
 import kotlinx.android.synthetic.main.activity_user_avatar.mouthSpinner
 import kotlinx.android.synthetic.main.activity_user_avatar.noseSpinner
+import kotlinx.android.synthetic.main.activity_user_avatar.toolbar
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -32,8 +33,11 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     override fun initViews() {
         super.initViews()
 
+        toolbar.setOnCloseClick(::onCloseClick)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.profile_avatar_activity_title)
+
         doneButton.setOnClickListener { onDoneClick() }
-        closeButton.setOnClickListener { onCloseClick() }
     }
 
     override fun initObservers() {
@@ -98,11 +102,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             mapMouth.keys.toList()
         ).apply { setDropDownViewResource(R.layout.component_app_spinner_dropdown_item) }
 
-        colorRecyclerView.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
+        colorRecyclerView.layoutManager = UserAvatarColorGridLayoutManager(this)
 
         eyesSpinner.setSelection(getIndexOf(mapEyes, userAvatar.eyes), true)
         noseSpinner.setSelection(getIndexOf(mapNose, userAvatar.nose), true)
@@ -152,10 +152,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         viewModel.insertAvatar(userAvatar)
     }
 
-    private fun onCloseClick() {
-        setResult(Activity.RESULT_CANCELED)
-        onBackPressed()
-    }
+    private fun onCloseClick() = onBackPressed()
 
     override fun getLayoutRes(): Int = R.layout.activity_user_avatar
 }

@@ -15,7 +15,7 @@ interface UserRepository {
 
     suspend fun doLogin(userLogin: UserLogin) : Boolean
 
-    suspend fun fetchUser() : User?
+    suspend fun fetchUser(forceCall: Boolean = false) : User?
 
     suspend fun fetchUserByName(username: String) : User?
 

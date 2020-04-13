@@ -19,6 +19,7 @@
         <activity
             android:name="revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_menu" />
 
         <activity
@@ -34,6 +35,9 @@
 
         <activity
             android:name=".presentation.feature.menu.profile.avatar.UserAvatarActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>

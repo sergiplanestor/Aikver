@@ -18,7 +18,7 @@ import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
-import revolhope.splanes.com.core.interactor.group.FetchUserGroupsUseCase
+import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.user.DoLoginUseCase
 import revolhope.splanes.com.core.interactor.user.avatar.FetchUserAvatarTypesUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserByNameUseCase
@@ -30,8 +30,8 @@ import revolhope.splanes.com.core.interactor.user.avatar.InsertUserAvatarUseCase
 
 /* Repositories */
 val repositoryModule = module(override = true) {
-    factory<UserRepository> { UserRepositoryImpl(get(), get(), get(), get()) }
-    factory<GroupRepository> { GroupRepositoryImpl(get()) }
+    factory<UserRepository> { UserRepositoryImpl(get(), get(), get()) }
+    factory<GroupRepository> { GroupRepositoryImpl(get(), get()) }
 }
 
 /* DataSources */
@@ -55,7 +55,7 @@ val useCaseModule = module(override = true) {
     factory { DoLoginUseCase(get()) }
 
     /* Group use cases */
-    factory { FetchUserGroupsUseCase(get()) }
+    factory { InsertUserGroupMemberUseCase(get()) }
 
     /* Series use cases */
     /*factory { AddSerieUseCase(get()) }
@@ -74,7 +74,7 @@ val viewModelModule = module(override = true) {
     viewModel { SplashViewModel(get(), get()) }
     viewModel { RegisterViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get(), get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     //viewModel { DetailsSerieViewModel(get(), get()) }
 }

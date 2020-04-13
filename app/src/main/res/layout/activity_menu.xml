@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <revolhope.splanes.com.aikver.presentation.common.widget.AppToolbar
+        <revolhope.splanes.com.aikver.presentation.common.widget.AppMenuToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"

@@ -6,7 +6,6 @@ import revolhope.splanes.com.core.data.datasource.CacheUserDataSource
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.datasource.SharedPreferencesDataSource
 import revolhope.splanes.com.core.data.entity.UserEntity
-import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.helper.CryptoHelper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
@@ -24,8 +23,7 @@ import java.util.UUID
 class UserRepositoryImpl(
     private val firebaseDataSource: FirebaseDataSource,
     private val sharedPreferencesDataSource: SharedPreferencesDataSource,
-    private val apiDataSource: ApiDataSource,
-    private val groupRepository: GroupRepository
+    private val apiDataSource: ApiDataSource
 ) : UserRepository {
 
     companion object {
@@ -90,7 +88,8 @@ class UserRepositoryImpl(
                         userGroups.add(userGroup)
                     }
                 )
-                val resultStoreUserGroup = groupRepository.insertUserGroup(userGroup)
+                val resultStoreUserGroup =
+                    firebaseDataSource.insertUserGroup(userGroup.let(UserGroupMapper::fromModelToEntity))
                 resultInsertUserLogin && resultStoreUser && resultStoreUserGroup
             } else {
                 insertUser(user)
@@ -103,8 +102,8 @@ class UserRepositoryImpl(
     override suspend fun doLogin(userLogin: UserLogin) =
         firebaseDataSource.login(userLogin.email, userLogin.pwd)
 
-    override suspend fun fetchUser(): User? =
-        if (CacheUserDataSource.fetchUser() == null) {
+    override suspend fun fetchUser(forceCall: Boolean): User? =
+        if (CacheUserDataSource.fetchUser() == null || forceCall) {
             firebaseDataSource.fetchUser(fetchUserLogin()?.id ?: "")?.let { user ->
                 UserMapper.fromUserEntityToUserModel(
                     entity = user,
@@ -148,7 +147,7 @@ class UserRepositoryImpl(
             }
         } ?: false
 
-    override suspend fun updateUser(user: User) : Boolean =
+    override suspend fun updateUser(user: User): Boolean =
         firebaseDataSource.insertUser(user.let(UserMapper::fromUserModelToEntity))
 
     override suspend fun doLogout() = firebaseDataSource.logout()
