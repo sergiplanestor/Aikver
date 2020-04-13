@@ -1,9 +1,12 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_user_avatar.avatarPreview
@@ -29,6 +32,17 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     private val mapNose: MutableMap<String, String> = mutableMapOf()
     private val mapMouth: MutableMap<String, String> = mutableMapOf()
     private lateinit var userAvatar: UserAvatar
+
+    companion object {
+
+        fun start(baseActivity: BaseActivity?) {
+            baseActivity?.startActivity(
+                Intent(baseActivity, UserAvatarActivity::class.java).apply {
+                    putExtras(bundleOf(EXTRA_NAVIGATION_TRANSITION to NavTransition.MODAL))
+                }
+            )
+        }
+    }
 
     override fun initViews() {
         super.initViews()

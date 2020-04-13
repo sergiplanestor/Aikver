@@ -99,12 +99,8 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.profileAvatarImageView -> {
-                (activity as BaseActivity?)?.navigateUp(UserAvatarActivity::class.java)
-            }
-            R.id.adminGroupsButton -> {
-                (activity as BaseActivity?)?.navigateUp(ManageGroupsActivity::class.java)
-            }
+            R.id.profileAvatarImageView -> UserAvatarActivity.start(activity as BaseActivity?)
+            R.id.adminGroupsButton -> ManageGroupsActivity.start(activity as BaseActivity?)
         }
     }
 

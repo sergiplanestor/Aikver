@@ -1,5 +1,7 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu
 
+import android.content.Intent
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -10,6 +12,17 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 
 class MenuActivity : BaseActivity() {
+
+    companion object {
+
+        fun start(baseActivity: BaseActivity?) {
+            baseActivity?.startActivity(
+                Intent(baseActivity, MenuActivity::class.java).apply {
+                    putExtras(bundleOf(EXTRA_NAVIGATION_TRANSITION to NavTransition.UP))
+                }
+            )
+        }
+    }
 
     override fun initViews() {
         super.initViews()

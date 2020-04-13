@@ -30,22 +30,21 @@ class OnBoardingActivity : BaseActivity() {
 
     fun navigate(action: Int, args: Bundle? = null) =
         navController.navigate(action, args, NavOptions.Builder().run {
-            setEnterAnim(R.anim.enter)
-            setExitAnim(R.anim.exit)
-            setPopEnterAnim(R.anim.slide_left_to_right)
-            setPopExitAnim(R.anim.slide_right_to_left)
+            setEnterAnim(R.anim.slide_in_right)
+            setExitAnim(R.anim.slide_out_left)
+            setPopEnterAnim(R.anim.slide_in_left)
+            setPopExitAnim(R.anim.slide_out_right)
             build()
         })
 
     fun navToDashBoard() {
-        navigateUpFinishing(MenuActivity::class.java)
+        MenuActivity.start(this)
+        finish()
     }
 
-    fun showError() {
-        Popup.showError(this, supportFragmentManager, View.OnClickListener {  })
-    }
+    fun showError() = Popup.showError(this, supportFragmentManager)
 
-    private fun onBackClick() { onBackPressed() }
+    private fun onBackClick() = onBackPressed()
 
     override fun getLayoutRes(): Int = R.layout.activity_onboarding
 }
