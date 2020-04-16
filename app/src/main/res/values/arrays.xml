@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="colors">
+        <item>FFF000</item> <!-- Yellow -->
+        <item>B2FF59</item> <!-- Green -->
+        <item>FFA726</item> <!-- Orange -->
+        <item>26C6DA</item> <!-- Blue -->
+        <item>4DB6AC</item> <!-- Turquoise -->
+        <item>7E57C2</item> <!-- Purple -->
+        <item>E53935</item> <!-- Red -->
+        <item>F06292</item> <!-- Pink -->
+        <item>8D6E63</item> <!-- Brown -->
+        <item>78909C</item> <!-- Gray -->
+    </string-array>
+
     <string-array name="categories">
         <item>Acción</item>
         <item>Comedia</item>

@@ -10,22 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 
 class UserAvatarColorAdapter(
+    private val colors: List<String>,
     private var colorSelected: String,
     private val onClick: (color: String) -> Unit
 ) : RecyclerView.Adapter<UserAvatarColorAdapter.ViewHolder>() {
-
-    private val colors: List<String> = listOf(
-        "FFF000", // Yellow
-        "B2FF59", // Green
-        "FFA726", // Orange
-        "26C6DA", // Blue
-        "4DB6AC", // Turquoise
-        "7E57C2", // Purple
-        "E53935", // Red
-        "F06292", // Pink
-        "8D6E63", // Brown
-        "78909C"  // Gray
-    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(

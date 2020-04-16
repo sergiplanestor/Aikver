@@ -5,7 +5,7 @@ import revolhope.splanes.com.core.domain.model.UserGroup
 
 interface GroupRepository {
 
-    suspend fun insertUserGroup(userGroup: UserGroup) : Boolean
+    suspend fun insertUserGroup(groupName: String) : Boolean
 
     suspend fun insertMember(user: String, userGroup: UserGroup) : Boolean
 

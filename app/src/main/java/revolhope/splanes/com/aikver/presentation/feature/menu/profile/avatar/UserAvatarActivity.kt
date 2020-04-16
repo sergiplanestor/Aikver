@@ -121,7 +121,11 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         eyesSpinner.setSelection(getIndexOf(mapEyes, userAvatar.eyes), true)
         noseSpinner.setSelection(getIndexOf(mapNose, userAvatar.nose), true)
         mouthSpinner.setSelection(getIndexOf(mapMouth, userAvatar.mouth), true)
-        colorRecyclerView.adapter = UserAvatarColorAdapter(userAvatar.color, ::onColorSelected)
+        colorRecyclerView.adapter = UserAvatarColorAdapter(
+            resources.getStringArray(R.array.colors).toList(),
+            userAvatar.color,
+            ::onColorSelected
+        )
 
         eyesSpinner.onItemSelectedListener = this
         noseSpinner.onItemSelectedListener = this

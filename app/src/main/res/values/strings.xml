@@ -27,7 +27,7 @@
     <string name="profile_group_members_title">Miembros del grupo:</string>
     <string name="profile_admin_group">Administrar grupos</string>
     <string name="profile_create_group">Crear grupo</string>
-    <string name="you">Tú</string>
+    <string name="profile_add_group_title">Añadir grupo</string>
     <string name="profile_avatar_choose_eyes">Tipo de ojos:</string>
     <string name="profile_avatar_choose_nose">Tipo de nariz:</string>
     <string name="profile_avatar_choose_mouth">Tipo de boca:</string>
@@ -35,6 +35,11 @@
     <string name="profile_avatar_activity_title">Personaliza tu Avatar</string>
     <string name="profile_add_member_hint">Nombre de usuario</string>
     <string name="profile_add_member_title">Añadir miembro</string>
+    <string name="profile_admin_groups_title">Administra tus grupos</string>
+    <string name="profile_add_group_hint">Nombre del grupo</string>
+    <string name="member_num">%d Miembros</string>
+    <string name="admin">Admin</string>
+    <string name="you">Tú</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

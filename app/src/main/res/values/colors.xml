@@ -2,8 +2,11 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#455A64</color>
-    <color name="colorAccent">#80CBC4</color> <!--5DE8B0-->
+    <color name="colorAccent">#80CBC4</color>
+    <color name="colorAccentSecond">#1DE9B6</color>
 
+
+    <!-- Check uses -->
     <color name="backgroundDark">#37474F</color>
     <color name="backgroundLight">#78909C</color>
     <color name="colorGray">#757575</color>

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember
+package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
@@ -7,26 +7,25 @@ import com.google.android.material.textfield.TextInputLayout
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseDialog
 
-class AddMemberDialog(
-    private val onPositiveButton: (String) -> Unit
-) : BaseDialog() {
+class AddGroupDialog(private val onAcceptClick: (String)-> Unit) : BaseDialog() {
 
-    override fun getLayoutResource(): Int = R.layout.fragment_add_member_dialog
+    override fun getLayoutResource(): Int = R.layout.fragment_add_group_dialog
 
     override fun initViews(view: View) {
+
+        view.findViewById<AppCompatButton>(R.id.popupNegativeButton).setOnClickListener {
+            dismiss()
+        }
+
         view.findViewById<AppCompatButton>(R.id.popupPositiveButton).setOnClickListener {
             view.findViewById<TextInputLayout>(R.id.textLayout).error = null
             val text = view.findViewById<TextInputEditText>(R.id.textInput).text?.toString()
-            if (text.isNullOrBlank()) {
-                view.findViewById<TextInputLayout>(R.id.textLayout).error =
-                    context?.getString(R.string.error_blank_field)
-            } else {
-                onPositiveButton.invoke(text)
+            if (!text.isNullOrBlank()) {
+                onAcceptClick.invoke(text)
                 dismiss()
             }
-        }
-        view.findViewById<AppCompatButton>(R.id.popupNegativeButton).setOnClickListener {
-            dismiss()
+            else view.findViewById<TextInputLayout>(R.id.textLayout).error =
+                getString(R.string.error_blank_field)
         }
     }
 }

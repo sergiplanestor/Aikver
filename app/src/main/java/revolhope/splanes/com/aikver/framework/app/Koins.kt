@@ -8,6 +8,7 @@ import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDa
 import revolhope.splanes.com.aikver.framework.helper.ImageLoaderHelper
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.login.LoginViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.register.RegisterViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.splash.SplashViewModel
@@ -19,6 +20,8 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
+import revolhope.splanes.com.core.interactor.group.InsertUserGroupUseCase
+import revolhope.splanes.com.core.interactor.user.UpdateUserUseCase
 import revolhope.splanes.com.core.interactor.user.DoLoginUseCase
 import revolhope.splanes.com.core.interactor.user.avatar.FetchUserAvatarTypesUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserByNameUseCase
@@ -48,6 +51,7 @@ val useCaseModule = module(override = true) {
     factory { InsertUserLoginUseCase(get()) }
     factory { FetchUserLoginUseCase(get()) }
     factory { FetchUserUseCase(get()) }
+    factory { UpdateUserUseCase(get()) }
     factory { FetchUserByNameUseCase(get()) }
     factory { FetchUserAvatarTypesUseCase(get()) }
     factory { InsertUserAvatarUseCase(get()) }
@@ -56,6 +60,7 @@ val useCaseModule = module(override = true) {
 
     /* Group use cases */
     factory { InsertUserGroupMemberUseCase(get()) }
+    factory { InsertUserGroupUseCase(get()) }
 
     /* Series use cases */
     /*factory { AddSerieUseCase(get()) }
@@ -76,5 +81,6 @@ val viewModelModule = module(override = true) {
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { UserAvatarViewModel(get(), get(), get()) }
+    viewModel { ManageGroupsViewModel(get(), get(), get()) }
     //viewModel { DetailsSerieViewModel(get(), get()) }
 }

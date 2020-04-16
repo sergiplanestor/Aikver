@@ -9,7 +9,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
-import revolhope.splanes.com.aikver.presentation.common.loadCircular
 import revolhope.splanes.com.core.domain.model.UserGroupMember
 
 class UserGroupMembersAdapter(

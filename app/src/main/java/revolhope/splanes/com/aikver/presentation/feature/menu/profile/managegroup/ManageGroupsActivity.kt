@@ -2,11 +2,18 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegro
 
 import android.content.Intent
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_manage_groups.groupsRecyclerView
 import kotlinx.android.synthetic.main.activity_manage_groups.toolbar
+import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
+import revolhope.splanes.com.core.domain.model.UserGroup
 
 class ManageGroupsActivity : BaseActivity() {
+
+    private val viewModel: ManageGroupsViewModel by viewModel()
 
     companion object {
         fun start(baseActivity: BaseActivity?) {
@@ -22,15 +29,51 @@ class ManageGroupsActivity : BaseActivity() {
         super.initViews()
         toolbar.setOnCloseClick(::onCloseClick)
         setSupportActionBar(toolbar)
-        supportActionBar?.run { title = "Administra tus grupos" }
+        supportActionBar?.run { title = getString(R.string.profile_admin_groups_title) }
     }
 
     override fun initObservers() {
         super.initObservers()
+        observe(viewModel.user) {
+            hideLoader()
+            if (it != null) {
+                groupsRecyclerView.layoutManager = LinearLayoutManager(this)
+                groupsRecyclerView.adapter = ManageGroupsAdapter(
+                    it,
+                    it.userGroups.sortedBy { group -> group.name },
+                    ::onAddGroupClick,
+                    ::onGroupLongClick,
+                    ::onGroupClick
+                )
+            }
+            showEmptyState(it == null)
+        }
     }
 
     override fun loadData() {
-        super.loadData()
+        showLoader()
+        viewModel.fetchUser()
+    }
+
+    private fun showEmptyState(show: Boolean) {
+
+    }
+
+    private fun onAddGroupClick() = AddGroupDialog(::onAddGroup).show(supportFragmentManager)
+
+
+    private fun onAddGroup(groupName: String) {
+        showLoader()
+        viewModel.addGroup(groupName)
+    }
+
+    private fun onGroupClick(group: UserGroup) {
+
+    }
+
+    private fun onGroupLongClick(group: UserGroup) {
+        showLoader()
+        viewModel.changeSelectedGroup(group)
     }
 
     private fun onCloseClick() = onBackPressed()

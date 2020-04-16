@@ -5,7 +5,9 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.core.domain.model.UserAvatar
+import kotlin.random.Random
 
 fun dpToPx(context: Context, dp: Int): Int =
     dp * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
@@ -21,7 +23,17 @@ fun View.invisible() {
 fun View.visibility(show: Boolean) = if (show) this.visible() else this.invisible()
 
 fun ImageView.loadCircular(url: String) {
-    if (url.isNotBlank()) Glide.with(context).load(url).circleCrop().into(this)
+    Glide.with(context).load(url).circleCrop().into(this)
+}
+
+fun ImageView.loadGroupIcon(name: String, color: String) {
+    Glide.with(context).load(
+        "https://eu.ui-avatars.com/api/?" +
+                "name=${name.replace(" ", "+")}&" +
+                "background=455A64&" +
+                "color=${color}&" +
+                "format=png"
+    ).circleCrop().into(this)
 }
 
 fun ImageView.loadAvatar(avatar: UserAvatar) {
