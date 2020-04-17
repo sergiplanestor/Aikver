@@ -11,6 +11,8 @@ import revolhope.splanes.com.aikver.R
 
 abstract class BaseDialog : DialogFragment() {
 
+    open val isPopupCancelable: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,6 +27,7 @@ abstract class BaseDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
             window?.setBackgroundDrawable(context.getDrawable(R.drawable.white_card))
+            setCancelable(isPopupCancelable)
         }
     }
 

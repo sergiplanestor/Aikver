@@ -77,7 +77,7 @@ class ManageGroupsAdapter(
             } else {
                 null
             }
-        holder.separator.visibility(user.selectedUserGroup?.id != item.id)
+        holder.separator.visibility(user.selectedUserGroup?.id != item.id, isGone = false)
         holder.adminIndicator.visibility(user.id == item.userGroupAdmin.userId)
 
         holder.itemView.setOnClickListener { onItemClick.invoke(item) }

@@ -1,14 +1,10 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_user_avatar.avatarPreview
 import kotlinx.android.synthetic.main.activity_user_avatar.colorRecyclerView
 import kotlinx.android.synthetic.main.activity_user_avatar.doneButton
@@ -21,7 +17,7 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
-import revolhope.splanes.com.aikver.presentation.common.widget.popup.Popup
+import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.core.domain.model.UserAvatar
 import revolhope.splanes.com.core.domain.model.UserAvatarTypes
 
@@ -70,7 +66,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                 mapAvatarTypes(it)
                 bindViews()
             } else {
-                Popup.showError(this, supportFragmentManager)
+                popupError(this, supportFragmentManager)
             }
         }
 
@@ -80,13 +76,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                 onBackPressed()
             }
             else {
-                Popup.showError(
-                    this,
-                    supportFragmentManager,
-                    View.OnClickListener {
-                        onBackPressed()
-                    }
-                )
+                popupError(context = this, fm = supportFragmentManager) { onBackPressed() }
             }
         }
     }

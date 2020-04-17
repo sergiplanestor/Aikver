@@ -11,9 +11,9 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
+import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
-import revolhope.splanes.com.aikver.presentation.common.widget.popup.Popup
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.AddMemberDialog
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity
@@ -42,14 +42,14 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
             if (result) {
                 viewModel.fetchUser()
             } else if (context != null) {
-                Popup.showError(context!!, childFragmentManager)
+                popupError(context!!, childFragmentManager)
             }
         }
     }
 
     private fun bindViews(user: User?) {
         if (user == null) {
-            if (context != null) Popup.showError(context!!, childFragmentManager)
+            if (context != null) popupError(context!!, childFragmentManager)
         } else {
             bindUserCardView(user)
             bindSelectedUserGroup(user)

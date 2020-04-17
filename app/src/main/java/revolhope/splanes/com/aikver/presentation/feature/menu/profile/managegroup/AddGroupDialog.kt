@@ -9,6 +9,8 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseDialog
 
 class AddGroupDialog(private val onAcceptClick: (String)-> Unit) : BaseDialog() {
 
+    override val isPopupCancelable: Boolean get() = true
+
     override fun getLayoutResource(): Int = R.layout.fragment_add_group_dialog
 
     override fun initViews(view: View) {

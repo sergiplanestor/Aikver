@@ -1,59 +1,55 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.popup
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.fragment.app.DialogFragment
+import androidx.core.widget.TextViewCompat
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.presentation.common.base.BaseDialog
+import revolhope.splanes.com.aikver.presentation.common.dpToPx
+import revolhope.splanes.com.aikver.presentation.common.invisible
 
-class PopupAlert(private val model: PopupModel): DialogFragment() {
+class PopupAlert(private val model: PopupModel): BaseDialog() {
 
+    override val isPopupCancelable: Boolean get() = model.isCancelable
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun getLayoutResource(): Int = R.layout.component_popup
 
-        val builder = AlertDialog.Builder(context)
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.component_popup,
-            activity?.findViewById(android.R.id.content) as ViewGroup,
-            false
-        )
-
+    override fun initViews(view: View) {
         view.findViewById<TextView>(R.id.popupTitle).text = model.title
         view.findViewById<TextView>(R.id.popupMessage).text = model.message
         view.findViewById<AppCompatButton>(R.id.popupPositiveButton).run {
             this.text = model.buttonPositive
             this.setOnClickListener {
-                model.buttonPositiveListener.onClick(this)
-                dialog?.dismiss()
+                model.buttonPositiveListener?.invoke()
+                dismiss()
             }
+            setAutoSize(this)
         }
 
         if (model.buttonNegative != null) {
             view.findViewById<AppCompatButton>(R.id.popupNegativeButton).run {
                 this.text = model.buttonNegative
                 this.setOnClickListener {
-                    model.buttonNegativeListener?.onClick(this)
-                    dialog?.dismiss()
+                    model.buttonNegativeListener?.invoke()
+                    dismiss()
                 }
+                setAutoSize(this)
             }
         } else {
-            view.findViewById<AppCompatButton>(R.id.popupNegativeButton).visibility = View.GONE
-            view.findViewById<View>(R.id.popupSeparator).visibility = View.GONE
+            view.findViewById<AppCompatButton>(R.id.popupNegativeButton).invisible()
+            view.findViewById<View>(R.id.popupSeparator).invisible()
         }
+    }
 
-        builder.setCancelable(model.isCancelable)
-        builder.setView(view)
-
-        val dialog = builder.create()
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        return dialog
+    private fun setAutoSize(view: TextView) {
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+            view,
+            9,
+            14,
+            2,
+            TypedValue.COMPLEX_UNIT_DIP
+        )
     }
 }

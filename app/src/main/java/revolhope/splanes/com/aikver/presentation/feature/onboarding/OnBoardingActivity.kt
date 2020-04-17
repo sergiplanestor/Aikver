@@ -2,7 +2,6 @@ package revolhope.splanes.com.aikver.presentation.feature.onboarding
 
 import android.animation.LayoutTransition
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_onboarding.back
@@ -10,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_onboarding.rootLayout
 import kotlinx.android.synthetic.main.activity_onboarding.titleTextView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
+import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
-import revolhope.splanes.com.aikver.presentation.common.widget.popup.Popup
 import revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity
 
 class OnBoardingActivity : BaseActivity() {
@@ -42,7 +41,7 @@ class OnBoardingActivity : BaseActivity() {
         finish()
     }
 
-    fun showError() = Popup.showError(this, supportFragmentManager)
+    fun showError() = popupError(context = this, fm = supportFragmentManager)
 
     private fun onBackClick() = onBackPressed()
 

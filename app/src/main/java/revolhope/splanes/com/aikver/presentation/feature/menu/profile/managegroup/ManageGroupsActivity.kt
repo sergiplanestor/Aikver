@@ -9,6 +9,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
+import revolhope.splanes.com.aikver.presentation.common.popup
+import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
 import revolhope.splanes.com.core.domain.model.UserGroup
 
 class ManageGroupsActivity : BaseActivity() {
@@ -71,7 +73,20 @@ class ManageGroupsActivity : BaseActivity() {
 
     }
 
-    private fun onGroupLongClick(group: UserGroup) {
+    private fun onGroupLongClick(group: UserGroup) =
+        popup(
+            fm = supportFragmentManager,
+            model = PopupModel(
+                title = getString(R.string.confirmation),
+                message = getString(R.string.profile_change_selected_group_confirmation),
+                buttonPositive = getString(R.string.select),
+                buttonNegative = getString(R.string.cancel),
+                buttonPositiveListener = { onChangeGroup(group) },
+                isCancelable = true
+            )
+        )
+
+    private fun onChangeGroup(group: UserGroup) {
         showLoader()
         viewModel.changeSelectedGroup(group)
     }

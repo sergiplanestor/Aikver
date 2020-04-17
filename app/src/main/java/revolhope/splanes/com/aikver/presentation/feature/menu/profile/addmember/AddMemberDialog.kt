@@ -11,6 +11,8 @@ class AddMemberDialog(
     private val onPositiveButton: (String) -> Unit
 ) : BaseDialog() {
 
+    override val isPopupCancelable: Boolean get() = true
+
     override fun getLayoutResource(): Int = R.layout.fragment_add_member_dialog
 
     override fun initViews(view: View) {
