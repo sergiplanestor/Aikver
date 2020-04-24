@@ -11,6 +11,7 @@ import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.popup
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
 import revolhope.splanes.com.core.domain.model.UserGroup
 
 class ManageGroupsActivity : BaseActivity() {
@@ -61,7 +62,9 @@ class ManageGroupsActivity : BaseActivity() {
 
     }
 
-    private fun onAddGroupClick() = AddGroupDialog(::onAddGroup).show(supportFragmentManager)
+    private fun onAddGroupClick() = AddGroupDialog(
+        ::onAddGroup
+    ).show(supportFragmentManager)
 
 
     private fun onAddGroup(groupName: String) {

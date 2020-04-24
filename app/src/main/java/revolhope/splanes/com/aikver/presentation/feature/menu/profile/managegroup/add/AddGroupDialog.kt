@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup
+package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton

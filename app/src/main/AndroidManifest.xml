@@ -34,10 +34,10 @@
         </activity>
 
         <activity
-            android:name=".presentation.feature.menu.profile.avatar.UserAvatarActivity"
+            android:name="revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
+        <activity android:name="revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
