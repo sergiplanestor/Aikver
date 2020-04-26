@@ -19,11 +19,13 @@ interface UserRepository {
 
     suspend fun fetchUserByName(username: String) : User?
 
+    suspend fun fetchUserById(userId: String) : User?
+
     suspend fun fetchUserAvatarTypes() : UserAvatarTypes?
 
     suspend fun insertUserAvatar(avatar: UserAvatar) : Boolean
 
-    suspend fun insertUser(user: User) : Boolean
+    suspend fun insertUser(user: User, shouldCache: Boolean = true) : Boolean
 
     suspend fun updateUser(user: User) : Boolean
 

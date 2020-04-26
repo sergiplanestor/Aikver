@@ -27,6 +27,7 @@
     <string name="profile_group_members_title">Miembros del grupo:</string>
     <string name="profile_admin_group">Administrar grupos</string>
     <string name="profile_create_group">Crear grupo</string>
+    <string name="profile_delete_group">Eliminar grupo</string>
     <string name="profile_add_group_title">Añadir grupo</string>
     <string name="profile_avatar_choose_eyes">Tipo de ojos:</string>
     <string name="profile_avatar_choose_nose">Tipo de nariz:</string>
@@ -44,7 +45,11 @@
     <string name="profile_change_selected_group_confirmation">
         Estás a punto de cambiar el grupo seleccionado. ¿Quieres continuar?
     </string>
+    <string name="profile_delete_member_from_group_confirmation">
+        ¿Seguro que deseas eliminar a este usuario del grupo?
+    </string>
     <string name="select">Seleccionar</string>
+    <string name="delete">Eliminar</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

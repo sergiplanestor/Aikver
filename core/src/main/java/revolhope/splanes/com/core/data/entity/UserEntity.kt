@@ -4,6 +4,6 @@ data class UserEntity(
     val id: String?,
     val username: String?,
     val avatar: UserAvatarEntity?,
-    var selectedUserGroup: UserGroupEntity?,
-    val userGroups: MutableList<UserGroupEntity>? = mutableListOf()
+    var selectedUserGroup: String?,
+    val userGroups: MutableList<String> = mutableListOf()
 )

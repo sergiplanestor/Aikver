@@ -9,6 +9,7 @@ import revolhope.splanes.com.aikver.framework.helper.ImageLoaderHelper
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.details.GroupDetailsViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.login.LoginViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.register.RegisterViewModel
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.splash.SplashViewModel
@@ -19,6 +20,7 @@ import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
+import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupUseCase
 import revolhope.splanes.com.core.interactor.user.UpdateUserUseCase
@@ -61,6 +63,7 @@ val useCaseModule = module(override = true) {
     /* Group use cases */
     factory { InsertUserGroupMemberUseCase(get()) }
     factory { InsertUserGroupUseCase(get()) }
+    factory { DeleteUserGroupMemberUseCase(get()) }
 
     /* Series use cases */
     /*factory { AddSerieUseCase(get()) }
@@ -82,5 +85,6 @@ val viewModelModule = module(override = true) {
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
+    viewModel { GroupDetailsViewModel(get(), get()) }
     //viewModel { DetailsSerieViewModel(get(), get()) }
 }

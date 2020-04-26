@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -41,6 +42,8 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
             }
         )
     }
+
+    fun show(fm: FragmentManager) = show(fm, javaClass.name)
 
     abstract fun getLayoutResource(): Int
 

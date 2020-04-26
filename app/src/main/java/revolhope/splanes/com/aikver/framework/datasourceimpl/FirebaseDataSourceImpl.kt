@@ -92,7 +92,6 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
     override suspend fun insertUserGroup(userGroupEntity: UserGroupEntity): Boolean =
         suspendCoroutine { cont ->
             database.getReference(REF_GROUP)
-                .child(userGroupEntity.userAdmin ?: "")
                 .child(userGroupEntity.id ?: "")
                 .setValue(Gson().toJson(userGroupEntity)) { error, _ ->
                     cont.resume(error == null)
@@ -100,12 +99,10 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
         }
 
     override suspend fun fetchUserGroup(
-        userId: String,
         userGroupId: String
     ): UserGroupEntity? =
         suspendCoroutine { cont ->
             database.getReference(REF_GROUP)
-                .child(userId)
                 .child(userGroupId)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
@@ -129,24 +126,14 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
 
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                        val keys = dataSnapshot.children.filter { data ->
-                            userEntity.userGroups?.any { it.userAdmin == data.key } ?: false
-                        }
-
-                        val groupList = mutableListOf<UserGroupEntity>()
-                        keys.forEach { key ->
-                            val groups = key.children.filter { group ->
-                                userEntity.userGroups?.any { it.id == group.key } ?: false
-                            }
-                            groupList.addAll(groups.map {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) =
+                        cont.resume(
+                            dataSnapshot.children.filter { data ->
+                                userEntity.userGroups.any { it == data.key }
+                            }.map {
                                 Gson().fromJson(it.value as String, UserGroupEntity::class.java)
-                            })
-                        }
-
-                        cont.resume(groupList)
-                    }
+                            }
+                        )
                 })
         }
 

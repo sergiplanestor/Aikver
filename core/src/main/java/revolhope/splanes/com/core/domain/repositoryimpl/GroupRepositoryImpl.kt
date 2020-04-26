@@ -5,8 +5,8 @@ import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.mapper.UserMapper
-import revolhope.splanes.com.core.domain.model.User
 import revolhope.splanes.com.core.domain.model.UserGroup
+import revolhope.splanes.com.core.domain.model.UserGroupMember
 import java.util.*
 
 class GroupRepositoryImpl(
@@ -34,30 +34,27 @@ class GroupRepositoryImpl(
             ).let {
                 if (it) {
                     user.userGroups.add(userGroup)
-                    firebaseDataSource.insertUser(user.let(UserMapper::fromUserModelToEntity))
+                    userRepository.insertUser(user)
                 } else {
                     false
                 }
             }
-        } ?: false).also {
+        } ?: false)/*.also {
             if (it) userRepository.fetchUser(forceCall = true)
-        }
+        }*/
 
-    override suspend fun insertMember(user: String, userGroup: UserGroup): Boolean =
-        (firebaseDataSource.fetchUserGroup(
-            userGroup.userGroupAdmin.userId,
-            userGroup.id
-        )?.let { groupEntity ->
-            firebaseDataSource.fetchUserByName(user)?.let { user ->
-                groupEntity.members?.add(user.id ?: "")
-                firebaseDataSource.insertUserGroup(groupEntity)
-                firebaseDataSource.fetchUser(user.id ?: "")?.let { userEntity ->
-                    if (userEntity.selectedUserGroup == null && userEntity.userGroups?.size == 0) {
-                        userEntity.selectedUserGroup = UserGroupMapper.fromModelToEntity(userGroup)
+    override suspend fun insertMember(username: String, userGroup: UserGroup): Boolean =
+        (firebaseDataSource.fetchUserByName(username)?.let { user ->
+            val groupEntity = UserGroupMapper.fromModelToEntity(userGroup)
+            groupEntity.members?.add(user.id ?: "")
+            firebaseDataSource.insertUserGroup(groupEntity)
+            firebaseDataSource.fetchUser(user.id ?: "")?.let { userEntity ->
+                firebaseDataSource.insertUser(userEntity.apply {
+                    if (selectedUserGroup == null && userGroups.size == 0) {
+                        selectedUserGroup = userGroup.id
                     }
-                    userEntity.userGroups?.add(UserGroupMapper.fromModelToEntity(userGroup))
-                    firebaseDataSource.insertUser(userEntity)
-                }
+                    userGroups.add(userGroup.id)
+                })
             }
         } ?: false).also {
             if (it) userRepository.fetchUser(forceCall = true)
@@ -67,9 +64,22 @@ class GroupRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteMember(user: User, userGroup: UserGroup): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteMember(member: UserGroupMember): Boolean =
+        (firebaseDataSource.fetchUserGroup(member.groupId)?.apply {
+            members?.remove(member.userId)
+        }?.run { firebaseDataSource.insertUserGroup(this) } ?: false).also {
+            if (it) {
+                userRepository.fetchUser(forceCall = true)
+                userRepository.fetchUserById(member.userId)?.apply {
+                    userGroups.removeIf { group ->
+                        group.id == member.groupId
+                    }
+                    if (selectedUserGroup?.id == member.groupId) {
+                        selectedUserGroup = userGroups.firstOrNull()
+                    }
+                }?.run { userRepository.insertUser(this, shouldCache = false) }
+            }
+        }
 
     override suspend fun deleteUserGroup(userGroup: UserGroup): Boolean {
         TODO("Not yet implemented")

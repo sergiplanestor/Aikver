@@ -16,7 +16,7 @@ interface FirebaseDataSource {
 
     suspend fun insertUserGroup(userGroupEntity: UserGroupEntity) : Boolean
 
-    suspend fun fetchUserGroup(userId: String, userGroupId: String) : UserGroupEntity?
+    suspend fun fetchUserGroup(userGroupId: String) : UserGroupEntity?
 
     suspend fun fetchUserGroups(userEntity: UserEntity, limitTo: Int = -1) : List<UserGroupEntity>?
 

@@ -49,7 +49,7 @@ class UserRepositoryImpl(
     override suspend fun register(username: String, userGroupName: String?): Boolean {
         val userLogin = UserLogin(
             id = UUID.randomUUID().toString().replace("-", ""),
-            email = "$username@xyz.com",
+            email = "${username.trim()}@xyz.com",
             pwd = CryptoHelper.sha256(username)
         )
         val resultRegister = firebaseDataSource.register(userLogin.email, userLogin.pwd)
@@ -126,13 +126,22 @@ class UserRepositoryImpl(
             }.also(CacheUserDataSource::insertUser)
         }
 
+    override suspend fun fetchUserById(userId: String): User? =
+        firebaseDataSource.fetchUser(userId)?.let {
+            UserMapper.fromUserEntityToUserModel(
+                entity = it,
+                userGroups = fetchUserGroupsFromEntity(it)
+            )
+        }
+
+
     override suspend fun fetchUserAvatarTypes(): UserAvatarTypes? =
         apiDataSource.fetchAvatarTypes(AVATAR_URL)
             ?.let(UserMapper::fromUserAvatarTypesEntityToModel)
 
-    override suspend fun insertUser(user: User): Boolean {
+    override suspend fun insertUser(user: User, shouldCache: Boolean): Boolean {
         val result = firebaseDataSource.insertUser(UserMapper.fromUserModelToEntity(user))
-        if (result) CacheUserDataSource.insertUser(user)
+        if (result && shouldCache) CacheUserDataSource.insertUser(user)
         return result
     }
 

@@ -12,6 +12,7 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.popup
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.details.GroupDetailsBottomSheet
 import revolhope.splanes.com.core.domain.model.UserGroup
 
 class ManageGroupsActivity : BaseActivity() {
@@ -37,8 +38,8 @@ class ManageGroupsActivity : BaseActivity() {
 
     override fun initObservers() {
         super.initObservers()
+        observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.user) {
-            hideLoader()
             if (it != null) {
                 groupsRecyclerView.layoutManager = LinearLayoutManager(this)
                 groupsRecyclerView.adapter = ManageGroupsAdapter(
@@ -51,10 +52,14 @@ class ManageGroupsActivity : BaseActivity() {
             }
             showEmptyState(it == null)
         }
+        observe(viewModel.isUserAdminOf) {
+            GroupDetailsBottomSheet(group = it.first, userId = it.second).show(
+                supportFragmentManager
+            )
+        }
     }
 
     override fun loadData() {
-        showLoader()
         viewModel.fetchUser()
     }
 
@@ -68,12 +73,11 @@ class ManageGroupsActivity : BaseActivity() {
 
 
     private fun onAddGroup(groupName: String) {
-        showLoader()
         viewModel.addGroup(groupName)
     }
 
     private fun onGroupClick(group: UserGroup) {
-
+        viewModel.isUserAdminOf(group)
     }
 
     private fun onGroupLongClick(group: UserGroup) =
@@ -90,7 +94,6 @@ class ManageGroupsActivity : BaseActivity() {
         )
 
     private fun onChangeGroup(group: UserGroup) {
-        showLoader()
         viewModel.changeSelectedGroup(group)
     }
 
