@@ -21,8 +21,8 @@ class ManageGroupsViewModel(
     val isUserAdminOf: LiveData<Pair<UserGroup, String>> get() = _isUserAdminOf
     private val _isUserAdminOf: MutableLiveData<Pair<UserGroup, String>> = MutableLiveData()
 
-    fun fetchUser() =
-        launchAsync { _user.postValue(fetchUserUseCase.invoke()) }
+    fun fetchUser(forceCall: Boolean = false) =
+        launchAsync { _user.postValue(fetchUserUseCase.invoke(forceCall)) }
 
     fun addGroup(groupName: String) =
         launchAsync {

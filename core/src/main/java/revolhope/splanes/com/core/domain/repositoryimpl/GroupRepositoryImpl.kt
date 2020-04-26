@@ -76,7 +76,13 @@ class GroupRepositoryImpl(
         firebaseDataSource.deleteUserGroup(userGroup.let(UserGroupMapper::fromModelToEntity)).also {
             if (it) {
                 userGroup.members.forEach { member ->
-                    deleteGroupFromUserId(member.userId, userGroup.id)
+                    if (member.isUserGroupAdmin) {
+                        if (deleteGroupFromUserId(member.userId, userGroup.id)) {
+                            userRepository.fetchUser(forceCall = true)
+                        }
+                    } else {
+                        deleteGroupFromUserId(member.userId, userGroup.id)
+                    }
                 }
             }
         }

@@ -48,6 +48,9 @@
     <string name="profile_delete_member_from_group_confirmation">
         ¿Seguro que deseas eliminar a este usuario del grupo?
     </string>
+    <string name="profile_delete_group_confirmation">
+        ¿Seguro que deseas eliminar este grupo? Esta acción no se podrá deshacer.
+    </string>
     <string name="select">Seleccionar</string>
     <string name="delete">Eliminar</string>
 

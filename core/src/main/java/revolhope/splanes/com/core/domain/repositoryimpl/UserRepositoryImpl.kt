@@ -163,7 +163,7 @@ class UserRepositoryImpl(
 
     // -- Private functions -- //
 
-    private suspend fun fetchUserGroupsFromEntity(entity: UserEntity): List<UserGroup> =
+    private suspend fun wfetchUserGroupsFromEntity(entity: UserEntity): List<UserGroup> =
         firebaseDataSource.fetchUserGroups(entity)?.map { groupEntity ->
             UserGroupMapper.fromEntityToModel(
                 entity = groupEntity,

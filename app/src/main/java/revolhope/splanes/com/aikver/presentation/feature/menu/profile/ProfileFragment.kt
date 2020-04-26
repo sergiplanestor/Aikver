@@ -33,8 +33,11 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     override fun initObservers() {
         super.initObservers()
+        observe(viewModel.loaderState) {
+            if (it) showLoader()
+            else hideLoader()
+        }
         observe(viewModel.user) {
-            hideLoader()
             user = it
             bindViews(it)
         }
@@ -84,7 +87,6 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     override fun loadData() {
         super.loadData()
-        showLoader()
         viewModel.fetchUser()
     }
 
@@ -93,7 +95,6 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
             .show(childFragmentManager, AddMemberDialog::class.java.name)
 
     private fun onAddMemberDialogResponse(username: String) {
-        showLoader()
         viewModel.addMember(username, user?.selectedUserGroup)
     }
 

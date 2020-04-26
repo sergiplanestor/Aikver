@@ -141,7 +141,7 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
             database.getReference(REF_GROUP)
                 .child(userGroupEntity.id ?: "")
                 .removeValue { error, _ ->
-                    cont.resume(error != null)
+                    cont.resume(error == null)
                 }
         }
 

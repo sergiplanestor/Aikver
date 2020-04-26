@@ -46,4 +46,6 @@
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:navGraph="@navigation/menu_navigation" />
 
+    <include layout="@layout/include_loader" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

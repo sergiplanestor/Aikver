@@ -21,6 +21,7 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
+import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupUseCase
 import revolhope.splanes.com.core.interactor.user.UpdateUserUseCase
@@ -64,6 +65,7 @@ val useCaseModule = module(override = true) {
     factory { InsertUserGroupMemberUseCase(get()) }
     factory { InsertUserGroupUseCase(get()) }
     factory { DeleteUserGroupMemberUseCase(get()) }
+    factory { DeleteUserGroupUseCase(get()) }
 
     /* Series use cases */
     /*factory { AddSerieUseCase(get()) }
@@ -85,6 +87,6 @@ val viewModelModule = module(override = true) {
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
-    viewModel { GroupDetailsViewModel(get(), get()) }
+    viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     //viewModel { DetailsSerieViewModel(get(), get()) }
 }

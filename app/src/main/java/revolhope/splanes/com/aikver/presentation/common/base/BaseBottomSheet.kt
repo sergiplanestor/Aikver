@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.common.base
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,9 @@ import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.AppLoader
 
-abstract class BaseBottomSheet : BottomSheetDialogFragment() {
+abstract class BaseBottomSheet(
+    private val onDismiss: (() -> Unit)? = null
+) : BottomSheetDialogFragment() {
 
     open val includeLoader = true
     open val stateExpanded = true
@@ -50,6 +53,11 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         bindView(view)
         if (stateExpanded) expand(view)
+    }
+
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        onDismiss?.invoke()
     }
 
     fun observeLoader(liveData: LiveData<Boolean>) = observe(liveData) { showLoader(it) }

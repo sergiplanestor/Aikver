@@ -53,24 +53,25 @@ class ManageGroupsActivity : BaseActivity() {
             showEmptyState(it == null)
         }
         observe(viewModel.isUserAdminOf) {
-            GroupDetailsBottomSheet(group = it.first, userId = it.second).show(
+            GroupDetailsBottomSheet(
+                group = it.first,
+                userId = it.second,
+                onDismiss = ::loadData
+            ).show(
                 supportFragmentManager
             )
         }
     }
 
-    override fun loadData() {
-        viewModel.fetchUser()
-    }
+    override fun loadData() = viewModel.fetchUser()
 
     private fun showEmptyState(show: Boolean) {
-
+        /* TODO: Set empty state feature */
     }
 
     private fun onAddGroupClick() = AddGroupDialog(
         ::onAddGroup
     ).show(supportFragmentManager)
-
 
     private fun onAddGroup(groupName: String) {
         viewModel.addGroup(groupName)
