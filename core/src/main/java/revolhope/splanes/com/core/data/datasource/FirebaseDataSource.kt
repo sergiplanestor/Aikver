@@ -20,5 +20,7 @@ interface FirebaseDataSource {
 
     suspend fun fetchUserGroups(userEntity: UserEntity, limitTo: Int = -1) : List<UserGroupEntity>?
 
+    suspend fun deleteUserGroup(userGroupEntity: UserGroupEntity) : Boolean
+
     suspend fun logout()
 }

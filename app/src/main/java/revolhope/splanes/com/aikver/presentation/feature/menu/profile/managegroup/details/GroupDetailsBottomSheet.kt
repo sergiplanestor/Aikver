@@ -41,6 +41,7 @@ class GroupDetailsBottomSheet(
     }
 
     private fun initObservers() {
+        observeLoader(viewModel.loaderState)
         observe(viewModel.memberDeletion) {
             (membersRecyclerView.adapter as MembersAdapter).updateItems(it)
             groupMemberCountTextView.text = context?.getString(R.string.member_num, it.size)

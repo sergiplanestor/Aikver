@@ -121,7 +121,6 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
         limitTo: Int
     ): List<UserGroupEntity>? =
         suspendCoroutine { cont ->
-
             database.getReference(REF_GROUP)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
@@ -136,6 +135,16 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                         )
                 })
         }
+
+    override suspend fun deleteUserGroup(userGroupEntity: UserGroupEntity): Boolean =
+        suspendCoroutine { cont ->
+            database.getReference(REF_GROUP)
+                .child(userGroupEntity.id ?: "")
+                .removeValue { error, _ ->
+                    cont.resume(error != null)
+                }
+        }
+
 
     override suspend fun logout() = auth.signOut()
 }

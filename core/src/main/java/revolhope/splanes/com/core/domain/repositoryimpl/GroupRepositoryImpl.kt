@@ -15,7 +15,7 @@ class GroupRepositoryImpl(
 ) : GroupRepository {
 
     override suspend fun insertUserGroup(groupName: String): Boolean =
-        (userRepository.fetchUser()?.let { user ->
+        userRepository.fetchUser()?.let { user ->
             val member = UserMapper.fromUserModelToUserGroupMemberModel(
                 model = user,
                 groupId = UUID.randomUUID().toString().replace("-", ""),
@@ -39,9 +39,7 @@ class GroupRepositoryImpl(
                     false
                 }
             }
-        } ?: false)/*.also {
-            if (it) userRepository.fetchUser(forceCall = true)
-        }*/
+        } ?: false
 
     override suspend fun insertMember(username: String, userGroup: UserGroup): Boolean =
         (firebaseDataSource.fetchUserByName(username)?.let { user ->
@@ -70,18 +68,26 @@ class GroupRepositoryImpl(
         }?.run { firebaseDataSource.insertUserGroup(this) } ?: false).also {
             if (it) {
                 userRepository.fetchUser(forceCall = true)
-                userRepository.fetchUserById(member.userId)?.apply {
-                    userGroups.removeIf { group ->
-                        group.id == member.groupId
-                    }
-                    if (selectedUserGroup?.id == member.groupId) {
-                        selectedUserGroup = userGroups.firstOrNull()
-                    }
-                }?.run { userRepository.insertUser(this, shouldCache = false) }
+                deleteGroupFromUserId(member.userId, member.groupId)
             }
         }
 
-    override suspend fun deleteUserGroup(userGroup: UserGroup): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteUserGroup(userGroup: UserGroup): Boolean =
+        firebaseDataSource.deleteUserGroup(userGroup.let(UserGroupMapper::fromModelToEntity)).also {
+            if (it) {
+                userGroup.members.forEach { member ->
+                    deleteGroupFromUserId(member.userId, userGroup.id)
+                }
+            }
+        }
+
+    private suspend fun deleteGroupFromUserId(userId: String, groupId: String): Boolean =
+        userRepository.fetchUserById(userId)?.apply {
+            userGroups.removeIf { group ->
+                group.id == groupId
+            }
+            if (selectedUserGroup?.id == groupId) {
+                selectedUserGroup = userGroups.firstOrNull()
+            }
+        }?.run { userRepository.insertUser(this, shouldCache = false) } ?: false
 }
