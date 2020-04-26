@@ -17,6 +17,7 @@ import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.AddMemberDialog
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
 import revolhope.splanes.com.core.domain.model.User
 
 class ProfileFragment : BaseFragment(), View.OnClickListener {
@@ -29,6 +30,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         super.initViews()
         profileAvatarImageView.setOnClickListener(this)
         adminGroupsButton.setOnClickListener(this)
+        createGroupButton.setOnClickListener(this)
     }
 
     override fun initObservers() {
@@ -94,14 +96,16 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         AddMemberDialog(::onAddMemberDialogResponse)
             .show(childFragmentManager, AddMemberDialog::class.java.name)
 
-    private fun onAddMemberDialogResponse(username: String) {
+    private fun onAddMemberDialogResponse(username: String) =
         viewModel.addMember(username, user?.selectedUserGroup)
-    }
+
+    private fun onAddGroup(groupName: String) = viewModel.addGroup(groupName)
 
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.profileAvatarImageView -> UserAvatarActivity.start(activity as BaseActivity?)
             R.id.adminGroupsButton -> ManageGroupsActivity.start(activity as BaseActivity?)
+            R.id.createGroupButton -> AddGroupDialog(::onAddGroup).show(childFragmentManager)
         }
     }
 

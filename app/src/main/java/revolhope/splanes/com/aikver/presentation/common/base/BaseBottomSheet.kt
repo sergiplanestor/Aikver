@@ -55,6 +55,11 @@ abstract class BaseBottomSheet(
         if (stateExpanded) expand(view)
     }
 
+    override fun dismiss() {
+        super.dismiss()
+        onDismiss?.invoke()
+    }
+
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         onDismiss?.invoke()

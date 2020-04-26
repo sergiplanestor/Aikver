@@ -5,10 +5,14 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.User
 import revolhope.splanes.com.core.domain.model.UserGroup
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
+import revolhope.splanes.com.core.interactor.group.InsertUserGroupUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
+import revolhope.splanes.com.core.interactor.user.UpdateUserUseCase
 
 class ProfileViewModel(
     private val fetchUserUseCase: FetchUserUseCase,
+    private val insertUserGroupUseCase: InsertUserGroupUseCase,
+    private val updateUserUseCase: UpdateUserUseCase,
     private val insertUserGroupMemberUseCase: InsertUserGroupMemberUseCase
 ) : BaseViewModel() {
 
@@ -31,4 +35,16 @@ class ProfileViewModel(
             }
         }
     }
+
+    fun addGroup(groupName: String) =
+        launchAsync {
+            if (insertUserGroupUseCase.invoke(groupName)) {
+                fetchUserUseCase.invoke()?.let {
+                    it.selectedUserGroup = it.userGroups[0]
+                    if (updateUserUseCase.invoke(it)) fetchUser()
+                }
+            } else {
+                _user.postValue(null)
+            }
+        }
 }
