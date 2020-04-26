@@ -38,6 +38,7 @@
     <string name="profile_add_member_title">Añadir miembro</string>
     <string name="profile_admin_groups_title">Administra tus grupos</string>
     <string name="profile_add_group_hint">Nombre del grupo</string>
+    <string name="profile_manage_groups_empty_state">Todavia no tienes ningún grupo,\n¡Adelante, crea el tuyo!</string>
     <string name="member_num">%d Miembro/s</string>
     <string name="admin">Admin</string>
     <string name="you">Tú</string>

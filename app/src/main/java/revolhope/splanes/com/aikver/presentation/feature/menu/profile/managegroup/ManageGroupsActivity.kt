@@ -3,6 +3,8 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegro
 import android.content.Intent
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_manage_groups.addButtonEmptyState
+import kotlinx.android.synthetic.main.activity_manage_groups.emptyState
 import kotlinx.android.synthetic.main.activity_manage_groups.groupsRecyclerView
 import kotlinx.android.synthetic.main.activity_manage_groups.toolbar
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -10,6 +12,7 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.popup
+import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.details.GroupDetailsBottomSheet
@@ -34,13 +37,14 @@ class ManageGroupsActivity : BaseActivity() {
         toolbar.setOnCloseClick(::onCloseClick)
         setSupportActionBar(toolbar)
         supportActionBar?.run { title = getString(R.string.profile_admin_groups_title) }
+        addButtonEmptyState.setOnClickListener { onAddGroupClick() }
     }
 
     override fun initObservers() {
         super.initObservers()
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.user) {
-            if (it != null) {
+            if (it != null && it.userGroups.isNotEmpty()) {
                 groupsRecyclerView.layoutManager = LinearLayoutManager(this)
                 groupsRecyclerView.adapter = ManageGroupsAdapter(
                     it,
@@ -50,7 +54,7 @@ class ManageGroupsActivity : BaseActivity() {
                     ::onGroupClick
                 )
             }
-            showEmptyState(it == null)
+            showEmptyState(it == null || it.userGroups.isEmpty())
         }
         observe(viewModel.isUserAdminOf) {
             GroupDetailsBottomSheet(
@@ -66,7 +70,9 @@ class ManageGroupsActivity : BaseActivity() {
     override fun loadData() = viewModel.fetchUser()
 
     private fun showEmptyState(show: Boolean) {
-        /* TODO: Set empty state feature */
+        groupsRecyclerView.visibility(!show)
+        emptyState.visibility(show)
+        addButtonEmptyState.visibility(show)
     }
 
     private fun onAddGroupClick() = AddGroupDialog(
