@@ -1,4 +1,4 @@
-package revolhope.splanes.com.core.data.entity
+package revolhope.splanes.com.core.data.entity.user
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

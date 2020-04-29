@@ -1,7 +1,7 @@
 package revolhope.splanes.com.core.data.datasource
 
-import revolhope.splanes.com.core.data.entity.UserEntity
-import revolhope.splanes.com.core.data.entity.UserGroupEntity
+import revolhope.splanes.com.core.data.entity.user.UserEntity
+import revolhope.splanes.com.core.data.entity.user.UserGroupEntity
 
 interface FirebaseDataSource {
     suspend fun login(email: String, pwd: String) : Boolean

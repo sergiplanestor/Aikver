@@ -5,7 +5,7 @@ import org.koin.dsl.module
 import revolhope.splanes.com.aikver.framework.datasourceimpl.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
-import revolhope.splanes.com.aikver.framework.helper.ImageLoaderHelper
+import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
@@ -16,10 +16,13 @@ import revolhope.splanes.com.aikver.presentation.feature.onboarding.splash.Splas
 import revolhope.splanes.com.core.data.datasource.ApiDataSource
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.datasource.SharedPreferencesDataSource
+import revolhope.splanes.com.core.data.repository.ContentRepository
 import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
+import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
+import revolhope.splanes.com.core.interactor.content.SearchContentUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
@@ -38,6 +41,7 @@ import revolhope.splanes.com.core.interactor.user.avatar.InsertUserAvatarUseCase
 val repositoryModule = module(override = true) {
     factory<UserRepository> { UserRepositoryImpl(get(), get(), get()) }
     factory<GroupRepository> { GroupRepositoryImpl(get(), get()) }
+    factory<ContentRepository> { ContentRepositoryImpl(get()) }
 }
 
 /* DataSources */
@@ -67,17 +71,8 @@ val useCaseModule = module(override = true) {
     factory { DeleteUserGroupMemberUseCase(get()) }
     factory { DeleteUserGroupUseCase(get()) }
 
-    /* Series use cases */
-    /*factory { AddSerieUseCase(get()) }
-    factory { GetSeriesUseCase(get()) }
-    factory { GetRecentSeriesUseCase(get()) }
-    factory { UpdateSerieUseCase(get()) }
-    factory { DeleteSerieUseCase(get()) }*/
-}
-
-/* Helpers */
-val helperModule = module(override = true) {
-    factory { ImageLoaderHelper(get()) }
+    /* Content use cases */
+    factory { SearchContentUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -88,5 +83,5 @@ val viewModelModule = module(override = true) {
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
-    //viewModel { DetailsSerieViewModel(get(), get()) }
+    viewModel { AddContentViewModel(get()) }
 }

@@ -15,7 +15,7 @@ abstract class BaseViewModel : ViewModel() {
         _loaderState.postValue(show)
     }
 
-    fun launchAsync(
+    protected fun launchAsync(
         showLoader: Boolean = true,
         context: CoroutineContext = Dispatchers.IO,
         closure: suspend () -> Unit

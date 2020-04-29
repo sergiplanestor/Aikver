@@ -6,6 +6,7 @@
     <color name="colorAccentSecond">#1DE9B6</color>
 
     <color name="colorRedAlpha">#EF9A9A</color>
+    <color name="colorPrimaryDarkAlpha50">#80455A64</color>
 
     <!-- Check uses -->
     <color name="backgroundDark">#37474F</color>

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.core.data.entity
+package revolhope.splanes.com.core.data.entity.user
 
 data class UserAvatarEntity(
     val eyes: String?,

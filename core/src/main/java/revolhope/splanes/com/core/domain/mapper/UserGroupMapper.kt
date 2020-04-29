@@ -1,6 +1,6 @@
 package revolhope.splanes.com.core.domain.mapper
 
-import revolhope.splanes.com.core.data.entity.UserGroupEntity
+import revolhope.splanes.com.core.data.entity.user.UserGroupEntity
 import revolhope.splanes.com.core.domain.model.UserGroup
 import revolhope.splanes.com.core.domain.model.UserGroupMember
 

@@ -1,31 +1,26 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.widget.SearchView
+import kotlinx.android.synthetic.main.fragment_add_content.contentSelector
+import kotlinx.android.synthetic.main.fragment_add_content.searchView
+import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 
-class AddContentFragment : Fragment() {
+class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
-    private lateinit var addContentViewModel: AddContentViewModel
+    private val viewModel: AddContentViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        addContentViewModel =
-            ViewModelProviders.of(this).get(AddContentViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        addContentViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun initViews() {
+        searchView.setOnQueryTextListener(this)
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (!query.isNullOrBlank()) viewModel.fetchContent(query, contentSelector.selection.value)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean = true /* Nothing to do here */
+
+    override fun getLayoutResource(): Int = R.layout.fragment_add_content
 }

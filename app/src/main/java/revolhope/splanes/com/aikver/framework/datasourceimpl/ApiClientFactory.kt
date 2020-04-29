@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import revolhope.splanes.com.aikver.BuildConfig
 
 object ApiClientFactory {
 
@@ -15,10 +16,11 @@ object ApiClientFactory {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
+            .addInterceptor(ApiInterceptor())
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BuildConfig.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

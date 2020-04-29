@@ -1,8 +1,8 @@
 package revolhope.splanes.com.core.domain.mapper
 
-import revolhope.splanes.com.core.data.entity.UserAvatarEntity
-import revolhope.splanes.com.core.data.entity.UserAvatarTypesEntity
-import revolhope.splanes.com.core.data.entity.UserEntity
+import revolhope.splanes.com.core.data.entity.user.UserAvatarEntity
+import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
+import revolhope.splanes.com.core.data.entity.user.UserEntity
 import revolhope.splanes.com.core.domain.model.User
 import revolhope.splanes.com.core.domain.model.UserAvatar
 import revolhope.splanes.com.core.domain.model.UserAvatarTypes

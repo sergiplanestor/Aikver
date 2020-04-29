@@ -9,7 +9,6 @@ class SharedPreferencesDataSourceImpl(context: Context) : SharedPreferencesDataS
 
     companion object {
         private const val SHARED_NAME: String = "aikver.shared.prefs"
-        const val KEY_USR_LOGIN = "aikver.shared.prefs.usr"
     }
 
     private val mSharedPrefs: SharedPreferences by lazy {

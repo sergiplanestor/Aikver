@@ -1,4 +1,6 @@
-package revolhope.splanes.com.core.data.entity
+package revolhope.splanes.com.core.data.entity.user
+
+import revolhope.splanes.com.core.data.entity.user.UserAvatarEntity
 
 data class UserEntity(
     val id: String?,

@@ -1,13 +1,18 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
+import revolhope.splanes.com.core.interactor.content.SearchContentUseCase
 
-class AddContentViewModel : ViewModel() {
+class AddContentViewModel(
+    private val searchContentUseCase: SearchContentUseCase
+) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+
+
+    fun fetchContent(query: String, type: Int) {
+        launchAsync {
+            searchContentUseCase.invoke(query, type)
+        }
     }
-    val text: LiveData<String> = _text
+
 }

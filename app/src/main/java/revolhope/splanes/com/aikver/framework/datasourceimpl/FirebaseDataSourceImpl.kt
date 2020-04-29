@@ -7,8 +7,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
-import revolhope.splanes.com.core.data.entity.UserEntity
-import revolhope.splanes.com.core.data.entity.UserGroupEntity
+import revolhope.splanes.com.core.data.entity.user.UserEntity
+import revolhope.splanes.com.core.data.entity.user.UserGroupEntity
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 

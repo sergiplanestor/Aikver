@@ -5,7 +5,7 @@ import revolhope.splanes.com.core.data.datasource.ApiDataSource
 import revolhope.splanes.com.core.data.datasource.CacheUserDataSource
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.datasource.SharedPreferencesDataSource
-import revolhope.splanes.com.core.data.entity.UserEntity
+import revolhope.splanes.com.core.data.entity.user.UserEntity
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.helper.CryptoHelper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
