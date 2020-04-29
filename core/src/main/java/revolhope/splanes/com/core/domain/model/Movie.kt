@@ -1,6 +1,6 @@
 package revolhope.splanes.com.core.domain.model
 
-data class Serie(
+data class Movie(
     val thumbnail: String,
     val popularity: Float,
     val id: Int,
@@ -10,8 +10,9 @@ data class Serie(
     val genreIds: List<Int>,
     val originalLanguage: String,
     val voteCount: Int,
-    val name: String,
-    val originalName: String,
-    val firstAirDate: String,
-    val originalCountries: List<String>
+    val adult: Boolean,
+    val releaseDate: String,
+    val originalTitle: String,
+    val title: String,
+    val hasVideo: Boolean
 )

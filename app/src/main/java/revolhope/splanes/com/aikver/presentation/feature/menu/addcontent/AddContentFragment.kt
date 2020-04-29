@@ -5,6 +5,7 @@ import kotlinx.android.synthetic.main.fragment_add_content.contentSelector
 import kotlinx.android.synthetic.main.fragment_add_content.searchView
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
@@ -13,6 +14,23 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun initViews() {
         searchView.setOnQueryTextListener(this)
+    }
+
+    override fun initObservers() {
+        observe(viewModel.loaderState) {
+            if (it) showLoader()
+            else hideLoader()
+        }
+        observe(viewModel.serieResults) {
+            it.forEach { s ->
+                print(s.toString())
+            }
+        }
+        observe(viewModel.movieResults) {
+            it.forEach { s ->
+                print(s.toString())
+            }
+        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

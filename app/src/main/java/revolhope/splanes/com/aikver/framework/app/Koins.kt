@@ -22,7 +22,8 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
-import revolhope.splanes.com.core.interactor.content.SearchContentUseCase
+import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
+import revolhope.splanes.com.core.interactor.content.SearchSerieUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
@@ -72,7 +73,8 @@ val useCaseModule = module(override = true) {
     factory { DeleteUserGroupUseCase(get()) }
 
     /* Content use cases */
-    factory { SearchContentUseCase(get()) }
+    factory { SearchSerieUseCase(get()) }
+    factory { SearchMovieUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -83,5 +85,5 @@ val viewModelModule = module(override = true) {
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
-    viewModel { AddContentViewModel(get()) }
+    viewModel { AddContentViewModel(get(), get()) }
 }

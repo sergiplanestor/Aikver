@@ -21,7 +21,7 @@ interface ApiDataSource {
         @Query("query") query: String,
         @Query("include_adult") showAdult: Boolean = false,
         @Query("primary_release_year") releaseDateYear: Int? = null
-    ): SearchContentEntity<MovieEntity>
+    ): SearchContentEntity<MovieEntity>?
 
     @GET("search/tv")
     suspend fun searchSeries(
@@ -29,5 +29,5 @@ interface ApiDataSource {
         @Query("query") query: String,
         @Query("include_adult") showAdult: Boolean = false,
         @Query("first_air_date_year") firstAirDateYear: Int? = null
-    ): SearchContentEntity<SerieEntity>
+    ): SearchContentEntity<SerieEntity>?
 }

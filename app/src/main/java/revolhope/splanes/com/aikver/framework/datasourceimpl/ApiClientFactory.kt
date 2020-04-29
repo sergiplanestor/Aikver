@@ -20,7 +20,7 @@ object ApiClientFactory {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl("https://${BuildConfig.API_BASE_URL}")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

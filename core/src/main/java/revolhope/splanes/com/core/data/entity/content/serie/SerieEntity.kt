@@ -7,7 +7,7 @@ data class SerieEntity(
     @SerializedName("poster_path") override val thumbnail: String?,
     @SerializedName("popularity") override val popularity: Float?,
     @SerializedName("id") override val id: Int?,
-    @SerializedName("backdrop_path") override val backdrop: Int?,
+    @SerializedName("backdrop_path") override val backdrop: String?,
     @SerializedName("vote_average") override val voteAverage: Float?,
     @SerializedName("overview") override val overview: String?,
     @SerializedName("genre_ids") override val genreIds: List<Int>?,

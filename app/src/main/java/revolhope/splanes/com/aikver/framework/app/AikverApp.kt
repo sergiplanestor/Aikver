@@ -15,7 +15,6 @@ class AikverApp : Application() {
                 repositoryModule,
                 dataSourceModule,
                 useCaseModule,
-                helperModule,
                 viewModelModule)
             )
         }
