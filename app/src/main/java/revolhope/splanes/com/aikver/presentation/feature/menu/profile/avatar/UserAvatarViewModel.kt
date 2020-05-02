@@ -1,11 +1,10 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar
 
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.framework.app.launchAsync
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserAvatar
-import revolhope.splanes.com.core.domain.model.UserAvatarTypes
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserAvatar
+import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 import revolhope.splanes.com.core.interactor.user.avatar.FetchUserAvatarTypesUseCase
 import revolhope.splanes.com.core.interactor.user.avatar.InsertUserAvatarUseCase

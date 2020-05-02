@@ -16,7 +16,7 @@ import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.details.GroupDetailsBottomSheet
-import revolhope.splanes.com.core.domain.model.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroup
 
 class ManageGroupsActivity : BaseActivity() {
 

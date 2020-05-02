@@ -20,6 +20,14 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
     <!-- =========================================================================================== -->
     <!-- Text Styles                                                                                 -->
     <!-- =========================================================================================== -->
@@ -62,10 +70,23 @@
         <item name="android:textSize">50dp</item>
     </style>
 
+    <!-- =========================================================================================== -->
+    <!-- Toolbar                                                                                     -->
+    <!-- =========================================================================================== -->
+
     <style name="ToolbarMenuText">
         <item name="android:fontFamily">@font/pacifico_regular</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:textAppearance">@style/Text.SemiBold</item>
+    </style>
+
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0sp</item>
     </style>
 
     <!-- =========================================================================================== -->
@@ -101,6 +122,11 @@
         <item name="rippleColor">@color/colorRedAlpha</item>
     </style>
 
+    <style name="AppButtonLink" parent="Text">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
     <!-- =========================================================================================== -->
     <!-- Pop up                                                                                      -->
     <!-- =========================================================================================== -->
@@ -127,16 +153,7 @@
     </style>
 
     <!-- =========================================================================================== -->
-    <!-- Button style                                                                                -->
-    <!-- =========================================================================================== -->
-
-    <style name="ButtonLink" parent="Text">
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:padding">4dp</item>
-    </style>
-
-    <!-- =========================================================================================== -->
-    <!-- TextInput                                                                            -->
+    <!-- TextInput                                                                                   -->
     <!-- =========================================================================================== -->
 
     <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">

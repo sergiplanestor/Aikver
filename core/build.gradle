@@ -18,7 +18,7 @@ dependencies {
         exclude module: 'okhttp'
     }
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
 }
 
 sourceCompatibility = "8"

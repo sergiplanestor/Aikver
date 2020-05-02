@@ -1,12 +1,27 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
 
+import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_add_content.contentSelector
+import kotlinx.android.synthetic.main.fragment_add_content.imageViewPlaceholder
+import kotlinx.android.synthetic.main.fragment_add_content.placeholder
+import kotlinx.android.synthetic.main.fragment_add_content.resultsRecyclerView
 import kotlinx.android.synthetic.main.fragment_add_content.searchView
+import kotlinx.android.synthetic.main.fragment_add_content.textViewPlaceholder
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.framework.app.hideKeyboard
 import revolhope.splanes.com.aikver.framework.app.observe
+import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.visibility
+import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
+import revolhope.splanes.com.core.domain.model.content.Content
+import revolhope.splanes.com.core.domain.model.content.Movie
+import revolhope.splanes.com.core.domain.model.content.Serie
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
@@ -17,24 +32,36 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun initObservers() {
-        observe(viewModel.loaderState) {
-            if (it) showLoader()
-            else hideLoader()
-        }
-        observe(viewModel.serieResults) {
-            it.forEach { s ->
-                print(s.toString())
-            }
-        }
-        observe(viewModel.movieResults) {
-            it.forEach { s ->
-                print(s.toString())
-            }
-        }
+        observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
+        observe(viewModel.serieResults) { onResultsReceived(it, ::onContentClick) }
+        observe(viewModel.movieResults) { onResultsReceived(it, ::onContentClick) }
     }
+
+    private fun <T : Content> onResultsReceived(results: List<T>, onClick: (T) -> Unit) {
+        if (results.isNotEmpty() && context != null) {
+            resultsRecyclerView.layoutManager = AutoSizeLayoutManager(context!!, 120f)
+            resultsRecyclerView.layoutAnimation =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.recycler_falldown)
+            resultsRecyclerView.adapter = AddContentAdapter(results, onClick)
+        }
+        resultsRecyclerView.visibility(results.isNotEmpty())
+        showNotFound(results.isEmpty())
+    }
+
+    private fun showNotFound(shouldShow: Boolean) {
+        if (shouldShow) {
+            imageViewPlaceholder.setImageResource(R.drawable.ic_no_result)
+            textViewPlaceholder.text = getString(R.string.add_content_search_no_result)
+        }
+        placeholder.visibility(shouldShow)
+    }
+
+    private fun <T : Content> onContentClick(item: T) =
+        ContentDetailsActivity.start(activity as BaseActivity?, item)
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrBlank()) viewModel.fetchContent(query, contentSelector.selection.value)
+        hideKeyboard()
         return true
     }
 

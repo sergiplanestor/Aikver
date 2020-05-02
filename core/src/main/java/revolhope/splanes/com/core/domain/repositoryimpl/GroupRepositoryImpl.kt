@@ -5,8 +5,8 @@ import revolhope.splanes.com.core.data.repository.GroupRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.mapper.UserMapper
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 import java.util.*
 
 class GroupRepositoryImpl(
@@ -21,14 +21,15 @@ class GroupRepositoryImpl(
                 groupId = UUID.randomUUID().toString().replace("-", ""),
                 userGroupAdminId = user.id
             )
-            val userGroup = UserGroup(
-                id = member.groupId,
-                icon = "", // TODO: Set default icon
-                name = groupName,
-                members = mutableListOf(member),
-                userGroupAdmin = member,
-                dateCreation = System.currentTimeMillis()
-            )
+            val userGroup =
+                UserGroup(
+                    id = member.groupId,
+                    icon = "", // TODO: Set default icon
+                    name = groupName,
+                    members = mutableListOf(member),
+                    userGroupAdmin = member,
+                    dateCreation = System.currentTimeMillis()
+                )
             firebaseDataSource.insertUserGroup(
                 userGroup.let(UserGroupMapper::fromModelToEntity)
             ).let {

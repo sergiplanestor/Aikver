@@ -3,8 +3,8 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegro
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase

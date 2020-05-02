@@ -3,9 +3,10 @@ package revolhope.splanes.com.core.data.datasource
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
-import revolhope.splanes.com.core.data.entity.content.SearchContentEntity
-import revolhope.splanes.com.core.data.entity.content.movie.MovieEntity
-import revolhope.splanes.com.core.data.entity.content.serie.SerieEntity
+import revolhope.splanes.com.core.data.entity.api.content.SearchContentEntity
+import revolhope.splanes.com.core.data.entity.api.configuration.ConfigurationEntity
+import revolhope.splanes.com.core.data.entity.api.content.MovieEntity
+import revolhope.splanes.com.core.data.entity.api.content.SerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
 
 interface ApiDataSource {
@@ -15,6 +16,9 @@ interface ApiDataSource {
     suspend fun fetchAvatarTypes(@Url url: String): UserAvatarTypesEntity?
 
     // Serie & movie api
+    @GET("configuration")
+    suspend fun fetchConfiguration(): ConfigurationEntity?
+
     @GET("search/movie")
     suspend fun searchMovies(
         @Query("page") page: Int = 1,

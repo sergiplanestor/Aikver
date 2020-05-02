@@ -1,5 +1,10 @@
 package revolhope.splanes.com.aikver.framework.app
 
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -21,4 +26,19 @@ fun <T> LifecycleOwner.observe(data: LiveData<T>, closure: (data: T) -> Unit) {
     data.observe(this, Observer {
         closure.invoke(it)
     })
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+fun Context.hideKeyboard(view: View) {
+    (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+        view.windowToken,
+        0
+    )
 }

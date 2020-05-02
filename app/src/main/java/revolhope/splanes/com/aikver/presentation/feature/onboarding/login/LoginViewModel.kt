@@ -1,11 +1,10 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.login
 
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.framework.app.launchAsync
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
-import revolhope.splanes.com.core.domain.helper.CryptoHelper
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserLogin
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserLogin
+import revolhope.splanes.com.core.domain.sha256
 import revolhope.splanes.com.core.interactor.user.DoLoginUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserByNameUseCase
 import revolhope.splanes.com.core.interactor.user.InsertUserLoginUseCase
@@ -23,11 +22,12 @@ class LoginViewModel(
 
     fun doLogin(username: String) {
         launchAsync {
-            val userLogin = UserLogin(
-                "",
-                "$username@xyz.com",
-                CryptoHelper.sha256(username)
-            )
+            val userLogin =
+                UserLogin(
+                    "",
+                    "$username@xyz.com",
+                    sha256(username)
+                )
             if (doLoginUseCase.invoke(userLogin)) {
                 user = fetchUserByNameUseCase.invoke(username)
                 if (user != null) {

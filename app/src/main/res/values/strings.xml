@@ -59,6 +59,9 @@
     <string name="add_content_search_placeholder">
         Escribe el título en el buscador para poder añadir tus series o películas favoritas
     </string>
+    <string name="add_content_search_no_result">
+        Oops, parece que no se ha encontrado ningún resultado :(
+    </string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

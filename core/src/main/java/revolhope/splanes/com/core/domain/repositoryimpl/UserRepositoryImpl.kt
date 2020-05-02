@@ -7,15 +7,15 @@ import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.datasource.SharedPreferencesDataSource
 import revolhope.splanes.com.core.data.entity.user.UserEntity
 import revolhope.splanes.com.core.data.repository.UserRepository
-import revolhope.splanes.com.core.domain.helper.CryptoHelper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.mapper.UserMapper
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserAvatar
-import revolhope.splanes.com.core.domain.model.UserAvatarTypes
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
-import revolhope.splanes.com.core.domain.model.UserLogin
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserAvatar
+import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserLogin
+import revolhope.splanes.com.core.domain.sha256
 import java.lang.Exception
 import java.util.UUID
 
@@ -50,7 +50,7 @@ class UserRepositoryImpl(
         val userLogin = UserLogin(
             id = UUID.randomUUID().toString().replace("-", ""),
             email = "${username.trim()}@xyz.com",
-            pwd = CryptoHelper.sha256(username)
+            pwd = sha256(username)
         )
         val resultRegister = firebaseDataSource.register(userLogin.email, userLogin.pwd)
         return if (resultRegister) {
@@ -64,24 +64,25 @@ class UserRepositoryImpl(
             )
             if (!userGroupName.isNullOrBlank()) {
                 val groupId = UUID.randomUUID().toString().replace("-", "")
-                val userGroup = UserGroup(
-                    id = groupId,
-                    icon = "", // TODO: Set default icon!
-                    name = userGroupName,
-                    members = mutableListOf(
-                        UserMapper.fromUserModelToUserGroupMemberModel(
+                val userGroup =
+                    UserGroup(
+                        id = groupId,
+                        icon = "", // TODO: Set default icon!
+                        name = userGroupName,
+                        members = mutableListOf(
+                            UserMapper.fromUserModelToUserGroupMemberModel(
+                                model = user,
+                                groupId = groupId,
+                                userGroupAdminId = user.id
+                            )
+                        ),
+                        userGroupAdmin = UserMapper.fromUserModelToUserGroupMemberModel(
                             model = user,
                             groupId = groupId,
                             userGroupAdminId = user.id
-                        )
-                    ),
-                    userGroupAdmin = UserMapper.fromUserModelToUserGroupMemberModel(
-                        model = user,
-                        groupId = groupId,
-                        userGroupAdminId = user.id
-                    ),
-                    dateCreation = System.currentTimeMillis()
-                )
+                        ),
+                        dateCreation = System.currentTimeMillis()
+                    )
                 val resultStoreUser = insertUser(
                     user.apply {
                         selectedUserGroup = userGroup

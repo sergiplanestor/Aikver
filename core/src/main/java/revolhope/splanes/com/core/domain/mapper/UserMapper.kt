@@ -3,11 +3,11 @@ package revolhope.splanes.com.core.domain.mapper
 import revolhope.splanes.com.core.data.entity.user.UserAvatarEntity
 import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
 import revolhope.splanes.com.core.data.entity.user.UserEntity
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserAvatar
-import revolhope.splanes.com.core.domain.model.UserAvatarTypes
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserAvatar
+import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 object UserMapper {
 

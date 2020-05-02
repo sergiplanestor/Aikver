@@ -1,8 +1,7 @@
 package revolhope.splanes.com.core.data.repository
 
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 interface GroupRepository {
 

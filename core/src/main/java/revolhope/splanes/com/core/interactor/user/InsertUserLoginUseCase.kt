@@ -1,7 +1,7 @@
 package revolhope.splanes.com.core.interactor.user
 
 import revolhope.splanes.com.core.data.repository.UserRepository
-import revolhope.splanes.com.core.domain.model.UserLogin
+import revolhope.splanes.com.core.domain.model.user.UserLogin
 
 
 class InsertUserLoginUseCase(private val userRepository: UserRepository) {

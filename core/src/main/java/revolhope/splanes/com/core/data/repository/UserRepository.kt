@@ -1,9 +1,9 @@
 package revolhope.splanes.com.core.data.repository
 
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserAvatar
-import revolhope.splanes.com.core.domain.model.UserAvatarTypes
-import revolhope.splanes.com.core.domain.model.UserLogin
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserAvatar
+import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
+import revolhope.splanes.com.core.domain.model.user.UserLogin
 
 interface UserRepository {
 

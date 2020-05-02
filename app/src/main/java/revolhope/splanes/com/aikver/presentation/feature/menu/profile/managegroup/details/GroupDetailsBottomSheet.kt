@@ -19,8 +19,8 @@ import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.AddMemberDialog
-import revolhope.splanes.com.core.domain.model.UserGroup
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class GroupDetailsBottomSheet(
     private val userId: String,

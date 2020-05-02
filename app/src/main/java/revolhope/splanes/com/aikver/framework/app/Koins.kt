@@ -2,7 +2,7 @@ package revolhope.splanes.com.aikver.framework.app
 
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import revolhope.splanes.com.aikver.framework.datasourceimpl.ApiClientFactory
+import revolhope.splanes.com.aikver.framework.net.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
 import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel

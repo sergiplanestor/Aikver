@@ -12,8 +12,8 @@ import com.google.android.material.button.MaterialButton
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
 import revolhope.splanes.com.aikver.presentation.common.visibility
-import revolhope.splanes.com.core.domain.model.User
-import revolhope.splanes.com.core.domain.model.UserGroup
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserGroup
 
 class ManageGroupsAdapter(
     private val user: User,

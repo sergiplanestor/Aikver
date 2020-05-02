@@ -1,6 +1,6 @@
 package revolhope.splanes.com.core.data.datasource
 
-import revolhope.splanes.com.core.domain.model.User
+import revolhope.splanes.com.core.domain.model.user.User
 
 object CacheUserDataSource {
 

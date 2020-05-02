@@ -40,6 +40,9 @@
         <activity android:name="revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".presentation.feature.menu.common.content.ContentDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

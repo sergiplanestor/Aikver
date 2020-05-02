@@ -18,8 +18,9 @@ import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.popupError
-import revolhope.splanes.com.core.domain.model.UserAvatar
-import revolhope.splanes.com.core.domain.model.UserAvatarTypes
+import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.core.domain.model.user.UserAvatar
+import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
 
 class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
@@ -106,7 +107,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             mapMouth.keys.toList()
         ).apply { setDropDownViewResource(R.layout.component_app_spinner_dropdown_item) }
 
-        colorRecyclerView.layoutManager = UserAvatarColorGridLayoutManager(this)
+        colorRecyclerView.layoutManager = AutoSizeLayoutManager(this, 48f)
 
         eyesSpinner.setSelection(getIndexOf(mapEyes, userAvatar.eyes), true)
         noseSpinner.setSelection(getIndexOf(mapNose, userAvatar.nose), true)

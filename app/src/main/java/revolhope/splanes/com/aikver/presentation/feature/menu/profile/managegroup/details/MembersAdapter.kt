@@ -11,7 +11,7 @@ import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
-import revolhope.splanes.com.core.domain.model.UserGroupMember
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class MembersAdapter(
     private var items: List<UserGroupMember>,

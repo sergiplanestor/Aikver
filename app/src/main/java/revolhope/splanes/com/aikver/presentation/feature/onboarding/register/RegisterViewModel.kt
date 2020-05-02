@@ -1,9 +1,8 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.register
 
 import androidx.lifecycle.MutableLiveData
-import revolhope.splanes.com.aikver.framework.app.launchAsync
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
-import revolhope.splanes.com.core.domain.model.User
+import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 import revolhope.splanes.com.core.interactor.user.RegisterUserUseCase
 

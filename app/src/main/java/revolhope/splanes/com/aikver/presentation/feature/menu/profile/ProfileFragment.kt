@@ -18,7 +18,7 @@ import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
-import revolhope.splanes.com.core.domain.model.User
+import revolhope.splanes.com.core.domain.model.user.User
 
 class ProfileFragment : BaseFragment(), View.OnClickListener {
 

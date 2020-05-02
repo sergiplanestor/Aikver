@@ -1,7 +1,7 @@
 package revolhope.splanes.com.core.interactor.user
 
 import revolhope.splanes.com.core.data.repository.UserRepository
-import revolhope.splanes.com.core.domain.model.User
+import revolhope.splanes.com.core.domain.model.user.User
 
 class UpdateUserUseCase(private val userRepository: UserRepository) {
     suspend operator fun invoke(user: User) =

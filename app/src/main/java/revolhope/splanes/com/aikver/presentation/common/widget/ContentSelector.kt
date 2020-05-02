@@ -18,9 +18,12 @@ class ContentSelector @JvmOverloads constructor(
         SERIE(1)
     }
 
-    val selection: Tab get() = if (film.isSelected) Tab.FILM else Tab.SERIE
+    var selection: Tab = Tab.SERIE
 
     init {
         View.inflate(context, R.layout.component_content_selector, this)
+        film.setOnCheckedChangeListener { _, checked ->
+            selection = if (checked) Tab.FILM else Tab.SERIE
+        }
     }
 }

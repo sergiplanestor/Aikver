@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/buttonLogin"
-        style="@style/ButtonLink"
+        style="@style/AppButtonLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_24dp"
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/buttonRegister"
-        style="@style/ButtonLink"
+        style="@style/AppButtonLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_24dp"

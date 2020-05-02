@@ -1,9 +1,12 @@
 package revolhope.splanes.com.core.data.repository
 
-import revolhope.splanes.com.core.domain.model.Movie
-import revolhope.splanes.com.core.domain.model.Serie
+import revolhope.splanes.com.core.domain.model.config.Configuration
+import revolhope.splanes.com.core.domain.model.content.Movie
+import revolhope.splanes.com.core.domain.model.content.Serie
 
 interface ContentRepository {
+
+    suspend fun fetchConfiguration(): Configuration?
 
     suspend fun searchMovies(query: String): List<Movie>?
 
