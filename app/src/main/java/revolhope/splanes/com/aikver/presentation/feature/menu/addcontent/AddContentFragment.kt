@@ -2,8 +2,6 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
 
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_add_content.contentSelector
 import kotlinx.android.synthetic.main.fragment_add_content.imageViewPlaceholder
 import kotlinx.android.synthetic.main.fragment_add_content.placeholder
@@ -20,8 +18,6 @@ import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.Movie
-import revolhope.splanes.com.core.domain.model.content.Serie
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 

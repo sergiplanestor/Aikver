@@ -7,8 +7,8 @@ import revolhope.splanes.com.core.data.repository.ContentRepository
 import revolhope.splanes.com.core.domain.mapper.ConfigurationMapper
 import revolhope.splanes.com.core.domain.mapper.ContentMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
-import revolhope.splanes.com.core.domain.model.content.Movie
-import revolhope.splanes.com.core.domain.model.content.Serie
+import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 class ContentRepositoryImpl(private val apiDataSource: ApiDataSource) : ContentRepository {
 

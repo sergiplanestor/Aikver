@@ -1,8 +1,8 @@
 package revolhope.splanes.com.core.data.repository
 
 import revolhope.splanes.com.core.domain.model.config.Configuration
-import revolhope.splanes.com.core.domain.model.content.Movie
-import revolhope.splanes.com.core.domain.model.content.Serie
+import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 interface ContentRepository {
 

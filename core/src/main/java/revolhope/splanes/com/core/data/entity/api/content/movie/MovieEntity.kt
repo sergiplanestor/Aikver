@@ -1,6 +1,7 @@
-package revolhope.splanes.com.core.data.entity.api.content
+package revolhope.splanes.com.core.data.entity.api.content.movie
 
 import com.google.gson.annotations.SerializedName
+import revolhope.splanes.com.core.data.entity.api.content.ContentEntity
 
 data class MovieEntity(
     @SerializedName("poster_path") override val thumbnail: String?,

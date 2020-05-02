@@ -1,12 +1,14 @@
 package revolhope.splanes.com.core.data.datasource
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 import revolhope.splanes.com.core.data.entity.api.content.SearchContentEntity
 import revolhope.splanes.com.core.data.entity.api.configuration.ConfigurationEntity
-import revolhope.splanes.com.core.data.entity.api.content.MovieEntity
-import revolhope.splanes.com.core.data.entity.api.content.SerieEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
 
 interface ApiDataSource {
@@ -34,4 +36,7 @@ interface ApiDataSource {
         @Query("include_adult") showAdult: Boolean = false,
         @Query("first_air_date_year") firstAirDateYear: Int? = null
     ): SearchContentEntity<SerieEntity>?
+
+    @GET("tv/{id}")
+    suspend fun fetchSerieDetails(@Path("id") serieId: Int): SerieDetailsEntity?
 }

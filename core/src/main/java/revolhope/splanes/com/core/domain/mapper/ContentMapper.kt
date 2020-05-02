@@ -1,11 +1,12 @@
 package revolhope.splanes.com.core.domain.mapper
 
-import revolhope.splanes.com.core.data.entity.api.content.MovieEntity
-import revolhope.splanes.com.core.data.entity.api.content.SerieEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.config.ImageConfiguration
-import revolhope.splanes.com.core.domain.model.content.Movie
-import revolhope.splanes.com.core.domain.model.content.Serie
+import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 object ContentMapper {
 
@@ -75,6 +76,10 @@ object ContentMapper {
             firstAirDate = entity.firstAirDate ?: "",
             originalCountries = entity.originalCountries ?: listOf()
         )
+
+    fun fromSerieDetailsEntityToModel(entity: SerieDetailsEntity) {
+
+    }
 
     private fun getImagePath(
         type: Int,

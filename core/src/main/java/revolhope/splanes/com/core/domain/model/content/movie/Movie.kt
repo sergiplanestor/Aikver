@@ -1,5 +1,6 @@
-package revolhope.splanes.com.core.domain.model.content
+package revolhope.splanes.com.core.domain.model.content.movie
 
+import revolhope.splanes.com.core.domain.model.content.Content
 import java.io.Serializable
 
 data class Movie(

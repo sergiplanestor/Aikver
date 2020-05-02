@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.Serie
 
 class AddContentAdapter<T : Content>(
     private val items: List<T>,

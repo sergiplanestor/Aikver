@@ -2,15 +2,14 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.common.content
 
 import android.content.Intent
 import androidx.core.os.bundleOf
-import kotlinx.android.synthetic.main.activity_content_details.collapsingToolbar
 import kotlinx.android.synthetic.main.activity_content_details.collapsingToolbarImageView
 import kotlinx.android.synthetic.main.activity_content_details.toolbar
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.Movie
-import revolhope.splanes.com.core.domain.model.content.Serie
+import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 class ContentDetailsActivity : BaseActivity() {
 
@@ -42,6 +41,7 @@ class ContentDetailsActivity : BaseActivity() {
         )
         setSupportActionBar(toolbar)
         supportActionBar?.title = getContent()?.title
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun initObservers() {
