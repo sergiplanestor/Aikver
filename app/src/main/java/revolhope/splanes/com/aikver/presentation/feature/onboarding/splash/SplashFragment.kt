@@ -2,14 +2,13 @@ package revolhope.splanes.com.aikver.presentation.feature.onboarding.splash
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.os.Build
-import android.text.Layout
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.OnBoardingActivity
 
 class SplashFragment : BaseFragment(), View.OnClickListener {
@@ -20,9 +19,7 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
         if (!lottieAnimationView.isAnimating) {
             startAnimation()
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            descriptionTextView.justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
-        }
+        descriptionTextView.justify()
         with(activity as OnBoardingActivity?) {
             this?.changeTitle(getString(R.string.app_name))
             this?.setBackVisibility(false)

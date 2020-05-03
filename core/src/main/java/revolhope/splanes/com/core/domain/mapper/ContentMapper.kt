@@ -1,18 +1,32 @@
 package revolhope.splanes.com.core.domain.mapper
 
+import revolhope.splanes.com.core.data.entity.api.content.ContentCreatorEntity
+import revolhope.splanes.com.core.data.entity.api.content.ContentGenresEntity
+import revolhope.splanes.com.core.data.entity.api.content.ContentNetworkEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.EpisodeEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.SeasonEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.config.ImageConfiguration
+import revolhope.splanes.com.core.domain.model.content.ContentCreator
+import revolhope.splanes.com.core.domain.model.content.ContentGenres
+import revolhope.splanes.com.core.domain.model.content.ContentNetwork
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Episode
+import revolhope.splanes.com.core.domain.model.content.serie.Season
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
+import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
 object ContentMapper {
 
-    private const val IMG_POSTER = 0
-    private const val IMG_BACKDROP = 1
-
+    private enum class ImageType {
+        LOGO,
+        POSTER,
+        BACKDROP,
+        STILL
+    }
 
     fun fromMovieEntityListToModel(
         entities: List<MovieEntity>,
@@ -23,16 +37,16 @@ object ContentMapper {
     private fun fromMovieEntityToModel(entity: MovieEntity, config: Configuration?): Movie =
         Movie(
             thumbnail = getImagePath(
-                IMG_POSTER,
+                ImageType.POSTER,
                 entity.thumbnail,
-                config?.imageConfigurationEntity
+                config?.imageConfiguration
             ),
             popularity = entity.popularity ?: Float.NaN,
             id = entity.id ?: -1,
             backdrop = getImagePath(
-                IMG_BACKDROP,
+                ImageType.BACKDROP,
                 entity.backdrop,
-                config?.imageConfigurationEntity
+                config?.imageConfiguration
             ),
             voteAverage = entity.voteAverage ?: Float.NaN,
             overview = entity.overview ?: "",
@@ -55,16 +69,16 @@ object ContentMapper {
     private fun fromSerieEntityToModel(entity: SerieEntity, config: Configuration?): Serie =
         Serie(
             thumbnail = getImagePath(
-                IMG_POSTER,
+                ImageType.POSTER,
                 entity.thumbnail,
-                config?.imageConfigurationEntity
+                config?.imageConfiguration
             ),
             popularity = entity.popularity ?: Float.NaN,
             id = entity.id ?: -1,
             backdrop = getImagePath(
-                IMG_BACKDROP,
+                ImageType.BACKDROP,
                 entity.backdrop,
-                config?.imageConfigurationEntity
+                config?.imageConfiguration
             ),
             voteAverage = entity.voteAverage ?: Float.NaN,
             overview = entity.overview ?: "",
@@ -77,12 +91,104 @@ object ContentMapper {
             originalCountries = entity.originalCountries ?: listOf()
         )
 
-    fun fromSerieDetailsEntityToModel(entity: SerieDetailsEntity) {
+    fun fromSerieDetailsEntityToModel(
+        entity: SerieDetailsEntity,
+        config: Configuration?
+    ): SerieDetails =
+        SerieDetails(
+            backdrop = getImagePath(
+                ImageType.BACKDROP,
+                entity.backdrop,
+                config?.imageConfiguration
+            ),
+            createdBy = entity.createdBy?.map(::fromContentCreatorEntityToModel) ?: listOf(),
+            episodeRuntime = entity.episodeRuntime ?: listOf(),
+            firstAirDate = entity.firstAirDate ?: "",
+            genres = entity.genres?.map(::fromContentGenresEntityToModel) ?: listOf(),
+            homepage = entity.homepage ?: "",
+            id = entity.id ?: -1,
+            isInProduction = entity.isInProduction ?: false,
+            languages = entity.languages ?: listOf(),
+            lastAirDate = entity.lastAirDate ?: "",
+            lastEpisodeToAir = entity.lastEpisodeToAir?.let(::fromEpisodeEntityToModel)
+                ?: Episode.getEmpty(),
+            name = entity.name ?: "",
+            network = entity.network?.map { fromContentNetworkEntityToModel(it, config) }
+                ?: listOf(),
+            numEpisodes = entity.numEpisodes ?: -1,
+            numSeasons = entity.numSeasons ?: -1,
+            originCountry = entity.originCountry ?: listOf(),
+            originalLanguage = entity.originalLanguage ?: "",
+            originalName = entity.originalName ?: "",
+            overview = entity.overview ?: "",
+            popularity = entity.popularity ?: Float.NaN,
+            thumbnail = getImagePath(
+                ImageType.POSTER,
+                entity.thumbnail,
+                config?.imageConfiguration
+            ),
+            seasons = entity.seasons?.map { fromSeasonEntityToModel(it, config) } ?: listOf(),
+            status = entity.status ?: "",
+            type = entity.type ?: "",
+            voteAverage = entity.voteAverage ?: Float.NaN,
+            voteCount = entity.voteCount ?: -1
+        )
 
-    }
+    private fun fromSeasonEntityToModel(entity: SeasonEntity, config: Configuration?): Season =
+        Season(
+            airDate = entity.airDate ?: "",
+            episodeCount = entity.episodeCount ?: -1,
+            id = entity.id ?: -1,
+            name = entity.name ?: "",
+            overview = entity.overview ?: "",
+            thumbnail = getImagePath(
+                ImageType.POSTER,
+                entity.thumbnail,
+                config?.imageConfiguration
+            ),
+            numSeason = entity.numSeason ?: -1
+        )
+
+    private fun fromContentNetworkEntityToModel(
+        entity: ContentNetworkEntity,
+        config: Configuration?
+    ): ContentNetwork =
+        ContentNetwork(
+            name = entity.name ?: "",
+            id = entity.id ?: -1,
+            logo = getImagePath(ImageType.LOGO, entity.logo, config?.imageConfiguration),
+            originCountry = entity.originCountry ?: ""
+        )
+
+    private fun fromEpisodeEntityToModel(entity: EpisodeEntity): Episode =
+        Episode(
+            airDate = entity.airDate ?: "",
+            numSeason = entity.numSeason ?: -1,
+            numEpisode = entity.numEpisode ?: -1,
+            id = entity.id ?: -1,
+            overview = entity.overview ?: "",
+            name = entity.name ?: "",
+            productionCode = entity.productionCode ?: "",
+            showId = entity.showId ?: -1,
+            still = entity.still ?: "",
+            voteAverage = entity.voteAverage ?: Float.NaN,
+            voteCount = entity.voteCount ?: -1
+        )
+
+    private fun fromContentGenresEntityToModel(entity: ContentGenresEntity): ContentGenres =
+        ContentGenres(id = entity.id ?: -1, name = entity.name ?: "")
+
+    private fun fromContentCreatorEntityToModel(entity: ContentCreatorEntity): ContentCreator =
+        ContentCreator(
+            id = entity.id ?: -1,
+            creditId = entity.creditId ?: "",
+            name = entity.name ?: "",
+            gender = entity.gender ?: -1,
+            profile = entity.profile ?: ""
+        )
 
     private fun getImagePath(
-        type: Int,
+        type: ImageType,
         lastPath: String?,
         config: ImageConfiguration?
     ): String =
@@ -90,12 +196,12 @@ object ContentMapper {
             ""
         } else {
             "${config.secureBaseUrl}${
-            if (type == IMG_POSTER) {
-                config.posterSizes.last { it.contains("w") }
-            } else {
-                config.backdropSizes.last { it.contains("w") }
+            when (type) {
+                ImageType.LOGO -> config.logoSizes.last { it.contains("w") }
+                ImageType.POSTER -> config.posterSizes.last { it.contains("w") }
+                ImageType.BACKDROP -> config.backdropSizes.last { it.contains("w") }
+                ImageType.STILL -> config.stillSizes.last { it.contains("w") }
             }
             }$lastPath"
         }
-
 }

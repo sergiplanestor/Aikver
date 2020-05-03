@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name="revolhope.splanes.com.aikver.framework.app.AikverApp"
+        android:name=".framework.app.AikverApp"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,13 +17,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity"
+            android:name=".presentation.feature.menu.MenuActivity"
+            android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing"
-            android:label="@string/title_activity_menu" />
-
+            android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name="revolhope.splanes.com.aikver.presentation.feature.onboarding.OnBoardingActivity"
+            android:name=".presentation.feature.onboarding.OnBoardingActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,17 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarActivity"
+            android:name=".presentation.feature.menu.profile.avatar.UserAvatarActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name="revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
+        <activity
+            android:name=".presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".presentation.feature.menu.common.content.ContentDetailsActivity"
+        <activity
+            android:name=".presentation.feature.menu.common.content.ContentDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
     </application>
 
 </manifest>

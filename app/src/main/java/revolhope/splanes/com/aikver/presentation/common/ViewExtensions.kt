@@ -1,12 +1,16 @@
 package revolhope.splanes.com.aikver.presentation.common
 
 import android.content.Context
+import android.os.Build
+import android.text.Layout
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_splash.descriptionTextView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupAlert
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupModel
@@ -74,4 +78,12 @@ fun ImageView.loadAvatar(avatar: UserAvatar) {
                 "/${avatar.mouth}" +
                 "/${avatar.color}"
     )
+}
+
+/* --- TextView --- */
+
+fun TextView.justify() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
+    }
 }

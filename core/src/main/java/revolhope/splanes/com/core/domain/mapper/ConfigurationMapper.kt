@@ -9,7 +9,7 @@ object ConfigurationMapper {
 
     fun fromEntityToModel(entity: ConfigurationEntity): Configuration =
         Configuration(
-            imageConfigurationEntity = entity.imageConfigEntity.let(::fromImageEntityToModel),
+            imageConfiguration = entity.imageConfigEntity.let(::fromImageEntityToModel),
             changeKeysValue = entity.changeKeysValue ?: listOf()
         )
 

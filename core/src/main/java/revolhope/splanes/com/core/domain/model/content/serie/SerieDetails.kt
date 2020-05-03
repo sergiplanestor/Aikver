@@ -7,7 +7,7 @@ import revolhope.splanes.com.core.domain.model.content.ContentNetwork
 
 data class SerieDetails(
     val backdrop: String,
-    val createdBy: ContentCreator,
+    val createdBy: List<ContentCreator>,
     val episodeRuntime: List<Int>,
     val firstAirDate: String,
     val genres: List<ContentGenres>,

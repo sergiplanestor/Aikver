@@ -6,6 +6,7 @@ import revolhope.splanes.com.aikver.framework.net.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
 import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
@@ -23,7 +24,8 @@ import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
-import revolhope.splanes.com.core.interactor.content.SearchSerieUseCase
+import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
+import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
 import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
@@ -75,6 +77,7 @@ val useCaseModule = module(override = true) {
     /* Content use cases */
     factory { SearchSerieUseCase(get()) }
     factory { SearchMovieUseCase(get()) }
+    factory { FetchSerieDetailsUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -86,4 +89,5 @@ val viewModelModule = module(override = true) {
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     viewModel { AddContentViewModel(get(), get()) }
+    viewModel { ContentDetailsViewModel(get()) }
 }

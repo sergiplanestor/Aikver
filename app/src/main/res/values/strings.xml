@@ -62,6 +62,9 @@
     <string name="add_content_search_no_result">
         Oops, parece que no se ha encontrado ningún resultado :(
     </string>
+    <string name="content_details_original_title">Título original</string>
+    <string name="content_details_genres_title">Géneros</string>
+    <string name="content_details_overview_title">Sinopsis</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

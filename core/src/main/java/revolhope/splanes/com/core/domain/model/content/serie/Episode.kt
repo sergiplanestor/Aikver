@@ -12,4 +12,21 @@ data class Episode(
     val still: String,
     val voteAverage: Float,
     val voteCount: Int
-)
+) {
+    companion object {
+        fun getEmpty(): Episode =
+            Episode(
+                airDate = "",
+                numEpisode = -1,
+                id = -1,
+                name = "",
+                overview = "",
+                productionCode = "",
+                numSeason = -1,
+                showId = -1,
+                still = "",
+                voteCount = -1,
+                voteAverage = Float.NaN
+            )
+    }
+}

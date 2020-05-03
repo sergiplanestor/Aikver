@@ -2,6 +2,7 @@ package revolhope.splanes.com.aikver.presentation.common.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.widget.AppLoader
@@ -52,7 +53,7 @@ abstract class BaseActivity : AppCompatActivity() {
         overrideTransition()
     }
 
-    /*override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.close, android.R.id.home -> {
                 finish()
@@ -61,7 +62,7 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         return item?.let { super.onOptionsItemSelected(item) } ?: false
-    }*/
+    }
 
 // =================================================================================================
 // Views

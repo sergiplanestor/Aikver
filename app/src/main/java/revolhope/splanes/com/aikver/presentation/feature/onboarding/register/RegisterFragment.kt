@@ -1,13 +1,16 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.register
 
-import android.os.Build
-import android.text.Layout
 import android.view.View
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.groupDescriptionTextView
+import kotlinx.android.synthetic.main.activity_register.groupInputEditText
+import kotlinx.android.synthetic.main.activity_register.submitButton
+import kotlinx.android.synthetic.main.activity_register.usernameDescriptionTextView
+import kotlinx.android.synthetic.main.activity_register.usernameInputEditText
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.feature.onboarding.OnBoardingActivity
 
 
@@ -20,10 +23,8 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
             this?.changeTitle(getString(R.string.register))
             this?.setBackVisibility(show = true)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            usernameDescriptionTextView.justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
-            groupDescriptionTextView.justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
-        }
+        usernameDescriptionTextView.justify()
+        groupDescriptionTextView.justify()
         submitButton.setOnClickListener(this)
     }
 
