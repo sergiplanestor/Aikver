@@ -67,8 +67,8 @@
                 android:paddingBottom="4dp"
                 android:text="@string/content_details_original_title"
                 android:textColor="@android:color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/originalTitleTextView"
@@ -142,11 +142,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_12dp"
+        android:minWidth="@dimen/size_40dp"
+        android:minHeight="@dimen/size_40dp"
         app:cardBackgroundColor="@color/colorScoreDark"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        android:minHeight="@dimen/size_40dp"
-        android:minWidth="@dimen/size_40dp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,9 +160,9 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
+            android:gravity="center"
             android:padding="4dp"
-            android:textSize="@dimen/text_25"
-            android:gravity="center"/>
+            android:textSize="@dimen/text_25" />
 
     </androidx.cardview.widget.CardView>
 
