@@ -6,7 +6,7 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 
-class ContentDetailsViewModel(
+class SerieDetailsViewModel(
     private val fetchSerieDetailsUseCase: FetchSerieDetailsUseCase
 ) : BaseViewModel() {
 

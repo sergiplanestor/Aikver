@@ -18,6 +18,7 @@ import revolhope.splanes.com.core.domain.model.content.serie.Episode
 import revolhope.splanes.com.core.domain.model.content.serie.Season
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.content.serie.SerieStatus
 
 object ContentMapper {
 
@@ -128,7 +129,7 @@ object ContentMapper {
                 config?.imageConfiguration
             ),
             seasons = entity.seasons?.map { fromSeasonEntityToModel(it, config) } ?: listOf(),
-            status = entity.status ?: "",
+            status = SerieStatus.parse(entity.status),
             type = entity.type ?: "",
             voteAverage = entity.voteAverage ?: Float.NaN,
             voteCount = entity.voteCount ?: -1

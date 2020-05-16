@@ -28,7 +28,7 @@ data class SerieDetails(
     val popularity: Float,
     val thumbnail: String,
     val seasons: List<Season>,
-    val status: String,
+    val status: SerieStatus,
     val type: String,
     val voteAverage: Float,
     val voteCount: Int

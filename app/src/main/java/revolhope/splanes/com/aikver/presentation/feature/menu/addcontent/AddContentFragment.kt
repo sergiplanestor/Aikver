@@ -16,7 +16,7 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
@@ -53,7 +53,7 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun <T : Content> onContentClick(item: T) =
-        ContentDetailsActivity.start(activity as BaseActivity?, item)
+        SerieDetailsActivity.start(activity as BaseActivity?, item)
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrBlank()) viewModel.fetchContent(query, contentSelector.selection.value)

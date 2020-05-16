@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#455A64</color>
     <color name="colorAccent">#80CBC4</color>
     <color name="colorAccentSecond">#1DE9B6</color>
+    <color name="colorAccentDark">#00897B</color><!--00897B-->
 
     <color name="colorRedAlpha">#EF9A9A</color>
     <color name="colorPrimaryDarkAlpha50">#80455A64</color>
@@ -12,6 +13,7 @@
     <color name="backgroundDark">#37474F</color>
     <color name="backgroundLight">#78909C</color>
     <color name="colorGray">#757575</color>
+    <color name="colorDarkGray">#616161</color>
 
     <color name="colorAccentAlpha">#8000B8D4</color>
     <color name="whiteAlpha50">#80FFFFFF</color>

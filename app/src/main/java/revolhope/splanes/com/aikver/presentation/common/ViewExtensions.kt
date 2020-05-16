@@ -1,6 +1,11 @@
 package revolhope.splanes.com.aikver.presentation.common
 
 import android.content.Context
+import android.graphics.LinearGradient
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.text.Layout
 import android.util.DisplayMetrics
@@ -10,6 +15,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.fragment_splash.descriptionTextView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.widget.popup.PopupAlert
@@ -53,11 +63,11 @@ fun View.visibility(show: Boolean, isGone: Boolean = true) =
 /* --- Image loading --- */
 
 fun ImageView.loadUrl(url: String) {
-    Glide.with(context).load(url).into(this)
+    Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
 }
 
 fun ImageView.loadCircular(url: String) {
-    Glide.with(context).load(url).circleCrop().into(this)
+    Glide.with(context).load(url).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
 }
 
 fun ImageView.loadGroupIcon(name: String, color: String) {
@@ -86,4 +96,17 @@ fun TextView.justify() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
     }
+}
+
+/* ---  --- */
+fun Int.toCustomString(): String {
+    val s = toString()
+    if (s.length / 3 != 0) {
+        return s.reversed().chunked(3).let { chunks ->
+            var aux = ""
+            chunks.forEach { aux += "$it." }
+            aux.removeSuffix(".").reversed()
+        }
+    }
+    return s
 }

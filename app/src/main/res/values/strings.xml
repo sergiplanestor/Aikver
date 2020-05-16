@@ -44,6 +44,8 @@
     <string name="member_num">%d Miembro/s</string>
     <string name="admin">Admin</string>
     <string name="you">Tú</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
     <string name="confirmation">Confirmación</string>
     <string name="profile_change_selected_group_confirmation">
         Estás a punto de cambiar el grupo seleccionado. ¿Quieres continuar?
@@ -63,8 +65,24 @@
         Oops, parece que no se ha encontrado ningún resultado :(
     </string>
     <string name="content_details_original_title">Título original</string>
+    <string name="content_details_status_ended">Finalizada</string>
+    <string name="content_details_status_in_progress">En curso</string>
+    <string name="content_details_status_unknown">Desconocido</string>
+    <string name="content_details_original_title_info">%s, país %s</string>
     <string name="content_details_genres_title">Géneros</string>
     <string name="content_details_overview_title">Sinopsis</string>
+    <string name="content_details_overview_see_more">Ver más</string>
+    <string name="content_details_overview_see_less">Ver menos</string>
+    <string name="content_details_episodes_title">Episodios</string>
+    <string name="content_details_episodes_info1">Serie %s.</string>
+    <string name="content_details_episodes_info2">
+        Dispone de %s temporada/s con un total de %s episodio/s.%s
+    </string>
+    <string name="content_details_seasons_info">%d temporada</string>
+    <string name="content_details_vote_title">Puntuación</string>
+    <string name="content_details_vote_info">
+        Popularidad: %s\n\nNúmero de votos: %s
+    </string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

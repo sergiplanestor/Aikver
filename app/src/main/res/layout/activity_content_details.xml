@@ -16,19 +16,32 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/Text"
-            app:contentScrim="?attr/colorPrimaryDark"
-            app:expandedTitleGravity="top"
+            app:contentScrim="@android:color/white"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:toolbarId="@id/toolbar">
 
-            <ImageView
-                android:id="@+id/collapsingToolbarImageView"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="fitXY"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/collapsingToolbarImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/white_gradient"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/white_gradient"
+                    app:layout_collapseMode="parallax" />
+            </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -53,22 +66,70 @@
             android:layout_marginStart="@dimen/margin_8dp"
             android:layout_marginEnd="@dimen/margin_8dp">
 
+            <LinearLayout
+                android:id="@+id/barLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/companyImage"
+                    android:layout_width="@dimen/size_30dp"
+                    android:layout_height="@dimen/size_30dp"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:layout_marginEnd="@dimen/margin_5dp" />
+
+                <TextView
+                    android:id="@+id/yearTextView"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:layout_marginEnd="@dimen/margin_5dp"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/seasonTextView"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:layout_marginEnd="@dimen/margin_5dp"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/statusTextView"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5dp"
+                    android:layout_marginEnd="@dimen/margin_5dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/originalTitleTitle"
-                style="@style/Text.SemiBold"
+                style="@style/Text.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="@dimen/margin_12dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/bkg_pill_text"
-                android:paddingStart="@dimen/margin_12dp"
-                android:paddingEnd="@dimen/margin_12dp"
-                android:paddingBottom="4dp"
                 android:text="@string/content_details_original_title"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/text_18"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/barLayout" />
 
             <TextView
                 android:id="@+id/originalTitleTextView"
@@ -78,24 +139,34 @@
                 android:layout_margin="@dimen/margin_8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:textColor="@color/colorDarkGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/originalTitleTitle" />
 
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:background="@color/colorPrimaryDark"
+                android:alpha=".1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/originalTitleTextView" />
+
             <TextView
                 android:id="@+id/genresTitle"
-                style="@style/Text.SemiBold"
+                style="@style/Text.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="@dimen/margin_12dp"
-                android:background="@drawable/bkg_pill_text"
-                android:paddingStart="@dimen/margin_12dp"
-                android:paddingEnd="@dimen/margin_12dp"
-                android:paddingBottom="4dp"
                 android:text="@string/content_details_genres_title"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/text_18"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/originalTitleTextView" />
+                app:layout_constraintTop_toBottomOf="@id/separator1" />
 
             <TextView
                 android:id="@+id/genresTextView"
@@ -103,35 +174,159 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_8dp"
+                android:textColor="@color/colorDarkGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genresTitle" />
 
-            <TextView
-                android:id="@+id/overviewTitle"
-                style="@style/Text.SemiBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <View
+                android:id="@+id/separator2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="@dimen/margin_12dp"
-                android:background="@drawable/bkg_pill_text"
-                android:paddingStart="@dimen/margin_12dp"
-                android:paddingEnd="@dimen/margin_12dp"
-                android:paddingBottom="4dp"
-                android:text="@string/content_details_overview_title"
-                android:textColor="@android:color/white"
+                android:background="@color/colorPrimaryDark"
+                android:alpha=".1"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genresTextView" />
 
             <TextView
-                android:id="@+id/overviewTextView"
+                android:id="@+id/overviewTitle"
+                style="@style/Text.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:text="@string/content_details_overview_title"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator2" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/overviewWrapLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/overviewTitle">
+
+                <TextView
+                    android:id="@+id/overviewTextView"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:textColor="@color/colorDarkGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/overviewDecorator"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/white_gradient"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/overviewTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/overviewVisibilityButton"
+                    style="@style/AppButtonLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_12dp"
+                    android:text="@string/content_details_overview_see_more"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/overviewDecorator" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/separator3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:background="@color/colorPrimaryDark"
+                android:alpha=".1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/overviewWrapLayout" />
+
+            <TextView
+                android:id="@+id/episodesTitle"
+                style="@style/Text.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:text="@string/content_details_episodes_title"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator3" />
+
+            <TextView
+                android:id="@+id/episodesTextView"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/colorDarkGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overviewTitle" />
+                app:layout_constraintTop_toBottomOf="@id/episodesTitle" />
+
+            <View
+                android:id="@+id/separator4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:background="@color/colorPrimaryDark"
+                android:alpha=".1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/episodesTextView" />
+
+            <TextView
+                android:id="@+id/voteTitle"
+                style="@style/Text.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:text="@string/content_details_vote_title"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator4" />
+
+            <TextView
+                android:id="@+id/voteTextView"
+                style="@style/Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8dp"
+                android:textColor="@color/colorDarkGray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/voteTitle" />
+
+            <View
+                android:id="@+id/separator5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:background="@color/colorPrimaryDark"
+                android:alpha=".1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/voteTextView"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,9 +343,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_anchorGravity="bottom|end">
 
         <TextView
             android:id="@+id/voteAverageTextView"
@@ -165,6 +358,14 @@
             android:textSize="@dimen/text_25" />
 
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/margin_20dp"
+        android:src="@drawable/ic_add" />
 
     <include layout="@layout/include_loader" />
 
