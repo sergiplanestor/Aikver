@@ -9,13 +9,15 @@ import com.google.gson.Gson
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.entity.user.UserEntity
 import revolhope.splanes.com.core.data.entity.user.UserGroupEntity
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class FirebaseDataSourceImpl : FirebaseDataSource {
 
     companion object {
-        const val REF_SERIE = "db/serie"
+        const val REF_SERIE = "db/content/serie"
+        const val REF_MOVIE = "db/content/movie"
         const val REF_USER = "db/user"
         const val REF_GROUP = "db/group"
     }
@@ -145,6 +147,16 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 }
         }
 
-
+    override suspend fun insertSerie(userGroupEntity: UserGroupEntity, serie: Serie): Boolean =
+        suspendCoroutine { cont ->
+            database.getReference(REF_SERIE)
+                .child(userGroupEntity.id ?: "")
+                .push()
+                .setValue(serie.id) { error, _ ->
+                    cont.resume(error == null)
+                }
+        }
+    
+    
     override suspend fun logout() = auth.signOut()
 }

@@ -3,15 +3,22 @@ package revolhope.splanes.com.core.domain.repositoryimpl
 
 import revolhope.splanes.com.core.data.datasource.ApiDataSource
 import revolhope.splanes.com.core.data.datasource.CacheConfigurationDataSource
+import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.repository.ContentRepository
+import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.mapper.ConfigurationMapper
 import revolhope.splanes.com.core.domain.mapper.ContentMapper
+import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
-class ContentRepositoryImpl(private val apiDataSource: ApiDataSource) : ContentRepository {
+class ContentRepositoryImpl(
+    private val apiDataSource: ApiDataSource,
+    private val firebaseDataSource: FirebaseDataSource,
+    private val userRepository: UserRepository
+) : ContentRepository {
 
     override suspend fun fetchConfiguration(): Configuration? =
         if (CacheConfigurationDataSource.fetchConfig() == null) {
@@ -39,4 +46,12 @@ class ContentRepositoryImpl(private val apiDataSource: ApiDataSource) : ContentR
         apiDataSource.fetchSerieDetails(serieId)?.let {
             ContentMapper.fromSerieDetailsEntityToModel(it, fetchConfiguration())
         }
+
+    override suspend fun insertSerie(serie: Serie): Boolean =
+        userRepository.fetchUser()?.selectedUserGroup?.let {
+            firebaseDataSource.insertSerie(
+                UserGroupMapper.fromModelToEntity(it),
+                serie
+            )
+        } ?: false
 }

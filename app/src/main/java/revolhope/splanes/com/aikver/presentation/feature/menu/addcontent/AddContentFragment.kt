@@ -18,6 +18,8 @@ import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
+import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
@@ -35,7 +37,7 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private fun <T : Content> onResultsReceived(results: List<T>, onClick: (T) -> Unit) {
         if (results.isNotEmpty() && context != null) {
-            resultsRecyclerView.layoutManager = AutoSizeLayoutManager(context!!, 120f)
+            resultsRecyclerView.layoutManager = AutoSizeLayoutManager(requireContext(), 120f)
             resultsRecyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(context, R.anim.recycler_falldown)
             resultsRecyclerView.adapter = AddContentAdapter(results, onClick)
@@ -52,8 +54,12 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
         placeholder.visibility(shouldShow)
     }
 
-    private fun <T : Content> onContentClick(item: T) =
-        SerieDetailsActivity.start(activity as BaseActivity?, item)
+    private fun <T : Content> onContentClick(item: T) {
+        when (item) {
+            is Serie -> SerieDetailsActivity.start(activity as BaseActivity?, item)
+            is Movie -> { /* TODO */ }
+        }
+    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrBlank()) viewModel.fetchContent(query, contentSelector.selection.value)

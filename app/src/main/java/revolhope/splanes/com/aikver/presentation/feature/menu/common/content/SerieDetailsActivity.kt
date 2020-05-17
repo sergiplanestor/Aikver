@@ -6,6 +6,7 @@ import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
+import kotlinx.android.synthetic.main.activity_content_details.addButton
 import kotlinx.android.synthetic.main.activity_content_details.collapsingToolbarImageView
 import kotlinx.android.synthetic.main.activity_content_details.companyImage
 import kotlinx.android.synthetic.main.activity_content_details.episodesTextView
@@ -69,6 +70,10 @@ class SerieDetailsActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getContent()?.title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
+        addButton.setOnClickListener {
+            viewModel.addSerie(getContent())
+        }
     }
 
     override fun initObservers() {
@@ -82,6 +87,14 @@ class SerieDetailsActivity : BaseActivity() {
                 )
             } else {
                 bindViews(it)
+            }
+        }
+        observe(viewModel.addSerieResult) {
+            if (it) {
+                onBackPressed()
+            }
+            else {
+                popupError(context = this, fm = supportFragmentManager)
             }
         }
     }

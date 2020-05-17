@@ -25,6 +25,7 @@ import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
+import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.group.DeleteUserGroupUseCase
@@ -44,7 +45,7 @@ import revolhope.splanes.com.core.interactor.user.avatar.InsertUserAvatarUseCase
 val repositoryModule = module(override = true) {
     factory<UserRepository> { UserRepositoryImpl(get(), get(), get()) }
     factory<GroupRepository> { GroupRepositoryImpl(get(), get()) }
-    factory<ContentRepository> { ContentRepositoryImpl(get()) }
+    factory<ContentRepository> { ContentRepositoryImpl(get(), get(), get()) }
 }
 
 /* DataSources */
@@ -78,6 +79,7 @@ val useCaseModule = module(override = true) {
     factory { SearchSerieUseCase(get()) }
     factory { SearchMovieUseCase(get()) }
     factory { FetchSerieDetailsUseCase(get()) }
+    factory { InsertSerieUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -89,5 +91,5 @@ val viewModelModule = module(override = true) {
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     viewModel { AddContentViewModel(get(), get()) }
-    viewModel { SerieDetailsViewModel(get()) }
+    viewModel { SerieDetailsViewModel(get(), get()) }
 }

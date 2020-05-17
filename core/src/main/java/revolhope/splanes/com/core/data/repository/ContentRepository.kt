@@ -14,4 +14,6 @@ interface ContentRepository {
     suspend fun searchSeries(query: String, page: Int = 1): List<Serie>?
 
     suspend fun fetchSerieDetails(serieId: Int): SerieDetails?
+
+    suspend fun insertSerie(serie: Serie): Boolean
 }
