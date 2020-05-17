@@ -6,23 +6,23 @@ import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
-import kotlinx.android.synthetic.main.activity_content_details.addButton
-import kotlinx.android.synthetic.main.activity_content_details.collapsingToolbarImageView
-import kotlinx.android.synthetic.main.activity_content_details.companyImage
-import kotlinx.android.synthetic.main.activity_content_details.episodesTextView
-import kotlinx.android.synthetic.main.activity_content_details.genresTextView
-import kotlinx.android.synthetic.main.activity_content_details.originalTitleTextView
-import kotlinx.android.synthetic.main.activity_content_details.overviewDecorator
-import kotlinx.android.synthetic.main.activity_content_details.overviewTextView
-import kotlinx.android.synthetic.main.activity_content_details.overviewVisibilityButton
-import kotlinx.android.synthetic.main.activity_content_details.overviewWrapLayout
-import kotlinx.android.synthetic.main.activity_content_details.seasonTextView
-import kotlinx.android.synthetic.main.activity_content_details.statusTextView
-import kotlinx.android.synthetic.main.activity_content_details.toolbar
-import kotlinx.android.synthetic.main.activity_content_details.voteAverageTextView
-import kotlinx.android.synthetic.main.activity_content_details.voteCardView
-import kotlinx.android.synthetic.main.activity_content_details.voteTextView
-import kotlinx.android.synthetic.main.activity_content_details.yearTextView
+import kotlinx.android.synthetic.main.activity_serie_details.addButton
+import kotlinx.android.synthetic.main.activity_serie_details.collapsingToolbarImageView
+import kotlinx.android.synthetic.main.activity_serie_details.companyImage
+import kotlinx.android.synthetic.main.activity_serie_details.episodesTextView
+import kotlinx.android.synthetic.main.activity_serie_details.genresTextView
+import kotlinx.android.synthetic.main.activity_serie_details.originalTitleTextView
+import kotlinx.android.synthetic.main.activity_serie_details.overviewDecorator
+import kotlinx.android.synthetic.main.activity_serie_details.overviewTextView
+import kotlinx.android.synthetic.main.activity_serie_details.overviewVisibilityButton
+import kotlinx.android.synthetic.main.activity_serie_details.overviewWrapLayout
+import kotlinx.android.synthetic.main.activity_serie_details.seasonTextView
+import kotlinx.android.synthetic.main.activity_serie_details.statusTextView
+import kotlinx.android.synthetic.main.activity_serie_details.toolbar
+import kotlinx.android.synthetic.main.activity_serie_details.voteAverageTextView
+import kotlinx.android.synthetic.main.activity_serie_details.voteCardView
+import kotlinx.android.synthetic.main.activity_serie_details.voteTextView
+import kotlinx.android.synthetic.main.activity_serie_details.yearTextView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
@@ -72,7 +72,9 @@ class SerieDetailsActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         addButton.setOnClickListener {
-            viewModel.addSerie(getContent())
+            getContent()?.let { serie ->
+                SerieCustomInfoActivity.start(this, serie)
+            }
         }
     }
 
@@ -87,14 +89,6 @@ class SerieDetailsActivity : BaseActivity() {
                 )
             } else {
                 bindViews(it)
-            }
-        }
-        observe(viewModel.addSerieResult) {
-            if (it) {
-                onBackPressed()
-            }
-            else {
-                popupError(context = this, fm = supportFragmentManager)
             }
         }
     }
@@ -179,7 +173,7 @@ class SerieDetailsActivity : BaseActivity() {
                         overviewTextView.maxLines = 7
                         overviewDecorator.visible()
                         overviewVisibilityButton.visible()
-                        overviewVisibilityButton.setOnClickListener(::swapOverviewState)
+                        overviewVisibilityButton.setOnClickListener { swapOverviewState() }
                     }
                     overviewTextView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
@@ -190,8 +184,8 @@ class SerieDetailsActivity : BaseActivity() {
         episodesTextView.text =
             getString(
                 R.string.content_details_episodes_info2,
-                details.numSeasons,
-                details.numEpisodes,
+                details.numSeasons.toString(),
+                details.numEpisodes.toString(),
                 if (details.status != SerieStatus.UNKNOWN) {
                     "\n\n" + getString(
                         R.string.content_details_episodes_info1,
@@ -210,7 +204,7 @@ class SerieDetailsActivity : BaseActivity() {
         )
     }
 
-    private fun swapOverviewState(view: View) {
+    private fun swapOverviewState() {
         if (overviewTextView.maxLines == OVERVIEW_COMPACT_MAX_LINES) {
             overviewTextView.maxLines = Int.MAX_VALUE
             overviewDecorator.invisible(isGone = false)
@@ -253,5 +247,5 @@ class SerieDetailsActivity : BaseActivity() {
     private fun getContent(): Serie? =
         intent.extras?.getSerializable(EXTRA_CONTENT) as Serie?
 
-    override fun getLayoutRes(): Int = R.layout.activity_content_details
+    override fun getLayoutRes(): Int = R.layout.activity_serie_details
 }

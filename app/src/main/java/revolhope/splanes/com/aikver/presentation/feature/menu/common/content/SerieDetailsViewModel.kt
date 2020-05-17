@@ -9,15 +9,11 @@ import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseC
 import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 
 class SerieDetailsViewModel(
-    private val fetchSerieDetailsUseCase: FetchSerieDetailsUseCase,
-    private val insertSerieUseCase: InsertSerieUseCase
+    private val fetchSerieDetailsUseCase: FetchSerieDetailsUseCase
 ) : BaseViewModel() {
 
     val serieDetails: LiveData<SerieDetails?> get() = _serieDetails
     private val _serieDetails: MutableLiveData<SerieDetails?> = MutableLiveData()
-
-    val addSerieResult: LiveData<Boolean> get() = _addSerieResult
-    private val _addSerieResult: MutableLiveData<Boolean> = MutableLiveData()
 
     fun fetchDetails(id: Int) {
         launchAsync {
@@ -28,12 +24,6 @@ class SerieDetailsViewModel(
                     fetchSerieDetailsUseCase.invoke(id)
                 }
             )
-        }
-    }
-
-    fun addSerie(serie: Serie?) {
-        launchAsync {
-            _addSerieResult.postValue(serie?.let { insertSerieUseCase.invoke(it) } ?: false)
         }
     }
 }

@@ -79,10 +79,17 @@
         Dispone de %s temporada/s con un total de %s episodio/s.%s
     </string>
     <string name="content_details_seasons_info">%d temporada</string>
-    <string name="content_details_vote_title">Puntuación</string>
+    <string name="content_details_vote_title">@string/punctuation</string>
     <string name="content_details_vote_info">
         Popularidad: %s\n\nNúmero de votos: %s
     </string>
+    <string name="serie_additional_info_title">
+        Añade de manera opcional un poco más de información antes de añadir la serie:
+    </string>
+    <string name="serie_seen">Serie vista?</string>
+    <string name="serie_network">Plataforma</string>
+    <string name="comments">Comentarios</string>
+    <string name="punctuation">Puntuación</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

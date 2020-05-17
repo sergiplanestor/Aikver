@@ -16,7 +16,8 @@ abstract class BaseActivity : AppCompatActivity() {
     enum class NavTransition() {
         LATERAL,
         UP,
-        MODAL
+        MODAL,
+        FADE
     }
 
 // =================================================================================================
@@ -107,6 +108,13 @@ abstract class BaseActivity : AppCompatActivity() {
                     Pair(R.anim.slide_in_up, android.R.anim.fade_out)
                 } else {
                     Pair(android.R.anim.fade_in, R.anim.slide_out_down)
+                }
+            NavTransition.FADE ->
+                if (isStart) {
+                    bundle?.putSerializable(EXTRA_NAVIGATION_TRANSITION, NavTransition.FADE)
+                    Pair(android.R.anim.fade_in, 0)
+                } else {
+                    Pair(0, android.R.anim.fade_out)
                 }
             else -> Pair(0, 0)
         }
