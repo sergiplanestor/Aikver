@@ -40,9 +40,6 @@
         <activity
             android:name=".presentation.feature.menu.common.content.SerieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".presentation.feature.menu.common.content.SerieCustomInfoActivity"
-            android:theme="@style/AppTheme.Translucent" />
     </application>
 
 </manifest>

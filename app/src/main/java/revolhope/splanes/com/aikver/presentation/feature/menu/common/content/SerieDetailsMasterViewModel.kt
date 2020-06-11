@@ -8,7 +8,7 @@ import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 
-class SerieDetailsViewModel(
+class SerieDetailsMasterViewModel(
     private val fetchSerieDetailsUseCase: FetchSerieDetailsUseCase
 ) : BaseViewModel() {
 
