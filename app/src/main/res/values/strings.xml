@@ -84,12 +84,14 @@
         Popularidad: %s\n\nNúmero de votos: %s
     </string>
     <string name="serie_additional_info_title">
-        Añade de manera opcional un poco más de información antes de añadir la serie:
+        Añade de manera opcional un poco más de información antes de guardar la serie:
     </string>
     <string name="serie_seen">Serie vista?</string>
     <string name="serie_network">Plataforma</string>
     <string name="comments">Comentarios</string>
     <string name="punctuation">Puntuación</string>
+    <string name="films">Peliculas</string>
+    <string name="series">Series</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

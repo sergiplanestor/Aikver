@@ -28,10 +28,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_component_content_selector"
+            android:background="@color/selector_component_content_selector"
             android:button="@null"
             android:gravity="center"
-            android:text="Pelicula" />
+            android:text="@string/films" />
 
         <RadioButton
             android:id="@+id/serie"
@@ -42,10 +42,10 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_component_content_selector"
+            android:background="@color/selector_component_content_selector"
             android:button="@null"
             android:gravity="center"
-            android:text="Serie" />
+            android:text="@string/series" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

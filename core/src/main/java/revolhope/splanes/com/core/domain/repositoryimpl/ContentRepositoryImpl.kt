@@ -10,6 +10,7 @@ import revolhope.splanes.com.core.domain.mapper.ConfigurationMapper
 import revolhope.splanes.com.core.domain.mapper.ContentMapper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
+import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
@@ -47,7 +48,13 @@ class ContentRepositoryImpl(
             ContentMapper.fromSerieDetailsEntityToModel(it, fetchConfiguration())
         }
 
-    override suspend fun insertSerie(serie: Serie): Boolean =
+    override suspend fun insertSerie(
+        serie: Serie,
+        seenByUser: Boolean,
+        network: Network,
+        userPunctuation: Int,
+        userComments: String
+    ): Boolean =
         userRepository.fetchUser()?.selectedUserGroup?.let {
             firebaseDataSource.insertSerie(
                 UserGroupMapper.fromModelToEntity(it),
