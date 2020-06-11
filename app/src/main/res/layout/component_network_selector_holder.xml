@@ -4,17 +4,18 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/platformContainer">
+    android:id="@+id/networkContainer"
+    android:layout_margin="@dimen/margin_5dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/platformCardView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="12dp"
+        android:id="@+id/networkCardView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:cardCornerRadius="6dp"
         android:layout_margin="@dimen/margin_5dp">
 
         <ImageView
-            android:id="@+id/platformImageView"
+            android:id="@+id/networkImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
