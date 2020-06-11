@@ -172,6 +172,13 @@
         <item name="android:colorAccent">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AppTextInputLayout.White" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/selector_text_input_white</item>
+        <item name="hintTextColor">@color/selector_text_input_white</item>
+        <item name="android:colorAccent">@color/whiteAlpha90</item>
+        <item name="android:textColorHint">@color/whiteAlpha90</item>
+    </style>
+
     <style name="AppTextInputText">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textCursorDrawable">@drawable/cursor_primary_dark</item>
@@ -179,8 +186,22 @@
         <item name="theme">@style/AppTextInputTextTheme</item>
     </style>
 
+    <style name="AppTextInputText.White">
+        <item name="android:textColor">@color/whiteAlpha90</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_white</item>
+        <item name="android:textColorHighlight">@color/whiteAlpha50</item>
+        <item name="android:textColorHint">@color/whiteAlpha90</item>
+        <item name="hintTextColor">@color/whiteAlpha90</item>
+        <item name="theme">@style/AppTextInputTextTheme.White</item>
+    </style>
+
     <style name="AppTextInputTextTheme">
         <item name="android:colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTextInputTextTheme.White">
+        <item name="android:colorControlActivated">@color/whiteAlpha90</item>
+        <item name="android:colorControlNormal">@color/whiteAlpha90</item>
     </style>
 
 </resources>
