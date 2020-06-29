@@ -68,6 +68,9 @@ class ScoreView @JvmOverloads constructor(
                 ColorStateList.valueOf(resources.getColor(R.color.colorScoreDark, null))
         }
 
+    fun whiteMode() =
+        scoreTextView.setTextColor(resources.getColor(R.color.whiteAlpha90, null))
+
     fun hideNumeric() {
         scoreTextView.visibility = View.GONE
     }
