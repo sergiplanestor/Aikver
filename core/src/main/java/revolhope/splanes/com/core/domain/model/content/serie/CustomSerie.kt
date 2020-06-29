@@ -7,7 +7,7 @@ data class CustomSerie(
     val serie: Serie,
     val userAdded: UserGroupMember,
     val dateAdded: Long,
-    val seenBy: List<UserGroupMember>,
+    val seenBy: List<UserGroupMember>?,
     val network: Network,
     val punctuation: List<Pair<UserGroupMember, Float>>?,
     val comments: List<Pair<UserGroupMember, String>>?

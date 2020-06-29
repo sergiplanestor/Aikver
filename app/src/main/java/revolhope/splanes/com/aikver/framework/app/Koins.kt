@@ -93,5 +93,5 @@ val viewModelModule = module(override = true) {
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     viewModel { AddContentViewModel(get(), get()) }
     viewModel { SerieDetailsMasterViewModel(get()) }
-    viewModel { SerieDetailsSlaveViewModel(get(), get()) }
+    viewModel { SerieDetailsSlaveViewModel(get()) }
 }

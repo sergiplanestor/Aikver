@@ -88,7 +88,8 @@
     </string>
     <string name="serie_seen">Serie vista?</string>
     <string name="serie_network">Plataforma</string>
-    <string name="comments">Comentarios</string>
+    <string name="comment_hint">Escribe aquí tu comentario</string>
+    <string name="serie_comments_title">Comparte algún comentario sobre esta serie con tu grupo:</string>
     <string name="punctuation">Puntuación</string>
     <string name="films">Peliculas</string>
     <string name="series">Series</string>

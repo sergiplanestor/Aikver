@@ -9,9 +9,11 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.mapper.ConfigurationMapper
 import revolhope.splanes.com.core.domain.mapper.ContentMapper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
+import revolhope.splanes.com.core.domain.mapper.UserMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
@@ -55,10 +57,33 @@ class ContentRepositoryImpl(
         userPunctuation: Int,
         userComments: String
     ): Boolean =
-        userRepository.fetchUser()?.selectedUserGroup?.let {
-            firebaseDataSource.insertSerie(
-                UserGroupMapper.fromModelToEntity(it),
-                serie
-            )
+        userRepository.fetchUser()?.let { user ->
+            user.selectedUserGroup?.let { selectedGroup ->
+                val userMember = UserMapper.fromUserModelToUserGroupMemberModel(
+                    user,
+                    selectedGroup.id,
+                    selectedGroup.userGroupAdmin.userId
+                )
+                firebaseDataSource.insertSerie(
+                    UserGroupMapper.fromModelToEntity(selectedGroup),
+                    CustomSerie(
+                        serie = serie,
+                        userAdded = userMember,
+                        dateAdded = System.currentTimeMillis(),
+                        seenBy = if (seenByUser) mutableListOf(userMember) else emptyList(),
+                        network = network,
+                        punctuation = if (userPunctuation != -1) {
+                            mutableListOf(userMember to userPunctuation.toFloat())
+                        } else {
+                            emptyList()
+                        },
+                        comments = if (userComments.isNotBlank()) {
+                            mutableListOf(userMember to userComments)
+                        } else {
+                            emptyList()
+                        }
+                    ).let(ContentMapper::fromCustomSerieModelToEntity)
+                )
+            } ?: false
         } ?: false
 }

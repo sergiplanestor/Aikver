@@ -18,9 +18,9 @@ interface ContentRepository {
 
     suspend fun insertSerie(
         serie: Serie,
-        seenByUser: Boolean = false,
-        network: Network = Network.UNKNOWN,
-        userPunctuation: Int = -1,
-        userComments: String = ""
+        seenByUser: Boolean,
+        network: Network,
+        userPunctuation: Int,
+        userComments: String
     ): Boolean
 }

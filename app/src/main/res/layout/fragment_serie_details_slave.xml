@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -9,8 +10,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_20dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,12 +36,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_8dp"
+                android:background="@color/whiteAlpha50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/infoTextView" />
+
             <Switch
                 android:id="@+id/serieSeenSwitcher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8dp"
-                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginTop="@dimen/margin_24dp"
                 android:text="@string/serie_seen"
                 android:textColor="@color/whiteAlpha90"
                 android:theme="@style/Text.SemiBold"
@@ -97,6 +108,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/networkTextView" />
 
+            <TextView
+                android:id="@+id/commentsTextView"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:text="@string/serie_comments_title"
+                android:textColor="@color/whiteAlpha90"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/networkSelector" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commentLayout"
                 style="@style/AppTextInputLayout.White"
@@ -107,14 +132,14 @@
                 android:layout_marginEnd="@dimen/margin_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/networkSelector">
+                app:layout_constraintTop_toBottomOf="@id/commentsTextView">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/commentInputEditText"
                     style="@style/AppTextInputText.White"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/comments" />
+                    android:hint="@string/comment_hint" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,14 +154,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/addButton" />
-
     <Button
         android:id="@+id/addButton"
         style="@style/AppButton"
@@ -145,9 +162,9 @@
         android:gravity="center_vertical"
         android:text="@string/add"
         android:textColor="@color/whiteAlpha90"
-        app:strokeColor="@color/whiteAlpha90"
-        app:rippleColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/colorAccent"
+        app:strokeColor="@color/whiteAlpha90" />
 </androidx.constraintlayout.widget.ConstraintLayout>

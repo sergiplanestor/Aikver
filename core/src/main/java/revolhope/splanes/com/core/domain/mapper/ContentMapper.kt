@@ -8,12 +8,14 @@ import revolhope.splanes.com.core.data.entity.api.content.serie.EpisodeEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SeasonEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
+import revolhope.splanes.com.core.data.entity.content.CustomSerieEntity
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.config.ImageConfiguration
 import revolhope.splanes.com.core.domain.model.content.ContentCreator
 import revolhope.splanes.com.core.domain.model.content.ContentGenres
 import revolhope.splanes.com.core.domain.model.content.ContentNetwork
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.Episode
 import revolhope.splanes.com.core.domain.model.content.serie.Season
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
@@ -205,4 +207,15 @@ object ContentMapper {
             }
             }$lastPath"
         }
+
+    fun fromCustomSerieModelToEntity(model: CustomSerie): CustomSerieEntity =
+        CustomSerieEntity(
+            serieId = model.serie.id.toString(),
+            userAdded = model.userAdded.userId,
+            dateAdded = model.dateAdded,
+            seenBy = model.seenBy?.map { it.userId },
+            network = model.network.id,
+            punctuation = model.punctuation?.map { it.first.userId to it.second },
+            comments = model.comments?.map { it.first.userId to it.second }
+        )
 }

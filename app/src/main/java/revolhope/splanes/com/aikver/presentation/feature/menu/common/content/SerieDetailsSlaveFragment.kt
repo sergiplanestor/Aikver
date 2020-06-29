@@ -12,14 +12,18 @@ import kotlinx.android.synthetic.main.fragment_serie_details_slave.infoTextView
 import kotlinx.android.synthetic.main.fragment_serie_details_slave.networkSelector
 import kotlinx.android.synthetic.main.fragment_serie_details_slave.punctuationGroup
 import kotlinx.android.synthetic.main.fragment_serie_details_slave.punctuationView
+import kotlinx.android.synthetic.main.fragment_serie_details_slave.root
 import kotlinx.android.synthetic.main.fragment_serie_details_slave.rootLayout
 import kotlinx.android.synthetic.main.fragment_serie_details_slave.serieSeenSwitcher
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.AnimUtils
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.common.visibility
+import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.SnackBar
+import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.model.SnackBarModel
 
 class SerieDetailsSlaveFragment : BaseFragment() {
 
@@ -54,9 +58,9 @@ class SerieDetailsSlaveFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = super.onCreateView(inflater, container, savedInstanceState)
-        playAnimationIn(v!!)
-        return v
+        return super.onCreateView(inflater, container, savedInstanceState).also {
+            playAnimationIn(it!!)
+        }
     }
 
     override fun initViews() {
@@ -65,11 +69,19 @@ class SerieDetailsSlaveFragment : BaseFragment() {
             punctuationGroup.visibility(checked)
             TransitionManager.beginDelayedTransition(rootLayout)
         }
-        addButton.setOnClickListener {
-            addSerie()
-        }
+        punctuationView.whiteMode()
+        addButton.setOnClickListener { addSerie() }
     }
 
+    override fun initObservers() {
+        observe(viewModel.addSerieResult) {
+            SnackBar.show(
+                root,
+                if (it) SnackBarModel.Success("T_Serie añadida") { activity?.finish() }
+                else SnackBarModel.Error("T_Ooops.. Ha habido un error")
+            )
+        }
+    }
 
     private fun playAnimationIn(view: View) {
         AnimUtils.playCircularRevealIn(
@@ -105,15 +117,17 @@ class SerieDetailsSlaveFragment : BaseFragment() {
     }
 
     private fun addSerie() {
-        viewModel.addSerie(
-            SerieCustomInfoUiModel(
-                (activity as? SerieDetailsActivity)?.getContent(),
-                serieSeenSwitcher.isChecked,
-                punctuationView.getScore(),
-                networkSelector.getSelected(),
-                commentInputEditText.text?.toString() ?: ""
+        (activity as? SerieDetailsActivity)?.getContent()?.let {
+            viewModel.addSerie(
+                SerieCustomInfoUiModel(
+                    it,
+                    serieSeenSwitcher.isChecked,
+                    punctuationView.getScore(),
+                    networkSelector.getSelected(),
+                    commentInputEditText.text?.toString() ?: ""
+                )
             )
-        )
+        }
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_serie_details_slave
