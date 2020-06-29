@@ -27,4 +27,7 @@
     <color name="colorScoreDark">#FFA000</color>
     <color name="colorScoreDarkAlpha70">#B3FFA000</color>
 
+    <color name="colorGreenSuccess">#00CA8D</color>
+    <color name="colorRedError">#FF6666</color>
+
 </resources>

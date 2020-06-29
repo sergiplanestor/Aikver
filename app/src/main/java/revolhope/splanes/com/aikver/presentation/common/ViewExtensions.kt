@@ -10,9 +10,12 @@ import android.os.Build
 import android.text.Layout
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -109,4 +112,24 @@ fun Int.toCustomString(): String {
         }
     }
     return s
+}
+
+/* --- SnackBar Parent --- */
+
+fun View?.findSuitableParent(): ViewGroup? {
+    var view = this
+    var fallback: ViewGroup? = null
+    do {
+        when (view) {
+            is CoordinatorLayout -> return view
+            is FrameLayout -> {
+                if (view.id == android.R.id.content) return view else fallback = view
+            }
+        }
+
+        view = if (view?.parent is View) view.parent as View else null
+
+    } while (view != null)
+
+    return fallback
 }
