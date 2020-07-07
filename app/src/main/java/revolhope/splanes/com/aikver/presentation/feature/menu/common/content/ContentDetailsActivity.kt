@@ -5,30 +5,32 @@ import android.content.res.ColorStateList
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
-import kotlinx.android.synthetic.main.activity_serie_details.addButton
-import kotlinx.android.synthetic.main.activity_serie_details.rootLayout
+import kotlinx.android.synthetic.main.activity_content_details.addButton
+import kotlinx.android.synthetic.main.activity_content_details.rootLayout
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.exec
 import revolhope.splanes.com.aikver.framework.app.findByTag
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
-import revolhope.splanes.com.core.domain.model.content.serie.Serie
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveFragment
+import revolhope.splanes.com.core.domain.model.content.Content
 
-class SerieDetailsActivity : BaseActivity() {
+class ContentDetailsActivity : BaseActivity() {
 
-    private var addButtonState: Int = STATE_ADD
+    private var addButtonState: Int =
+        STATE_ADD
 
     companion object {
-        private const val EXTRA_CONTENT = "serieDetailsActivity.extra.content"
+        private const val EXTRA_CONTENT = "ContentDetailsActivity.extra.content"
         private const val STATE_ADD = 0
         private const val STATE_CLOSE = 1
 
-        fun start(baseActivity: BaseActivity?, serie: Serie) {
+        fun start(baseActivity: BaseActivity?, content: Content) {
             baseActivity?.startActivity(
-                Intent(baseActivity, SerieDetailsActivity::class.java).apply {
+                Intent(baseActivity, ContentDetailsActivity::class.java).apply {
                     putExtras(
                         bundleOf(
                             EXTRA_NAVIGATION_TRANSITION to NavTransition.MODAL,
-                            EXTRA_CONTENT to serie
+                            EXTRA_CONTENT to content
                         )
                     )
                 }
@@ -45,24 +47,24 @@ class SerieDetailsActivity : BaseActivity() {
                     transaction
                         .add(
                             R.id.container,
-                            SerieDetailsSlaveFragment.newInstance(
+                            ContentDetailsSlaveFragment.newInstance(
                                 x = addButton.x + addButton.width / 2,
                                 y = addButton.y + addButton.height / 2,
                                 width = rootLayout.width,
                                 height = rootLayout.height
                             ),
-                            SerieDetailsSlaveFragment::javaClass.name
+                            ContentDetailsSlaveFragment::javaClass.name
                         )
-                        .addToBackStack(SerieDetailsSlaveFragment::javaClass.name)
+                        .addToBackStack(ContentDetailsSlaveFragment::javaClass.name)
                 }
                 changeFabState(STATE_CLOSE)
 
             } else {
-                (supportFragmentManager.findByTag(SerieDetailsSlaveFragment::javaClass.name)
-                        as? SerieDetailsSlaveFragment)?.run {
+                (supportFragmentManager.findByTag(ContentDetailsSlaveFragment::javaClass.name)
+                        as? ContentDetailsSlaveFragment)?.run {
                     playAnimationOut {
                         supportFragmentManager.popBackStackImmediate(
-                            SerieDetailsSlaveFragment::javaClass.name,
+                            ContentDetailsSlaveFragment::javaClass.name,
                             FragmentManager.POP_BACK_STACK_INCLUSIVE
                         )
                     }
@@ -79,8 +81,8 @@ class SerieDetailsActivity : BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
     }
 
-    fun getContent(): Serie? =
-        intent.extras?.getSerializable(EXTRA_CONTENT) as Serie?
+    fun getContent(): Content? =
+        intent.extras?.getSerializable(EXTRA_CONTENT) as Content?
 
     private fun changeFabState(newState: Int) {
         addButton.backgroundTintList = ColorStateList.valueOf(
@@ -94,5 +96,5 @@ class SerieDetailsActivity : BaseActivity() {
         addButtonState = newState
     }
 
-    override fun getLayoutRes(): Int = R.layout.activity_serie_details
+    override fun getLayoutRes(): Int = R.layout.activity_content_details
 }

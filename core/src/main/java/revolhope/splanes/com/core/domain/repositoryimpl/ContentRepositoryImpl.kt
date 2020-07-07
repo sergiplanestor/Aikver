@@ -13,7 +13,11 @@ import revolhope.splanes.com.core.domain.mapper.UserMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
+import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
+import revolhope.splanes.com.core.domain.model.content.movie.RelatedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
+import revolhope.splanes.com.core.domain.model.content.serie.RelatedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
@@ -50,6 +54,22 @@ class ContentRepositoryImpl(
             ContentMapper.fromSerieDetailsEntityToModel(it, fetchConfiguration())
         }
 
+    override suspend fun fetchMovieDetails(movieId: Int): MovieDetails? =
+        apiDataSource.fetchMovieDetails(movieId)?.let {
+            ContentMapper.fromMovieDetailsEntityToModel(it, fetchConfiguration())
+        }
+
+    override suspend fun fetchRelatedSeries(serieId: Int, page: Int): RelatedSeries? =
+        apiDataSource.fetchRelatedSeries(serieId, page)?.let {
+            ContentMapper.fromRelatedSeriesEntityToModel(it, fetchConfiguration())
+        }
+
+
+    override suspend fun fetchRelatedMovies(movieId: Int, page: Int): RelatedMovies? =
+        apiDataSource.fetchRelatedMovies(movieId, page)?.let {
+            ContentMapper.fromRelatedMoviesEntityToModel(it, fetchConfiguration())
+        }
+
     override suspend fun insertSerie(
         serie: Serie,
         seenByUser: Boolean,
@@ -83,6 +103,43 @@ class ContentRepositoryImpl(
                             emptyList()
                         }
                     ).let(ContentMapper::fromCustomSerieModelToEntity)
+                )
+            } ?: false
+        } ?: false
+
+    override suspend fun insertMovie(
+        movie: Movie,
+        seenByUser: Boolean,
+        network: Network,
+        userPunctuation: Int,
+        userComments: String
+    ): Boolean =
+        userRepository.fetchUser()?.let { user ->
+            user.selectedUserGroup?.let { selectedGroup ->
+                val userMember = UserMapper.fromUserModelToUserGroupMemberModel(
+                    user,
+                    selectedGroup.id,
+                    selectedGroup.userGroupAdmin.userId
+                )
+                firebaseDataSource.insertMovie(
+                    UserGroupMapper.fromModelToEntity(selectedGroup),
+                    CustomMovie(
+                        movie = movie,
+                        userAdded = userMember,
+                        dateAdded = System.currentTimeMillis(),
+                        seenBy = if (seenByUser) mutableListOf(userMember) else emptyList(),
+                        network = network,
+                        punctuation = if (userPunctuation != -1) {
+                            mutableListOf(userMember to userPunctuation.toFloat())
+                        } else {
+                            emptyList()
+                        },
+                        comments = if (userComments.isNotBlank()) {
+                            mutableListOf(userMember to userComments)
+                        } else {
+                            emptyList()
+                        }
+                    ).let(ContentMapper::fromCustomMovieModelToEntity)
                 )
             } ?: false
         } ?: false

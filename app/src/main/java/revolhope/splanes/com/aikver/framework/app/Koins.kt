@@ -6,8 +6,8 @@ import revolhope.splanes.com.aikver.framework.net.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
 import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsSlaveViewModel
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsMasterViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.ContentDetailsMasterViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
@@ -25,6 +25,10 @@ import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
+import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
+import revolhope.splanes.com.core.interactor.content.movie.FetchRelatedMoviesUseCase
+import revolhope.splanes.com.core.interactor.content.movie.InsertMovieUseCase
+import revolhope.splanes.com.core.interactor.content.serie.FetchRelatedSeriesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
@@ -81,6 +85,10 @@ val useCaseModule = module(override = true) {
     factory { SearchMovieUseCase(get()) }
     factory { FetchSerieDetailsUseCase(get()) }
     factory { InsertSerieUseCase(get()) }
+    factory { FetchMovieDetailsUseCase(get()) }
+    factory { InsertMovieUseCase(get()) }
+    factory { FetchRelatedSeriesUseCase(get()) }
+    factory { FetchRelatedMoviesUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -92,6 +100,6 @@ val viewModelModule = module(override = true) {
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     viewModel { AddContentViewModel(get(), get()) }
-    viewModel { SerieDetailsMasterViewModel(get()) }
-    viewModel { SerieDetailsSlaveViewModel(get()) }
+    viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
+    viewModel { ContentDetailsSlaveViewModel(get(), get()) }
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="PlatformViewer">
-        <attr name="showTitle" format="boolean" />
-        <attr name="imageSize" format="dimension" />
+    <declare-styleable name="SwitcherView">
+        <attr name="rightOption" format="string" />
+        <attr name="leftOption" format="string" />
+        <attr name="defaultOptionSelected" format="enum">
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
     </declare-styleable>
-
 </resources>

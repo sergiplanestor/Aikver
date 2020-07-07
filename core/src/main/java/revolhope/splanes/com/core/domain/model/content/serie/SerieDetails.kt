@@ -1,35 +1,38 @@
 package revolhope.splanes.com.core.domain.model.content.serie
 
 import revolhope.splanes.com.core.domain.model.content.ContentCreator
+import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.ContentGenres
 import revolhope.splanes.com.core.domain.model.content.ContentNetwork
+import revolhope.splanes.com.core.domain.model.content.ContentStatus
+import java.io.Serializable
 
 
 data class SerieDetails(
-    val backdrop: String,
+    override val backdrop: String,
     val createdBy: List<ContentCreator>,
     val episodeRuntime: List<Int>,
     val firstAirDate: String,
-    val genres: List<ContentGenres>,
-    val homepage: String,
-    val id: Int,
+    override val genres: List<ContentGenres>,
+    override val homepage: String,
+    override val id: Int,
     val isInProduction: Boolean,
     val languages: List<String>,
     val lastAirDate: String,
     val lastEpisodeToAir: Episode,
-    val name: String,
+    override val title: String,
     val network: List<ContentNetwork>,
     val numEpisodes: Int,
     val numSeasons: Int,
     val originCountry: List<String>,
-    val originalLanguage: String,
-    val originalName: String,
-    val overview: String,
-    val popularity: Float,
-    val thumbnail: String,
+    override val originalLanguage: String,
+    override val originalTitle: String,
+    override val overview: String,
+    override val popularity: Float,
+    override val thumbnail: String,
     val seasons: List<Season>,
-    val status: SerieStatus,
+    override val status: ContentStatus,
     val type: String,
-    val voteAverage: Float,
-    val voteCount: Int
-)
+    override val voteAverage: Float,
+    override val voteCount: Int
+) : ContentDetails(), Serializable

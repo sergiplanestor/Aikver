@@ -6,7 +6,10 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 import revolhope.splanes.com.core.data.entity.api.content.SearchContentEntity
 import revolhope.splanes.com.core.data.entity.api.configuration.ConfigurationEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.MovieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.RelatedMoviesEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.RelatedSeriesEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
@@ -39,4 +42,19 @@ interface ApiDataSource {
 
     @GET("tv/{id}")
     suspend fun fetchSerieDetails(@Path("id") serieId: Int): SerieDetailsEntity?
+
+    @GET("movie/{id}")
+    suspend fun fetchMovieDetails(@Path("id") movieId: Int): MovieDetailsEntity?
+
+    @GET("tv/{id}/similar")
+    suspend fun fetchRelatedSeries(
+        @Path("id") serieId: Int,
+        @Query("page") page: Int
+    ): RelatedSeriesEntity?
+
+    @GET("movie/{id}/similar")
+    suspend fun fetchRelatedMovies(
+        @Path("id") movieId: Int,
+        @Query("page") page: Int
+    ): RelatedMoviesEntity?
 }

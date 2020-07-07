@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave
 
 import android.os.Bundle
 import android.transition.TransitionManager
@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.addButton
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.commentInputEditText
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.infoTextView
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.networkSelector
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.punctuationGroup
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.punctuationView
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.root
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.rootLayout
-import kotlinx.android.synthetic.main.fragment_serie_details_slave.serieSeenSwitcher
+import kotlinx.android.synthetic.main.fragment_content_details_slave.addButton
+import kotlinx.android.synthetic.main.fragment_content_details_slave.commentInputEditText
+import kotlinx.android.synthetic.main.fragment_content_details_slave.infoTextView
+import kotlinx.android.synthetic.main.fragment_content_details_slave.networkSelector
+import kotlinx.android.synthetic.main.fragment_content_details_slave.punctuationGroup
+import kotlinx.android.synthetic.main.fragment_content_details_slave.punctuationView
+import kotlinx.android.synthetic.main.fragment_content_details_slave.root
+import kotlinx.android.synthetic.main.fragment_content_details_slave.rootLayout
+import kotlinx.android.synthetic.main.fragment_content_details_slave.contentSeenSwitcher
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -24,32 +24,35 @@ import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.SnackBar
 import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.model.SnackBarModel
+import revolhope.splanes.com.aikver.presentation.common.widget.switcher.SwitcherView
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
 
-class SerieDetailsSlaveFragment : BaseFragment() {
+class ContentDetailsSlaveFragment : BaseFragment() {
 
-    val viewModel: SerieDetailsSlaveViewModel by viewModel()
+    val viewModel: ContentDetailsSlaveViewModel by viewModel()
 
     companion object {
 
-        private const val ARG_X = "SerieDetailsSlaveFragment.arg.X"
-        private const val ARG_Y = "SerieDetailsSlaveFragment.arg.Y"
-        private const val ARG_WIDTH = "SerieDetailsSlaveFragment.arg.WIDTH"
-        private const val ARG_HEIGHT = "SerieDetailsSlaveFragment.arg.HEIGHT"
+        private const val ARG_X = "ContentDetailsSlaveFragment.arg.X"
+        private const val ARG_Y = "ContentDetailsSlaveFragment.arg.Y"
+        private const val ARG_WIDTH = "ContentDetailsSlaveFragment.arg.WIDTH"
+        private const val ARG_HEIGHT = "ContentDetailsSlaveFragment.arg.HEIGHT"
 
         fun newInstance(
             x: Float,
             y: Float,
             width: Int,
             height: Int
-        ): SerieDetailsSlaveFragment {
-            return SerieDetailsSlaveFragment().apply {
-                arguments = bundleOf(
-                    ARG_X to x,
-                    ARG_Y to y,
-                    ARG_WIDTH to width,
-                    ARG_HEIGHT to height
-                )
-            }
+        ): ContentDetailsSlaveFragment {
+            return ContentDetailsSlaveFragment()
+                .apply {
+                    arguments = bundleOf(
+                        ARG_X to x,
+                        ARG_Y to y,
+                        ARG_WIDTH to width,
+                        ARG_HEIGHT to height
+                    )
+                }
         }
     }
 
@@ -65,8 +68,8 @@ class SerieDetailsSlaveFragment : BaseFragment() {
 
     override fun initViews() {
         infoTextView.justify()
-        serieSeenSwitcher.setOnCheckedChangeListener { _, checked ->
-            punctuationGroup.visibility(checked)
+        contentSeenSwitcher.setOnCheckedChangeListener { option ->
+            punctuationGroup.visibility(option == SwitcherView.Option.LEFT)
             TransitionManager.beginDelayedTransition(rootLayout)
         }
         punctuationView.whiteMode()
@@ -74,11 +77,13 @@ class SerieDetailsSlaveFragment : BaseFragment() {
     }
 
     override fun initObservers() {
-        observe(viewModel.addSerieResult) {
+        observe(viewModel.addContentResult) {
             SnackBar.show(
                 root,
-                if (it) SnackBarModel.Success("T_Serie añadida") { activity?.finish() }
-                else SnackBarModel.Error("T_Ooops.. Ha habido un error")
+                if (it) SnackBarModel.Success(getString(R.string.new_content_added)) {
+                    activity?.finish()
+                }
+                else SnackBarModel.Error(getString(R.string.error_short))
             )
         }
     }
@@ -117,18 +122,18 @@ class SerieDetailsSlaveFragment : BaseFragment() {
     }
 
     private fun addSerie() {
-        (activity as? SerieDetailsActivity)?.getContent()?.let {
-            viewModel.addSerie(
-                SerieCustomInfoUiModel(
-                    it,
-                    serieSeenSwitcher.isChecked,
-                    punctuationView.getScore(),
-                    networkSelector.getSelected(),
-                    commentInputEditText.text?.toString() ?: ""
+        (activity as? ContentDetailsActivity)?.getContent()?.let {
+            viewModel.addContent(
+                ContentCustomInfoUiModel(
+                    content = it,
+                    haveSeen = contentSeenSwitcher.getOptionSelected() == SwitcherView.Option.LEFT,
+                    score = punctuationView.getScore(),
+                    network = networkSelector.getSelected(),
+                    comments = commentInputEditText.text?.toString() ?: ""
                 )
             )
         }
     }
 
-    override fun getLayoutResource(): Int = R.layout.fragment_serie_details_slave
+    override fun getLayoutResource(): Int = R.layout.fragment_content_details_slave
 }

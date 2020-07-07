@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
+import revolhope.splanes.com.core.data.entity.content.CustomMovieEntity
 import revolhope.splanes.com.core.data.entity.content.CustomSerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserEntity
 import revolhope.splanes.com.core.data.entity.user.UserGroupEntity
@@ -156,6 +157,19 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 .child(userGroupEntity.id ?: "")
                 .push()
                 .setValue(Gson().toJson(serie)) { error, _ ->
+                    cont.resume(error == null)
+                }
+        }
+
+    override suspend fun insertMovie(
+        userGroupEntity: UserGroupEntity,
+        movie: CustomMovieEntity
+    ): Boolean =
+        suspendCoroutine { cont ->
+            database.getReference(REF_MOVIE)
+                .child(userGroupEntity.id ?: "")
+                .push()
+                .setValue(Gson().toJson(movie)) { error, _ ->
                     cont.resume(error == null)
                 }
         }

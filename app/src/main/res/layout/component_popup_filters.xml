@@ -37,15 +37,6 @@
             android:layout_weight="1"
             android:text="@string/category"/>
 
-        <revolhope.splanes.com.aikver.presentation.common.widget.AppSpinner
-            android:id="@+id/categorySpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.25"
-            android:layout_marginStart="@dimen/margin_10dp"
-            android:layout_marginEnd="@dimen/margin_10dp"
-            android:visibility="gone"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -95,15 +86,6 @@
             android:layout_weight="1"
             android:text="@string/platform" />
 
-        <revolhope.splanes.com.aikver.presentation.common.widget.platform.PlatformViewer
-            android:id="@+id/platformView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.25"
-            android:padding="@dimen/margin_5dp"
-            app:showTitle="false"
-            app:imageSize="35dp"
-            android:visibility="gone"/>
 
     </LinearLayout>
 

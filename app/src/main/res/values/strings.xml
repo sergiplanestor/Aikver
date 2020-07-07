@@ -65,12 +65,19 @@
         Oops, parece que no se ha encontrado ningún resultado :(
     </string>
     <string name="content_details_original_title">Título original</string>
-    <string name="content_details_status_ended">Finalizada</string>
+    <string name="content_details_status_rumored">Rumor</string>
+    <string name="content_details_status_planned">Planificada</string>
+    <string name="content_details_status_in_production">En producción</string>
+    <string name="content_details_status_post_production">En post-producción</string>
+    <string name="content_details_status_released">Terminada</string>
+    <string name="content_details_status_canceled">Cancelada</string>
     <string name="content_details_status_in_progress">En curso</string>
+    <string name="content_details_status_ended">Finalizada</string>
     <string name="content_details_status_unknown">Desconocido</string>
     <string name="content_details_original_title_info">%s, país %s</string>
     <string name="content_details_genres_title">Géneros</string>
     <string name="content_details_overview_title">Sinopsis</string>
+    <string name="content_details_related_content_title">%s relacionadas</string>
     <string name="content_details_overview_see_more">Ver más</string>
     <string name="content_details_overview_see_less">Ver menos</string>
     <string name="content_details_episodes_title">Episodios</string>
@@ -80,19 +87,23 @@
     </string>
     <string name="content_details_seasons_info">%d temporada</string>
     <string name="content_details_vote_title">@string/punctuation</string>
+    <string name="content_details_homepage">Página web</string>
     <string name="content_details_vote_info">
         Popularidad: %s\n\nNúmero de votos: %s
     </string>
-    <string name="serie_additional_info_title">
-        Añade de manera opcional un poco más de información antes de guardar la serie:
+    <string name="content_additional_info_title">
+        Añade de manera opcional un poco más de información:
     </string>
-    <string name="serie_seen">Serie vista?</string>
+    <string name="content_details_movie_runtime">%d\'</string>
+    <string name="content_seen">Contenido visto?</string>
     <string name="serie_network">Plataforma</string>
-    <string name="comment_hint">Escribe aquí tu comentario</string>
-    <string name="serie_comments_title">Comparte algún comentario sobre esta serie con tu grupo:</string>
+    <string name="comment_hint">Comentario</string>
+    <string name="content_comments_title">Comparte algún comentario con tu grupo:</string>
     <string name="punctuation">Puntuación</string>
     <string name="films">Peliculas</string>
     <string name="series">Series</string>
+    <string name="new_content_added">¡Nuevo contenido añadido!</string>
+    <string name="error_short">Oops..ha habido un error</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

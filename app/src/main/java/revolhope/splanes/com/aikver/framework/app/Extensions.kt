@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsSlaveFragment
 import kotlin.coroutines.CoroutineContext
 
 fun launchAsync(

@@ -1,13 +1,18 @@
 package revolhope.splanes.com.aikver.presentation.common
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.LinearGradient
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Build
 import android.text.Layout
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
@@ -95,9 +100,25 @@ fun ImageView.loadAvatar(avatar: UserAvatar) {
 
 /* --- TextView --- */
 
-fun TextView.justify() {
+fun TextView.justify(isJustified: Boolean = true) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
+        justificationMode = if (isJustified) {
+            Layout.JUSTIFICATION_MODE_INTER_WORD
+        } else {
+            Layout.JUSTIFICATION_MODE_NONE
+        }
+    }
+}
+
+fun TextView.setAsLink() {
+    setTextColor(context.getColor(R.color.colorAccent))
+    text = SpannableString(text.toString()).apply {
+        setSpan(UnderlineSpan(), 0, text.toString().length, 0)
+    }
+    setOnClickListener {
+        (context as? Activity)?.startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse(text.toString()))
+        )
     }
 }
 

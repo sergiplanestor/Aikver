@@ -16,14 +16,18 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.SerieDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.movie.Movie
-import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private val viewModel: AddContentViewModel by viewModel()
+
+    override fun onResume() {
+        super.onResume()
+        resultsRecyclerView.requestFocus()
+        hideKeyboard()
+    }
 
     override fun initViews() {
         searchView.setOnQueryTextListener(this)
@@ -55,10 +59,7 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     private fun <T : Content> onContentClick(item: T) {
-        when (item) {
-            is Serie -> SerieDetailsActivity.start(activity as BaseActivity?, item)
-            is Movie -> { /* TODO */ }
-        }
+        ContentDetailsActivity.start(activity as? BaseActivity, item)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
