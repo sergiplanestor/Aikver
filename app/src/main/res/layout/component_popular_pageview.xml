@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/popularContentIcon"
         android:layout_width="@dimen/size_30dp"
         android:layout_height="@dimen/size_30dp"
@@ -14,22 +14,33 @@
         android:src="@drawable/round_star_24"
         android:tint="@color/colorScoreDark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/popularContentTitle"
         style="@style/Text.SemiBold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12dp"
         android:layout_marginStart="@dimen/margin_12dp"
         android:layout_marginEnd="@dimen/margin_12dp"
         android:text="Series y peliculas populares"
         android:textColor="@color/colorAccentDark"
-        android:textSize="@dimen/text_18"
-        app:layout_constraintBottom_toBottomOf="@id/popularContentIcon"
+        android:textSize="@dimen/text_20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/arrow"/>
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_12dp"
+        android:background="@drawable/button_selector"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/popularContentIcon"
-        app:layout_constraintTop_toTopOf="@id/popularContentIcon" />
+        app:layout_constraintTop_toTopOf="@id/popularContentTitle"
+        app:layout_constraintBottom_toBottomOf="@id/popularContentTitle"
+        android:src="@drawable/ic_arrow_up"/>
 
     <revolhope.splanes.com.aikver.presentation.common.widget.popularpager.PopularPagerRecyclerView
         android:id="@+id/popularContentRecycler"
@@ -44,5 +55,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/popularContentTitle" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:background="@color/blackAlpha20"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popularContentRecycler"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
