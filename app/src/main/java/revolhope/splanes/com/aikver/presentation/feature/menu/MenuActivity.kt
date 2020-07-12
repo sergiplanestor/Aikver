@@ -31,7 +31,7 @@ class MenuActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_menu)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_profile, R.id.navigation_dashboard, R.id.navigation_add_content
+                R.id.navigation_profile, R.id.navigation_dashboard, R.id.navigation_search_content
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
