@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
+package revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent
 
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -12,10 +12,10 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
 import revolhope.splanes.com.core.domain.model.content.Content
 
-class AddContentAdapter<T : Content>(
+class SearchContentAdapter<T : Content>(
     private val items: List<T>,
     private val onItemClick: (T) -> Unit
-) : RecyclerView.Adapter<AddContentAdapter<T>.ViewHolder>() {
+) : RecyclerView.Adapter<SearchContentAdapter<T>.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(

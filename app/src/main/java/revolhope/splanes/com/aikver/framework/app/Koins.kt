@@ -5,7 +5,7 @@ import org.koin.dsl.module
 import revolhope.splanes.com.aikver.framework.net.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
-import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent.SearchContentViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.ContentDetailsMasterViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.dashboard.DashboardViewModel
@@ -104,7 +104,7 @@ val viewModelModule = module(override = true) {
     viewModel { UserAvatarViewModel(get(), get(), get()) }
     viewModel { ManageGroupsViewModel(get(), get(), get()) }
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
-    viewModel { AddContentViewModel(get(), get()) }
+    viewModel { SearchContentViewModel(get(), get()) }
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
     viewModel { ContentDetailsSlaveViewModel(get(), get()) }
     viewModel { DashboardViewModel(get(), get()) }

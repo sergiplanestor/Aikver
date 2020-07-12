@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_add_content"
-        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent.SearchContentFragment"
         android:label="@string/title_add"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_search_content" />
 </navigation>

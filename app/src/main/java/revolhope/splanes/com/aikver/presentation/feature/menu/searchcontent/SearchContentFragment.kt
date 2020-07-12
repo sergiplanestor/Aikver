@@ -1,13 +1,13 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
+package revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent
 
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
-import kotlinx.android.synthetic.main.fragment_add_content.contentSelector
-import kotlinx.android.synthetic.main.fragment_add_content.imageViewPlaceholder
-import kotlinx.android.synthetic.main.fragment_add_content.placeholder
-import kotlinx.android.synthetic.main.fragment_add_content.resultsRecyclerView
-import kotlinx.android.synthetic.main.fragment_add_content.searchView
-import kotlinx.android.synthetic.main.fragment_add_content.textViewPlaceholder
+import kotlinx.android.synthetic.main.fragment_search_content.contentSelector
+import kotlinx.android.synthetic.main.fragment_search_content.imageViewPlaceholder
+import kotlinx.android.synthetic.main.fragment_search_content.placeholder
+import kotlinx.android.synthetic.main.fragment_search_content.resultsRecyclerView
+import kotlinx.android.synthetic.main.fragment_search_content.searchView
+import kotlinx.android.synthetic.main.fragment_search_content.textViewPlaceholder
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.hideKeyboard
@@ -19,9 +19,9 @@ import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
 
-class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
+class SearchContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
-    private val viewModel: AddContentViewModel by viewModel()
+    private val viewModel: SearchContentViewModel by viewModel()
 
     override fun onResume() {
         super.onResume()
@@ -44,7 +44,7 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
             resultsRecyclerView.layoutManager = AutoSizeLayoutManager(requireContext(), 120f)
             resultsRecyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(context, R.anim.recycler_falldown)
-            resultsRecyclerView.adapter = AddContentAdapter(results, onClick)
+            resultsRecyclerView.adapter = SearchContentAdapter(results, onClick)
         }
         resultsRecyclerView.visibility(results.isNotEmpty())
         showNotFound(results.isEmpty())
@@ -70,5 +70,5 @@ class AddContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String?): Boolean = true /* Nothing to do here */
 
-    override fun getLayoutResource(): Int = R.layout.fragment_add_content
+    override fun getLayoutResource(): Int = R.layout.fragment_search_content
 }

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.addcontent
+package revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
 
-class AddContentViewModel(
+class SearchContentViewModel(
     private val searchSerieUseCase: SearchSerieUseCase,
     private val searchMovieUseCase: SearchMovieUseCase
 ) : BaseViewModel() {
