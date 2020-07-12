@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
-import revolhope.splanes.com.core.domain.model.content.RelatedContent
+import revolhope.splanes.com.core.domain.model.content.QueriedContent
 import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchRelatedMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchRelatedSeriesUseCase
@@ -20,8 +20,8 @@ class ContentDetailsMasterViewModel(
     val contentDetails: LiveData<ContentDetails?> get() = _contentDetails
     private val _contentDetails: MutableLiveData<ContentDetails?> = MutableLiveData()
 
-    val contentRelated: LiveData<RelatedContent?> get() = _contentRelated
-    private val _contentRelated: MutableLiveData<RelatedContent?> = MutableLiveData()
+    val contentRelated: LiveData<QueriedContent?> get() = _contentRelated
+    private val _contentRelated: MutableLiveData<QueriedContent?> = MutableLiveData()
 
     fun fetchDetails(id: Int, isSerie: Boolean) {
         launchAsync {

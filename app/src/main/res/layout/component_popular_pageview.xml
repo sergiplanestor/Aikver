@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/popularContentIcon"
+        android:layout_width="@dimen/size_30dp"
+        android:layout_height="@dimen/size_30dp"
+        android:layout_margin="@dimen/margin_12dp"
+        android:background="@drawable/button_selector"
+        android:src="@drawable/round_star_24"
+        android:tint="@color/colorScoreDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/popularContentTitle"
+        style="@style/Text.SemiBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12dp"
+        android:layout_marginEnd="@dimen/margin_12dp"
+        android:text="Series y peliculas populares"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="@dimen/text_18"
+        app:layout_constraintBottom_toBottomOf="@id/popularContentIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/popularContentIcon"
+        app:layout_constraintTop_toTopOf="@id/popularContentIcon" />
+
+    <revolhope.splanes.com.aikver.presentation.common.widget.popularpager.PopularPagerRecyclerView
+        android:id="@+id/popularContentRecycler"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/margin_35dp"
+        android:paddingEnd="@dimen/margin_35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popularContentTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

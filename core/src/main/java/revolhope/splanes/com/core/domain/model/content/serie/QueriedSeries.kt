@@ -1,11 +1,11 @@
 package revolhope.splanes.com.core.domain.model.content.serie
 
-import revolhope.splanes.com.core.domain.model.content.RelatedContent
+import revolhope.splanes.com.core.domain.model.content.QueriedContent
 import java.io.Serializable
 
-data class RelatedSeries(
+data class QueriedSeries(
     override val page: Int,
     override val results: List<Serie>,
     override val totalPages: Int,
     override val totalResults: Int
-): RelatedContent(), Serializable
+): QueriedContent(), Serializable

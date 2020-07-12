@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.RelatedContent
 
 class RelatedContentAdapter(
     private val items: MutableList<Content>,
@@ -31,6 +30,7 @@ class RelatedContentAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(items[position]) {
+            holder.image.scaleType = ImageView.ScaleType.CENTER_CROP
             holder.image.loadUrl(thumbnail)
             holder.image.setOnClickListener { onItemClick.invoke(this) }
             holder.title.text = title

@@ -9,9 +9,9 @@ import revolhope.splanes.com.core.data.entity.api.content.ContentProductionCompa
 import revolhope.splanes.com.core.data.entity.api.content.ContentProductionCountryEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
-import revolhope.splanes.com.core.data.entity.api.content.movie.RelatedMoviesEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.QueryMoviesEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.EpisodeEntity
-import revolhope.splanes.com.core.data.entity.api.content.serie.RelatedSeriesEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.QuerySeriesEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SeasonEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
@@ -30,10 +30,10 @@ import revolhope.splanes.com.core.domain.model.content.ContentStatus
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
 import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
-import revolhope.splanes.com.core.domain.model.content.movie.RelatedMovies
+import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.Episode
-import revolhope.splanes.com.core.domain.model.content.serie.RelatedSeries
+import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Season
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
@@ -196,22 +196,22 @@ object ContentMapper {
             voteCount = entity.voteCount ?: -1
         )
 
-    fun fromRelatedMoviesEntityToModel(
-        entity: RelatedMoviesEntity,
+    fun fromQueryMoviesEntityToModel(
+        entity: QueryMoviesEntity,
         config: Configuration?
-    ): RelatedMovies =
-        RelatedMovies(
+    ): QueriedMovies =
+        QueriedMovies(
             page = entity.page ?: -1,
             results = entity.results?.map { fromMovieEntityToModel(it, config) } ?: emptyList(),
             totalPages = entity.totalPages ?: -1,
             totalResults = entity.totalResults ?: -1
         )
 
-    fun fromRelatedSeriesEntityToModel(
-        entity: RelatedSeriesEntity,
+    fun fromQuerySeriesEntityToModel(
+        entity: QuerySeriesEntity,
         config: Configuration?
-    ): RelatedSeries =
-        RelatedSeries(
+    ): QueriedSeries =
+        QueriedSeries(
             page = entity.page ?: -1,
             results = entity.results?.map { fromSerieEntityToModel(it, config) } ?: emptyList(),
             totalPages = entity.totalPages ?: -1,

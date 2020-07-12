@@ -8,8 +8,8 @@ import revolhope.splanes.com.core.data.entity.api.content.SearchContentEntity
 import revolhope.splanes.com.core.data.entity.api.configuration.ConfigurationEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.movie.MovieEntity
-import revolhope.splanes.com.core.data.entity.api.content.movie.RelatedMoviesEntity
-import revolhope.splanes.com.core.data.entity.api.content.serie.RelatedSeriesEntity
+import revolhope.splanes.com.core.data.entity.api.content.movie.QueryMoviesEntity
+import revolhope.splanes.com.core.data.entity.api.content.serie.QuerySeriesEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserAvatarTypesEntity
@@ -50,11 +50,17 @@ interface ApiDataSource {
     suspend fun fetchRelatedSeries(
         @Path("id") serieId: Int,
         @Query("page") page: Int
-    ): RelatedSeriesEntity?
+    ): QuerySeriesEntity?
 
     @GET("movie/{id}/similar")
     suspend fun fetchRelatedMovies(
         @Path("id") movieId: Int,
         @Query("page") page: Int
-    ): RelatedMoviesEntity?
+    ): QueryMoviesEntity?
+
+    @GET("tv/popular")
+    suspend fun fetchPopularSeries(@Query("page") page: Int): QuerySeriesEntity?
+
+    @GET("movie/popular")
+    suspend fun fetchPopularMovies(@Query("page") page: Int): QueryMoviesEntity?
 }

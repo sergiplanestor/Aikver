@@ -84,6 +84,11 @@ class ContentDetailsActivity : BaseActivity() {
     fun getContent(): Content? =
         intent.extras?.getSerializable(EXTRA_CONTENT) as Content?
 
+
+    override fun onBackPressed() {
+        if (addButtonState == STATE_CLOSE) addButton.callOnClick() else super.onBackPressed()
+    }
+
     private fun changeFabState(newState: Int) {
         addButton.backgroundTintList = ColorStateList.valueOf(
             getColor(

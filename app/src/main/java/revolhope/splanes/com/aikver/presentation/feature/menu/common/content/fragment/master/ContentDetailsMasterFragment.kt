@@ -34,10 +34,10 @@ import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fra
 import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.ContentStatus
-import revolhope.splanes.com.core.domain.model.content.RelatedContent
+import revolhope.splanes.com.core.domain.model.content.QueriedContent
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
-import revolhope.splanes.com.core.domain.model.content.movie.RelatedMovies
-import revolhope.splanes.com.core.domain.model.content.serie.RelatedSeries
+import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
+import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import java.util.*
@@ -129,7 +129,7 @@ class ContentDetailsMasterFragment : BaseFragment() {
         /* Release date */
         extraInfo1TextView.text = when (details) {
             is SerieDetails -> details.firstAirDate.split("-")[0]
-            is MovieDetails -> details.releaseDate.split("-")[0] /* TODO: CHECK! */
+            is MovieDetails -> details.releaseDate.split("-")[0]
             else -> null
         }
 
@@ -247,13 +247,13 @@ class ContentDetailsMasterFragment : BaseFragment() {
         return data
     }
 
-    private fun bindRelatedContent(relatedContent: RelatedContent) {
+    private fun bindRelatedContent(relatedContent: QueriedContent) {
         relatedContentGroup.visible()
         relatedContentTextView.text = getString(
             R.string.content_details_related_content_title,
             when (relatedContent) {
-                is RelatedSeries -> getString(R.string.series)
-                is RelatedMovies -> getString(R.string.films)
+                is QueriedSeries -> getString(R.string.series)
+                is QueriedMovies -> getString(R.string.films)
                 else -> ""
             }
         )

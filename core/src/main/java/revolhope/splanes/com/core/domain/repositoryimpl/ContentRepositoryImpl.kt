@@ -15,9 +15,9 @@ import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
 import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
-import revolhope.splanes.com.core.domain.model.content.movie.RelatedMovies
+import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
-import revolhope.splanes.com.core.domain.model.content.serie.RelatedSeries
+import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
@@ -59,15 +59,25 @@ class ContentRepositoryImpl(
             ContentMapper.fromMovieDetailsEntityToModel(it, fetchConfiguration())
         }
 
-    override suspend fun fetchRelatedSeries(serieId: Int, page: Int): RelatedSeries? =
+    override suspend fun fetchRelatedSeries(serieId: Int, page: Int): QueriedSeries? =
         apiDataSource.fetchRelatedSeries(serieId, page)?.let {
-            ContentMapper.fromRelatedSeriesEntityToModel(it, fetchConfiguration())
+            ContentMapper.fromQuerySeriesEntityToModel(it, fetchConfiguration())
         }
 
 
-    override suspend fun fetchRelatedMovies(movieId: Int, page: Int): RelatedMovies? =
+    override suspend fun fetchRelatedMovies(movieId: Int, page: Int): QueriedMovies? =
         apiDataSource.fetchRelatedMovies(movieId, page)?.let {
-            ContentMapper.fromRelatedMoviesEntityToModel(it, fetchConfiguration())
+            ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
+        }
+
+    override suspend fun fetchPopularSeries(page: Int): QueriedSeries? =
+        apiDataSource.fetchPopularSeries(page)?.let {
+            ContentMapper.fromQuerySeriesEntityToModel(it, fetchConfiguration())
+        }
+
+    override suspend fun fetchPopularMovies(page: Int): QueriedMovies? =
+        apiDataSource.fetchPopularMovies(page)?.let {
+            ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
         }
 
     override suspend fun insertSerie(

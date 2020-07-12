@@ -30,4 +30,7 @@
     <color name="colorGreenSuccess">#00CA8D</color>
     <color name="colorRedError">#FF6666</color>
 
+    <color name="dotSelected">#FFFFFF</color>
+    <color name="dotUnselected">#DDDD</color>
+
 </resources>

@@ -1,12 +1,11 @@
 package revolhope.splanes.com.core.data.repository
 
-import revolhope.splanes.com.core.data.entity.api.content.movie.MovieDetailsEntity
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
-import revolhope.splanes.com.core.domain.model.content.movie.RelatedMovies
-import revolhope.splanes.com.core.domain.model.content.serie.RelatedSeries
+import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
+import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 
@@ -22,9 +21,13 @@ interface ContentRepository {
 
     suspend fun fetchMovieDetails(movieId: Int): MovieDetails?
 
-    suspend fun fetchRelatedSeries(serieId: Int, page: Int): RelatedSeries?
+    suspend fun fetchRelatedSeries(serieId: Int, page: Int): QueriedSeries?
 
-    suspend fun fetchRelatedMovies(movieId: Int, page: Int): RelatedMovies?
+    suspend fun fetchRelatedMovies(movieId: Int, page: Int): QueriedMovies?
+
+    suspend fun fetchPopularSeries(page: Int): QueriedSeries?
+
+    suspend fun fetchPopularMovies(page: Int): QueriedMovies?
 
     suspend fun insertSerie(
         serie: Serie,

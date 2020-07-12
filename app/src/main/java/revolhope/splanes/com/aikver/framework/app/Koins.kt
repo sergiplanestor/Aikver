@@ -8,6 +8,7 @@ import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDa
 import revolhope.splanes.com.aikver.presentation.feature.menu.addcontent.AddContentViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.ContentDetailsMasterViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.dashboard.DashboardViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsViewModel
@@ -26,8 +27,10 @@ import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
+import revolhope.splanes.com.core.interactor.content.movie.FetchPopularMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchRelatedMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.movie.InsertMovieUseCase
+import revolhope.splanes.com.core.interactor.content.serie.FetchPopularSeriesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchRelatedSeriesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
@@ -89,6 +92,8 @@ val useCaseModule = module(override = true) {
     factory { InsertMovieUseCase(get()) }
     factory { FetchRelatedSeriesUseCase(get()) }
     factory { FetchRelatedMoviesUseCase(get()) }
+    factory { FetchPopularSeriesUseCase(get()) }
+    factory { FetchPopularMoviesUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -102,4 +107,5 @@ val viewModelModule = module(override = true) {
     viewModel { AddContentViewModel(get(), get()) }
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
     viewModel { ContentDetailsSlaveViewModel(get(), get()) }
+    viewModel { DashboardViewModel(get(), get()) }
 }

@@ -39,6 +39,9 @@ import revolhope.splanes.com.core.domain.model.user.UserAvatar
 fun dpToPx(context: Context, dp: Int): Int =
     dp * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
 
+fun dpToPx(context: Context, dp: Float): Float =
+    dp * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
+
 /* --- Popup --- */
 
 fun popup(fm: FragmentManager, model: PopupModel) = PopupAlert(model).show(fm)

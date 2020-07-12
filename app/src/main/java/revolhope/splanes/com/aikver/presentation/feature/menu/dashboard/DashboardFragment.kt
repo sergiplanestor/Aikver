@@ -1,31 +1,29 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.dashboard
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.fragment_dashboard.popularPager
+import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.framework.app.observe
+import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private val viewModel: DashboardViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun initViews() {
+        super.initViews()
+
     }
+
+    override fun initObservers() {
+        super.initObservers()
+        observe(viewModel.popularContent) { popularPager.addItems(it) }
+    }
+
+    override fun loadData() {
+        super.loadData()
+        viewModel.fetchPopularContent()
+    }
+
+    override fun getLayoutResource(): Int = R.layout.fragment_dashboard
 }
