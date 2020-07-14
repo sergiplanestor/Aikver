@@ -8,6 +8,7 @@ import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 interface ContentRepository {
 
@@ -33,6 +34,7 @@ interface ContentRepository {
         serie: Serie,
         seenByUser: Boolean,
         network: Network,
+        recommendedTo: List<UserGroupMember>,
         userPunctuation: Int,
         userComments: String
     ): Boolean
@@ -41,6 +43,7 @@ interface ContentRepository {
         movie: Movie,
         seenByUser: Boolean,
         network: Network,
+        recommendedTo: List<UserGroupMember>,
         userPunctuation: Int,
         userComments: String
     ): Boolean

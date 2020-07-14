@@ -10,7 +10,7 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
-import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
+import revolhope.splanes.com.aikver.presentation.common.loadCircular
 import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
@@ -72,7 +72,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         selectedGroupEmptyStateLayout.visibility(group == null)
 
         if (group != null) {
-            selectedGroupImageView.loadGroupIcon(group.name, group.userGroupAdmin.avatar.color)
+            selectedGroupImageView.loadCircular(group.icon)
             selectedGroupNameTextView.text = group.name
             if (group.userGroupAdmin.userId == user.id) {
                 selectedGroupAddMemberButton.visible()

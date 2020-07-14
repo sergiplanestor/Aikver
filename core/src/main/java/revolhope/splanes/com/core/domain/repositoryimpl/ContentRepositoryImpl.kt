@@ -20,6 +20,7 @@ import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class ContentRepositoryImpl(
     private val apiDataSource: ApiDataSource,
@@ -84,6 +85,7 @@ class ContentRepositoryImpl(
         serie: Serie,
         seenByUser: Boolean,
         network: Network,
+        recommendedTo: List<UserGroupMember>,
         userPunctuation: Int,
         userComments: String
     ): Boolean =
@@ -97,11 +99,12 @@ class ContentRepositoryImpl(
                 firebaseDataSource.insertSerie(
                     UserGroupMapper.fromModelToEntity(selectedGroup),
                     CustomSerie(
-                        serie = serie,
+                        content = serie,
                         userAdded = userMember,
                         dateAdded = System.currentTimeMillis(),
                         seenBy = if (seenByUser) mutableListOf(userMember) else emptyList(),
                         network = network,
+                        recommendedTo = recommendedTo,
                         punctuation = if (userPunctuation != -1) {
                             mutableListOf(userMember to userPunctuation.toFloat())
                         } else {
@@ -121,6 +124,7 @@ class ContentRepositoryImpl(
         movie: Movie,
         seenByUser: Boolean,
         network: Network,
+        recommendedTo: List<UserGroupMember>,
         userPunctuation: Int,
         userComments: String
     ): Boolean =
@@ -134,11 +138,12 @@ class ContentRepositoryImpl(
                 firebaseDataSource.insertMovie(
                     UserGroupMapper.fromModelToEntity(selectedGroup),
                     CustomMovie(
-                        movie = movie,
+                        content = movie,
                         userAdded = userMember,
                         dateAdded = System.currentTimeMillis(),
                         seenBy = if (seenByUser) mutableListOf(userMember) else emptyList(),
                         network = network,
+                        recommendedTo = recommendedTo,
                         punctuation = if (userPunctuation != -1) {
                             mutableListOf(userMember to userPunctuation.toFloat())
                         } else {

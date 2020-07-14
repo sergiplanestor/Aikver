@@ -99,6 +99,7 @@
     <string name="serie_network">Plataforma</string>
     <string name="comment_hint">Comentario</string>
     <string name="content_comments_title">Comparte algún comentario con tu grupo:</string>
+    <string name="content_recommend_to_title">¿Quieres recomendar este contenido a alguien en particular de tu grupo?</string>
     <string name="punctuation">Puntuación</string>
     <string name="films">Peliculas</string>
     <string name="series">Series</string>

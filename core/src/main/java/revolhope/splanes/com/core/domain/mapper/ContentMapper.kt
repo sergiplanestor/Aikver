@@ -27,9 +27,9 @@ import revolhope.splanes.com.core.domain.model.content.ContentNetwork
 import revolhope.splanes.com.core.domain.model.content.ContentProductionCompany
 import revolhope.splanes.com.core.domain.model.content.ContentProductionCountry
 import revolhope.splanes.com.core.domain.model.content.ContentStatus
+import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
-import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
 import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.Episode
@@ -331,38 +331,39 @@ object ContentMapper {
         lastPath: String?,
         config: ImageConfiguration?
     ): String =
-        if (lastPath.isNullOrBlank() || config == null) {
-            ""
-        } else {
-            "${config.secureBaseUrl}${
-            when (type) {
-                ImageType.LOGO -> config.logoSizes.last { it.contains("w") }
-                ImageType.POSTER -> config.posterSizes.last { it.contains("w") }
-                ImageType.BACKDROP -> config.backdropSizes.last { it.contains("w") }
-                ImageType.STILL -> config.stillSizes.last { it.contains("w") }
+        when {
+            lastPath.isNullOrBlank() || config == null -> ""
+            else -> {
+                "${config.secureBaseUrl}${when (type) {
+                    ImageType.LOGO -> config.logoSizes.last { it.contains("w") }
+                    ImageType.POSTER -> config.posterSizes.last { it.contains("w") }
+                    ImageType.BACKDROP -> config.backdropSizes.last { it.contains("w") }
+                    ImageType.STILL -> config.stillSizes.last { it.contains("w") }
+                }}$lastPath"
             }
-            }$lastPath"
         }
 
     fun fromCustomSerieModelToEntity(model: CustomSerie): CustomSerieEntity =
         CustomSerieEntity(
-            serieId = model.serie.id.toString(),
+            contentId = model.content.id.toString(),
             userAdded = model.userAdded.userId,
             dateAdded = model.dateAdded,
-            seenBy = model.seenBy?.map { it.userId },
+            seenBy = model.seenBy.map { it.userId },
             network = model.network.id,
-            punctuation = model.punctuation?.map { it.first.userId to it.second },
-            comments = model.comments?.map { it.first.userId to it.second }
+            recommendedTo = model.recommendedTo.map { it.userId },
+            punctuation = model.punctuation.map { it.first.userId to it.second },
+            comments = model.comments.map { it.first.userId to it.second }
         )
 
     fun fromCustomMovieModelToEntity(model: CustomMovie): CustomMovieEntity =
         CustomMovieEntity(
-            movieId = model.movie.id.toString(),
+            contentId = model.content.id.toString(),
             userAdded = model.userAdded.userId,
             dateAdded = model.dateAdded,
-            seenBy = model.seenBy?.map { it.userId },
+            seenBy = model.seenBy.map { it.userId },
             network = model.network.id,
-            punctuation = model.punctuation?.map { it.first.userId to it.second },
-            comments = model.comments?.map { it.first.userId to it.second }
+            recommendedTo = model.recommendedTo.map { it.userId },
+            punctuation = model.punctuation.map { it.first.userId to it.second },
+            comments = model.comments.map { it.first.userId to it.second }
         )
 }

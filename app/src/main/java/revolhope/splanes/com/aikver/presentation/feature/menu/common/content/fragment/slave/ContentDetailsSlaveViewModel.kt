@@ -25,6 +25,7 @@ class ContentDetailsSlaveViewModel (
                         model.haveSeen,
                         model.score,
                         model.network,
+                        model.recommendedTo,
                         model.comments
                     )
                     is Movie -> insertMovieUseCase.invoke(
@@ -32,6 +33,7 @@ class ContentDetailsSlaveViewModel (
                         model.haveSeen,
                         model.score,
                         model.network,
+                        model.recommendedTo,
                         model.comments
                     )
                     else -> false

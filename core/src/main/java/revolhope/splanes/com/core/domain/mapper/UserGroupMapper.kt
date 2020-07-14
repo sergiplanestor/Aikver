@@ -22,7 +22,7 @@ object UserGroupMapper {
             icon = entity.icon ?: "",
             name = entity.name ?: "",
             members = members.toMutableList(),
-            userGroupAdmin = members.first { it.isUserGroupAdmin }, /* TODO: This should throw exception... check it */
+            userGroupAdmin = members.firstOrNull { it.isUserGroupAdmin } ?: UserGroupMember.empty,
             dateCreation = entity.dateCreation ?: 0
         )
 

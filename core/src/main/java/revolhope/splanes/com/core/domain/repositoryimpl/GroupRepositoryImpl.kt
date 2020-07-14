@@ -14,6 +14,15 @@ class GroupRepositoryImpl(
     private val firebaseDataSource: FirebaseDataSource
 ) : GroupRepository {
 
+    private companion object {
+        const val GROUP_ICON_URL =
+            "https://eu.ui-avatars.com/api/?" +
+                "name=%s&" +
+                "background=455A64&" +
+                "color=%s&" +
+                "format=png"
+    }
+
     override suspend fun insertUserGroup(groupName: String): Boolean =
         userRepository.fetchUser()?.let { user ->
             val member = UserMapper.fromUserModelToUserGroupMemberModel(
@@ -24,7 +33,11 @@ class GroupRepositoryImpl(
             val userGroup =
                 UserGroup(
                     id = member.groupId,
-                    icon = "", // TODO: Set default icon
+                    icon = String.format(
+                        GROUP_ICON_URL,
+                        groupName.replace(" ", "+"),
+                        member.avatar.color
+                    ),
                     name = groupName,
                     members = mutableListOf(member),
                     userGroupAdmin = member,
@@ -58,10 +71,6 @@ class GroupRepositoryImpl(
         } ?: false).also {
             if (it) userRepository.fetchUser(forceCall = true)
         }
-
-    override suspend fun updateUserGroup(userGroup: UserGroup): Boolean {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun deleteMember(member: UserGroupMember): Boolean =
         (firebaseDataSource.fetchUserGroup(member.groupId)?.apply {

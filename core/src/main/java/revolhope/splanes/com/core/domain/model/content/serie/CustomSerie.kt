@@ -1,14 +1,16 @@
 package revolhope.splanes.com.core.domain.model.content.serie
 
+import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 data class CustomSerie(
-    val serie: Serie,
-    val userAdded: UserGroupMember,
-    val dateAdded: Long,
-    val seenBy: List<UserGroupMember>?,
-    val network: Network,
-    val punctuation: List<Pair<UserGroupMember, Float>>?,
-    val comments: List<Pair<UserGroupMember, String>>?
-)
+    override val content: Serie,
+    override val userAdded: UserGroupMember,
+    override val dateAdded: Long,
+    override val seenBy: List<UserGroupMember>,
+    override val network: Network,
+    override val recommendedTo: List<UserGroupMember>,
+    override val punctuation: List<Pair<UserGroupMember, Float>>,
+    override val comments: List<Pair<UserGroupMember, String>>
+) : CustomContent<Serie>()

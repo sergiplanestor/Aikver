@@ -23,7 +23,6 @@ enum class Network(val id: Int) {
         }
     }
 
-    // TODO: same shit above
     override fun toString(): String = when (this) {
         HBO -> "HBO"
         NETFLIX -> "Netflix"

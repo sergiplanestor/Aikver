@@ -6,4 +6,15 @@ data class UserGroupMember(
     val avatar: UserAvatar,
     val username: String,
     val isUserGroupAdmin: Boolean
-)
+) {
+    companion object {
+        val empty: UserGroupMember
+            get() = UserGroupMember(
+                userId = "",
+                groupId = "",
+                avatar = UserAvatar(),
+                username = "",
+                isUserGroupAdmin = false
+            )
+    }
+}

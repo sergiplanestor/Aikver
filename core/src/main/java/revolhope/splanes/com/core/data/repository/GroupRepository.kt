@@ -9,7 +9,8 @@ interface GroupRepository {
 
     suspend fun insertMember(username: String, userGroup: UserGroup) : Boolean
 
-    suspend fun updateUserGroup(userGroup: UserGroup) : Boolean
+    // TODO: delete this method if not necessary
+    //suspend fun updateUserGroup(userGroup: UserGroup) : Boolean
 
     suspend fun deleteMember(member: UserGroupMember) : Boolean
 

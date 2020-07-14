@@ -124,6 +124,22 @@
                 app:layout_constraintTop_toBottomOf="@id/networkTextView" />
 
             <TextView
+                android:id="@+id/recommendToTextView"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:text="@string/content_recommend_to_title"
+                android:textColor="@color/whiteAlpha90"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/networkSelector" />
+
+
+
+            <TextView
                 android:id="@+id/commentsTextView"
                 style="@style/Text.SemiBold"
                 android:layout_width="0dp"
@@ -135,7 +151,7 @@
                 android:textColor="@color/whiteAlpha90"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/networkSelector" />
+                app:layout_constraintTop_toBottomOf="@id/recommendToTextView" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commentLayout"
