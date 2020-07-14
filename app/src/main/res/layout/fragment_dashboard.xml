@@ -9,7 +9,7 @@
     tools:context=".presentation.feature.menu.dashboard.DashboardFragment">
 
 
-    <revolhope.splanes.com.aikver.presentation.common.widget.popularpager.PopularPageView
+    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
         android:id="@+id/popularPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.common.widget.popularpager
+package revolhope.splanes.com.aikver.presentation.common.widget.contentpager
 
 import android.content.Context
 import android.os.Handler
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-class PopularPagerRecyclerView @JvmOverloads constructor(
+class ContentPagerRecyclerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -53,10 +53,10 @@ class PopularPagerRecyclerView @JvmOverloads constructor(
         scrollHandler.sendEmptyMessageDelayed(WHAT_SCROLL, delayMillis)
     }
 
-    private class ScrollHandler(autoScrollableRecyclerView: PopularPagerRecyclerView) : Handler() {
+    private class ScrollHandler(autoScrollableRecyclerView: ContentPagerRecyclerView) : Handler() {
 
         private val autoScrollViewPager =
-            WeakReference<PopularPagerRecyclerView>(autoScrollableRecyclerView)
+            WeakReference<ContentPagerRecyclerView>(autoScrollableRecyclerView)
 
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)

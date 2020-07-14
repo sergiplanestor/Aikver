@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.common.widget.popularpager
+package revolhope.splanes.com.aikver.presentation.common.widget.contentpager
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +11,9 @@ import revolhope.splanes.com.aikver.presentation.common.loadUrl
 import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
-class PopularPagerAdapter(
+class ContentPagerAdapter(
     private var items: List<Content>
-) : RecyclerView.Adapter<PopularPagerAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ContentPagerAdapter.ViewHolder>() {
 
     val actualItemCount get() = items.size
 
