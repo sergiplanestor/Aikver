@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import revolhope.splanes.com.aikver.R
-import revolhope.splanes.com.aikver.presentation.common.loadCircular
+import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.domain.model.user.UserGroup
@@ -67,7 +67,7 @@ class ManageGroupsAdapter(
         holder.addButton.setOnClickListener { onAddGroupClick.invoke() }
 
     private fun bindContentViewHolder(holder: ContentViewHolder, item: UserGroup) {
-        holder.iconImageView.loadCircular(item.icon)
+        holder.iconImageView.loadGroupIcon(item.name, item.userGroupAdmin.avatar.color)
         holder.titleTextView.text = item.name
         holder.countTextView.text =
             holder.itemView.context.getString(R.string.member_num, item.members.size)

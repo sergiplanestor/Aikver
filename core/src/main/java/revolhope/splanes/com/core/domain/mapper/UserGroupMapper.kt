@@ -9,7 +9,6 @@ object UserGroupMapper {
     fun fromModelToEntity(model: UserGroup) =
         UserGroupEntity(
             id = model.id,
-            icon = model.icon,
             name = model.name,
             members = model.members.map { it.userId }.toMutableList(),
             userAdmin = model.userGroupAdmin.userId,
@@ -19,7 +18,6 @@ object UserGroupMapper {
     fun fromEntityToModel(entity: UserGroupEntity, members: List<UserGroupMember>) =
         UserGroup(
             id = entity.id ?: "",
-            icon = entity.icon ?: "",
             name = entity.name ?: "",
             members = members.toMutableList(),
             userGroupAdmin = members.firstOrNull { it.isUserGroupAdmin } ?: UserGroupMember.empty,

@@ -13,7 +13,7 @@ import org.koin.android.ext.android.inject
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseBottomSheet
-import revolhope.splanes.com.aikver.presentation.common.loadCircular
+import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
 import revolhope.splanes.com.aikver.presentation.common.popup
 import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
@@ -33,7 +33,7 @@ class GroupDetailsBottomSheet(
     override fun getLayoutResource(): Int = R.layout.fragment_group_details_bottom_sheet
 
     override fun bindView(view: View) {
-        groupImageView.loadCircular(group.icon)
+        groupImageView.loadGroupIcon(group.name, group.userGroupAdmin.avatar.color)
         groupTitleTextView.text = group.name
         groupMemberCountTextView.text = context?.getString(R.string.member_num, group.members.size)
         addMemberButton.visibility(show = isAdmin())

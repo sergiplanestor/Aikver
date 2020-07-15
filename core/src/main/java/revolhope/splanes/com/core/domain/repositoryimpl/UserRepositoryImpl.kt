@@ -67,7 +67,6 @@ class UserRepositoryImpl(
                 val userGroup =
                     UserGroup(
                         id = groupId,
-                        icon = "", // TODO: Set default icon!
                         name = userGroupName,
                         members = mutableListOf(
                             UserMapper.fromUserModelToUserGroupMemberModel(

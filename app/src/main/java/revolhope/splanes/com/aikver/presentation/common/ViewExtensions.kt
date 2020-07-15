@@ -81,6 +81,16 @@ fun ImageView.loadCircular(url: String) {
     Glide.with(context).load(url).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
 }
 
+fun ImageView.loadGroupIcon(name: String, color: String) {
+    loadCircular(
+        "https://eu.ui-avatars.com/api/?" +
+                "name=${name.replace(" ", "+")}&" +
+                "background=455A64&" +
+                "color=${color}&" +
+                "format=png"
+    )
+}
+
 fun ImageView.loadAvatar(avatar: UserAvatar) {
     loadCircular(
         "https://api.adorable.io/avatars/face" +
