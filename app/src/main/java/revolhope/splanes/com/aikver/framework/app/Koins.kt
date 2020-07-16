@@ -106,6 +106,6 @@ val viewModelModule = module(override = true) {
     viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
     viewModel { SearchContentViewModel(get(), get()) }
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
-    viewModel { ContentDetailsSlaveViewModel(get(), get()) }
+    viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get(), get()) }
 }

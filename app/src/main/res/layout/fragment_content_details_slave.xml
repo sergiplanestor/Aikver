@@ -137,7 +137,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/networkSelector" />
 
-
+            <revolhope.splanes.com.aikver.presentation.common.widget.membergrouppicker.MemberGroupPicker
+                android:id="@+id/recommendToUserPicked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recommendToTextView" />
 
             <TextView
                 android:id="@+id/commentsTextView"
@@ -151,7 +158,7 @@
                 android:textColor="@color/whiteAlpha90"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recommendToTextView" />
+                app:layout_constraintTop_toBottomOf="@id/recommendToUserPicked" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commentLayout"

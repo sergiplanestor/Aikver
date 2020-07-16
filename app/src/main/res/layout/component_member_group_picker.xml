@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8dp"
-    android:background="@drawable/card_outlined_accent"
-    android:padding="@dimen/margin_15dp">
+    android:background="@drawable/card_outlined_white"
+    android:padding="@dimen/margin_15dp"
+    android:animateLayoutChanges="true">
 
     <TextView
         android:id="@+id/userSelectedTitle"
@@ -13,7 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_5dp"
-        android:text="T_Usuarios seleccionados:"
+        android:text="@string/users_picked"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@id/buttonAddMember"
         app:layout_constraintEnd_toStartOf="@id/buttonAddMember"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +27,7 @@
         android:layout_height="@dimen/size_30dp"
         android:layout_marginEnd="@dimen/margin_5dp"
         android:background="@drawable/button_selector"
+        android:tint="@android:color/white"
         android:padding="@dimen/margin_5dp"
         android:src="@drawable/ic_add"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/margin_5dp"
-        android:background="@color/blackAlpha20"
+        android:background="@color/whiteAlpha50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonAddMember" />

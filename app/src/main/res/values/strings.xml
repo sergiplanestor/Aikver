@@ -105,6 +105,7 @@
     <string name="series">Series</string>
     <string name="new_content_added">¡Nuevo contenido añadido!</string>
     <string name="error_short">Oops..ha habido un error</string>
+    <string name="users_picked">Usuarios seleccionados:</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

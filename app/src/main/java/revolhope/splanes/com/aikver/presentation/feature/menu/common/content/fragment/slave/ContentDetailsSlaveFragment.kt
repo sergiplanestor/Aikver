@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_content_details_slave.punctuation
 import kotlinx.android.synthetic.main.fragment_content_details_slave.root
 import kotlinx.android.synthetic.main.fragment_content_details_slave.rootLayout
 import kotlinx.android.synthetic.main.fragment_content_details_slave.contentSeenSwitcher
+import kotlinx.android.synthetic.main.fragment_content_details_slave.recommendToUserPicked
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -74,9 +75,16 @@ class ContentDetailsSlaveFragment : BaseFragment() {
         }
         punctuationView.whiteMode()
         addButton.setOnClickListener { addSerie() }
+        viewModel.fetchUserGroup()
     }
 
     override fun initObservers() {
+        observe(viewModel.userGroup) {
+            it?.let {
+                recommendToUserPicked.fragmentManager = childFragmentManager
+                recommendToUserPicked.group = it
+            }
+        }
         observe(viewModel.addContentResult) {
             SnackBar.show(
                 root,
