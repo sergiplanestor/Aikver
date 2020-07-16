@@ -44,7 +44,7 @@ class ContentPagerView @JvmOverloads constructor(
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = ContentPagerAdapter(items.run { sortedWith(compareBy { it.popularity }) })
             PagerSnapHelper().attachToRecyclerView(this)
-            postDelayed({ popularContentRecycler.scrollNext() }, 5000)
+            resumeAutoScroll()
         }
     }
 

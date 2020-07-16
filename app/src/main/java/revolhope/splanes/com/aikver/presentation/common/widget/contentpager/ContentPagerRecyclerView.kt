@@ -15,9 +15,8 @@ class ContentPagerRecyclerView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
-    private val scrollHandler by lazy {
-        ScrollHandler(this)
-    }
+
+    private val scrollHandler by lazy { ScrollHandler(this) }
 
     private val delayMillis: Long = 7500
 
@@ -35,11 +34,9 @@ class ContentPagerRecyclerView @JvmOverloads constructor(
         return super.dispatchTouchEvent(e)
     }
 
-    private fun pauseAutoScroll() {
-        scrollHandler.removeMessages(WHAT_SCROLL)
-    }
+    private fun pauseAutoScroll() = scrollHandler.removeMessages(WHAT_SCROLL)
 
-    private fun resumeAutoScroll() {
+    fun resumeAutoScroll() {
         scrollHandler.removeMessages(WHAT_SCROLL)
         scrollHandler.sendEmptyMessageDelayed(WHAT_SCROLL, delayMillis)
     }

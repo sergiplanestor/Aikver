@@ -74,11 +74,11 @@ fun View.visibility(show: Boolean, isGone: Boolean = true) =
 /* --- Image loading --- */
 
 fun ImageView.loadUrl(url: String) {
-    Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
+    Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(this)
 }
 
 fun ImageView.loadCircular(url: String) {
-    Glide.with(context).load(url).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
+    Glide.with(context).load(url).circleCrop().diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(this)
 }
 
 fun ImageView.loadGroupIcon(name: String, color: String) {
