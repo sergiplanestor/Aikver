@@ -8,13 +8,83 @@
     android:animateLayoutChanges="true"
     tools:context=".presentation.feature.menu.dashboard.DashboardFragment">
 
-
-    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
-        android:id="@+id/popularPager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:animateLayoutChanges="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/margin_12dp"
+                    android:animateLayoutChanges="true">
+
+                    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
+                        android:id="@+id/popularPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:title="@string/dashboard_popular_content_title" />
+
+                    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
+                        android:id="@+id/recommendedPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/popularPager"
+                        app:title="@string/dashboard_recommended_content_title" />
+
+                    <TextView
+                        android:id="@+id/groupContentTitle"
+                        style="@style/Text.SemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_12dp"
+                        android:layout_marginTop="@dimen/margin_12dp"
+                        android:layout_marginEnd="@dimen/margin_12dp"
+                        android:text="@string/title_dashboard"
+                        android:textColor="@color/colorAccentDark"
+                        android:textSize="@dimen/text_20"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/recommendedPager" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/groupContentRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_12dp"
+                        android:layout_marginTop="@dimen/margin_12dp"
+                        android:layout_marginEnd="@dimen/margin_12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/groupContentTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

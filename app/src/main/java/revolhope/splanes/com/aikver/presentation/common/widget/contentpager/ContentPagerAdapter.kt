@@ -12,10 +12,11 @@ import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 
 class ContentPagerAdapter(
-    private var items: List<Content>
+    private var items: List<ContentPagerUiModel>,
+    private val onClick: (String) -> Unit
 ) : RecyclerView.Adapter<ContentPagerAdapter.ViewHolder>() {
 
-    val actualItemCount get() = items.size
+    private val actualItemCount get() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -31,17 +32,13 @@ class ContentPagerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(items[position % actualItemCount]) {
             holder.image.loadUrl(backdrop)
-            holder.punctuation.text = voteAverage.toString()
+            holder.punctuation.text = voteAverage
             holder.title.text = title
             holder.icon.setImageResource(
-                if (this is Serie) {
-                    R.drawable.ic_tv
-                } else {
-                    R.drawable.ic_film
-                }
+                if (isSerie) R.drawable.ic_tv else R.drawable.ic_film
             )
+            holder.itemView.setOnClickListener { onClick.invoke(id) }
         }
-
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

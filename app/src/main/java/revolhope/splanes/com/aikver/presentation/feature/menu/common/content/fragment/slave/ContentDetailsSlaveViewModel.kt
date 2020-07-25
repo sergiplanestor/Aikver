@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
+import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
-import revolhope.splanes.com.core.domain.model.user.UserGroup
+import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.interactor.content.movie.InsertMovieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
@@ -16,15 +18,15 @@ class ContentDetailsSlaveViewModel (
     private val insertMovieUseCase: InsertMovieUseCase
 ) : BaseViewModel() {
 
-    val userGroup: LiveData<UserGroup?> get() = _userGroup
-    private val _userGroup: MutableLiveData<UserGroup?> = MutableLiveData()
+    val user: LiveData<User?> get() = _user
+    private val _user: MutableLiveData<User?> = MutableLiveData()
 
     val addContentResult: LiveData<Boolean> get() = _addContentResult
     private val _addContentResult: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun fetchUserGroup() {
+    fun fetchUser() {
         launchAsync {
-            _userGroup.postValue(fetchUserUseCase.invoke()?.selectedUserGroup)
+            _user.postValue(fetchUserUseCase.invoke())
         }
     }
 
@@ -32,7 +34,7 @@ class ContentDetailsSlaveViewModel (
         launchAsync {
             _addContentResult.postValue(
                 when (model.content) {
-                    is Serie -> insertSerieUseCase.invoke(
+                    is SerieDetails -> insertSerieUseCase.invoke(
                         model.content,
                         model.haveSeen,
                         model.score,
@@ -40,7 +42,7 @@ class ContentDetailsSlaveViewModel (
                         model.recommendedTo,
                         model.comments
                     )
-                    is Movie -> insertMovieUseCase.invoke(
+                    is MovieDetails -> insertMovieUseCase.invoke(
                         model.content,
                         model.haveSeen,
                         model.score,

@@ -3,18 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <!--<ImageView
-        android:id="@+id/popularContentIcon"
-        android:layout_width="@dimen/size_30dp"
-        android:layout_height="@dimen/size_30dp"
-        android:layout_margin="@dimen/margin_12dp"
-        android:background="@drawable/button_selector"
-        android:src="@drawable/round_star_24"
-        android:tint="@color/colorScoreDark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
 
     <TextView
         android:id="@+id/popularContentTitle"
@@ -24,7 +14,6 @@
         android:layout_marginTop="@dimen/margin_12dp"
         android:layout_marginStart="@dimen/margin_12dp"
         android:layout_marginEnd="@dimen/margin_12dp"
-        android:text="Series y peliculas populares"
         android:textColor="@color/colorAccentDark"
         android:textSize="@dimen/text_20"
         app:layout_constraintTop_toTopOf="parent"

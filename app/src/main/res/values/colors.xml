@@ -16,6 +16,7 @@
     <color name="colorDarkGray">#616161</color>
 
     <color name="colorAccentAlpha">#8000B8D4</color>
+    <color name="whiteAlpha20">#33FFFFFF</color>
     <color name="whiteAlpha50">#80FFFFFF</color>
     <color name="whiteAlpha75">#BFFFFFFF</color>
     <color name="whiteAlpha90">#E6FFFFFF</color>

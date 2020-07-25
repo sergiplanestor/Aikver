@@ -29,8 +29,6 @@ class ContentPagerRecyclerView @JvmOverloads constructor(
             MotionEvent.ACTION_UP -> resumeAutoScroll()
             MotionEvent.ACTION_DOWN -> pauseAutoScroll()
         }
-        parent.requestDisallowInterceptTouchEvent(true)
-
         return super.dispatchTouchEvent(e)
     }
 

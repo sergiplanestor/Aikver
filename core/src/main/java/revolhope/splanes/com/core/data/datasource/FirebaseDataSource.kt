@@ -1,5 +1,6 @@
 package revolhope.splanes.com.core.data.datasource
 
+import revolhope.splanes.com.core.data.entity.content.CustomContentEntity
 import revolhope.splanes.com.core.data.entity.content.CustomMovieEntity
 import revolhope.splanes.com.core.data.entity.content.CustomSerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserEntity
@@ -27,6 +28,12 @@ interface FirebaseDataSource {
     suspend fun insertSerie(userGroupEntity: UserGroupEntity, serie: CustomSerieEntity): Boolean
 
     suspend fun insertMovie(userGroupEntity: UserGroupEntity, movie: CustomMovieEntity): Boolean
+
+    suspend fun fetchGroupContent(groupId: String): List<CustomContentEntity>?
+
+    suspend fun fetchGroupSeries(groupId: String): List<CustomSerieEntity>?
+
+    suspend fun fetchGroupMovies(groupId: String): List<CustomMovieEntity>?
 
     suspend fun logout()
 }

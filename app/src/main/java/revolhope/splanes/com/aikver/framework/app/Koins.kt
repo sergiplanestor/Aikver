@@ -25,7 +25,8 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
-import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
+import revolhope.splanes.com.core.interactor.content.FetchGroupContentUseCase
+import revolhope.splanes.com.core.interactor.content.movie.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchPopularMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchRelatedMoviesUseCase
@@ -94,6 +95,7 @@ val useCaseModule = module(override = true) {
     factory { FetchRelatedMoviesUseCase(get()) }
     factory { FetchPopularSeriesUseCase(get()) }
     factory { FetchPopularMoviesUseCase(get()) }
+    factory { FetchGroupContentUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -107,5 +109,5 @@ val viewModelModule = module(override = true) {
     viewModel { SearchContentViewModel(get(), get()) }
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
     viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
-    viewModel { DashboardViewModel(get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get(), get()) }
 }

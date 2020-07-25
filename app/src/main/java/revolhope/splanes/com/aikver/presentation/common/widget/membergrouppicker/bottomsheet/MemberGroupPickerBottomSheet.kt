@@ -14,6 +14,7 @@ import revolhope.splanes.com.core.domain.model.user.UserGroup
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class MemberGroupPickerBottomSheet(
+    private val userId: String,
     private val group: UserGroup,
     private val usersPicked: List<UserGroupMember>,
     private val onUsersAdded: (List<UserGroupMember>) -> Unit,
@@ -23,7 +24,8 @@ class MemberGroupPickerBottomSheet(
     override fun bindView(view: View) {
         groupImageView.loadGroupIcon(group.name, group.userGroupAdmin.avatar.color)
         groupTitleTextView.text = group.name
-        groupMemberCountTextView.text = context?.getString(R.string.member_num, group.members.size)
+        groupMemberCountTextView.text =
+            context?.getString(R.string.member_num, group.members.size - 1)
         setUpAdapter(usersPicked)
         doneButton.setOnClickListener {
             onUsersAdded.invoke(
@@ -37,7 +39,7 @@ class MemberGroupPickerBottomSheet(
     private fun setUpAdapter(usersPicked: List<UserGroupMember>) {
         membersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         membersRecyclerView.adapter = MemberGroupPickerBottomSheetAdapter(
-            group.members.map {
+            group.members.filter { it.userId != userId }.map {
                 MemberGroupPickerBottomSheetUiModel(
                     member = it,
                     isPicked = usersPicked.any { picked -> it.userId == picked.userId }

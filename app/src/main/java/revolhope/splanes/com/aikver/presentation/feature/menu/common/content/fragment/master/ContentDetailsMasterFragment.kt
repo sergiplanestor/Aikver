@@ -59,6 +59,7 @@ class ContentDetailsMasterFragment : BaseFragment() {
     override fun initObservers() {
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.contentDetails) {
+            (activity as? ContentDetailsActivity)?.contentDetails = it
             it?.let(::bindViews) ?: popupError(
                 context = requireContext(),
                 fm = childFragmentManager,

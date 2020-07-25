@@ -33,8 +33,7 @@ object UserMapper {
         model: User,
         groupId: String,
         userGroupAdminId: String
-    ) =
-        UserGroupMember(
+    ) = UserGroupMember(
             userId = model.id,
             groupId = groupId,
             avatar = model.avatar,

@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8dp"
+    android:animateLayoutChanges="true"
     android:background="@drawable/card_outlined_white"
-    android:padding="@dimen/margin_15dp"
-    android:animateLayoutChanges="true">
+    android:padding="@dimen/margin_15dp">
 
     <TextView
         android:id="@+id/userSelectedTitle"
@@ -25,11 +25,11 @@
         android:id="@+id/buttonAddMember"
         android:layout_width="@dimen/size_30dp"
         android:layout_height="@dimen/size_30dp"
-        android:layout_marginEnd="@dimen/margin_5dp"
         android:background="@drawable/button_selector"
-        android:tint="@android:color/white"
+        android:foregroundGravity="right"
         android:padding="@dimen/margin_5dp"
         android:src="@drawable/ic_add"
+        android:tint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,10 +48,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_5dp"
+        android:scrollIndicators="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/separator" />
 
-    <!-- TODO: Set empty state -->
+    <revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_5dp"
+        android:visibility="gone"
+        app:subtitle="@string/no_recommendations"
+        app:imageSize="85"
+        app:mode="light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

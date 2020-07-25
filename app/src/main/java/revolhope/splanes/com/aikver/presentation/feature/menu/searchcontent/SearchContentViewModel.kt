@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
-import revolhope.splanes.com.core.interactor.content.SearchMovieUseCase
+import revolhope.splanes.com.core.interactor.content.movie.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
 
 class SearchContentViewModel(

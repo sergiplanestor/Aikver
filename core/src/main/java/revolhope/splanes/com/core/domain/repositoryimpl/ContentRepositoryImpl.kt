@@ -3,23 +3,28 @@ package revolhope.splanes.com.core.domain.repositoryimpl
 
 import revolhope.splanes.com.core.data.datasource.ApiDataSource
 import revolhope.splanes.com.core.data.datasource.CacheConfigurationDataSource
+import revolhope.splanes.com.core.data.datasource.CacheContentDataSource
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
 import revolhope.splanes.com.core.data.repository.ContentRepository
 import revolhope.splanes.com.core.data.repository.UserRepository
+import revolhope.splanes.com.core.domain.filterRepeated
 import revolhope.splanes.com.core.domain.mapper.ConfigurationMapper
 import revolhope.splanes.com.core.domain.mapper.ContentMapper
 import revolhope.splanes.com.core.domain.mapper.UserGroupMapper
 import revolhope.splanes.com.core.domain.mapper.UserMapper
 import revolhope.splanes.com.core.domain.model.config.Configuration
+import revolhope.splanes.com.core.domain.model.content.ContentDetails
+import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.Network
+import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
-import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
 import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.CustomSerie
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.UserGroup
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class ContentRepositoryImpl(
@@ -71,18 +76,27 @@ class ContentRepositoryImpl(
             ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
         }
 
-    override suspend fun fetchPopularSeries(page: Int): QueriedSeries? =
-        apiDataSource.fetchPopularSeries(page)?.let {
-            ContentMapper.fromQuerySeriesEntityToModel(it, fetchConfiguration())
+    override suspend fun fetchPopularSeries(page: Int, forceCall: Boolean): QueriedSeries? =
+        if (forceCall || CacheContentDataSource.fetchPopularSeries() == null) {
+            apiDataSource.fetchPopularSeries(page)?.let {
+                ContentMapper.fromQuerySeriesEntityToModel(it, fetchConfiguration())
+            }.also(CacheContentDataSource::insertPopularSeries)
+        } else {
+            CacheContentDataSource.fetchPopularSeries()
         }
 
-    override suspend fun fetchPopularMovies(page: Int): QueriedMovies? =
-        apiDataSource.fetchPopularMovies(page)?.let {
-            ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
+    override suspend fun fetchPopularMovies(page: Int, forceCall: Boolean): QueriedMovies? =
+        if (forceCall || CacheContentDataSource.fetchPopularMovies() == null) {
+            apiDataSource.fetchPopularMovies(page)?.let {
+                ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
+            }.also(CacheContentDataSource::insertPopularMovies)
+        } else {
+            CacheContentDataSource.fetchPopularMovies()
         }
+
 
     override suspend fun insertSerie(
-        serie: Serie,
+        serie: SerieDetails,
         seenByUser: Boolean,
         network: Network,
         recommendedTo: List<UserGroupMember>,
@@ -121,7 +135,7 @@ class ContentRepositoryImpl(
         } ?: false
 
     override suspend fun insertMovie(
-        movie: Movie,
+        movie: MovieDetails,
         seenByUser: Boolean,
         network: Network,
         recommendedTo: List<UserGroupMember>,
@@ -158,4 +172,149 @@ class ContentRepositoryImpl(
                 )
             } ?: false
         } ?: false
+
+    override suspend fun fetchSelectedGroupContent(forceCall: Boolean): List<CustomContent<ContentDetails>>? =
+        if (forceCall || CacheContentDataSource.fetchGroupContent().isNullOrEmpty()) {
+            userRepository.fetchUser()?.let { user ->
+                user.selectedUserGroup?.let { group ->
+                    val series = fetchSelectedGroupSeries(group)
+                    val movies = fetchSelectedGroupMovies(group)
+                    series.toMutableList().filterRepeated().apply {
+                        addAll(movies.toMutableList().filterRepeated())
+                        sortWith(compareBy { it.dateAdded })
+                    }.also(CacheContentDataSource::insertGroupContent)
+                }
+            }
+        } else {
+            CacheContentDataSource.fetchGroupContent()
+        }
+
+
+    // FIXME: Try to resolver unchecked cast
+    @Suppress("UNCHECKED_CAST")
+    private suspend fun fetchSelectedGroupSeries(group: UserGroup): List<CustomContent<ContentDetails>> =
+        firebaseDataSource.fetchGroupSeries(groupId = group.id)?.map {
+            val userAdded =
+                userRepository.fetchUserById(it.userAdded ?: "")?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+
+            val seenBy = it.seenBy?.map { id ->
+                userRepository.fetchUserById(id)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+            }.orEmpty().filterNotNull()
+
+            val recommendedTo = it.recommendedTo?.map { id ->
+                userRepository.fetchUserById(id)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+            }.orEmpty().filterNotNull()
+
+            val punctuation = it.punctuation?.map { pair ->
+                userRepository.fetchUserById(pair.first)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }?.run { this to pair.second }
+            }.orEmpty().filterNotNull()
+
+            val comments = it.comments?.map { pair ->
+                userRepository.fetchUserById(pair.first)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }?.run { this to pair.second }
+            }.orEmpty().filterNotNull()
+
+            ContentMapper.fromCustomSerieEntityToModel(
+                entity = it,
+                serieDetails = fetchSerieDetails(it.contentId?.toInt() ?: -1),
+                userAdded = userAdded,
+                seenBy = seenBy,
+                recommendedTo = recommendedTo,
+                punctuation = punctuation,
+                comments = comments
+            )
+
+        } as? List<CustomContent<ContentDetails>> ?: emptyList()
+
+    // FIXME: Try to resolver unchecked cast
+    @Suppress("UNCHECKED_CAST")
+    private suspend fun fetchSelectedGroupMovies(group: UserGroup): List<CustomContent<ContentDetails>> =
+        firebaseDataSource.fetchGroupMovies(groupId = group.id)?.map {
+            val userAdded =
+                userRepository.fetchUserById(it.userAdded ?: "")?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+            val seenBy = it.seenBy?.map { id ->
+                userRepository.fetchUserById(id)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+            }.orEmpty().filterNotNull()
+            val recommendedTo = it.recommendedTo?.map { id ->
+                userRepository.fetchUserById(id)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }
+            }.orEmpty().filterNotNull()
+            val punctuation = it.punctuation?.map { pair ->
+                userRepository.fetchUserById(pair.first)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }?.run { this to pair.second }
+            }.orEmpty().filterNotNull()
+
+            val comments = it.comments?.map { pair ->
+                userRepository.fetchUserById(pair.first)?.let { user ->
+                    UserMapper.fromUserModelToUserGroupMemberModel(
+                        model = user,
+                        groupId = group.id,
+                        userGroupAdminId = group.userGroupAdmin.userId
+                    )
+                }?.run { this to pair.second }
+            }.orEmpty().filterNotNull()
+
+            ContentMapper.fromCustomMovieEntityToModel(
+                entity = it,
+                movieDetails = fetchMovieDetails(it.contentId?.toInt() ?: -1),
+                userAdded = userAdded,
+                seenBy = seenBy,
+                recommendedTo = recommendedTo,
+                punctuation = punctuation,
+                comments = comments
+            )
+
+        } as? List<CustomContent<ContentDetails>> ?: emptyList()
 }
+

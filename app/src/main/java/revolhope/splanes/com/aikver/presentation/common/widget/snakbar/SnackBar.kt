@@ -1,8 +1,10 @@
 package revolhope.splanes.com.aikver.presentation.common.widget.snakbar
 
 import android.annotation.SuppressLint
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.postDelayed
 import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import revolhope.splanes.com.aikver.presentation.common.dpToPx
@@ -52,6 +54,10 @@ class SnackBar(
                     model.onClick?.invoke()
                     dismiss()
                 }
+                Handler().postDelayed(
+                    { (model as? SnackBarModel.Success)?.onDismiss?.invoke() },
+                    DURATION.toLong()
+                )
             }.show()
             TransitionManager.beginDelayedTransition(viewGroup)
         }

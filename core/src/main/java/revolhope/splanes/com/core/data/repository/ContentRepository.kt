@@ -1,6 +1,9 @@
 package revolhope.splanes.com.core.data.repository
 
 import revolhope.splanes.com.core.domain.model.config.Configuration
+import revolhope.splanes.com.core.domain.model.content.Content
+import revolhope.splanes.com.core.domain.model.content.ContentDetails
+import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
@@ -26,12 +29,12 @@ interface ContentRepository {
 
     suspend fun fetchRelatedMovies(movieId: Int, page: Int): QueriedMovies?
 
-    suspend fun fetchPopularSeries(page: Int): QueriedSeries?
+    suspend fun fetchPopularSeries(page: Int, forceCall: Boolean = false): QueriedSeries?
 
-    suspend fun fetchPopularMovies(page: Int): QueriedMovies?
+    suspend fun fetchPopularMovies(page: Int, forceCall: Boolean = false): QueriedMovies?
 
     suspend fun insertSerie(
-        serie: Serie,
+        serie: SerieDetails,
         seenByUser: Boolean,
         network: Network,
         recommendedTo: List<UserGroupMember>,
@@ -40,11 +43,13 @@ interface ContentRepository {
     ): Boolean
 
     suspend fun insertMovie(
-        movie: Movie,
+        movie: MovieDetails,
         seenByUser: Boolean,
         network: Network,
         recommendedTo: List<UserGroupMember>,
         userPunctuation: Int,
         userComments: String
     ): Boolean
+
+    suspend fun fetchSelectedGroupContent(forceCall: Boolean = false) : List<CustomContent<ContentDetails>>?
 }

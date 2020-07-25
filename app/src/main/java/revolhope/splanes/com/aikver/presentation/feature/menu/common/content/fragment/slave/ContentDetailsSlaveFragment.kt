@@ -15,12 +15,14 @@ import kotlinx.android.synthetic.main.fragment_content_details_slave.punctuation
 import kotlinx.android.synthetic.main.fragment_content_details_slave.root
 import kotlinx.android.synthetic.main.fragment_content_details_slave.rootLayout
 import kotlinx.android.synthetic.main.fragment_content_details_slave.contentSeenSwitcher
+import kotlinx.android.synthetic.main.fragment_content_details_slave.recommendToGroup
 import kotlinx.android.synthetic.main.fragment_content_details_slave.recommendToUserPicked
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.AnimUtils
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.SnackBar
@@ -75,15 +77,22 @@ class ContentDetailsSlaveFragment : BaseFragment() {
         }
         punctuationView.whiteMode()
         addButton.setOnClickListener { addSerie() }
-        viewModel.fetchUserGroup()
+        viewModel.fetchUser()
     }
 
     override fun initObservers() {
-        observe(viewModel.userGroup) {
-            it?.let {
-                recommendToUserPicked.fragmentManager = childFragmentManager
-                recommendToUserPicked.group = it
-            }
+        observe(viewModel.user) {
+            it?.let { user ->
+                user.selectedUserGroup?.let { group ->
+
+                    recommendToGroup.visibility(show = group.members.size != 1)
+
+                    recommendToUserPicked.fragmentManager = childFragmentManager
+                    recommendToUserPicked.userId = user.id
+                    recommendToUserPicked.group = group
+
+                } ?: recommendToUserPicked.invisible()
+            } ?: recommendToUserPicked.invisible()
         }
         observe(viewModel.addContentResult) {
             SnackBar.show(
@@ -130,14 +139,15 @@ class ContentDetailsSlaveFragment : BaseFragment() {
     }
 
     private fun addSerie() {
-        (activity as? ContentDetailsActivity)?.getContent()?.let {
+        (activity as? ContentDetailsActivity)?.contentDetails?.let {
             viewModel.addContent(
                 ContentCustomInfoUiModel(
                     content = it,
                     haveSeen = contentSeenSwitcher.getOptionSelected() == SwitcherView.Option.LEFT,
                     score = punctuationView.getScore(),
                     network = networkSelector.getSelected(),
-                    comments = commentInputEditText.text?.toString() ?: ""
+                    comments = commentInputEditText.text?.toString() ?: "",
+                    recommendedTo = recommendToUserPicked.pickedUsers()
                 )
             )
         }

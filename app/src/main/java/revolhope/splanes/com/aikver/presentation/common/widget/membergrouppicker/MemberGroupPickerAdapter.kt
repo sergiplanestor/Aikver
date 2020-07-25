@@ -12,7 +12,8 @@ import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class MemberGroupPickerAdapter(
-    val members: MutableList<UserGroupMember>
+    val members: MutableList<UserGroupMember>,
+    val onMembersEmpty: () -> Unit
 ) : RecyclerView.Adapter<MemberGroupPickerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberGroupPickerAdapter.ViewHolder =
@@ -33,6 +34,7 @@ class MemberGroupPickerAdapter(
             holder.delete.setOnClickListener {
                 members.removeAt(position)
                 notifyItemRemoved(position)
+                if (members.isEmpty()) onMembersEmpty.invoke()
             }
             holder.separator.visibility(position != members.lastIndex)
         }

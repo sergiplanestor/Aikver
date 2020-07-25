@@ -2,7 +2,7 @@ package revolhope.splanes.com.core.domain.model.content
 
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
-abstract class CustomContent<T: Content> {
+abstract class CustomContent<T: ContentDetails> {
     abstract val content: T
     abstract val userAdded: UserGroupMember
     abstract val dateAdded: Long

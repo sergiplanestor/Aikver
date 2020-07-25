@@ -106,6 +106,9 @@
     <string name="new_content_added">¡Nuevo contenido añadido!</string>
     <string name="error_short">Oops..ha habido un error</string>
     <string name="users_picked">Usuarios seleccionados:</string>
+    <string name="no_recommendations">¡Sin recomendaciones!</string>
+    <string name="dashboard_popular_content_title">Series y peliculas populares</string>
+    <string name="dashboard_recommended_content_title">Recomendado para ti</string>
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>

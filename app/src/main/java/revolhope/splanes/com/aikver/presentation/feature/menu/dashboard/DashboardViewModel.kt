@@ -2,22 +2,30 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.content.Content
-import revolhope.splanes.com.core.domain.model.content.QueriedContent
-import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
-import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
+import revolhope.splanes.com.core.domain.model.content.ContentDetails
+import revolhope.splanes.com.core.domain.model.content.CustomContent
+import revolhope.splanes.com.core.interactor.content.FetchGroupContentUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchPopularMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchPopularSeriesUseCase
+import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 
 class DashboardViewModel(
+    private val fetchUserUseCase: FetchUserUseCase,
     private val fetchPopularSeriesUseCase: FetchPopularSeriesUseCase,
-    private val fetchPopularMoviesUseCase: FetchPopularMoviesUseCase
+    private val fetchPopularMoviesUseCase: FetchPopularMoviesUseCase,
+    private val fetchGroupContentUseCase: FetchGroupContentUseCase
 ) : BaseViewModel() {
 
     private val _popularContent = MutableLiveData<List<Content>>()
     val popularContent: LiveData<List<Content>> get() = _popularContent
+
+    private val _groupContent = MutableLiveData<List<CustomContent<ContentDetails>>>()
+    val groupContent: LiveData<List<CustomContent<ContentDetails>>> get() = _groupContent
+
+    private val _recommendedContent = MutableLiveData<List<CustomContent<ContentDetails>>>()
+    val recommendedContent: LiveData<List<CustomContent<ContentDetails>>> get() = _recommendedContent
 
     fun fetchPopularContent() {
         launchAsync(showLoader = false) {
@@ -29,6 +37,19 @@ class DashboardViewModel(
                     if (movies != null) addAll(movies)
                 }
             )
+        }
+    }
+
+    fun fetchGroupContent() {
+        launchAsync(showLoader = false) {
+            val result = fetchGroupContentUseCase.invoke()
+            val user = fetchUserUseCase.invoke()
+            _recommendedContent.postValue(
+                result?.filter { content ->
+                    content.recommendedTo.any { it.userId == user?.id }
+                }
+            )
+            _groupContent.postValue(result)
         }
     }
 }

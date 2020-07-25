@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import revolhope.splanes.com.core.data.datasource.FirebaseDataSource
+import revolhope.splanes.com.core.data.entity.content.CustomContentEntity
 import revolhope.splanes.com.core.data.entity.content.CustomMovieEntity
 import revolhope.splanes.com.core.data.entity.content.CustomSerieEntity
 import revolhope.splanes.com.core.data.entity.user.UserEntity
@@ -172,6 +173,53 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 .setValue(Gson().toJson(movie)) { error, _ ->
                     cont.resume(error == null)
                 }
+        }
+
+    override suspend fun fetchGroupContent(
+        groupId: String
+    ): List<CustomContentEntity>? {
+        val series = fetchGroupSeries(groupId)
+        val movies = fetchGroupMovies(groupId)
+        return mutableListOf<CustomContentEntity>().apply {
+            series?.let { addAll(it) }
+            movies?.let { addAll(it) }
+        }
+    }
+
+    override suspend fun fetchGroupSeries(
+        groupId: String
+    ): List<CustomSerieEntity>? =
+        suspendCoroutine { cont ->
+            database.getReference(REF_SERIE)
+                .child(groupId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) =
+                        cont.resume(
+                            dataSnapshot.children.map {
+                                Gson().fromJson(it.value as String, CustomSerieEntity::class.java)
+                            }
+                        )
+                })
+        }
+
+    override suspend fun fetchGroupMovies(
+        groupId: String
+    ): List<CustomMovieEntity>? =
+        suspendCoroutine { cont ->
+            database.getReference(REF_MOVIE)
+                .child(groupId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(null)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) =
+                        cont.resume(
+                            dataSnapshot.children.map {
+                                Gson().fromJson(it.value as String, CustomMovieEntity::class.java)
+                            }
+                        )
+                })
         }
 
     override suspend fun logout() = auth.signOut()

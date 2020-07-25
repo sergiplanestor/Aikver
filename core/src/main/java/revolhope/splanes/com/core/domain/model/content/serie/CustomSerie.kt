@@ -5,7 +5,7 @@ import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 data class CustomSerie(
-    override val content: Serie,
+    override val content: SerieDetails,
     override val userAdded: UserGroupMember,
     override val dateAdded: Long,
     override val seenBy: List<UserGroupMember>,
@@ -13,4 +13,4 @@ data class CustomSerie(
     override val recommendedTo: List<UserGroupMember>,
     override val punctuation: List<Pair<UserGroupMember, Float>>,
     override val comments: List<Pair<UserGroupMember, String>>
-) : CustomContent<Serie>()
+) : CustomContent<SerieDetails>()

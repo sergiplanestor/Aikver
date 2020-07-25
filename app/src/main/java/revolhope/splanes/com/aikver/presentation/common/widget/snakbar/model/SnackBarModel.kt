@@ -4,6 +4,7 @@ sealed class SnackBarModel(open val onClick: (() -> Unit)?) {
 
     data class Success(
         val message: String,
+        val onDismiss: (() -> Unit)? = null,
         override val onClick: (() -> Unit)? = null
     ) : SnackBarModel(onClick)
 

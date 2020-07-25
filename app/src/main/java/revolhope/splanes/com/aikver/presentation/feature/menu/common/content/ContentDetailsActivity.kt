@@ -13,11 +13,12 @@ import revolhope.splanes.com.aikver.framework.app.findByTag
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveFragment
 import revolhope.splanes.com.core.domain.model.content.Content
+import revolhope.splanes.com.core.domain.model.content.ContentDetails
 
 class ContentDetailsActivity : BaseActivity() {
 
-    private var addButtonState: Int =
-        STATE_ADD
+    private var addButtonState: Int = STATE_ADD
+    var contentDetails: ContentDetails? = null
 
     companion object {
         private const val EXTRA_CONTENT = "ContentDetailsActivity.extra.content"
@@ -83,7 +84,6 @@ class ContentDetailsActivity : BaseActivity() {
 
     fun getContent(): Content? =
         intent.extras?.getSerializable(EXTRA_CONTENT) as Content?
-
 
     override fun onBackPressed() {
         if (addButtonState == STATE_CLOSE) addButton.callOnClick() else super.onBackPressed()

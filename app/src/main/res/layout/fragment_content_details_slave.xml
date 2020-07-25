@@ -188,6 +188,13 @@
                 android:visibility="gone"
                 app:constraint_referenced_ids="punctuationTextView, punctuationView" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/recommendToGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="recommendToTextView, recommendToUserPicked" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
