@@ -79,7 +79,7 @@
         android:id="@+id/separatorPunctuation"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_12dp"
         android:alpha=".1"
         android:background="@color/colorPrimaryDark" />
 
