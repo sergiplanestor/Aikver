@@ -6,8 +6,9 @@ import revolhope.splanes.com.aikver.framework.net.ApiClientFactory
 import revolhope.splanes.com.aikver.framework.datasourceimpl.FirebaseDataSourceImpl
 import revolhope.splanes.com.aikver.framework.datasourceimpl.SharedPreferencesDataSourceImpl
 import revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent.SearchContentViewModel
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.ContentDetailsMasterViewModel
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.master.ContentDetailsMasterViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave.ContentDetailsSlaveViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.CustomContentDetailsViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.dashboard.DashboardViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
@@ -110,4 +111,5 @@ val viewModelModule = module(override = true) {
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
     viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get(), get()) }
+    viewModel { CustomContentDetailsViewModel(get(), get(), get()) }
 }

@@ -6,9 +6,13 @@ import kotlinx.android.synthetic.main.fragment_dashboard.recommendedPager
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
+import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.CustomContentDetailsActivity
+import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
 
@@ -24,11 +28,11 @@ class DashboardFragment : BaseFragment() {
     override fun initObservers() {
         super.initObservers()
         observe(viewModel.popularContent) {
-            popularPager.addContentItems(it, ::onContentClick)
+            popularPager.addContentItems(it, ::onPopularContentClick)
         }
         observe(viewModel.recommendedContent) {
             recommendedPager.visibility(it.isNotEmpty())
-            recommendedPager.addContentDetailsItems(it, ::onContentClick)
+            recommendedPager.addContentDetailsItems(it, ::onCustomContentClick)
         }
         observe(viewModel.groupContent) {
             groupContentRecycler.layoutManager = AutoSizeLayoutManager(
@@ -37,7 +41,7 @@ class DashboardFragment : BaseFragment() {
             )
             groupContentRecycler.adapter = GroupContentAdapter(
                 items = it,
-                onItemClick = ::onGroupContentClick
+                onItemClick = ::onCustomContentClick
             )
         }
     }
@@ -48,12 +52,12 @@ class DashboardFragment : BaseFragment() {
         viewModel.fetchGroupContent()
     }
 
-    private fun onContentClick(id: String) {
-
+    private fun onPopularContentClick(content: Content) {
+        ContentDetailsActivity.start(requireActivity() as? BaseActivity, content)
     }
 
-    private fun onGroupContentClick(content: CustomContent<ContentDetails>) {
-
+    private fun onCustomContentClick(customContent: CustomContent<ContentDetails>) {
+        CustomContentDetailsActivity.start(requireActivity() as? BaseActivity, customContent)
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_dashboard

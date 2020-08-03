@@ -1,11 +1,9 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
-import revolhope.splanes.com.core.domain.model.content.movie.Movie
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
-import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.interactor.content.movie.InsertMovieUseCase

@@ -16,7 +16,7 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
 
 class SearchContentFragment : BaseFragment(), SearchView.OnQueryTextListener {

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave
 
 import android.os.Bundle
 import android.transition.TransitionManager
@@ -28,7 +28,7 @@ import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.SnackBar
 import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.model.SnackBarModel
 import revolhope.splanes.com.aikver.presentation.common.widget.switcher.SwitcherView
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
 
 class ContentDetailsSlaveFragment : BaseFragment() {
 

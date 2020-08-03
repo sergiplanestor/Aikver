@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_content_details_master"
-        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.ContentDetailsMasterFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.master.ContentDetailsMasterFragment"
         tools:layout="@layout/fragment_content_details_master">
         <action
             android:id="@+id/action_content_details_master_to_slave"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/navigation_content_details_slave"
-        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.ContentDetailsSlaveFragment"
+        android:name="revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.ContentDetailsSlaveFragment"
         tools:layout="@layout/fragment_content_details_slave">
         <action
             android:id="@+id/action_content_details_slave_to_master"

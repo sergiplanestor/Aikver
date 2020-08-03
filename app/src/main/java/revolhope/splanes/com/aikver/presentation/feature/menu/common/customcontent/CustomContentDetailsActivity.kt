@@ -1,71 +1,84 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_content_details_master.collapsingToolbarImageView
-import kotlinx.android.synthetic.main.fragment_content_details_master.companyImage
-import kotlinx.android.synthetic.main.fragment_content_details_master.contentRecycler
-import kotlinx.android.synthetic.main.fragment_content_details_master.extraInfo1TextView
-import kotlinx.android.synthetic.main.fragment_content_details_master.extraInfo2TextView
-import kotlinx.android.synthetic.main.fragment_content_details_master.relatedContentGroup
-import kotlinx.android.synthetic.main.fragment_content_details_master.relatedContentRecycler
-import kotlinx.android.synthetic.main.fragment_content_details_master.relatedContentTextView
-import kotlinx.android.synthetic.main.fragment_content_details_master.statusTextView
-import kotlinx.android.synthetic.main.fragment_content_details_master.toolbar
-import kotlinx.android.synthetic.main.fragment_content_details_master.voteAverageTextView
-import kotlinx.android.synthetic.main.fragment_content_details_master.voteCardView
+import kotlinx.android.synthetic.main.activity_custom_content_details.collapsingToolbarImageView
+import kotlinx.android.synthetic.main.activity_custom_content_details.companyImage
+import kotlinx.android.synthetic.main.activity_custom_content_details.contentRecycler
+import kotlinx.android.synthetic.main.activity_custom_content_details.customContentView
+import kotlinx.android.synthetic.main.activity_custom_content_details.extraInfo1TextView
+import kotlinx.android.synthetic.main.activity_custom_content_details.extraInfo2TextView
+import kotlinx.android.synthetic.main.activity_custom_content_details.relatedContentGroup
+import kotlinx.android.synthetic.main.activity_custom_content_details.relatedContentRecycler
+import kotlinx.android.synthetic.main.activity_custom_content_details.relatedContentTextView
+import kotlinx.android.synthetic.main.activity_custom_content_details.statusTextView
+import kotlinx.android.synthetic.main.activity_custom_content_details.toolbar
+import kotlinx.android.synthetic.main.activity_custom_content_details.voteAverageTextView
+import kotlinx.android.synthetic.main.activity_custom_content_details.voteCardView
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
-import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadUrl
-import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.toCustomString
 import revolhope.splanes.com.aikver.presentation.common.visible
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.ContentDetailsActivity
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.adapter.ContentDetailsAdapter
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.adapter.ContentDetailsUiModel
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.relatedcontent.RelatedContentAdapter
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.relatedcontent.RelatedContentLayoutManager
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.adapter.ContentDetailsAdapter
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.adapter.ContentDetailsUiModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.relatedcontent.RelatedContentAdapter
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.relatedcontent.RelatedContentLayoutManager
 import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.ContentStatus
+import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.QueriedContent
 import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
 import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
-import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import java.util.*
 
-class ContentDetailsMasterFragment : BaseFragment() {
+class CustomContentDetailsActivity : BaseActivity() {
 
-    private val viewModel: ContentDetailsMasterViewModel by viewModel()
+    private val viewModel: CustomContentDetailsViewModel by viewModel()
+    private var customContent: CustomContent<ContentDetails>? = null
+
+    companion object {
+
+        private const val EXTRA_CONTENT = "CustomContentActivity.extra.content"
+
+        fun start(baseActivity: BaseActivity?, customContent: CustomContent<ContentDetails>) {
+            baseActivity?.startActivity(
+                Intent(baseActivity, CustomContentDetailsActivity::class.java).apply {
+                    putExtras(
+                        bundleOf(
+                            EXTRA_NAVIGATION_TRANSITION to NavTransition.MODAL,
+                            EXTRA_CONTENT to customContent
+                        )
+                    )
+                }
+            )
+        }
+    }
 
     override fun initViews() {
         super.initViews()
-        collapsingToolbarImageView.loadUrl(
-            getContent()?.backdrop.let {
-                if (it.isNullOrBlank()) getContent()?.thumbnail ?: "" else it
-            }
-        )
-        (activity as? ContentDetailsActivity)?.setupToolbar(toolbar)
+        getCustomContent()?.content?.let {
+            collapsingToolbarImageView.loadUrl(
+                if (it.backdrop.isBlank()) it.thumbnail else it.backdrop
+            )
+            setupToolbar(it)
+            bindViews(it)
+        }
     }
 
     override fun initObservers() {
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
-        observe(viewModel.contentDetails) {
-            (activity as? ContentDetailsActivity)?.contentDetails = it
-            it?.let(::bindViews) ?: popupError(
-                context = requireContext(),
-                fm = childFragmentManager,
-                action = (activity as ContentDetailsActivity)::onBackPressed
-            )
-        }
         observe(viewModel.contentRelated) {
             if (it == null || it.results.isEmpty()) {
                 relatedContentGroup.invisible()
@@ -73,32 +86,44 @@ class ContentDetailsMasterFragment : BaseFragment() {
                 bindRelatedContent(it)
             }
         }
-    }
-
-    override fun loadData() {
-        getContent()?.let {
-            viewModel.fetchDetails(it.id, it is Serie)
-            viewModel.fetchContentRelated(it.id, it is Serie)
+        observe(viewModel.user) {
+            it?.let { user ->
+                getCustomContent()?.let { content ->
+                    customContentView.initialize(user, content)
+                }
+            }
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun bindViews(details: ContentDetails) {
+    override fun loadData() {
+        getCustomContent()?.let {
+            viewModel.fetchContentRelated(it.content.id, it.content is SerieDetails)
+        }
+        viewModel.fetchUser()
+    }
 
-        /* Subtitle */
-        (activity as? ContentDetailsActivity)?.supportActionBar?.subtitle =
+    private fun setupToolbar(details: ContentDetails) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = getCustomContent()?.content?.title
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
+        supportActionBar?.subtitle =
             when (details) {
                 is SerieDetails -> details.firstAirDate.split("-")[0]
                 is MovieDetails -> details.tagLine
                 else -> null
             }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun bindViews(details: ContentDetails) {
 
         /* Toolbar extra info */
         bindBottomToolbarInfo(details)
 
         /* Recycler content info */
-        contentRecycler.layoutManager = LinearLayoutManager(requireContext())
-        contentRecycler.adapter = ContentDetailsAdapter(buildAdapterData(details))
+        contentRecycler.layoutManager = LinearLayoutManager(this)
+        contentRecycler.adapter = ContentDetailsAdapter(buildDetailsAdapterData(details))
 
         /* Punctuation */
         if (!details.voteAverage.isNaN() || details.voteAverage == 0f) {
@@ -155,7 +180,7 @@ class ContentDetailsMasterFragment : BaseFragment() {
         statusTextView.text = getStatusString(details.status)
     }
 
-    private fun buildAdapterData(details: ContentDetails): List<ContentDetailsUiModel> {
+    private fun buildDetailsAdapterData(details: ContentDetails): List<ContentDetailsUiModel> {
         val data = mutableListOf<ContentDetailsUiModel>()
 
         /* Original title */
@@ -259,9 +284,9 @@ class ContentDetailsMasterFragment : BaseFragment() {
             }
         )
         if (relatedContent.page == 1) {
-            relatedContentRecycler.layoutManager = RelatedContentLayoutManager(requireContext()) {
-                getContent()?.let {
-                    viewModel.fetchContentRelated(it.id, it is Serie, relatedContent.page + 1)
+            relatedContentRecycler.layoutManager = RelatedContentLayoutManager(this) {
+                getCustomContent()?.content?.let {
+                    viewModel.fetchContentRelated(it.id, it is SerieDetails, relatedContent.page + 1)
                     // TODO: Show any loader?
                 }
             }
@@ -275,8 +300,7 @@ class ContentDetailsMasterFragment : BaseFragment() {
     }
 
     private fun onContentRelatedClick(content: Content) {
-        ContentDetailsActivity.start(requireActivity() as? BaseActivity, content)
-        requireActivity().finish() // TODO: Check it: deberia pasar algun flag para poner back o no?
+        ContentDetailsActivity.start(this, content)
     }
 
     private fun resizeVoteLayout(v: View) {
@@ -315,7 +339,13 @@ class ContentDetailsMasterFragment : BaseFragment() {
             }
         )
 
-    private fun getContent(): Content? = (activity as? ContentDetailsActivity)?.getContent()
+    private fun getCustomContent() : CustomContent<ContentDetails>? {
+        if (customContent == null) {
+            customContent =
+                intent?.extras?.getSerializable(EXTRA_CONTENT) as? CustomContent<ContentDetails>
+        }
+        return customContent
+    }
 
-    override fun getLayoutResource(): Int = R.layout.fragment_content_details_master
+    override fun getLayoutRes(): Int = R.layout.activity_custom_content_details
 }

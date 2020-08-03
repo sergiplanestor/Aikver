@@ -7,8 +7,10 @@ import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.interactor.content.FetchGroupContentUseCase
+import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchPopularMoviesUseCase
 import revolhope.splanes.com.core.interactor.content.serie.FetchPopularSeriesUseCase
+import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 
 class DashboardViewModel(

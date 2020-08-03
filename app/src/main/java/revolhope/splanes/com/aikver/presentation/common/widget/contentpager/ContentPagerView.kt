@@ -58,7 +58,7 @@ class ContentPagerView @JvmOverloads constructor(
 
     private fun initViews() = arrow.setOnClickListener { changeState() }
 
-    fun addContentItems(items: List<Content>, callback: (String) -> Unit) {
+    fun addContentItems(items: List<Content>, callback: (Content) -> Unit) {
         with(popularContentRecycler) {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = ContentPagerAdapter(
@@ -71,7 +71,9 @@ class ContentPagerView @JvmOverloads constructor(
                         voteAverage = it.voteAverage.toString()
                     )
                 },
-                onClick = callback
+                onClick = { id ->
+                    items.find { it.id.toString() == id }?.run { callback.invoke(this) }
+                }
             )
             PagerSnapHelper().attachToRecyclerView(this)
             resumeAutoScroll()
@@ -80,7 +82,7 @@ class ContentPagerView @JvmOverloads constructor(
 
     fun addContentDetailsItems(
         items: List<CustomContent<ContentDetails>>,
-        callback: (String) -> Unit
+        callback: (CustomContent<ContentDetails>) -> Unit
     ) {
         with(popularContentRecycler) {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -94,7 +96,9 @@ class ContentPagerView @JvmOverloads constructor(
                         voteAverage = it.content.voteAverage.toString()
                     )
                 },
-                onClick = callback
+                onClick = { id ->
+                    items.find { it.content.id.toString() == id }?.run { callback.invoke(this) }
+                }
             )
             PagerSnapHelper().attachToRecyclerView(this)
             resumeAutoScroll()

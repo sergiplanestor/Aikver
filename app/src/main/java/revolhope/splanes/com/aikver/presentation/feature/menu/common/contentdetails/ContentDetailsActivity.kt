@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails
 
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -11,7 +11,7 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.exec
 import revolhope.splanes.com.aikver.framework.app.findByTag
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
-import revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave.ContentDetailsSlaveFragment
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave.ContentDetailsSlaveFragment
 import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 

@@ -1,5 +1,7 @@
 package revolhope.splanes.com.core.domain.model.content.serie
 
+import java.io.Serializable
+
 data class Episode(
     val airDate: String,
     val numEpisode: Int,
@@ -12,7 +14,7 @@ data class Episode(
     val still: String,
     val voteAverage: Float,
     val voteCount: Int
-) {
+) : Serializable {
     companion object {
         fun getEmpty(): Episode =
             Episode(

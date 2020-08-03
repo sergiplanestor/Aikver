@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.adapter
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.adapter
 
 import android.transition.TransitionManager
 import android.view.LayoutInflater

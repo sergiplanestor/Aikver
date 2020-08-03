@@ -109,6 +109,21 @@
     <string name="no_recommendations">¡Sin recomendaciones!</string>
     <string name="dashboard_popular_content_title">Series y peliculas populares</string>
     <string name="dashboard_recommended_content_title">Recomendado para ti</string>
+    <string name="group_info">Información del grupo</string>
+    <string name="users_that_have_seen_this">Usuarios que han visto esta %s:</string>
+    <string name="seen_by">%s vista</string>
+    <string name="users_punctuation">Puntuación de los usuarios:</string>
+    <string name="score_now">¡Puntuala ahora!</string>
+    <string name="some_users_comment">Algunos usuarios han comentado este contenido</string>
+    <string name="see_comments">Ver comentarios</string>
+    <string name="content_added_by">%s añadida por:</string>
+    <string name="serie">Serie</string>
+    <string name="film">Película</string>
+    <string name="content_seen_by_nobody">Nadie ha visto esta %s</string>
+    <string name="dont_know_what_see">¿No sabes que ver? ¡Atrévete!</string>
+    <string name="content_no_scored">Nadie ha puntuado aún esta %s</string>
+    <string name="share_your_opinion">¡Animate a dar tu opinión!</string>
+
 
     <string name="optional_field">Campo opcional</string>
     <string name="register_group_field_hint">Nombre del grupo</string>
@@ -125,7 +140,6 @@
     <string name="score_view_placeholder">%d / 10</string>
     <string name="error_blank_field">Campo obligatorio.</string>
     <string name="add_serie_title">Rellena los siguientes campos:</string>
-    <string name="serie">Serie</string>
     <string name="category_title">Categoria:</string>
     <string name="template_user_creator">Añadida por %s, %s</string>
     <string name="template_scorers">Han puntuado esta serie %d persona/s</string>

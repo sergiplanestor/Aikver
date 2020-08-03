@@ -38,7 +38,10 @@
             android:name=".presentation.feature.menu.profile.managegroup.ManageGroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".presentation.feature.menu.common.content.ContentDetailsActivity"
+            android:name=".presentation.feature.menu.common.contentdetails.ContentDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentation.feature.menu.common.customcontent.CustomContentDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

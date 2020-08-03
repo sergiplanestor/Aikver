@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_5dp">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        style="@style/Text.SemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:text="@string/group_info"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="@dimen/text_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView">
+
+        <revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.CustomContentSeenByView
+            android:id="@+id/seenByView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.CustomContentPunctuationView
+            android:id="@+id/punctuationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp" />
+
+        <revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.CustomContentCommentsView
+            android:id="@+id/commentsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentWrapLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp">
+
+            <TextView
+                android:id="@+id/addedByTitle"
+                style="@style/Text.SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/content_added_by"
+                android:textColor="@color/colorGray"
+                app:layout_constraintBottom_toBottomOf="@id/addedByAvatar"
+                app:layout_constraintEnd_toStartOf="@id/addedByName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/addedByAvatar" />
+
+            <TextView
+                android:id="@+id/addedByName"
+                style="@style/Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:textColor="@color/colorGray"
+                app:layout_constraintBottom_toBottomOf="@id/addedByAvatar"
+                app:layout_constraintEnd_toStartOf="@id/addedByAvatar"
+                app:layout_constraintTop_toTopOf="@id/addedByAvatar"
+                tools:text="Sergi" />
+
+            <ImageView
+                android:id="@+id/addedByAvatar"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:alpha=".1"
+            android:background="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

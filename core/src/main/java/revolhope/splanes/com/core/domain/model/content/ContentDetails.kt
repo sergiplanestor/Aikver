@@ -1,7 +1,9 @@
 package revolhope.splanes.com.core.domain.model.content
 
+import java.io.Serializable
 
-abstract class ContentDetails {
+
+abstract class ContentDetails : Serializable {
     abstract val id: Int
     abstract val title: String
     abstract val originalTitle: String

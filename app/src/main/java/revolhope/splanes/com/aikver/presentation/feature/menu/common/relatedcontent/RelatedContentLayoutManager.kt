@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.master.relatedcontent
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.relatedcontent
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager

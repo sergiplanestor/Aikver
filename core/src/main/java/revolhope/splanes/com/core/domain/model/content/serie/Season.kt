@@ -1,5 +1,7 @@
 package revolhope.splanes.com.core.domain.model.content.serie
 
+import java.io.Serializable
+
 data class Season(
     val airDate: String,
     val episodeCount: Int,
@@ -8,4 +10,4 @@ data class Season(
     val overview: String,
     val thumbnail: String,
     val numSeason: Int
-)
+) : Serializable

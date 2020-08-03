@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/punctuationTitle"
+            style="@style/Text.SemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/users_punctuation"
+            android:textColor="@color/colorGray"
+            app:layout_constraintEnd_toStartOf="@id/punctuationAverage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/punctuationAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_12dp"
+            android:background="@drawable/shape_popular_punctuation"
+            android:paddingStart="@dimen/margin_12dp"
+            android:paddingTop="@dimen/margin_8dp"
+            android:paddingEnd="@dimen/margin_12dp"
+            android:paddingBottom="@dimen/margin_8dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/punctuationTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/punctuationRecycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/punctuationAverage"
+            tools:itemCount="1"
+            tools:listitem="@layout/row_user_group_member_view" />
+
+        <TextView
+            android:id="@+id/punctuationButton"
+            style="@style/AppButtonLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:text="@string/score_now"
+            app:layout_constraintStart_toStartOf="@id/punctuationTitle"
+            app:layout_constraintTop_toBottomOf="@id/punctuationRecycler" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
+        android:id="@+id/emptyStatePunctuation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:visibility="gone"
+        app:imageSize="85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/punctuationTitle"
+        app:mode="dark"
+        app:orientation="horizontal"
+        app:subtitle="@string/share_your_opinion" />
+
+    <View
+        android:id="@+id/separatorPunctuation"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:alpha=".1"
+        android:background="@color/colorPrimaryDark" />
+
+</LinearLayout>

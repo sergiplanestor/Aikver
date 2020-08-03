@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.content.fragment.slave
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave
 
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.Network
