@@ -89,7 +89,7 @@ class CustomContentDetailsActivity : BaseActivity() {
         observe(viewModel.user) {
             it?.let { user ->
                 getCustomContent()?.let { content ->
-                    customContentView.initialize(user, content)
+                    customContentView.initialize(user, content, supportFragmentManager)
                 }
             }
         }

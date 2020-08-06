@@ -113,7 +113,7 @@
     <string name="users_that_have_seen_this">Usuarios que han visto esta %s:</string>
     <string name="seen_by">%s vista</string>
     <string name="users_punctuation">Puntuación de los usuarios:</string>
-    <string name="score_now">¡Puntuala ahora!</string>
+    <string name="score_now">¡Puntúala ahora!</string>
     <string name="some_users_comment">Algunos usuarios han comentado este contenido</string>
     <string name="see_comments">Ver comentarios</string>
     <string name="content_added_by">%s añadida por:</string>
@@ -123,6 +123,8 @@
     <string name="dont_know_what_see">¿No sabes que ver? ¡Atrévete!</string>
     <string name="content_no_scored">Nadie ha puntuado aún esta %s</string>
     <string name="share_your_opinion">¡Animate a dar tu opinión!</string>
+    <string name="no_comments">Todavía no hay comentarios</string>
+    <string name="comment_now">¡Escribe tu comentario!</string>
 
 
     <string name="optional_field">Campo opcional</string>

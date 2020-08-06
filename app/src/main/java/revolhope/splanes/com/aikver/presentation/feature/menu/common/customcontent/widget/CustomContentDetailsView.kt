@@ -3,7 +3,9 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcont
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.WindowContentFrameStats
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByAvatar
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByName
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByTitle
@@ -31,10 +33,14 @@ class CustomContentDetailsView @JvmOverloads constructor(
         )
     }
 
-    fun initialize(currentUser: User, customContent: CustomContent<ContentDetails>) {
+    fun initialize(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>,
+        fragmentManager: FragmentManager
+    ) {
         seenByView.setupSeenBy(currentUser, customContent)
         punctuationView.setupPunctuation(currentUser, customContent)
-        commentsView.setupComments(customContent)
+        commentsView.setupComments(currentUser, customContent, fragmentManager)
         setupAddedBy(customContent)
     }
 

@@ -1,4 +1,4 @@
-package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget
+package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.comments
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.component_custom_content_comments_view.view.commentsTitle
 import kotlinx.android.synthetic.main.component_custom_content_comments_view.view.emptyStateComments
 import kotlinx.android.synthetic.main.component_custom_content_comments_view.view.showCommentsButton
@@ -14,6 +15,8 @@ import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
+import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class CustomContentCommentsView @JvmOverloads constructor(
     context: Context,
@@ -29,14 +32,39 @@ class CustomContentCommentsView @JvmOverloads constructor(
         )
     }
 
-    fun setupComments(customContent: CustomContent<ContentDetails>) {
+    fun setupComments(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>,
+        fragmentManager: FragmentManager
+    ) {
         if (customContent.comments.isEmpty()) {
             commentsTitle.invisible()
             showCommentsButton.invisible()
+            emptyStateComments.setActionText(context.getString(R.string.comment_now))
+            emptyStateComments.setAction {
+                showComments(
+                    currentUser,
+                    customContent.comments,
+                    fragmentManager
+                )
+            }
             emptyStateComments.visible()
         } else {
-            // TODO(¿show bottom sheet?)
-            Toast.makeText(context, "TODO!", Toast.LENGTH_LONG).show()
+            showCommentsButton.setOnClickListener {
+                showComments(
+                    currentUser,
+                    customContent.comments,
+                    fragmentManager
+                )
+            }
         }
+    }
+
+    private fun showComments(
+        currentUser: User,
+        comments: List<Pair<UserGroupMember, String>>,
+        fragmentManager: FragmentManager
+    ) {
+        CommentsBottomSheet(comments, currentUser).show(fragmentManager)
     }
 }
