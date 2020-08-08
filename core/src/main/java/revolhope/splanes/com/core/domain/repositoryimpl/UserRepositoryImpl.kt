@@ -134,10 +134,8 @@ class UserRepositoryImpl(
             )
         }
 
-
     override suspend fun fetchUserAvatarTypes(): UserAvatarTypes? =
-        apiDataSource.fetchAvatarTypes(AVATAR_URL)
-            ?.let(UserMapper::fromUserAvatarTypesEntityToModel)
+        apiDataSource.fetchAvatarTypes(AVATAR_URL)?.let(UserMapper::fromUserAvatarTypesEntityToModel)
 
     override suspend fun insertUser(user: User, shouldCache: Boolean): Boolean {
         val result = firebaseDataSource.insertUser(UserMapper.fromUserModelToEntity(user))
@@ -173,8 +171,8 @@ class UserRepositoryImpl(
                         groupId = groupEntity.id ?: "",
                         groupAdminId = groupEntity.userAdmin ?: ""
                     )
-                } ?: mutableListOf())
-        } ?: mutableListOf()
+                } ?: emptyList())
+        } ?: emptyList()
 
     private suspend fun fetchUserGroupMemberById(
         userId: String,

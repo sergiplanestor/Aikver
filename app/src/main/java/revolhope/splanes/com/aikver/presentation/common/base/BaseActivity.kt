@@ -13,7 +13,7 @@ abstract class BaseActivity : AppCompatActivity() {
         const val EXTRA_NAVIGATION_TRANSITION = "nav.transition"
     }
 
-    enum class NavTransition() {
+    enum class NavTransition {
         LATERAL,
         UP,
         MODAL,

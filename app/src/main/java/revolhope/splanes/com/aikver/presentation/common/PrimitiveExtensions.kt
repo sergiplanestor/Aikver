@@ -1,6 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.common
 
-import java.util.*
+import java.util.Locale
 
 fun String.toLowerCase() = this.toLowerCase(Locale.ROOT)
 
