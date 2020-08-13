@@ -40,11 +40,11 @@ class CustomContentCommentsView @JvmOverloads constructor(
         if (customContent.comments.isEmpty()) {
             commentsTitle.invisible()
             showCommentsButton.invisible()
-            emptyStateComments.setActionText(context.getString(R.string.comment_now))
+            emptyStateComments.setActionText(context.getString(R.string.comment_now_admiration))
             emptyStateComments.setAction {
                 showComments(
                     currentUser,
-                    customContent.comments,
+                    customContent,
                     fragmentManager
                 )
             }
@@ -53,7 +53,7 @@ class CustomContentCommentsView @JvmOverloads constructor(
             showCommentsButton.setOnClickListener {
                 showComments(
                     currentUser,
-                    customContent.comments,
+                    customContent,
                     fragmentManager
                 )
             }
@@ -62,9 +62,9 @@ class CustomContentCommentsView @JvmOverloads constructor(
 
     private fun showComments(
         currentUser: User,
-        comments: List<Pair<UserGroupMember, String>>,
+        customContent: CustomContent<ContentDetails>,
         fragmentManager: FragmentManager
     ) {
-        CommentsBottomSheet(comments, currentUser).show(fragmentManager)
+        CommentsBottomSheet(customContent, currentUser).show(fragmentManager)
     }
 }

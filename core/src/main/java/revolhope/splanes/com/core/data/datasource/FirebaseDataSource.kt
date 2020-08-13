@@ -29,6 +29,10 @@ interface FirebaseDataSource {
 
     suspend fun insertMovie(userGroupEntity: UserGroupEntity, movie: CustomMovieEntity): Boolean
 
+    suspend fun deleteSerie(userGroupEntity: UserGroupEntity, serie: CustomSerieEntity): Boolean
+
+    suspend fun deleteMovie(userGroupEntity: UserGroupEntity, movie: CustomMovieEntity): Boolean
+
     suspend fun fetchGroupContent(groupId: String): List<CustomContentEntity>?
 
     suspend fun fetchGroupSeries(groupId: String): List<CustomSerieEntity>?

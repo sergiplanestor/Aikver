@@ -116,6 +116,7 @@
     <string name="score_now">¡Puntúala ahora!</string>
     <string name="some_users_comment">Algunos usuarios han comentado este contenido</string>
     <string name="see_comments">Ver comentarios</string>
+    <string name="comments">Comentarios</string>
     <string name="content_added_by">%s añadida por:</string>
     <string name="serie">Serie</string>
     <string name="film">Película</string>
@@ -124,7 +125,10 @@
     <string name="content_no_scored">Nadie ha puntuado aún esta %s</string>
     <string name="share_your_opinion">¡Animate a dar tu opinión!</string>
     <string name="no_comments">Todavía no hay comentarios</string>
-    <string name="comment_now">¡Escribe tu comentario!</string>
+    <string name="comment_now_admiration">¡Escribe tu comentario!</string>
+    <string name="comment_now">Escribe tu comentario</string>
+    <string name="share_your_score">Puntua esta %s y compártela con el grupo</string>
+    <string name="send_score">Puntuar</string>
 
 
     <string name="optional_field">Campo opcional</string>

@@ -9,9 +9,9 @@ class CustomMovie(
     override val content: MovieDetails,
     override val userAdded: UserGroupMember,
     override val dateAdded: Long,
-    override val seenBy: List<UserGroupMember>,
+    override val seenBy: MutableList<UserGroupMember>,
     override val network: Network,
     override val recommendedTo: List<UserGroupMember>,
-    override val punctuation: List<Pair<UserGroupMember, Float>>,
-    override val comments: List<Pair<UserGroupMember, String>>
+    override val punctuation: MutableList<Pair<UserGroupMember, Float>>,
+    override val comments: MutableList<Pair<UserGroupMember, String>>
 ) : CustomContent<MovieDetails>(), Serializable

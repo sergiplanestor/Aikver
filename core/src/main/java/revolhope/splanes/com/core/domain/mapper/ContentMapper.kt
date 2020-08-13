@@ -15,22 +15,18 @@ import revolhope.splanes.com.core.data.entity.api.content.serie.QuerySeriesEntit
 import revolhope.splanes.com.core.data.entity.api.content.serie.SeasonEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieDetailsEntity
 import revolhope.splanes.com.core.data.entity.api.content.serie.SerieEntity
-import revolhope.splanes.com.core.data.entity.content.CustomContentEntity
 import revolhope.splanes.com.core.data.entity.content.CustomMovieEntity
 import revolhope.splanes.com.core.data.entity.content.CustomSerieEntity
 import revolhope.splanes.com.core.domain.model.config.Configuration
 import revolhope.splanes.com.core.domain.model.config.ImageConfiguration
-import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentCollection
 import revolhope.splanes.com.core.domain.model.content.ContentCreator
-import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.ContentGenres
 import revolhope.splanes.com.core.domain.model.content.ContentLanguage
 import revolhope.splanes.com.core.domain.model.content.ContentNetwork
 import revolhope.splanes.com.core.domain.model.content.ContentProductionCompany
 import revolhope.splanes.com.core.domain.model.content.ContentProductionCountry
 import revolhope.splanes.com.core.domain.model.content.ContentStatus
-import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.Network
 import revolhope.splanes.com.core.domain.model.content.movie.CustomMovie
 import revolhope.splanes.com.core.domain.model.content.movie.Movie
@@ -386,11 +382,11 @@ object ContentMapper {
             content = serieDetails ?: TODO(),
             userAdded = userAdded ?: TODO(),
             dateAdded = entity.dateAdded ?: -1L,
-            seenBy = seenBy,
+            seenBy = seenBy.toMutableList(),
             network = entity.network?.let { Network.fromValue(it) } ?: Network.UNKNOWN,
             recommendedTo = recommendedTo,
-            punctuation = punctuation,
-            comments = comments
+            punctuation = punctuation.toMutableList(),
+            comments = comments.toMutableList()
         )
 
     fun fromCustomMovieEntityToModel(
@@ -406,10 +402,10 @@ object ContentMapper {
             content = movieDetails ?: TODO(),
             userAdded = userAdded ?: TODO(),
             dateAdded = entity.dateAdded ?: -1L,
-            seenBy = seenBy,
+            seenBy = seenBy.toMutableList(),
             network = entity.network?.let { Network.fromValue(it) } ?: Network.UNKNOWN,
             recommendedTo = recommendedTo,
-            punctuation = punctuation,
-            comments = comments
+            punctuation = punctuation.toMutableList(),
+            comments = comments.toMutableList()
         )
 }

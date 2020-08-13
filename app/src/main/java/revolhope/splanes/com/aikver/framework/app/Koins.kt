@@ -9,6 +9,8 @@ import revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent.Sear
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.master.ContentDetailsMasterViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave.ContentDetailsSlaveViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.CustomContentDetailsViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.comments.CommentsBottomSheetViewModel
+import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.widget.punctuation.PunctuationBottomSheetViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.dashboard.DashboardViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.ProfileViewModel
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.UserAvatarViewModel
@@ -26,6 +28,8 @@ import revolhope.splanes.com.core.data.repository.UserRepository
 import revolhope.splanes.com.core.domain.repositoryimpl.ContentRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
+import revolhope.splanes.com.core.interactor.content.AddCommentUseCase
+import revolhope.splanes.com.core.interactor.content.AddPunctuationUseCase
 import revolhope.splanes.com.core.interactor.content.FetchGroupContentUseCase
 import revolhope.splanes.com.core.interactor.content.movie.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
@@ -97,6 +101,8 @@ val useCaseModule = module(override = true) {
     factory { FetchPopularSeriesUseCase(get()) }
     factory { FetchPopularMoviesUseCase(get()) }
     factory { FetchGroupContentUseCase(get()) }
+    factory { AddCommentUseCase(get()) }
+    factory { AddPunctuationUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -112,4 +118,6 @@ val viewModelModule = module(override = true) {
     viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get(), get()) }
     viewModel { CustomContentDetailsViewModel(get(), get(), get()) }
+    viewModel { CommentsBottomSheetViewModel(get()) }
+    viewModel { PunctuationBottomSheetViewModel(get()) }
 }

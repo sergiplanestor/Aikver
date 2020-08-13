@@ -11,9 +11,14 @@ abstract class BaseViewModel : ViewModel() {
     val loaderState: LiveData<Boolean> get() = _loaderState
     private val _loaderState: MutableLiveData<Boolean> = MutableLiveData()
 
+    val errorState: LiveData<Any?> get() = _errorState
+    private val _errorState: MutableLiveData<Any?> = MutableLiveData()
+
     fun postLoader(show: Boolean) {
         _loaderState.postValue(show)
     }
+
+    protected fun postError(any: Any?) { _errorState.postValue(any) }
 
     protected fun launchAsync(
         showLoader: Boolean = true,

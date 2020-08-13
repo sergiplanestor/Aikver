@@ -175,6 +175,60 @@ class FirebaseDataSourceImpl : FirebaseDataSource {
                 }
         }
 
+    override suspend fun deleteSerie(
+        userGroupEntity: UserGroupEntity,
+        serie: CustomSerieEntity
+    ): Boolean =
+        suspendCoroutine { cont ->
+            database.getReference(REF_SERIE)
+                .child(userGroupEntity.id ?: "")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(false)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.children.find {
+                            val entity =
+                                Gson().fromJson(it.value as String, CustomSerieEntity::class.java)
+                            entity.contentId == serie.contentId
+                        }?.key?.let {
+                            database.getReference(REF_SERIE)
+                                .child(userGroupEntity.id ?: "")
+                                .child(it)
+                                .removeValue { error, _ ->
+                                    cont.resume(error == null)
+                                }
+                        } ?: cont.resume(false)
+                    }
+                })
+        }
+
+    override suspend fun deleteMovie(
+        userGroupEntity: UserGroupEntity,
+        movie: CustomMovieEntity
+    ): Boolean =
+        suspendCoroutine { cont ->
+            database.getReference(REF_MOVIE)
+                .child(userGroupEntity.id ?: "")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) = cont.resume(false)
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.children.find {
+                            val entity =
+                                Gson().fromJson(it.value as String, CustomMovieEntity::class.java)
+                            entity.contentId == movie.contentId
+                        }?.key?.let {
+                            database.getReference(REF_MOVIE)
+                                .child(userGroupEntity.id ?: "")
+                                .child(it)
+                                .removeValue { error, _ ->
+                                    cont.resume(error == null)
+                                }
+                        } ?: cont.resume(false)
+                    }
+                })
+        }
+
     override suspend fun fetchGroupContent(
         groupId: String
     ): List<CustomContentEntity>? {

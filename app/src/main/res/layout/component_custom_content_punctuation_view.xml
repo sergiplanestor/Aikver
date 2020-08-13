@@ -16,7 +16,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/users_punctuation"
-            android:textColor="@color/colorGray"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="@dimen/text_18"
             app:layout_constraintEnd_toStartOf="@id/punctuationAverage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +43,7 @@
             android:id="@+id/punctuationRecycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginTop="@dimen/margin_12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/punctuationAverage"

@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/some_users_comment"
             android:textColor="@color/colorGray"
+            android:layout_marginEnd="@dimen/margin_12dp"
             app:layout_constraintEnd_toStartOf="@id/showCommentsButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

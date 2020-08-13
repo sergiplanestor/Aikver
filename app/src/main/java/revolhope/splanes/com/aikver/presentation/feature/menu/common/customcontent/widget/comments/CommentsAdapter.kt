@@ -11,7 +11,7 @@ import revolhope.splanes.com.aikver.presentation.common.justify
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 
 class CommentsAdapter(
-    private val items: List<CommentUiModel>
+    private var items: List<CommentUiModel>
 ) : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
 
@@ -38,6 +38,11 @@ class CommentsAdapter(
             holder.comment.text = comment
             holder.comment.justify()
         }
+    }
+
+    fun onNewItems(items: List<CommentUiModel>) {
+        this.items = items
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

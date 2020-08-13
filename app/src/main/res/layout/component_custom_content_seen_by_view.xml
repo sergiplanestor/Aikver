@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
         android:text="@string/users_that_have_seen_this"
-        android:textColor="@color/colorGray" />
+        android:textColor="@color/colorAccentDark"
+        android:textSize="@dimen/text_18" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/seenByRecycler"

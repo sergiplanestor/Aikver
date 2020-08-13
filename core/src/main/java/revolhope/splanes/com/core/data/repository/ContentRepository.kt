@@ -11,6 +11,7 @@ import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.Serie
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 interface ContentRepository {
@@ -50,6 +51,18 @@ interface ContentRepository {
         userPunctuation: Int,
         userComments: String
     ): Boolean
+
+    suspend fun insertComment(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>,
+        comment: String
+    ): List<Pair<UserGroupMember, String>>
+
+    suspend fun insertPunctuation(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>,
+        punctuation: Int
+    ): List<Pair<UserGroupMember, Float>>
 
     suspend fun fetchSelectedGroupContent(forceCall: Boolean = false) : List<CustomContent<ContentDetails>>?
 }

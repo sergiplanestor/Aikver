@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.WindowContentFrameStats
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByAvatar
@@ -23,7 +24,7 @@ class CustomContentDetailsView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     attrDefStyle: Int = 0
-) : ConstraintLayout(context, attributeSet, attrDefStyle) {
+) : LinearLayout(context, attributeSet, attrDefStyle) {
 
     init {
         View.inflate(context, R.layout.component_custom_content_details_view, this)
