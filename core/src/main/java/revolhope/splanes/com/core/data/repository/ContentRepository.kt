@@ -64,5 +64,10 @@ interface ContentRepository {
         punctuation: Int
     ): List<Pair<UserGroupMember, Float>>
 
+    suspend fun insertSeenBy(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>
+    ): List<UserGroupMember>
+
     suspend fun fetchSelectedGroupContent(forceCall: Boolean = false) : List<CustomContent<ContentDetails>>?
 }

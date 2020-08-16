@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.component_custom_content_punctuation_view.view.emptyStatePunctuation
 import kotlinx.android.synthetic.main.component_custom_content_punctuation_view.view.punctuationAverage
@@ -29,6 +30,8 @@ class CustomContentPunctuationView @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet, attrDefStyle) {
 
     private var currentUser: User? = null
+    private var customContent: CustomContent<ContentDetails>? = null
+    private var fm: FragmentManager? = null
 
     init {
         View.inflate(context, R.layout.component_custom_content_punctuation_view, this)
@@ -38,10 +41,17 @@ class CustomContentPunctuationView @JvmOverloads constructor(
         )
     }
 
-    fun setupPunctuation(currentUser: User, customContent: CustomContent<ContentDetails>) {
-        this.currentUser = currentUser
+    fun setupPunctuation(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>,
+        fm: FragmentManager
+    ) {
+        if (this.currentUser == null) this.currentUser = currentUser
+        if (this.customContent == null) this.customContent = customContent
+        if (this.fm == null) this.fm = fm
+
         if (customContent.punctuation.isEmpty()) {
-            setupEmptyState(customContent.content is SerieDetails, currentUser, customContent)
+            setupEmptyState(customContent.content is SerieDetails, currentUser, customContent, fm)
             punctuationButton.invisible()
             punctuationAverage.invisible()
             punctuationRecycler.invisible()
@@ -62,15 +72,13 @@ class CustomContentPunctuationView @JvmOverloads constructor(
                     },
                     currentUserId = currentUser.id
                 )
-            punctuationButton.visibility(
-                customContent.punctuation.any { it.first.userId == currentUser.id }.not()
-            )
+            punctuationButton.visibility(isButtonVisible())
             punctuationButton.setOnClickListener {
                 PunctuationBottomSheet(
                     currentUser = currentUser,
                     customContent = customContent,
                     onPunctuationUpdated = ::onPunctuationUpdated
-                )
+                ).show(fm)
             }
         }
     }
@@ -78,7 +86,8 @@ class CustomContentPunctuationView @JvmOverloads constructor(
     private fun setupEmptyState(
         isSerie: Boolean,
         currentUser: User,
-        customContent: CustomContent<ContentDetails>
+        customContent: CustomContent<ContentDetails>,
+        fm: FragmentManager
     ) {
         val contentText = context.getString(if (isSerie) R.string.serie else R.string.film)
         emptyStatePunctuation.setTitle(
@@ -93,12 +102,20 @@ class CustomContentPunctuationView @JvmOverloads constructor(
                 currentUser = currentUser,
                 customContent = customContent,
                 onPunctuationUpdated = ::onPunctuationUpdated
-            )
+            ).show(fm)
         }
+        emptyStatePunctuation.setActionVisibility(isButtonVisible())
     }
 
+    private fun isButtonVisible() =
+        customContent?.seenBy?.any { it.userId == currentUser?.id }?.and(
+            other = customContent?.punctuation?.any {
+                it.first.userId == currentUser?.id
+            }?.not() ?: false
+        ) ?: false
+
     private fun onPunctuationUpdated(items: List<Pair<UserGroupMember, Float>>) {
-        currentUser?.let {
+        this.currentUser?.let {
             punctuationRecycler.adapter =
                 CustomContentUserAdapter(
                     items = items.map { pair ->
@@ -111,6 +128,16 @@ class CustomContentPunctuationView @JvmOverloads constructor(
                     },
                     currentUserId = it.id
                 )
+        }
+    }
+
+    fun onSerieSeenBy() {
+        currentUser?.let { user ->
+            customContent?.let { content ->
+                fm?.let { fm ->
+                    setupPunctuation(user, content, fm)
+                }
+            }
         }
     }
 }

@@ -41,6 +41,7 @@ import revolhope.splanes.com.core.domain.model.content.movie.MovieDetails
 import revolhope.splanes.com.core.domain.model.content.movie.QueriedMovies
 import revolhope.splanes.com.core.domain.model.content.serie.QueriedSeries
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
+import revolhope.splanes.com.core.domain.model.user.User
 import java.util.*
 
 class CustomContentDetailsActivity : BaseActivity() {
@@ -89,9 +90,17 @@ class CustomContentDetailsActivity : BaseActivity() {
         observe(viewModel.user) {
             it?.let { user ->
                 getCustomContent()?.let { content ->
-                    customContentView.initialize(user, content, supportFragmentManager)
+                    customContentView.initialize(
+                        currentUser = user,
+                        customContent = content,
+                        onContentSeenByClick = ::onContentSeenBy,
+                        fragmentManager = supportFragmentManager
+                    )
                 }
             }
+        }
+        observe(viewModel.contentSeenByResponse) {
+            customContentView.onSerieSeenByResponse(it.toMutableList())
         }
     }
 
@@ -286,7 +295,11 @@ class CustomContentDetailsActivity : BaseActivity() {
         if (relatedContent.page == 1) {
             relatedContentRecycler.layoutManager = RelatedContentLayoutManager(this) {
                 getCustomContent()?.content?.let {
-                    viewModel.fetchContentRelated(it.id, it is SerieDetails, relatedContent.page + 1)
+                    viewModel.fetchContentRelated(
+                        it.id,
+                        it is SerieDetails,
+                        relatedContent.page + 1
+                    )
                     // TODO: Show any loader?
                 }
             }
@@ -321,6 +334,10 @@ class CustomContentDetailsActivity : BaseActivity() {
         })
     }
 
+    private fun onContentSeenBy(user: User, customContent: CustomContent<ContentDetails>) {
+        viewModel.onContentSeenBy(user, customContent)
+    }
+
     private fun getStatusString(status: ContentStatus): String =
         getString(
             when (status) {
@@ -339,7 +356,7 @@ class CustomContentDetailsActivity : BaseActivity() {
             }
         )
 
-    private fun getCustomContent() : CustomContent<ContentDetails>? {
+    private fun getCustomContent(): CustomContent<ContentDetails>? {
         if (customContent == null) {
             customContent =
                 intent?.extras?.getSerializable(EXTRA_CONTENT) as? CustomContent<ContentDetails>

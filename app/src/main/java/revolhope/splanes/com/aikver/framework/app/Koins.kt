@@ -30,6 +30,7 @@ import revolhope.splanes.com.core.domain.repositoryimpl.GroupRepositoryImpl
 import revolhope.splanes.com.core.domain.repositoryimpl.UserRepositoryImpl
 import revolhope.splanes.com.core.interactor.content.AddCommentUseCase
 import revolhope.splanes.com.core.interactor.content.AddPunctuationUseCase
+import revolhope.splanes.com.core.interactor.content.AddSeenByUseCase
 import revolhope.splanes.com.core.interactor.content.FetchGroupContentUseCase
 import revolhope.splanes.com.core.interactor.content.movie.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.movie.FetchMovieDetailsUseCase
@@ -103,6 +104,7 @@ val useCaseModule = module(override = true) {
     factory { FetchGroupContentUseCase(get()) }
     factory { AddCommentUseCase(get()) }
     factory { AddPunctuationUseCase(get()) }
+    factory { AddSeenByUseCase(get()) }
 }
 
 val viewModelModule = module(override = true) {
@@ -117,7 +119,7 @@ val viewModelModule = module(override = true) {
     viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
     viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get(), get()) }
-    viewModel { CustomContentDetailsViewModel(get(), get(), get()) }
+    viewModel { CustomContentDetailsViewModel(get(), get(), get(), get()) }
     viewModel { CommentsBottomSheetViewModel(get()) }
     viewModel { PunctuationBottomSheetViewModel(get()) }
 }

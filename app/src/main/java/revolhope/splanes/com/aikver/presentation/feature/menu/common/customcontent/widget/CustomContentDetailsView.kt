@@ -3,9 +3,7 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcont
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.WindowContentFrameStats
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByAvatar
 import kotlinx.android.synthetic.main.component_custom_content_details_view.view.addedByName
@@ -19,6 +17,7 @@ import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.content.serie.SerieDetails
 import revolhope.splanes.com.core.domain.model.user.User
+import revolhope.splanes.com.core.domain.model.user.UserGroupMember
 
 class CustomContentDetailsView @JvmOverloads constructor(
     context: Context,
@@ -37,12 +36,18 @@ class CustomContentDetailsView @JvmOverloads constructor(
     fun initialize(
         currentUser: User,
         customContent: CustomContent<ContentDetails>,
-        fragmentManager: FragmentManager
+        fragmentManager: FragmentManager,
+        onContentSeenByClick: (User, CustomContent<ContentDetails>) -> Unit
     ) {
-        seenByView.setupSeenBy(currentUser, customContent)
-        punctuationView.setupPunctuation(currentUser, customContent)
+        seenByView.setupSeenBy(currentUser, customContent, onContentSeenByClick)
+        punctuationView.setupPunctuation(currentUser, customContent, fragmentManager)
         commentsView.setupComments(currentUser, customContent, fragmentManager)
         setupAddedBy(customContent)
+    }
+
+    fun onSerieSeenByResponse(usersSeenBy: MutableList<UserGroupMember>) {
+        seenByView.onContentSeenByResponse(usersSeenBy)
+        punctuationView.onSerieSeenBy()
     }
 
     private fun setupAddedBy(customContent: CustomContent<ContentDetails>) {

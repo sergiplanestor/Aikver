@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import revolhope.splanes.com.aikver.R
+import revolhope.splanes.com.aikver.presentation.common.dpToPx
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.visibility
@@ -47,11 +48,21 @@ class CustomContentUserAdapter(
             punctuation?.let {
                 holder.punctuation.text = it.toInt().toString()
             } ?: holder.punctuation.invisible()
+            holder.root.layoutParams =
+                (holder.root.layoutParams as RecyclerView.LayoutParams).apply {
+                    setMargins(
+                        0,
+                        if (position == 0) 0 else dpToPx(holder.root.context, 12),
+                        0,
+                        0
+                    )
+                }
             holder.separator.visibility(position != items.lastIndex)
         }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val root by lazy<View> { itemView.findViewById<View>(R.id.rootLayout) }
         val image by lazy<ImageView> { itemView.findViewById<ImageView>(R.id.avatar) }
         val userName by lazy<TextView> { itemView.findViewById<TextView>(R.id.userName) }
         val punctuation by lazy<TextView> { itemView.findViewById<TextView>(R.id.punctuation) }

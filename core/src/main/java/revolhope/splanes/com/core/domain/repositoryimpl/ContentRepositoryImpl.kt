@@ -71,7 +71,6 @@ class ContentRepositoryImpl(
             ContentMapper.fromQuerySeriesEntityToModel(it, fetchConfiguration())
         }
 
-
     override suspend fun fetchRelatedMovies(movieId: Int, page: Int): QueriedMovies? =
         apiDataSource.fetchRelatedMovies(movieId, page)?.let {
             ContentMapper.fromQueryMoviesEntityToModel(it, fetchConfiguration())
@@ -94,7 +93,6 @@ class ContentRepositoryImpl(
         } else {
             CacheContentDataSource.fetchPopularMovies()
         }
-
 
     override suspend fun insertSerie(
         serie: SerieDetails,
@@ -255,7 +253,6 @@ class ContentRepositoryImpl(
 
         } as? List<CustomContent<ContentDetails>> ?: emptyList()
 
-    // FIXME: Try to resolver unchecked cast
     @Suppress("UNCHECKED_CAST")
     private suspend fun fetchSelectedGroupMovies(group: UserGroup): List<CustomContent<ContentDetails>> =
         firebaseDataSource.fetchGroupMovies(groupId = group.id)?.map {
@@ -317,118 +314,96 @@ class ContentRepositoryImpl(
 
         } as? List<CustomContent<ContentDetails>> ?: emptyList()
 
+    private suspend fun updateContent(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>
+    ): Boolean =
+        currentUser.selectedUserGroup?.let {
+            val groupEntity = UserGroupMapper.fromModelToEntity(it)
+            when (customContent.content) {
+                is SerieDetails -> {
+                    val serieEntity =
+                        ContentMapper.fromCustomSerieModelToEntity(customContent.toCustomSerie())
+                    firebaseDataSource.deleteSerie(groupEntity, serieEntity) &&
+                            firebaseDataSource.insertSerie(groupEntity, serieEntity)
+                }
+                is MovieDetails -> {
+                    val movieEntity =
+                        ContentMapper.fromCustomMovieModelToEntity(customContent.toCustomMovie())
+                    firebaseDataSource.deleteMovie(groupEntity, movieEntity) &&
+                            firebaseDataSource.insertMovie(groupEntity, movieEntity)
+                }
+                else -> false
+            }
+        } ?: false
+
     override suspend fun insertComment(
         currentUser: User,
         customContent: CustomContent<ContentDetails>,
         comment: String
     ): List<Pair<UserGroupMember, String>> =
-        currentUser.selectedUserGroup?.let {
+        currentUser.selectedUserGroup?.let { selectedGroup ->
             val userComment = UserMapper.fromUserModelToUserGroupMemberModel(
                 model = currentUser,
-                groupId = it.id,
-                userGroupAdminId = it.userGroupAdmin.userId
+                groupId = selectedGroup.id,
+                userGroupAdminId = selectedGroup.userGroupAdmin.userId
             ) to comment
             customContent.comments.add(userComment)
-            when (customContent.content) {
-                is SerieDetails -> {
-                    val entity = UserGroupMapper.fromModelToEntity(it)
-                    val serie =
-                        ContentMapper.fromCustomSerieModelToEntity(customContent.toCustomSerie())
-                    val resultSuccess = firebaseDataSource.deleteSerie(entity, serie) &&
-                            firebaseDataSource.insertSerie(entity, serie)
-                    if (resultSuccess) {
-                        onCommentServicesDone(customContent, userComment)
-                    } else {
-                        emptyList()
-                    }
-                }
-                is MovieDetails -> {
-                    val entity = UserGroupMapper.fromModelToEntity(it)
-                    val movie =
-                        ContentMapper.fromCustomMovieModelToEntity(customContent.toCustomMovie())
-                    val resultSuccess = firebaseDataSource.deleteMovie(entity, movie) &&
-                            firebaseDataSource.insertMovie(entity, movie)
-                    if (resultSuccess) {
-                        onCommentServicesDone(customContent, userComment)
-                    } else {
-                        emptyList()
-                    }
-                }
-                else -> emptyList()
+            if (updateContent(currentUser, customContent)) {
+                CacheContentDataSource.fetchGroupContent()?.find {
+                    it.content.id == customContent.content.id
+                }?.comments?.apply { add(userComment) }
+                    ?: fetchSelectedGroupContent()?.find { it.content.id == customContent.content.id }?.comments
+                    ?: emptyList<Pair<UserGroupMember, String>>()
+            } else {
+                emptyList()
             }
         } ?: emptyList()
 
-    private suspend fun onCommentServicesDone(
-        content: CustomContent<ContentDetails>,
-        comment: Pair<UserGroupMember, String>
-    ): List<Pair<UserGroupMember, String>> =
-        CacheContentDataSource.fetchGroupContent()?.find { data ->
-            data.content.id == content.content.id
-        }?.comments?.apply { add(comment) }
-            ?: fetchSelectedGroupContent()?.let {
-                val result = mutableListOf<Pair<UserGroupMember, String>>()
-                it.forEach { element ->
-                    result.addAll(element.comments)
-                }
-                result
-            } ?: emptyList()
 
-    // TODO: Try to unify with comment methods
     override suspend fun insertPunctuation(
         currentUser: User,
         customContent: CustomContent<ContentDetails>,
         punctuation: Int
     ): List<Pair<UserGroupMember, Float>> =
-        currentUser.selectedUserGroup?.let {
+        currentUser.selectedUserGroup?.let { selectedGroup ->
             val userPunctuation = UserMapper.fromUserModelToUserGroupMemberModel(
                 model = currentUser,
-                groupId = it.id,
-                userGroupAdminId = it.userGroupAdmin.userId
+                groupId = selectedGroup.id,
+                userGroupAdminId = selectedGroup.userGroupAdmin.userId
             ) to punctuation.toFloat()
             customContent.punctuation.add(userPunctuation)
-            when (customContent.content) {
-                is SerieDetails -> {
-                    val entity = UserGroupMapper.fromModelToEntity(it)
-                    val serie =
-                        ContentMapper.fromCustomSerieModelToEntity(customContent.toCustomSerie())
-                    val resultSuccess = firebaseDataSource.deleteSerie(entity, serie) &&
-                            firebaseDataSource.insertSerie(entity, serie)
-                    if (resultSuccess) {
-                        onPunctuationServicesDone(customContent, userPunctuation)
-                    } else {
-                        emptyList()
-                    }
-                }
-                is MovieDetails -> {
-                    val entity = UserGroupMapper.fromModelToEntity(it)
-                    val movie =
-                        ContentMapper.fromCustomMovieModelToEntity(customContent.toCustomMovie())
-                    val resultSuccess = firebaseDataSource.deleteMovie(entity, movie) &&
-                            firebaseDataSource.insertMovie(entity, movie)
-                    if (resultSuccess) {
-                        onPunctuationServicesDone(customContent, userPunctuation)
-                    } else {
-                        emptyList()
-                    }
-                }
-                else -> emptyList()
+            if (updateContent(currentUser, customContent)) {
+                CacheContentDataSource.fetchGroupContent()?.find {
+                    it.content.id == customContent.content.id
+                }?.punctuation?.apply { add(userPunctuation) }
+                    ?: fetchSelectedGroupContent()?.find { it.content.id == customContent.content.id }?.punctuation
+                    ?: emptyList<Pair<UserGroupMember, Float>>()
+            } else {
+                emptyList()
             }
         } ?: emptyList()
 
-    // TODO: Try to unify with comment methods
-    private suspend fun onPunctuationServicesDone(
-        content: CustomContent<ContentDetails>,
-        punctuation: Pair<UserGroupMember, Float>
-    ): List<Pair<UserGroupMember, Float>> =
-        CacheContentDataSource.fetchGroupContent()?.find { data ->
-            data.content.id == content.content.id
-        }?.punctuation?.apply { add(punctuation) }
-            ?: fetchSelectedGroupContent()?.let {
-                val result = mutableListOf<Pair<UserGroupMember, Float>>()
-                it.forEach { element ->
-                    result.addAll(element.punctuation)
-                }
-                result
-            } ?: emptyList()
-}
+    override suspend fun insertSeenBy(
+        currentUser: User,
+        customContent: CustomContent<ContentDetails>
+    ): List<UserGroupMember> =
+        currentUser.selectedUserGroup?.let { selectedGroup ->
+            val member = UserMapper.fromUserModelToUserGroupMemberModel(
+                model = currentUser,
+                groupId = selectedGroup.id,
+                userGroupAdminId = selectedGroup.userGroupAdmin.userId
+            )
+            customContent.seenBy.add(member)
+            if (updateContent(currentUser, customContent)) {
+                CacheContentDataSource.fetchGroupContent()?.find {
+                    it.content.id == customContent.content.id
+                }?.seenBy?.apply { add(member) }
+                    ?: fetchSelectedGroupContent()?.find { it.content.id == customContent.content.id }?.seenBy
+                    ?: emptyList<UserGroupMember>()
+            } else {
+                emptyList()
+            }
+        } ?: emptyList()
 
+}

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.component_empty_state_view.view.emptyTitle
 import kotlinx.android.synthetic.main.component_empty_state_view.view.rootLayout
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.dpToPx
+import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
 
 class EmptyStateView @JvmOverloads constructor(
@@ -108,6 +109,8 @@ class EmptyStateView @JvmOverloads constructor(
         emptyAction.text = actionText
         emptyAction.visible()
     }
+
+    fun setActionVisibility(visible: Boolean) = emptyAction.visibility(visible)
 
     // TODO: Change that shit.. resize automatically!
     fun setImageSize(dp: Int) {
