@@ -16,10 +16,11 @@ import kotlinx.android.synthetic.main.component_popular_pageview.view.arrow
 import kotlinx.android.synthetic.main.component_popular_pageview.view.popularContentRecycler
 import kotlinx.android.synthetic.main.component_popular_pageview.view.popularContentTitle
 import kotlinx.android.synthetic.main.component_popular_pageview.view.separator
+import kotlinx.android.synthetic.main.component_popular_pageview.view.shimmer
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.invisible
+import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
-import revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
 import revolhope.splanes.com.core.domain.model.content.Content
 import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
@@ -40,7 +41,9 @@ class ContentPagerView @JvmOverloads constructor(
     private var currentState: State = State.EXPANDED
     private val attributeMap = mapOf(
         R.styleable.ContentPagerView[R.styleable.ContentPagerView_title] to
-                fun(ta: TypedArray, i: Int) { ta.getString(i)?.run { setTitle(this) } }
+                fun(ta: TypedArray, i: Int) { ta.getString(i)?.run { setTitle(this) } },
+        R.styleable.ContentPagerView[R.styleable.ContentPagerView_shimmer] to
+                fun(ta: TypedArray, i: Int) { ta.getBoolean(i, false).run { showShimmer(this) } }
     ).toSortedMap()
 
     init {
@@ -78,6 +81,7 @@ class ContentPagerView @JvmOverloads constructor(
             PagerSnapHelper().attachToRecyclerView(this)
             resumeAutoScroll()
         }
+        showShimmer(false)
     }
 
     fun addContentDetailsItems(
@@ -103,10 +107,19 @@ class ContentPagerView @JvmOverloads constructor(
             PagerSnapHelper().attachToRecyclerView(this)
             resumeAutoScroll()
         }
+        showShimmer(false)
     }
 
     fun setTitle(title: String) {
         popularContentTitle.text = title
+    }
+
+    fun showShimmer(show: Boolean) {
+        shimmer.visibility(show)
+        popularContentTitle.visibility(show.not())
+        arrow.visibility(show.not())
+        popularContentRecycler.visibility(show.not())
+        separator.visibility(show = show.not() && currentState == State.COLLAPSED)
     }
 
     private fun changeState() {

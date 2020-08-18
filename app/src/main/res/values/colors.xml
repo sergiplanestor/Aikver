@@ -8,6 +8,7 @@
 
     <color name="colorRedAlpha">#EF9A9A</color>
     <color name="colorPrimaryDarkAlpha50">#80455A64</color>
+    <color name="colorAccentDarkAlpha50">#8000897B</color>
 
     <!-- Check uses -->
     <color name="backgroundDark">#37474F</color>

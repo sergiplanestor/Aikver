@@ -151,6 +151,14 @@ class EmptyStateView @JvmOverloads constructor(
                     (this as? LinearLayout.LayoutParams)?.gravity = Gravity.START
                 }
                 emptyTitle.gravity = Gravity.START
+                emptyTitle.layoutParams = emptyTitle.layoutParams.apply {
+                    (this as? LinearLayout.LayoutParams)?.setMargins(
+                        dpToPx(context, 15),
+                        0,
+                        dpToPx(context, 15),
+                        0
+                    )
+                }
                 emptySubtitle.gravity = Gravity.START
                 emptyAction.layoutParams = emptyAction.layoutParams.apply {
                     (this as? LinearLayout.LayoutParams)?.gravity = Gravity.START
@@ -162,6 +170,14 @@ class EmptyStateView @JvmOverloads constructor(
                     (this as? LinearLayout.LayoutParams)?.gravity = Gravity.CENTER
                 }
                 emptyTitle.gravity = Gravity.CENTER
+                emptyTitle.layoutParams = emptyTitle.layoutParams.apply {
+                    (this as? LinearLayout.LayoutParams)?.setMargins(
+                        dpToPx(context, 15),
+                        dpToPx(context, 12),
+                        dpToPx(context, 15),
+                        0
+                    )
+                }
                 emptySubtitle.gravity = Gravity.CENTER
                 emptyAction.layoutParams = emptyAction.layoutParams.apply {
                     (this as? LinearLayout.LayoutParams)?.gravity = Gravity.CENTER

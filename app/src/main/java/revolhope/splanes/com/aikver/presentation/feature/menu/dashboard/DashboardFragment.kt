@@ -1,5 +1,7 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.dashboard
 
+import kotlinx.android.synthetic.main.fragment_dashboard.contentShimmer
+import kotlinx.android.synthetic.main.fragment_dashboard.groupContentEmptyState
 import kotlinx.android.synthetic.main.fragment_dashboard.groupContentRecycler
 import kotlinx.android.synthetic.main.fragment_dashboard.popularPager
 import kotlinx.android.synthetic.main.fragment_dashboard.recommendedPager
@@ -8,8 +10,11 @@ import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
+import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.visibility
+import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.CustomContentDetailsActivity
 import revolhope.splanes.com.core.domain.model.content.Content
@@ -22,7 +27,8 @@ class DashboardFragment : BaseFragment() {
 
     override fun initViews() {
         super.initViews()
-
+        contentShimmer.visible()
+        groupContentRecycler.invisible()
     }
 
     override fun initObservers() {
@@ -35,14 +41,20 @@ class DashboardFragment : BaseFragment() {
             recommendedPager.addContentDetailsItems(it, ::onCustomContentClick)
         }
         observe(viewModel.groupContent) {
-            groupContentRecycler.layoutManager = AutoSizeLayoutManager(
-                context = requireContext(),
-                defaultWidth = 120f
-            )
-            groupContentRecycler.adapter = GroupContentAdapter(
-                items = it,
-                onItemClick = ::onCustomContentClick
-            )
+            contentShimmer.invisible()
+            if (it.isEmpty()) {
+                showContentEmptyState()
+            } else {
+                groupContentRecycler.visible()
+                groupContentRecycler.layoutManager = AutoSizeLayoutManager(
+                    context = requireContext(),
+                    defaultWidth = 120f
+                )
+                groupContentRecycler.adapter = GroupContentAdapter(
+                    items = it,
+                    onItemClick = ::onCustomContentClick
+                )
+            }
         }
     }
 
@@ -50,6 +62,14 @@ class DashboardFragment : BaseFragment() {
         super.loadData()
         viewModel.fetchPopularContent()
         viewModel.fetchGroupContent()
+    }
+
+    private fun showContentEmptyState() {
+        groupContentRecycler.invisible()
+        groupContentEmptyState.visible()
+        groupContentEmptyState.setAction {
+            (requireActivity() as? MenuActivity)?.navigate(R.id.navigation_search_content)
+        }
     }
 
     private fun onPopularContentClick(content: Content) {

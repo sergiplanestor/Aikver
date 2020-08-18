@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_menu.navView
 import kotlinx.android.synthetic.main.activity_menu.toolbar
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
+import java.lang.Exception
 
 class MenuActivity : BaseActivity() {
 
@@ -36,6 +37,14 @@ class MenuActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun navigate(itemId: Int) {
+        try {
+            navView.selectedItemId = itemId
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun getLayoutRes(): Int = R.layout.activity_menu

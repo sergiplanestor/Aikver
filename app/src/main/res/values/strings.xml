@@ -129,6 +129,9 @@
     <string name="comment_now">Escribe tu comentario</string>
     <string name="share_your_score">Puntua esta %s y compártela con el grupo</string>
     <string name="send_score">Puntuar</string>
+    <string name="find">Buscar</string>
+    <string name="group_content_empty">Tu grupo no ha añadido contenido aún. ¡Animate!</string>
+    <string name="ouch">Ouch :(</string>
 
 
     <string name="optional_field">Campo opcional</string>
