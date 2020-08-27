@@ -10,7 +10,6 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
-import revolhope.splanes.com.aikver.presentation.common.loadCircular
 import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
 import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
@@ -53,13 +52,9 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    private fun bindViews(user: User?) {
-        if (user == null) {
-            if (context != null) popupError(requireContext(), childFragmentManager)
-        } else {
-            bindUserCardView(user)
-            bindSelectedUserGroup(user)
-        }
+    private fun bindViews(user: User) {
+        bindUserCardView(user)
+        bindSelectedUserGroup(user)
     }
 
     private fun bindUserCardView(user: User) {
@@ -102,9 +97,16 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     private fun onAddGroup(groupName: String) = viewModel.addGroup(groupName)
 
+    private fun onUserAvatarUpdate(resultSuccess: Boolean) {
+        if (resultSuccess) loadData()
+        else {
+            // TODO: Show error?
+        }
+    }
+
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.profileAvatarImageView -> UserAvatarActivity.start(activity as BaseActivity?)
+            R.id.profileAvatarImageView -> UserAvatarActivity.start(activity as BaseActivity?, ::onUserAvatarUpdate)
             R.id.adminGroupsButton -> ManageGroupsActivity.start(activity as BaseActivity?)
             R.id.createGroupButton -> AddGroupDialog(::onAddGroup).show(childFragmentManager)
         }

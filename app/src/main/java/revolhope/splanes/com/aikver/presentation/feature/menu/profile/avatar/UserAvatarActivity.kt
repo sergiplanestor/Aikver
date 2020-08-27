@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
@@ -32,10 +33,16 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     companion object {
 
-        fun start(baseActivity: BaseActivity?) {
-            baseActivity?.startActivity(
-                Intent(baseActivity, UserAvatarActivity::class.java).apply {
+        private const val REQ_CODE = 0x123
+
+        fun start(baseActivity: BaseActivity?, onActivityResult: (Boolean) -> Unit) {
+            baseActivity?.startActivityForResult(
+                intent = Intent(baseActivity, UserAvatarActivity::class.java).apply {
                     putExtras(bundleOf(EXTRA_NAVIGATION_TRANSITION to NavTransition.MODAL))
+                },
+                requestCode = REQ_CODE,
+                onActivityResult = { _, requestCode, resultCode ->
+                    onActivityResult.invoke(requestCode == REQ_CODE && resultCode == Activity.RESULT_OK)
                 }
             )
         }
@@ -54,30 +61,27 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     override fun initObservers() {
         super.initObservers()
 
-        observe(viewModel.user) { user ->
-            user?.let {
-                viewModel.fetchAvatarTypes()
-                userAvatar = it.avatar.copy()
-                avatarPreview.loadAvatar(userAvatar)
-            }
+        observe(viewModel.user) {
+            viewModel.fetchAvatarTypes()
+            userAvatar = it.avatar.copy()
+            avatarPreview.loadAvatar(userAvatar)
         }
 
         observe(viewModel.avatarTypes) {
-            if (it != null) {
-                mapAvatarTypes(it)
-                bindViews()
-            } else {
-                popupError(this, supportFragmentManager)
-            }
+            mapAvatarTypes(it)
+            bindViews()
         }
 
         observe(viewModel.insertAvatarResult) {
             hideLoader()
             if (it) {
+                setResult(Activity.RESULT_OK)
                 onBackPressed()
-            }
-            else {
-                popupError(context = this, fm = supportFragmentManager) { onBackPressed() }
+            } else {
+                popupError(context = this, fm = supportFragmentManager) {
+                    setResult(Activity.RESULT_CANCELED)
+                    onBackPressed()
+                }
             }
         }
     }
@@ -123,7 +127,8 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         mouthSpinner.onItemSelectedListener = this
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) { /* Nothing to do */ }
+    override fun onNothingSelected(parent: AdapterView<*>?) { /* Nothing to do */
+    }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent) {
@@ -148,7 +153,7 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun getIndexOf(map: Map<String, String>, value: String) : Int =
+    private fun getIndexOf(map: Map<String, String>, value: String): Int =
         map.keys.find { map[it] == value }?.let { map.keys.indexOf(it) } ?: 0
 
     private fun onColorSelected(color: String) {
@@ -161,7 +166,10 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         viewModel.insertAvatar(userAvatar)
     }
 
-    private fun onCloseClick() = onBackPressed()
+    private fun onCloseClick() {
+        setResult(Activity.RESULT_OK)
+        onBackPressed()
+    }
 
     override fun getLayoutRes(): Int = R.layout.activity_user_avatar
 }

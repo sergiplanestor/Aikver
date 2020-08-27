@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
@@ -14,14 +15,15 @@ import revolhope.splanes.com.core.interactor.content.serie.FetchRelatedSeriesUse
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 
 class CustomContentDetailsViewModel(
+    context: Context,
     private val fetchUserUseCase: FetchUserUseCase,
     private val fetchRelatedSeriesUseCase: FetchRelatedSeriesUseCase,
     private val fetchRelatedMoviesUseCase: FetchRelatedMoviesUseCase,
     private val addSeenByUseCase: AddSeenByUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
-    val user: LiveData<User?> get() = _user
-    private val _user: MutableLiveData<User?> = MutableLiveData()
+    val user: LiveData<User> get() = _user
+    private val _user: MutableLiveData<User> = MutableLiveData()
 
     val contentRelated: LiveData<QueriedContent?> get() = _contentRelated
     private val _contentRelated: MutableLiveData<QueriedContent?> = MutableLiveData()
@@ -29,20 +31,33 @@ class CustomContentDetailsViewModel(
     val contentSeenByResponse: LiveData<List<UserGroupMember>> get() = _contentSeenByResponse
     private val _contentSeenByResponse: MutableLiveData<List<UserGroupMember>> = MutableLiveData()
 
-    fun fetchUser() {
-        launchAsync { _user.postValue(fetchUserUseCase.invoke()) }
-    }
+    fun fetchUser() =
+        launchAsync {
+            handleResponse(
+                state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+            )?.let { _user.postValue(it) }
+        }
 
     fun fetchContentRelated(id: Int, isSerie: Boolean, page: Int = 1) {
         launchAsync(showLoader = false) {
             if (id != -1) {
-                _contentRelated.postValue(
-                    if (isSerie) {
-                        fetchRelatedSeriesUseCase.invoke(id, page)
+                handleResponse(
+                    state = if (isSerie) {
+                        fetchRelatedSeriesUseCase.invoke(
+                            FetchRelatedSeriesUseCase.Request(
+                                serieId = id,
+                                page = page
+                            )
+                        )
                     } else {
-                        fetchRelatedMoviesUseCase.invoke(id, page)
+                        fetchRelatedMoviesUseCase.invoke(
+                            FetchRelatedMoviesUseCase.Request(
+                                movieId = id,
+                                page = page
+                            )
+                        )
                     }
-                )
+                )?.let { _contentRelated.postValue(it) }
             } else {
                 _contentRelated.postValue(null)
             }
@@ -54,7 +69,14 @@ class CustomContentDetailsViewModel(
         customContent: CustomContent<ContentDetails>
     ) {
         launchAsync {
-            _contentSeenByResponse.postValue(addSeenByUseCase.invoke(user, customContent))
+            handleResponse(
+                state = addSeenByUseCase.invoke(
+                    AddSeenByUseCase.Request(
+                        currentUser = user,
+                        customContent = customContent
+                    )
+                )
+            )?.let { _contentSeenByResponse.postValue(it) }
         }
     }
 }

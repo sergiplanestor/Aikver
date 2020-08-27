@@ -5,12 +5,22 @@ import revolhope.splanes.com.core.domain.model.content.ContentDetails
 import revolhope.splanes.com.core.domain.model.content.CustomContent
 import revolhope.splanes.com.core.domain.model.user.User
 import revolhope.splanes.com.core.domain.model.user.UserGroupMember
+import revolhope.splanes.com.core.interactor.BaseUseCase
 
-class AddPunctuationUseCase(private val contentRepository: ContentRepository) {
-    suspend operator fun invoke(
-        currentUser: User,
-        customContent: CustomContent<ContentDetails>,
-        punctuation: Int
-    ): List<Pair<UserGroupMember, Float>> =
-        contentRepository.insertPunctuation(currentUser, customContent, punctuation)
+class AddPunctuationUseCase(
+    private val contentRepository: ContentRepository
+) : BaseUseCase<AddPunctuationUseCase.Request, List<Pair<UserGroupMember, Float>>>() {
+
+    override suspend fun execute(req: Request): List<Pair<UserGroupMember, Float>>?  =
+        contentRepository.insertPunctuation(
+            currentUser = req.currentUser,
+            customContent = req.customContent,
+            punctuation = req.punctuation
+        )
+
+    data class Request(
+        val currentUser: User,
+        val customContent: CustomContent<ContentDetails>,
+        val punctuation: Int
+    )
 }

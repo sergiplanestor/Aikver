@@ -10,12 +10,10 @@ object ApiClientFactory {
 
     fun <T> create(clazz: Class<T>): T {
 
-        val interceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .addInterceptor(ApiInterceptor())
             .build()
 

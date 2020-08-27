@@ -26,6 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private var appLoader: AppLoader? = null
     private var isFirstOnResume = true
+    private var onActivityResultMap: MutableMap<Int, (Intent?, Int, Int) -> Unit> = mutableMapOf()
 
 // =================================================================================================
 // Lifecycle
@@ -55,7 +56,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.close, android.R.id.home -> {
                 finish()
                 overrideTransition()
@@ -69,13 +70,21 @@ abstract class BaseActivity : AppCompatActivity() {
 // Views
 // =================================================================================================
 
-    open fun initViews() { /* Nothing to do here */ }
+    open fun initViews() {
+        /* Nothing to do here */
+    }
 
-    open fun initObservers() { /* Nothing to do here */ }
+    open fun initObservers() {
+        /* Nothing to do here */
+    }
 
-    open fun loadData() { /* Nothing to do here */ }
+    open fun loadData() {
+        /* Nothing to do here */
+    }
 
-    open fun reloadData() { /* Nothing to do here */ }
+    open fun reloadData() {
+        /* Nothing to do here */
+    }
 
     fun showLoader() = appLoader?.play()
 
@@ -91,7 +100,24 @@ abstract class BaseActivity : AppCompatActivity() {
         overridePendingTransition(anim.first, anim.second)
     }
 
-    private fun getNavAnimations(intent: Intent?, isStart: Boolean = true) : Pair<Int, Int> {
+    fun startActivityForResult(
+        intent: Intent?,
+        requestCode: Int,
+        onActivityResult: (data: Intent?, requestCode: Int, resultCode: Int) -> Unit
+    ) {
+        this.onActivityResultMap[requestCode] = onActivityResult
+        val anim = getNavAnimations(intent)
+        super.startActivityForResult(intent, requestCode)
+        overridePendingTransition(anim.first, anim.second)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        this.onActivityResultMap[requestCode]?.invoke(data, requestCode, resultCode)
+        this.onActivityResultMap.remove(requestCode)
+    }
+
+    private fun getNavAnimations(intent: Intent?, isStart: Boolean = true): Pair<Int, Int> {
         val bundle = intent?.extras
         return when (bundle?.getSerializable(EXTRA_NAVIGATION_TRANSITION) as NavTransition?) {
             NavTransition.LATERAL ->
@@ -129,5 +155,5 @@ abstract class BaseActivity : AppCompatActivity() {
 // Abstract methods
 // =================================================================================================
 
-    abstract fun getLayoutRes() : Int
+    abstract fun getLayoutRes(): Int
 }

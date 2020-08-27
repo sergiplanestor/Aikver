@@ -8,14 +8,12 @@
 
     <TextView
         android:id="@+id/popularContentTitle"
-        style="@style/Text.SemiBold"
+        style="@style/Text.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12dp"
         android:layout_marginStart="@dimen/margin_12dp"
         android:layout_marginEnd="@dimen/margin_12dp"
-        android:textColor="@color/colorAccentDark"
-        android:textSize="@dimen/text_20"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/arrow"/>

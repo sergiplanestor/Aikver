@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.details
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
@@ -11,11 +12,12 @@ import revolhope.splanes.com.core.interactor.group.InsertUserGroupMemberUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 
 class GroupDetailsViewModel(
+    context: Context,
     private val fetchUserUseCase: FetchUserUseCase,
     private val insertUserGroupMemberUseCase: InsertUserGroupMemberUseCase,
     private val deleteUserGroupMemberUseCase: DeleteUserGroupMemberUseCase,
     private val deleteUserGroupUseCase: DeleteUserGroupUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     val addMemberResult: LiveData<List<UserGroupMember>> get() = _addMemberResult
     private val _addMemberResult: MutableLiveData<List<UserGroupMember>> = MutableLiveData()
@@ -26,18 +28,37 @@ class GroupDetailsViewModel(
     val groupDeletion: LiveData<Boolean> get() = _groupDeletion
     private val _groupDeletion: MutableLiveData<Boolean> = MutableLiveData()
 
-
     fun deleteGroup(group: UserGroup) =
-        launchAsync { _groupDeletion.postValue(deleteUserGroupUseCase.invoke(group)) }
+        launchAsync {
+            handleResponse(
+                state = deleteUserGroupUseCase.invoke(
+                    DeleteUserGroupUseCase.Request(
+                        group = group
+                    )
+                )
+            )?.let { _groupDeletion.postValue(it) }
+        }
 
     fun deleteMember(member: UserGroupMember) {
         launchAsync {
-            if (deleteUserGroupMemberUseCase.invoke(member)) {
-                _memberDeletion.postValue(
-                    fetchUserUseCase.invoke()?.userGroups?.find { it.id == member.groupId }?.members
+            handleResponse(
+                state = deleteUserGroupMemberUseCase.invoke(
+                    DeleteUserGroupMemberUseCase.Request(
+                        member = member
+                    )
                 )
-            } else {
-                _memberDeletion.postValue(mutableListOf())
+            )?.let { success ->
+                if (success) {
+                    handleResponse(
+                        state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+                    )?.let { user ->
+                        _memberDeletion.postValue(
+                            user.userGroups.find { it.id == member.groupId }?.members
+                        )
+                    }
+                } else {
+                    _memberDeletion.postValue(mutableListOf())
+                }
             }
         }
     }
@@ -46,12 +67,23 @@ class GroupDetailsViewModel(
         if (username.isBlank()) _addMemberResult.postValue(group.members)
         else {
             launchAsync {
-                if (insertUserGroupMemberUseCase.invoke(username, group)) {
-                    _addMemberResult.postValue(
-                        fetchUserUseCase.invoke()?.userGroups?.find {
-                            it.id == group.id
-                        }?.members ?: group.members
+                handleResponse(
+                    state = insertUserGroupMemberUseCase.invoke(
+                        InsertUserGroupMemberUseCase.Request(
+                            member = username,
+                            group = group
+                        )
                     )
+                )?.let { success ->
+                    if (success) {
+                        handleResponse(
+                            state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+                        )?.let { user ->
+                            _addMemberResult.postValue(
+                                user.userGroups.find { it.id == group.id }?.members ?: group.members
+                            )
+                        }
+                    }
                 }
             }
         }

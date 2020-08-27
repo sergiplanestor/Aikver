@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
@@ -9,9 +10,10 @@ import revolhope.splanes.com.core.interactor.content.movie.SearchMovieUseCase
 import revolhope.splanes.com.core.interactor.content.serie.SearchSerieUseCase
 
 class SearchContentViewModel(
+    context: Context,
     private val searchSerieUseCase: SearchSerieUseCase,
     private val searchMovieUseCase: SearchMovieUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     val movieResults: LiveData<List<Movie>> get() = _movieResults
     private val _movieResults: MutableLiveData<List<Movie>> = MutableLiveData()
@@ -22,9 +24,21 @@ class SearchContentViewModel(
     fun fetchContent(query: String, type: Int) {
         launchAsync {
             if (type == 0) {
-                _movieResults.postValue(searchMovieUseCase.invoke(query) ?: listOf())
+                handleResponse(
+                    state = searchMovieUseCase.invoke(
+                        SearchMovieUseCase.Request(
+                            query = query
+                        )
+                    )
+                )?.let { _movieResults.postValue(it) }
             } else {
-                _serieResults.postValue(searchSerieUseCase.invoke(query) ?: listOf())
+                handleResponse(
+                    state = searchSerieUseCase.invoke(
+                        SearchSerieUseCase.Request(
+                            query = query
+                        )
+                    )
+                )?.let { _serieResults.postValue(it) }
             }
         }
     }

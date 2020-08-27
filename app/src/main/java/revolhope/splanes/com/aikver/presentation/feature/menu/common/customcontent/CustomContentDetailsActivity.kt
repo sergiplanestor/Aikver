@@ -87,16 +87,14 @@ class CustomContentDetailsActivity : BaseActivity() {
                 bindRelatedContent(it)
             }
         }
-        observe(viewModel.user) {
-            it?.let { user ->
-                getCustomContent()?.let { content ->
-                    customContentView.initialize(
-                        currentUser = user,
-                        customContent = content,
-                        onContentSeenByClick = ::onContentSeenBy,
-                        fragmentManager = supportFragmentManager
-                    )
-                }
+        observe(viewModel.user) {user ->
+            getCustomContent()?.let { content ->
+                customContentView.initialize(
+                    currentUser = user,
+                    customContent = content,
+                    onContentSeenByClick = ::onContentSeenBy,
+                    fragmentManager = supportFragmentManager
+                )
             }
         }
         observe(viewModel.contentSeenByResponse) {

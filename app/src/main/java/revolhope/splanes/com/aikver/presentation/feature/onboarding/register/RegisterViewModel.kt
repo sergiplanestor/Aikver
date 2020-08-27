@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.register
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.user.User
@@ -7,9 +8,10 @@ import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 import revolhope.splanes.com.core.interactor.user.RegisterUserUseCase
 
 class RegisterViewModel(
+    context: Context,
     private val registerUserUseCase: RegisterUserUseCase,
     private val fetchUserUseCase: FetchUserUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     val registerResult: MutableLiveData<Boolean> get() = _registerResult
     private val _registerResult = MutableLiveData<Boolean>()
@@ -20,7 +22,11 @@ class RegisterViewModel(
     fun register(username: String?, userGroup: String?) {
         if (!username.isNullOrBlank()) {
             launchAsync {
-                _registerResult.postValue(registerUserUseCase.invoke(username, userGroup))
+                handleResponse(
+                    state = registerUserUseCase.invoke(
+                        RegisterUserUseCase.Request(username, userGroup)
+                    )
+                )?.let { _registerResult.postValue(it) }
             }
         } else {
             _registerResult.value = false
@@ -29,7 +35,9 @@ class RegisterViewModel(
 
     fun getUser() {
         launchAsync {
-            _user.postValue(fetchUserUseCase.invoke())
+            handleResponse(
+                state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+            )?.let { _user.postValue(it) }
         }
     }
 }

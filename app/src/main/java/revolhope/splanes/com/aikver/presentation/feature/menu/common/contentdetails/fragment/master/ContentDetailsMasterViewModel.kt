@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.master
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
@@ -11,11 +12,12 @@ import revolhope.splanes.com.core.interactor.content.serie.FetchRelatedSeriesUse
 import revolhope.splanes.com.core.interactor.content.serie.FetchSerieDetailsUseCase
 
 class ContentDetailsMasterViewModel(
+    context: Context,
     private val fetchSerieDetailsUseCase: FetchSerieDetailsUseCase,
     private val fetchMovieDetailsUseCase: FetchMovieDetailsUseCase,
     private val fetchRelatedSeriesUseCase: FetchRelatedSeriesUseCase,
     private val fetchRelatedMoviesUseCase: FetchRelatedMoviesUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     val contentDetails: LiveData<ContentDetails?> get() = _contentDetails
     private val _contentDetails: MutableLiveData<ContentDetails?> = MutableLiveData()
@@ -26,13 +28,17 @@ class ContentDetailsMasterViewModel(
     fun fetchDetails(id: Int, isSerie: Boolean) {
         launchAsync {
             if (id != -1) {
-                _contentDetails.postValue(
-                    if (isSerie) {
-                        fetchSerieDetailsUseCase.invoke(id)
+                handleResponse(
+                    state = if (isSerie) {
+                        fetchSerieDetailsUseCase.invoke(
+                            FetchSerieDetailsUseCase.Request(serieId = id)
+                        )
                     } else {
-                        fetchMovieDetailsUseCase.invoke(id)
+                        fetchMovieDetailsUseCase.invoke(
+                            FetchMovieDetailsUseCase.Request(movieId = id)
+                        )
                     }
-                )
+                )?.let { _contentDetails.postValue(it) }
             } else {
                 _contentDetails.postValue(null)
             }
@@ -42,13 +48,17 @@ class ContentDetailsMasterViewModel(
     fun fetchContentRelated(id: Int, isSerie: Boolean, page: Int = 1) {
         launchAsync(showLoader = false) {
             if (id != -1) {
-                _contentRelated.postValue(
-                    if (isSerie) {
-                        fetchRelatedSeriesUseCase.invoke(id, page)
+                handleResponse(
+                    state = if (isSerie) {
+                        fetchRelatedSeriesUseCase.invoke(
+                            FetchRelatedSeriesUseCase.Request(serieId = id, page = page)
+                        )
                     } else {
-                        fetchRelatedMoviesUseCase.invoke(id, page)
+                        fetchRelatedMoviesUseCase.invoke(
+                            FetchRelatedMoviesUseCase.Request(movieId = id, page = page)
+                        )
                     }
-                )
+                )?.let { _contentRelated.postValue(it) }
             } else {
                 _contentRelated.postValue(null)
             }

@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.fragment.slave
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
@@ -11,10 +12,11 @@ import revolhope.splanes.com.core.interactor.content.serie.InsertSerieUseCase
 import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 
 class ContentDetailsSlaveViewModel (
+    context: Context,
     private val fetchUserUseCase: FetchUserUseCase,
     private val insertSerieUseCase: InsertSerieUseCase,
     private val insertMovieUseCase: InsertMovieUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     val user: LiveData<User?> get() = _user
     private val _user: MutableLiveData<User?> = MutableLiveData()
@@ -24,33 +26,38 @@ class ContentDetailsSlaveViewModel (
 
     fun fetchUser() {
         launchAsync {
-            _user.postValue(fetchUserUseCase.invoke())
+            handleResponse(
+                state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+            ).also { _user.postValue(it) }
         }
     }
 
     fun addContent(model: ContentCustomInfoUiModel) {
         launchAsync {
-            _addContentResult.postValue(
-                when (model.content) {
+            handleResponse(
+                state = when (model.content) {
                     is SerieDetails -> insertSerieUseCase.invoke(
-                        model.content,
-                        model.haveSeen,
-                        model.score,
-                        model.network,
-                        model.recommendedTo,
-                        model.comments
+                        InsertSerieUseCase.Request(
+                            serie = model.content,
+                            haveSeen = model.haveSeen,
+                            score = model.score,
+                            network = model.network,
+                            recommendedTo = model.recommendedTo,
+                            comments = model.comments
+                        )
                     )
-                    is MovieDetails -> insertMovieUseCase.invoke(
-                        model.content,
-                        model.haveSeen,
-                        model.score,
-                        model.network,
-                        model.recommendedTo,
-                        model.comments
+                    else /* is MovieDetails */ -> insertMovieUseCase.invoke(
+                        InsertMovieUseCase.Request(
+                            movie = model.content as MovieDetails,
+                            haveSeen = model.haveSeen,
+                            score = model.score,
+                            network = model.network,
+                            recommendedTo = model.recommendedTo,
+                            comments = model.comments
+                        )
                     )
-                    else -> false
                 }
-            )
+            )?.let { _addContentResult.postValue(it) }
         }
     }
 }

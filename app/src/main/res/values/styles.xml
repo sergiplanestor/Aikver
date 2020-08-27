@@ -64,6 +64,11 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="Text.Title" parent="Text.SemiBold">
+        <item name="android:textColor">@color/colorAccentDark</item>
+        <item name="android:textSize">@dimen/text_20</item>
+    </style>
+
     <style name="Header">
         <item name="android:fontFamily">@font/baloothambi2_medium</item>
         <item name="android:textColor">@android:color/black</item>

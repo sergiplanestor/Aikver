@@ -108,18 +108,18 @@ val useCaseModule = module(override = true) {
 }
 
 val viewModelModule = module(override = true) {
-    viewModel { SplashViewModel(get(), get()) }
-    viewModel { RegisterViewModel(get(), get()) }
-    viewModel { LoginViewModel(get(), get(), get()) }
-    viewModel { ProfileViewModel(get(), get(), get(), get()) }
-    viewModel { UserAvatarViewModel(get(), get(), get()) }
-    viewModel { ManageGroupsViewModel(get(), get(), get()) }
-    viewModel { GroupDetailsViewModel(get(), get(), get(), get()) }
-    viewModel { SearchContentViewModel(get(), get()) }
-    viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get()) }
-    viewModel { ContentDetailsSlaveViewModel(get(), get(), get()) }
-    viewModel { DashboardViewModel(get(), get(), get(), get()) }
-    viewModel { CustomContentDetailsViewModel(get(), get(), get(), get()) }
-    viewModel { CommentsBottomSheetViewModel(get()) }
-    viewModel { PunctuationBottomSheetViewModel(get()) }
+    viewModel { SplashViewModel(get(), get(), get()) }
+    viewModel { RegisterViewModel(get(), get(), get()) }
+    viewModel { LoginViewModel(get(), get(), get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get(), get()) }
+    viewModel { UserAvatarViewModel(get(), get(), get(), get()) }
+    viewModel { ManageGroupsViewModel(get(), get(), get(), get()) }
+    viewModel { GroupDetailsViewModel(get(), get(), get(), get(), get()) }
+    viewModel { SearchContentViewModel(get(), get(), get()) }
+    viewModel { ContentDetailsMasterViewModel(get(), get(), get(), get(), get()) }
+    viewModel { ContentDetailsSlaveViewModel(get(), get(), get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CustomContentDetailsViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CommentsBottomSheetViewModel(get(), get()) }
+    viewModel { PunctuationBottomSheetViewModel(get(), get()) }
 }

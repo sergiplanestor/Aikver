@@ -57,15 +57,13 @@
 
                     <TextView
                         android:id="@+id/groupContentTitle"
-                        style="@style/Text.SemiBold"
+                        style="@style/Text.Title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_12dp"
                         android:layout_marginTop="@dimen/margin_12dp"
                         android:layout_marginEnd="@dimen/margin_12dp"
                         android:text="@string/title_dashboard"
-                        android:textColor="@color/colorAccentDark"
-                        android:textSize="@dimen/text_20"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/recommendedPager" />

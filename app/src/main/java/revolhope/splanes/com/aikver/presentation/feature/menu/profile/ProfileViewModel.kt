@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import revolhope.splanes.com.aikver.presentation.common.base.BaseViewModel
 import revolhope.splanes.com.core.domain.model.user.User
@@ -10,41 +11,66 @@ import revolhope.splanes.com.core.interactor.user.FetchUserUseCase
 import revolhope.splanes.com.core.interactor.user.UpdateUserUseCase
 
 class ProfileViewModel(
+    context: Context,
     private val fetchUserUseCase: FetchUserUseCase,
     private val insertUserGroupUseCase: InsertUserGroupUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val insertUserGroupMemberUseCase: InsertUserGroupMemberUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
-    val user: MutableLiveData<User?> get() = _user
-    private val _user: MutableLiveData<User?> = MutableLiveData()
+    val user: MutableLiveData<User> get() = _user
+    private val _user: MutableLiveData<User> = MutableLiveData()
 
     val addMemberResult: MutableLiveData<Boolean> get() = _addMemberResult
     private val _addMemberResult: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun fetchUser() = launchAsync {
-        _user.postValue(fetchUserUseCase.invoke())
-    }
+    fun fetchUser() =
+        launchAsync {
+            handleResponse(
+                state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+            )?.let { _user.postValue(it) }
+        }
 
     fun addMember(username: String, group: UserGroup?) {
         if (username.isBlank() || group == null) {
             _addMemberResult.postValue(false)
         } else {
             launchAsync {
-                _addMemberResult.postValue(insertUserGroupMemberUseCase.invoke(username, group))
+                handleResponse(
+                    state = insertUserGroupMemberUseCase.invoke(
+                        InsertUserGroupMemberUseCase.Request(
+                            member = username,
+                            group = group
+                        )
+                    )
+                )?.let { _addMemberResult.postValue(it) }
             }
         }
     }
 
     fun addGroup(groupName: String) =
         launchAsync {
-            if (insertUserGroupUseCase.invoke(groupName)) {
-                fetchUserUseCase.invoke()?.let {
-                    it.selectedUserGroup = it.userGroups[0]
-                    if (updateUserUseCase.invoke(it)) fetchUser()
+            handleResponse(
+                state = insertUserGroupUseCase.invoke(
+                    InsertUserGroupUseCase.Request(
+                        groupName = groupName
+                    )
+                )
+            )?.let { success ->
+                if (success) {
+                    handleResponse(
+                        state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
+                    )?.let { user ->
+                        user.selectedUserGroup = user.userGroups[0]
+                        handleResponse(
+                            state = updateUserUseCase.invoke(
+                                UpdateUserUseCase.Request(
+                                    user = user
+                                )
+                            )
+                        )?.let { if (it) fetchUser() }
+                    }
                 }
-            } else {
-                _user.postValue(null)
             }
         }
 }
