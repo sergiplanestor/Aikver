@@ -1,6 +1,7 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.profile
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -111,6 +112,8 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
             R.id.createGroupButton -> AddGroupDialog(::onAddGroup).show(childFragmentManager)
         }
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_profile
 }

@@ -3,6 +3,7 @@ package revolhope.splanes.com.aikver.presentation.feature.onboarding.splash
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.fragment_splash.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
@@ -29,6 +30,8 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.userLogin) { userLogin ->
             if (userLogin == null) {
                 descriptionTextView.text = getString(R.string.register_user_not_registered)
@@ -82,6 +85,8 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
             }
         )
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_splash
 }

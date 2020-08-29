@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.fragment_content_details_slave.addButton
 import kotlinx.android.synthetic.main.fragment_content_details_slave.commentInputEditText
 import kotlinx.android.synthetic.main.fragment_content_details_slave.infoTextView
@@ -81,6 +82,8 @@ class ContentDetailsSlaveFragment : BaseFragment() {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.user) {
             it?.let { user ->
                 user.selectedUserGroup?.let { group ->
@@ -152,6 +155,8 @@ class ContentDetailsSlaveFragment : BaseFragment() {
             )
         }
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_content_details_slave
 }

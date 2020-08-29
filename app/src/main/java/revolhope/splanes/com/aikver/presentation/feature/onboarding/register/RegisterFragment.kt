@@ -1,6 +1,7 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.register
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.activity_register.groupDescriptionTextView
 import kotlinx.android.synthetic.main.activity_register.groupInputEditText
 import kotlinx.android.synthetic.main.activity_register.submitButton
@@ -29,6 +30,8 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.registerResult) {
             if (it) viewModel.getUser()
             else {
@@ -52,6 +55,8 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
             groupInputEditText.text?.toString()
         )
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_register
 }

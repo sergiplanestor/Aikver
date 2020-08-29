@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.feature.menu.dashboard
 
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.fragment_dashboard.contentShimmer
 import kotlinx.android.synthetic.main.fragment_dashboard.groupContentEmptyState
 import kotlinx.android.synthetic.main.fragment_dashboard.groupContentRecycler
@@ -79,6 +80,8 @@ class DashboardFragment : BaseFragment() {
     private fun onCustomContentClick(customContent: CustomContent<ContentDetails>) {
         CustomContentDetailsActivity.start(requireActivity() as? BaseActivity, customContent)
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_dashboard
 }

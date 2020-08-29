@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
+import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.core.domain.ResponseState
 import kotlin.coroutines.CoroutineContext
 
@@ -44,8 +45,7 @@ abstract class BaseViewModel(private val context: Context) : ViewModel() {
             is ResponseState.Error -> {
                 if (shouldPostError) {
                     if (state.description.isNullOrBlank()) {
-                        // TODO: Set default error messages
-                        state.description = "Error!"
+                        state.description = context.getString(R.string.default_error)
                     }
                     _errorState.postValue(state.description)
                 }

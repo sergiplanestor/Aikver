@@ -29,9 +29,12 @@
     <string name="profile_create_group">Crear grupo</string>
     <string name="profile_delete_group">Eliminar grupo</string>
     <string name="profile_add_group_title">Añadir grupo</string>
-    <string name="profile_avatar_choose_eyes">Tipo de ojos:</string>
-    <string name="profile_avatar_choose_nose">Tipo de nariz:</string>
-    <string name="profile_avatar_choose_mouth">Tipo de boca:</string>
+    <string name="profile_avatar_choose_eyes">Tipo de ojos</string>
+    <string name="profile_avatar_choose_nose">Tipo de nariz</string>
+    <string name="profile_avatar_choose_mouth">Tipo de boca</string>
+    <string name="mouth">boca</string>
+    <string name="eyes">ojos</string>
+    <string name="nose">nariz</string>
     <string name="profile_avatar_choose_color">Color:</string>
     <string name="profile_avatar_activity_title">Personaliza tu Avatar</string>
     <string name="profile_add_member_hint">Nombre de usuario</string>
@@ -132,6 +135,8 @@
     <string name="find">Buscar</string>
     <string name="group_content_empty">Tu grupo no ha añadido contenido aún. ¡Animate!</string>
     <string name="ouch">Ouch :(</string>
+    <string name="default_error">Vaya.. Parece que algo ha ido mal</string>
+    <string name="type_of">Tipos de %s</string>
 
 
     <string name="optional_field">Campo opcional</string>

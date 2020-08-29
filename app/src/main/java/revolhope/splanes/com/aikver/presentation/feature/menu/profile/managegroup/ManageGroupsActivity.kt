@@ -2,6 +2,7 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegro
 
 import android.content.Intent
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_manage_groups.addButtonEmptyState
 import kotlinx.android.synthetic.main.activity_manage_groups.emptyState
@@ -105,6 +106,8 @@ class ManageGroupsActivity : BaseActivity() {
     }
 
     private fun onCloseClick() = onBackPressed()
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutRes(): Int = R.layout.activity_manage_groups
 }

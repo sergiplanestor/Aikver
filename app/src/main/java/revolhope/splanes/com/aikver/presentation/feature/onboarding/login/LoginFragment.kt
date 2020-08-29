@@ -1,6 +1,7 @@
 package revolhope.splanes.com.aikver.presentation.feature.onboarding.login
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.fragment_login.*
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -21,6 +22,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.userLoginResult) {
             hideLoader()
             with(activity as OnBoardingActivity?) {
@@ -34,6 +37,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         showLoader()
         viewModel.doLogin(usernameInputEditText.text?.toString() ?: "")
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_login
 }

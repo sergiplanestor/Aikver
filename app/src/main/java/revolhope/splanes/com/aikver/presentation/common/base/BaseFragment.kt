@@ -5,6 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import revolhope.splanes.com.aikver.framework.app.observe
+import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.SnackBar
+import revolhope.splanes.com.aikver.presentation.common.widget.snakbar.model.SnackBarModel
 
 abstract class BaseFragment : Fragment() {
 
@@ -26,11 +30,22 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun initObservers() {
-        // Nothing to do here
+        getErrorLiveData()?.let {
+            observe(it) { message ->
+                SnackBar.show(
+                    view = view,
+                    model = SnackBarModel.Error(message)
+                )
+            }
+        }
     }
 
     open fun loadData() {
         // Nothing to do here
+    }
+
+    open fun getErrorLiveData() : LiveData<String>? {
+        return null
     }
 
     fun showLoader() = (activity as BaseActivity?)?.showLoader()

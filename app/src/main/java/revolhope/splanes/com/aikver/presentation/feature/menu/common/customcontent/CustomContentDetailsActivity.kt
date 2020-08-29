@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_custom_content_details.collapsingToolbarImageView
 import kotlinx.android.synthetic.main.activity_custom_content_details.companyImage
@@ -79,6 +80,7 @@ class CustomContentDetailsActivity : BaseActivity() {
     }
 
     override fun initObservers() {
+        super.initObservers()
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.contentRelated) {
             if (it == null || it.results.isEmpty()) {
@@ -361,6 +363,8 @@ class CustomContentDetailsActivity : BaseActivity() {
         }
         return customContent
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutRes(): Int = R.layout.activity_custom_content_details
 }

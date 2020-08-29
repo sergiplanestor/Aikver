@@ -2,6 +2,7 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.searchcontent
 
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.fragment_search_content.contentSelector
 import kotlinx.android.synthetic.main.fragment_search_content.imageViewPlaceholder
 import kotlinx.android.synthetic.main.fragment_search_content.placeholder
@@ -34,6 +35,8 @@ class SearchContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.serieResults) { onResultsReceived(it, ::onContentClick) }
         observe(viewModel.movieResults) { onResultsReceived(it, ::onContentClick) }
@@ -69,6 +72,8 @@ class SearchContentFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean = true /* Nothing to do here */
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_search_content
 }

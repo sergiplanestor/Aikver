@@ -3,6 +3,7 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdet
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_content_details_master.collapsingToolbarImageView
 import kotlinx.android.synthetic.main.fragment_content_details_master.companyImage
@@ -57,6 +58,8 @@ class ContentDetailsMasterFragment : BaseFragment() {
     }
 
     override fun initObservers() {
+        super.initObservers()
+
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.contentDetails) {
             (activity as? ContentDetailsActivity)?.contentDetails = it
@@ -316,6 +319,8 @@ class ContentDetailsMasterFragment : BaseFragment() {
         )
 
     private fun getContent(): Content? = (activity as? ContentDetailsActivity)?.getContent()
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutResource(): Int = R.layout.fragment_content_details_master
 }

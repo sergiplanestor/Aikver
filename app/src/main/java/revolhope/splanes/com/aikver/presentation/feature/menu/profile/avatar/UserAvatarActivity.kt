@@ -3,15 +3,17 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.activity_user_avatar.avatarPreview
 import kotlinx.android.synthetic.main.activity_user_avatar.colorRecyclerView
 import kotlinx.android.synthetic.main.activity_user_avatar.doneButton
-import kotlinx.android.synthetic.main.activity_user_avatar.eyesSpinner
-import kotlinx.android.synthetic.main.activity_user_avatar.mouthSpinner
-import kotlinx.android.synthetic.main.activity_user_avatar.noseSpinner
+import kotlinx.android.synthetic.main.activity_user_avatar.eyesInput
+import kotlinx.android.synthetic.main.activity_user_avatar.eyesText
+import kotlinx.android.synthetic.main.activity_user_avatar.mouthInput
+import kotlinx.android.synthetic.main.activity_user_avatar.mouthText
+import kotlinx.android.synthetic.main.activity_user_avatar.noseInput
+import kotlinx.android.synthetic.main.activity_user_avatar.noseText
 import kotlinx.android.synthetic.main.activity_user_avatar.toolbar
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
@@ -20,15 +22,17 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.typeselector.TypeSelectorBottomSheetFragment
+import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.typeselector.TypeSelectorUiModel
 import revolhope.splanes.com.core.domain.model.user.UserAvatar
 import revolhope.splanes.com.core.domain.model.user.UserAvatarTypes
 
-class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
+class UserAvatarActivity : BaseActivity() {
 
     private val viewModel: UserAvatarViewModel by viewModel()
-    private val mapEyes: MutableMap<String, String> = mutableMapOf()
-    private val mapNose: MutableMap<String, String> = mutableMapOf()
-    private val mapMouth: MutableMap<String, String> = mutableMapOf()
+    private val eyesSelectorUiModel: MutableList<TypeSelectorUiModel> = mutableListOf()
+    private val noseSelectorUiModel: MutableList<TypeSelectorUiModel> = mutableListOf()
+    private val mouthSelectorUiModel: MutableList<TypeSelectorUiModel> = mutableListOf()
     private lateinit var userAvatar: UserAvatar
 
     companion object {
@@ -62,9 +66,9 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         super.initObservers()
 
         observe(viewModel.user) {
-            viewModel.fetchAvatarTypes()
             userAvatar = it.avatar.copy()
             avatarPreview.loadAvatar(userAvatar)
+            viewModel.fetchAvatarTypes()
         }
 
         observe(viewModel.avatarTypes) {
@@ -93,68 +97,97 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private fun bindViews() {
 
-        eyesSpinner.adapter = ArrayAdapter(
-            this,
-            R.layout.component_app_spinner_item,
-            mapEyes.keys.toList()
-        ).apply { setDropDownViewResource(R.layout.component_app_spinner_dropdown_item) }
-
-        noseSpinner.adapter = ArrayAdapter(
-            this,
-            R.layout.component_app_spinner_item,
-            mapNose.keys.toList()
-        ).apply { setDropDownViewResource(R.layout.component_app_spinner_dropdown_item) }
-
-        mouthSpinner.adapter = ArrayAdapter(
-            this,
-            R.layout.component_app_spinner_item,
-            mapMouth.keys.toList()
-        ).apply { setDropDownViewResource(R.layout.component_app_spinner_dropdown_item) }
+        eyesInput.setEndIconOnClickListener { onInputClick(id = R.id.eyesInput) }
+        noseInput.setEndIconOnClickListener { onInputClick(id = R.id.noseInput) }
+        mouthInput.setEndIconOnClickListener { onInputClick(id = R.id.mouthInput) }
 
         colorRecyclerView.layoutManager = AutoSizeLayoutManager(this, 48f)
-
-        eyesSpinner.setSelection(getIndexOf(mapEyes, userAvatar.eyes), true)
-        noseSpinner.setSelection(getIndexOf(mapNose, userAvatar.nose), true)
-        mouthSpinner.setSelection(getIndexOf(mapMouth, userAvatar.mouth), true)
         colorRecyclerView.adapter = UserAvatarColorAdapter(
             resources.getStringArray(R.array.colors).toList(),
             userAvatar.color,
             ::onColorSelected
         )
-
-        eyesSpinner.onItemSelectedListener = this
-        noseSpinner.onItemSelectedListener = this
-        mouthSpinner.onItemSelectedListener = this
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) { /* Nothing to do */
+    private fun onInputClick(id: Int) {
+        val title: String
+        val items: List<TypeSelectorUiModel>
+
+        when (id) {
+            R.id.eyesInput -> {
+                title = getString(R.string.eyes)
+                items = eyesSelectorUiModel
+            }
+            R.id.noseInput -> {
+                title = getString(R.string.nose)
+                items = noseSelectorUiModel
+            }
+            else /* R.id.mouthInput */ -> {
+                title = getString(R.string.mouth)
+                items = mouthSelectorUiModel
+            }
+        }
+
+        TypeSelectorBottomSheetFragment(
+            title = title,
+            items = items,
+            callback = { onItemSelected(id, it) }
+        ).show(supportFragmentManager)
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    private fun onItemSelected(parent: Int, typeSelectorUiModel: TypeSelectorUiModel?) {
+        if (typeSelectorUiModel == null) return
         when (parent) {
-            eyesSpinner -> userAvatar.eyes = mapEyes["Tipo ${position + 1}"] ?: ""
-            noseSpinner -> userAvatar.nose = mapNose["Tipo ${position + 1}"] ?: ""
-            mouthSpinner -> userAvatar.mouth = mapMouth["Tipo ${position + 1}"] ?: ""
+            R.id.eyesInput -> {
+                eyesText.setText(typeSelectorUiModel.title)
+                userAvatar.eyes = typeSelectorUiModel.avatar.eyes
+            }
+            R.id.noseInput -> {
+                noseText.setText(typeSelectorUiModel.title)
+                userAvatar.nose = typeSelectorUiModel.avatar.nose
+            }
+            R.id.mouthInput -> {
+                mouthText.setText(typeSelectorUiModel.title)
+                userAvatar.mouth = typeSelectorUiModel.avatar.mouth
+            }
         }
         avatarPreview.loadAvatar(userAvatar)
     }
 
     private fun mapAvatarTypes(avatarTypes: UserAvatarTypes) {
         avatarTypes.eyes.forEachIndexed { index, item ->
-            mapEyes["Tipo ${index + 1}"] = item
+            eyesSelectorUiModel.add(
+                index = index,
+                element = TypeSelectorUiModel(
+                    title = "Ojos ${index + 1}",
+                    avatar = userAvatar.copy().apply { eyes = item },
+                    isChecked = index == 0
+                )
+            )
         }
 
         avatarTypes.nose.forEachIndexed { index, item ->
-            mapNose["Tipo ${index + 1}"] = item
+            noseSelectorUiModel.add(
+                index = index,
+                element = TypeSelectorUiModel(
+                    title = "Nariz ${index + 1}",
+                    avatar = userAvatar.copy().apply { nose = item },
+                    isChecked = index == 0
+                )
+            )
         }
 
         avatarTypes.mouth.forEachIndexed { index, item ->
-            mapMouth["Tipo ${index + 1}"] = item
+            mouthSelectorUiModel.add(
+                index = index,
+                element = TypeSelectorUiModel(
+                    title = "Boca ${index + 1}",
+                    avatar = userAvatar.copy().apply { mouth = item },
+                    isChecked = index == 0
+                )
+            )
         }
     }
-
-    private fun getIndexOf(map: Map<String, String>, value: String): Int =
-        map.keys.find { map[it] == value }?.let { map.keys.indexOf(it) } ?: 0
 
     private fun onColorSelected(color: String) {
         userAvatar.color = color
@@ -170,6 +203,8 @@ class UserAvatarActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         setResult(Activity.RESULT_OK)
         onBackPressed()
     }
+
+    override fun getErrorLiveData(): LiveData<String>? = viewModel.errorState
 
     override fun getLayoutRes(): Int = R.layout.activity_user_avatar
 }
