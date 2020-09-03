@@ -10,7 +10,7 @@ class FetchGroupContentUseCase(
 ) : BaseUseCase<FetchGroupContentUseCase.Request, List<CustomContent<ContentDetails>>>() {
 
     override suspend fun execute(req: Request): List<CustomContent<ContentDetails>>? =
-        contentRepository.fetchSelectedGroupContent()
+        contentRepository.fetchSelectedGroupContent(req.forceCall)
 
-    object Request
+    data class Request(val forceCall: Boolean = false)
 }

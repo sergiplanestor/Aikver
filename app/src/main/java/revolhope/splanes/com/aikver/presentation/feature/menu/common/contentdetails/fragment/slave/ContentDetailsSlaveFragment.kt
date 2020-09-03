@@ -22,6 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
 import revolhope.splanes.com.aikver.presentation.common.AnimUtils
+import revolhope.splanes.com.aikver.presentation.common.base.BaseActivity
 import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.justify
@@ -100,9 +101,11 @@ class ContentDetailsSlaveFragment : BaseFragment() {
         observe(viewModel.addContentResult) {
             SnackBar.show(
                 root,
-                if (it) SnackBarModel.Success(getString(R.string.new_content_added)) {
-                    activity?.finish()
-                }
+                if (it) SnackBarModel.Success(
+                    message = getString(R.string.new_content_added),
+                    onClick = { (activity as? BaseActivity)?.finish() },
+                    onDismiss = { (activity as? BaseActivity)?.finish() }
+                )
                 else SnackBarModel.Error(getString(R.string.error_short))
             )
         }
@@ -147,7 +150,7 @@ class ContentDetailsSlaveFragment : BaseFragment() {
                 ContentCustomInfoUiModel(
                     content = it,
                     haveSeen = contentSeenSwitcher.getOptionSelected() == SwitcherView.Option.LEFT,
-                    score = punctuationView.getScore(),
+                    score = punctuationView.getScore() ?: -1,
                     network = networkSelector.getSelected(),
                     comments = commentInputEditText.text?.toString() ?: "",
                     recommendedTo = recommendToUserPicked.pickedUsers()

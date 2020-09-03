@@ -35,11 +35,13 @@ class PunctuationBottomSheet(
             getString(if (customContent.content is SerieDetails) R.string.serie else R.string.film).toLowerCase()
         )
         sendPunctuationButton.setOnClickListener {
-            viewModel.sendPunctuation(
-                currentUser = currentUser,
-                customContent = customContent,
-                punctuation = scoreView.getScore()
-            )
+            scoreView.getScore()?.let {
+                viewModel.sendPunctuation(
+                    currentUser = currentUser,
+                    customContent = customContent,
+                    punctuation = it
+                )
+            } ?: viewModel.postError(getString(R.string.error_punctuation_blank_field))
         }
     }
 

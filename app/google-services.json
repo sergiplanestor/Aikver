@@ -34,6 +34,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085736439629:android:7d6eb9dd6df5664ac7f104",
+        "android_client_info": {
+          "package_name": "revolhope.splanes.com.aikver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085736439629-6ihlkbtt24kkt9j93nd3uqgpnvtjh5vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8p1EzRL3fr7QB-W2ZA-phaTOyP0TGXUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085736439629-6ihlkbtt24kkt9j93nd3uqgpnvtjh5vc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -104,17 +104,18 @@ class ContentPagerView @JvmOverloads constructor(
                     items.find { it.content.id.toString() == id }?.run { callback.invoke(this) }
                 }
             )
+            onFlingListener = null /* In order to detach and avoid IllegalStateException */
             PagerSnapHelper().attachToRecyclerView(this)
             resumeAutoScroll()
         }
         showShimmer(false)
     }
 
-    fun setTitle(title: String) {
+    private fun setTitle(title: String) {
         popularContentTitle.text = title
     }
 
-    fun showShimmer(show: Boolean) {
+    private fun showShimmer(show: Boolean) {
         shimmer.visibility(show)
         popularContentTitle.visibility(show.not())
         arrow.visibility(show.not())

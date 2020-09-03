@@ -100,7 +100,7 @@ class EmptyStateView @JvmOverloads constructor(
         emptyTitle.visible()
     }
 
-    fun setSubtitle(subtitle: String) {
+    private fun setSubtitle(subtitle: String) {
         emptySubtitle.text = subtitle
         emptySubtitle.visible()
     }
@@ -112,8 +112,7 @@ class EmptyStateView @JvmOverloads constructor(
 
     fun setActionVisibility(visible: Boolean) = emptyAction.visibility(visible)
 
-    // TODO: Change that shit.. resize automatically!
-    fun setImageSize(dp: Int) {
+    private fun setImageSize(dp: Int) {
         emptyImage.layoutParams = emptyImage.layoutParams.apply {
             dpToPx(context, dp).let {
                 height = it
@@ -122,7 +121,7 @@ class EmptyStateView @JvmOverloads constructor(
         }
     }
 
-    fun setMode(mode: Mode) {
+    private fun setMode(mode: Mode) {
         when (mode) {
             Mode.LIGHT -> {
                 emptyTitle.setTextColor(context.getColor(R.color.whiteAlpha90))
@@ -143,7 +142,7 @@ class EmptyStateView @JvmOverloads constructor(
         }
     }
 
-    fun setOrientation(orientation: Orientation) {
+    private fun setOrientation(orientation: Orientation) {
         when (orientation) {
             Orientation.HORIZONTAL -> {
                 rootLayout.orientation = LinearLayout.HORIZONTAL

@@ -45,7 +45,7 @@ class ManageGroupsActivity : BaseActivity() {
         super.initObservers()
         observe(viewModel.loaderState) { if (it) showLoader() else hideLoader() }
         observe(viewModel.user) {
-            if (it != null && it.userGroups.isNotEmpty()) {
+            if (it.userGroups.isNotEmpty()) {
                 groupsRecyclerView.layoutManager = LinearLayoutManager(this)
                 groupsRecyclerView.adapter = ManageGroupsAdapter(
                     it,
@@ -55,7 +55,7 @@ class ManageGroupsActivity : BaseActivity() {
                     ::onGroupClick
                 )
             }
-            showEmptyState(it == null || it.userGroups.isEmpty())
+            showEmptyState(it.userGroups.isEmpty())
         }
         observe(viewModel.isUserAdminOf) {
             GroupDetailsBottomSheet(

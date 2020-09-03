@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.groupContentEmptyState
 import kotlinx.android.synthetic.main.fragment_dashboard.groupContentRecycler
 import kotlinx.android.synthetic.main.fragment_dashboard.popularPager
 import kotlinx.android.synthetic.main.fragment_dashboard.recommendedPager
+import kotlinx.android.synthetic.main.fragment_dashboard.swipeLayout
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -15,6 +16,7 @@ import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.aikver.presentation.common.widget.gridlayoutmanager.AutoSizeLayoutManager
+import revolhope.splanes.com.aikver.presentation.common.widget.swipelayout.SwipeLayout
 import revolhope.splanes.com.aikver.presentation.feature.menu.MenuActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.contentdetails.ContentDetailsActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.common.customcontent.CustomContentDetailsActivity
@@ -30,6 +32,15 @@ class DashboardFragment : BaseFragment() {
         super.initViews()
         contentShimmer.visible()
         groupContentRecycler.invisible()
+        swipeLayout.setOnRefreshListener(object : SwipeLayout.OnCircleRefreshListener {
+            override fun completeRefresh() {
+            }
+
+            override fun refreshing() {
+                initViews()
+                viewModel.fetchGroupContent(force = true)
+            }
+        })
     }
 
     override fun initObservers() {
@@ -56,6 +67,7 @@ class DashboardFragment : BaseFragment() {
                     onItemClick = ::onCustomContentClick
                 )
             }
+            swipeLayout.finishRefreshing()
         }
     }
 

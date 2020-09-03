@@ -48,7 +48,6 @@
         app:title="@string/no_comments" />
 
     <View
-        android:id="@+id/separatorComments"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/margin_12dp"

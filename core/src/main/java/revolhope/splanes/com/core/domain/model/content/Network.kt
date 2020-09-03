@@ -1,6 +1,6 @@
 package revolhope.splanes.com.core.domain.model.content
 
-import java.util.*
+import java.util.Locale
 
 enum class Network(val id: Int) {
     UNKNOWN(-1),
@@ -12,8 +12,7 @@ enum class Network(val id: Int) {
     companion object {
         fun fromValue(id: Int): Network = values().find { it.id == id } ?: UNKNOWN
 
-        // TODO: This should not be hardcoded values.. Here can't access to resource so...
-        //  I might not have way to get it from strings.xml, search solution
+        // TODO: This should not be hardcoded values
         fun fromName(name: String): Network = when (name.toLowerCase(Locale.ROOT)) {
             "hbo" -> HBO
             "netflix" -> NETFLIX

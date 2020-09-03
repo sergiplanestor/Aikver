@@ -16,7 +16,7 @@ data class Episode(
     val voteCount: Int
 ) : Serializable {
     companion object {
-        fun getEmpty(): Episode =
+        val empty: Episode get() =
             Episode(
                 airDate = "",
                 numEpisode = -1,

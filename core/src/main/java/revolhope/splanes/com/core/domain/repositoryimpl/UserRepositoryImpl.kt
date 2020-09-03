@@ -60,7 +60,9 @@ class UserRepositoryImpl(
                 avatar = UserAvatar(),
                 username = username,
                 selectedUserGroup = null,
-                userGroups = mutableListOf()
+                userGroups = mutableListOf(),
+                numOfContentAddedByUser = 0,
+                createdOn = System.currentTimeMillis()
             )
             if (!userGroupName.isNullOrBlank()) {
                 val groupId = UUID.randomUUID().toString().replace("-", "")

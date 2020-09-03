@@ -132,7 +132,7 @@ object ContentMapper {
             languages = entity.languages ?: listOf(),
             lastAirDate = entity.lastAirDate ?: "",
             lastEpisodeToAir = entity.lastEpisodeToAir?.let(::fromEpisodeEntityToModel)
-                ?: Episode.getEmpty(),
+                ?: Episode.empty,
             title = entity.name ?: "",
             network = entity.network?.map { fromContentNetworkEntityToModel(it, config) }
                 ?: listOf(),
@@ -379,8 +379,8 @@ object ContentMapper {
         comments: List<Pair<UserGroupMember, String>>
     ): CustomSerie =
         CustomSerie(
-            content = serieDetails ?: TODO(),
-            userAdded = userAdded ?: TODO(),
+            content = serieDetails ?: SerieDetails.empty,
+            userAdded = userAdded ?: UserGroupMember.empty,
             dateAdded = entity.dateAdded ?: -1L,
             seenBy = seenBy.toMutableList(),
             network = entity.network?.let { Network.fromValue(it) } ?: Network.UNKNOWN,
@@ -399,8 +399,8 @@ object ContentMapper {
         comments: List<Pair<UserGroupMember, String>>
     ): CustomMovie =
         CustomMovie(
-            content = movieDetails ?: TODO(),
-            userAdded = userAdded ?: TODO(),
+            content = movieDetails ?: MovieDetails.empty,
+            userAdded = userAdded ?: UserGroupMember.empty,
             dateAdded = entity.dateAdded ?: -1L,
             seenBy = seenBy.toMutableList(),
             network = entity.network?.let { Network.fromValue(it) } ?: Network.UNKNOWN,

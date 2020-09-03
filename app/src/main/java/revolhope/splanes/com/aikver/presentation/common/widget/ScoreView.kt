@@ -24,6 +24,7 @@ class ScoreView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyle) {
 
     private var stars = listOf<ImageView>().toMutableList()
+    private var score: Int? = null
 
     init {
         View.inflate(context, R.layout.component_score_view, this)
@@ -89,7 +90,7 @@ class ScoreView @JvmOverloads constructor(
     }
 
     fun updateScore(score: Int) {
-
+        this.score = score
         if (score == 0) {
             clearStars()
             return
@@ -141,5 +142,5 @@ class ScoreView @JvmOverloads constructor(
 
     }
 
-    fun getScore() : Int = seekBar.progress
+    fun getScore() : Int? = this.score
 }

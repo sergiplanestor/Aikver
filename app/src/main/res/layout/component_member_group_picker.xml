@@ -9,7 +9,6 @@
     android:padding="@dimen/margin_15dp">
 
     <TextView
-        android:id="@+id/userSelectedTitle"
         style="@style/Text.SemiBold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

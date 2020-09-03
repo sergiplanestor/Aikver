@@ -22,8 +22,9 @@ class SplashViewModel(
     fun getUserLogin() =
         launchAsync {
             handleResponse(
-                state = fetchUserLoginUseCase.invoke(FetchUserLoginUseCase.Request)
-            )?.let { _userLogin.postValue(it) }
+                state = fetchUserLoginUseCase.invoke(FetchUserLoginUseCase.Request),
+                shouldPostError = false
+            ).let { _userLogin.postValue(it) }
         }
 
     fun doLogin(user: UserLogin) =

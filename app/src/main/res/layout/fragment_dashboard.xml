@@ -8,141 +8,136 @@
     android:animateLayoutChanges="true"
     tools:context=".presentation.feature.menu.dashboard.DashboardFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <revolhope.splanes.com.aikver.presentation.common.widget.swipelayout.SwipeLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:AniBackColor="@color/colorPrimaryDark"
+        app:AniForeColor="@android:color/white"
+        app:CircleSmaller="8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:animateLayoutChanges="true">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:paddingBottom="@dimen/margin_12dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
+                    android:id="@+id/popularPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:animateLayoutChanges="true"
-                    android:paddingBottom="@dimen/margin_12dp">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shimmer="true"
+                    app:title="@string/dashboard_popular_content_title" />
 
-                    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
-                        android:id="@+id/popularPager"
+                <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
+                    android:id="@+id/recommendedPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/popularPager"
+                    app:shimmer="true"
+                    app:title="@string/dashboard_recommended_content_title" />
+
+                <TextView
+                    android:id="@+id/groupContentTitle"
+                    style="@style/Text.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:layout_marginEnd="@dimen/margin_12dp"
+                    android:text="@string/title_dashboard"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recommendedPager" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/groupContentRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:layout_marginEnd="@dimen/margin_12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/groupContentTitle" />
+
+                <revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
+                    android:id="@+id/groupContentEmptyState"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:visibility="gone"
+                    app:actionText="@string/find"
+                    app:imageSize="180"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/groupContentTitle"
+                    app:mode="dark"
+                    app:orientation="vertical"
+                    app:subtitle="@string/group_content_empty"
+                    app:title="@string/ouch" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/contentShimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:layout_marginEnd="@dimen/margin_12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/groupContentTitle"
+                    app:shimmer_duration="2000">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:shimmer="true"
-                        app:title="@string/dashboard_popular_content_title" />
+                        android:orientation="horizontal">
 
-                    <revolhope.splanes.com.aikver.presentation.common.widget.contentpager.ContentPagerView
-                        android:id="@+id/recommendedPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/popularPager"
-                        app:shimmer="true"
-                        app:title="@string/dashboard_recommended_content_title" />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="@dimen/margin_5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shimmer_image" />
 
-                    <TextView
-                        android:id="@+id/groupContentTitle"
-                        style="@style/Text.Title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_12dp"
-                        android:layout_marginTop="@dimen/margin_12dp"
-                        android:layout_marginEnd="@dimen/margin_12dp"
-                        android:text="@string/title_dashboard"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/recommendedPager" />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="@dimen/margin_5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shimmer_image" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/groupContentRecycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_12dp"
-                        android:layout_marginTop="@dimen/margin_12dp"
-                        android:layout_marginEnd="@dimen/margin_12dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/groupContentTitle" />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="@dimen/margin_5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shimmer_image" />
 
-                    <revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
-                        android:id="@+id/groupContentEmptyState"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_12dp"
-                        android:visibility="gone"
-                        app:actionText="@string/find"
-                        app:imageSize="180"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/groupContentTitle"
-                        app:mode="dark"
-                        app:orientation="vertical"
-                        app:subtitle="@string/group_content_empty"
-                        app:title="@string/ouch" />
+                    </LinearLayout>
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/contentShimmer"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_12dp"
-                        android:layout_marginTop="@dimen/margin_12dp"
-                        android:layout_marginEnd="@dimen/margin_12dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/groupContentTitle"
-                        app:shimmer_duration="2000">
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="180dp"
-                                android:layout_margin="@dimen/margin_5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/shimmer_image" />
+        </androidx.core.widget.NestedScrollView>
 
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="180dp"
-                                android:layout_margin="@dimen/margin_5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/shimmer_image" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="180dp"
-                                android:layout_margin="@dimen/margin_5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/shimmer_image" />
-
-                        </LinearLayout>
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </revolhope.splanes.com.aikver.presentation.common.widget.swipelayout.SwipeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

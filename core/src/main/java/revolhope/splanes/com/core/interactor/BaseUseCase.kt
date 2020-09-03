@@ -11,7 +11,6 @@ abstract class BaseUseCase<REQ, RES> {
                 ResponseState.Success(data = it)
             } ?: ResponseState.Error(Exception())
         } catch (e: Exception) {
-            // TODO: Set default description errors
             ResponseState.Error(e)
         }
 

@@ -2,11 +2,11 @@ package revolhope.splanes.com.aikver.presentation.feature.onboarding.register
 
 import android.view.View
 import androidx.lifecycle.LiveData
-import kotlinx.android.synthetic.main.activity_register.groupDescriptionTextView
-import kotlinx.android.synthetic.main.activity_register.groupInputEditText
-import kotlinx.android.synthetic.main.activity_register.submitButton
-import kotlinx.android.synthetic.main.activity_register.usernameDescriptionTextView
-import kotlinx.android.synthetic.main.activity_register.usernameInputEditText
+import kotlinx.android.synthetic.main.fragment_register.groupDescriptionTextView
+import kotlinx.android.synthetic.main.fragment_register.groupInputEditText
+import kotlinx.android.synthetic.main.fragment_register.submitButton
+import kotlinx.android.synthetic.main.fragment_register.usernameDescriptionTextView
+import kotlinx.android.synthetic.main.fragment_register.usernameInputEditText
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe

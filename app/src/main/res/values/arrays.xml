@@ -14,17 +14,4 @@
         <item>78909C</item> <!-- Gray -->
     </string-array>
 
-    <string-array name="categories">
-        <item>Acción</item>
-        <item>Comedia</item>
-        <item>Ciencia Ficción</item>
-        <item>Documental</item>
-        <item>Drama</item>
-        <item>Fantasia</item>
-        <item>Histórica</item>
-        <item>Romantica</item>
-        <item>Terror</item>
-        <item>Thriller</item>
-    </string-array>
-
 </resources>

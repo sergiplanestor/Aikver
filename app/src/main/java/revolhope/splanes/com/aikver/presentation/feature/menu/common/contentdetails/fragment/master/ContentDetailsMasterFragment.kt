@@ -279,7 +279,7 @@ class ContentDetailsMasterFragment : BaseFragment() {
 
     private fun onContentRelatedClick(content: Content) {
         ContentDetailsActivity.start(requireActivity() as? BaseActivity, content)
-        requireActivity().finish() // TODO: Check it: deberia pasar algun flag para poner back o no?
+        requireActivity().finish()
     }
 
     private fun resizeVoteLayout(v: View) {

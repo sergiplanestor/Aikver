@@ -61,7 +61,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.close, android.R.id.home -> {
+            android.R.id.home -> {
                 finish()
                 overrideTransition()
                 return true

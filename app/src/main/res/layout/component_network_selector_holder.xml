@@ -8,7 +8,6 @@
     android:layout_margin="@dimen/margin_5dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/networkCardView"
         android:layout_width="35dp"
         android:layout_height="35dp"
         app:cardCornerRadius="6dp"

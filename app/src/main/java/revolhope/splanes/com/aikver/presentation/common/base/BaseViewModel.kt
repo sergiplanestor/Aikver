@@ -21,6 +21,12 @@ abstract class BaseViewModel(private val context: Context) : ViewModel() {
         _loaderState.postValue(show)
     }
 
+    fun postError(message: String? = null) {
+        _errorState.postValue(
+            message ?: context.getString(R.string.default_error)
+        )
+    }
+
     protected fun launchAsync(
         showLoader: Boolean = true,
         context: CoroutineContext = Dispatchers.IO,

@@ -35,4 +35,39 @@ data class SerieDetails(
     val type: String,
     override val voteAverage: Float,
     override val voteCount: Int
-) : ContentDetails(), Serializable
+) : ContentDetails(), Serializable {
+
+    companion object {
+        val empty: SerieDetails
+            get() =
+                SerieDetails(
+                    backdrop = "",
+                    createdBy = emptyList(),
+                    episodeRuntime = emptyList(),
+                    firstAirDate = "",
+                    genres = emptyList(),
+                    homepage = "",
+                    id = Int.MIN_VALUE,
+                    isInProduction = false,
+                    languages = emptyList(),
+                    lastAirDate = "",
+                    lastEpisodeToAir = Episode.empty,
+                    title = "",
+                    network = emptyList(),
+                    numEpisodes = Int.MIN_VALUE,
+                    numSeasons = Int.MIN_VALUE,
+                    originCountry = emptyList(),
+                    originalLanguage = "",
+                    originalTitle = "",
+                    overview = "",
+                    popularity = Float.NaN,
+                    thumbnail = "",
+                    seasons = emptyList(),
+                    status = ContentStatus.UNKNOWN,
+                    type = "",
+                    voteAverage = Float.NaN,
+                    voteCount = Int.MIN_VALUE
+                )
+    }
+
+}

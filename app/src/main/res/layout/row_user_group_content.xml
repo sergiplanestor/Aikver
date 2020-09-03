@@ -14,9 +14,7 @@
         android:layout_height="@dimen/size_40dp"
         android:layout_margin="@dimen/margin_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/groupTitleTextView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/separator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +24,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_12dp"
-        android:layout_marginEnd="@dimen/margin_12dp"
         android:ellipsize="end"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/groupMemberCountTextView"
-        app:layout_constraintEnd_toStartOf="@+id/groupMemberCountTextView"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="@+id/groupMemberCountTextView"
         app:layout_constraintStart_toEndOf="@+id/groupImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="My group name" />

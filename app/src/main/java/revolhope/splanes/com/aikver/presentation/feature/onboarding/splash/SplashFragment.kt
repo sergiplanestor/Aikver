@@ -21,7 +21,7 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
             startAnimation()
         }
         descriptionTextView.justify()
-        with(activity as OnBoardingActivity?) {
+        with(activity as? OnBoardingActivity) {
             this?.changeTitle(getString(R.string.app_name))
             this?.setBackVisibility(false)
         }
@@ -34,6 +34,7 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
 
         observe(viewModel.userLogin) { userLogin ->
             if (userLogin == null) {
+                lottieAnimationView.cancelAnimation()
                 descriptionTextView.text = getString(R.string.register_user_not_registered)
             } else {
                 descriptionTextView.text = getString(R.string.splash_text_connecting)
@@ -42,13 +43,11 @@ class SplashFragment : BaseFragment(), View.OnClickListener {
         }
         observe(viewModel.userLoginResult) { success ->
             if (success) {
-                (activity as OnBoardingActivity?)?.navToDashBoard()
+                (activity as? OnBoardingActivity)?.navToDashBoard()
             } else {
-                activity?.runOnUiThread {
-                    lottieAnimationView.setAnimation(R.raw.anim_error_connection)
-                    lottieAnimationView.playAnimation()
-                    descriptionTextView.text = getString(R.string.splash_text_error)
-                }
+                lottieAnimationView.setAnimation(R.raw.anim_error_connection)
+                lottieAnimationView.playAnimation()
+                descriptionTextView.text = getString(R.string.splash_text_error)
             }
         }
     }

@@ -3,7 +3,18 @@ package revolhope.splanes.com.aikver.presentation.feature.menu.profile
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.adminGroupsButton
+import kotlinx.android.synthetic.main.fragment_profile.createGroupButton
+import kotlinx.android.synthetic.main.fragment_profile.editButton
+import kotlinx.android.synthetic.main.fragment_profile.profileAvatarImageView
+import kotlinx.android.synthetic.main.fragment_profile.profileUserNameTextView
+import kotlinx.android.synthetic.main.fragment_profile.profileUserNumOfContentTextView
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupAddMemberButton
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupEmptyStateLayout
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupImageView
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupLayout
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupMembersRecyclerView
+import kotlinx.android.synthetic.main.fragment_profile.selectedGroupNameTextView
 import org.koin.android.viewmodel.ext.android.viewModel
 import revolhope.splanes.com.aikver.R
 import revolhope.splanes.com.aikver.framework.app.observe
@@ -12,7 +23,6 @@ import revolhope.splanes.com.aikver.presentation.common.base.BaseFragment
 import revolhope.splanes.com.aikver.presentation.common.invisible
 import revolhope.splanes.com.aikver.presentation.common.loadAvatar
 import revolhope.splanes.com.aikver.presentation.common.loadGroupIcon
-import revolhope.splanes.com.aikver.presentation.common.popupError
 import revolhope.splanes.com.aikver.presentation.common.visibility
 import revolhope.splanes.com.aikver.presentation.common.visible
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.addmember.AddMemberDialog
@@ -20,6 +30,8 @@ import revolhope.splanes.com.aikver.presentation.feature.menu.profile.avatar.Use
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.ManageGroupsActivity
 import revolhope.splanes.com.aikver.presentation.feature.menu.profile.managegroup.add.AddGroupDialog
 import revolhope.splanes.com.core.domain.model.user.User
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProfileFragment : BaseFragment(), View.OnClickListener {
 
@@ -32,6 +44,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
         profileAvatarImageView.setOnClickListener(this)
         adminGroupsButton.setOnClickListener(this)
         createGroupButton.setOnClickListener(this)
+        editButton.setOnClickListener(this)
     }
 
     override fun initObservers() {
@@ -45,11 +58,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
             bindViews(it)
         }
         observe(viewModel.addMemberResult) { result ->
-            if (result) {
-                viewModel.fetchUser()
-            } else if (context != null) {
-                popupError(requireContext(), childFragmentManager)
-            }
+            if (result) viewModel.fetchUser() else viewModel.postError()
         }
     }
 
@@ -61,6 +70,13 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
     private fun bindUserCardView(user: User) {
         profileAvatarImageView.loadAvatar(user.avatar)
         profileUserNameTextView.text = user.username
+        profileUserNumOfContentTextView.text =
+            getString(
+                R.string.profile_user_num_of_content,
+                user.userGroups.count(),
+                user.numOfContentAddedByUser,
+                SimpleDateFormat("dd/MM/yy", Locale.ROOT).format(user.createdOn)
+            )
     }
 
     private fun bindSelectedUserGroup(user: User) {
@@ -99,15 +115,13 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
     private fun onAddGroup(groupName: String) = viewModel.addGroup(groupName)
 
     private fun onUserAvatarUpdate(resultSuccess: Boolean) {
-        if (resultSuccess) loadData()
-        else {
-            // TODO: Show error?
-        }
+        if (resultSuccess) loadData() else viewModel.postError()
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.profileAvatarImageView -> UserAvatarActivity.start(activity as BaseActivity?, ::onUserAvatarUpdate)
+            R.id.editButton, R.id.profileAvatarImageView ->
+                UserAvatarActivity.start(activity as BaseActivity?, ::onUserAvatarUpdate)
             R.id.adminGroupsButton -> ManageGroupsActivity.start(activity as BaseActivity?)
             R.id.createGroupButton -> AddGroupDialog(::onAddGroup).show(childFragmentManager)
         }

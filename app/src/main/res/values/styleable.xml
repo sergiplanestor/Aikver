@@ -31,4 +31,10 @@
             <enum name="vertical" value="1" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="SwipeLayout">
+        <attr name="AniBackColor" format="color" />
+        <attr name="AniForeColor" format="color" />
+        <attr name="CircleSmaller" format="integer"/>
+    </declare-styleable>
 </resources>

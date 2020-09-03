@@ -50,10 +50,10 @@ class DashboardViewModel(
         }
     }
 
-    fun fetchGroupContent() {
+    fun fetchGroupContent(force: Boolean = false) {
         launchAsync(showLoader = false) {
             val result = handleResponse(
-                state = fetchGroupContentUseCase.invoke(FetchGroupContentUseCase.Request)
+                state = fetchGroupContentUseCase.invoke(FetchGroupContentUseCase.Request(force))
             )
             val user = handleResponse(
                 state = fetchUserUseCase.invoke(FetchUserUseCase.Request())

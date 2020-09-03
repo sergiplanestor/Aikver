@@ -35,4 +35,37 @@ data class MovieDetails(
     val productionCountries: List<ContentProductionCountry>,
     override val voteAverage: Float,
     override val voteCount: Int
-) : ContentDetails(), Serializable
+) : ContentDetails(), Serializable {
+
+    companion object {
+        val empty: MovieDetails
+            get() =
+                MovieDetails(
+                    backdrop = "",
+                    isAdult = false,
+                    collection = null,
+                    budget = Int.MIN_VALUE,
+                    genres = emptyList(),
+                    homepage = "",
+                    id = Int.MIN_VALUE,
+                    languages = emptyList(),
+                    title = "",
+                    originalLanguage = "",
+                    originalTitle = "",
+                    overview = "",
+                    popularity = Float.NaN,
+                    thumbnail = "",
+                    status = ContentStatus.UNKNOWN,
+                    voteAverage = Float.NaN,
+                    voteCount = Int.MIN_VALUE,
+                    idIMBD = "",
+                    releaseDate = "",
+                    revenue = Int.MIN_VALUE,
+                    runtime = Int.MIN_VALUE,
+                    tagLine = "",
+                    haveVideo = false,
+                    productionCountries = emptyList(),
+                    productionCompanies = emptyList()
+                )
+    }
+}

@@ -129,7 +129,9 @@ class ContentRepositoryImpl(
                             mutableListOf()
                         }
                     ).let(ContentMapper::fromCustomSerieModelToEntity)
-                )
+                ).also {
+                    if (it) userRepository.updateUser(user.apply { numOfContentAddedByUser++ })
+                }
             } ?: false
         } ?: false
 
@@ -168,7 +170,9 @@ class ContentRepositoryImpl(
                             mutableListOf()
                         }
                     ).let(ContentMapper::fromCustomMovieModelToEntity)
-                )
+                ).also {
+                    if (it) userRepository.updateUser(user.apply { numOfContentAddedByUser++ })
+                }
             } ?: false
         } ?: false
 
