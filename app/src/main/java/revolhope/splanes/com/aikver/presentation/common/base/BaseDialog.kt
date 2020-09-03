@@ -1,5 +1,6 @@
 package revolhope.splanes.com.aikver.presentation.common.base
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,10 +27,23 @@ abstract class BaseDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
+
+        val builder = AlertDialog.Builder(context, R.style.AppDialogStyle)
+
+        LayoutInflater.from(context).inflate(
+            getLayoutResource(),
+            null,
+            false
+        ).run {
+            initViews(this)
+            builder.setView(this)
+        }
+        builder.setCancelable(isPopupCancelable)
+        return builder.create()
+        /*return super.onCreateDialog(savedInstanceState).apply {
             window?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.white_card))
             setCancelable(isPopupCancelable)
-        }
+        }*/
     }
 
     fun show(fragmentManager: FragmentManager) = show(fragmentManager, this::class.java.name)

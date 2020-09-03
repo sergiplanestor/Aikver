@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_20dp"
     android:padding="@dimen/margin_20dp">
@@ -28,28 +28,32 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/popupNegativeButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_20dp"
-        android:textSize="14dp"
-        android:textAllCaps="false"
         android:background="@android:color/transparent"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@id/popupSeparator"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/popupMessage"/>
+        app:layout_constraintTop_toBottomOf="@id/popupMessage" />
 
     <View
         android:id="@+id/popupSeparator"
         android:layout_width="1dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
         android:background="@color/backgroundLight"
-        app:layout_constraintTop_toTopOf="@id/popupNegativeButton"
         app:layout_constraintBottom_toBottomOf="@id/popupNegativeButton"
+        app:layout_constraintEnd_toStartOf="@id/popupPositiveButton"
         app:layout_constraintStart_toEndOf="@id/popupNegativeButton"
-        app:layout_constraintEnd_toStartOf="@id/popupPositiveButton"/>
+        app:layout_constraintTop_toTopOf="@id/popupNegativeButton" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/popupPositiveButton"
@@ -58,11 +62,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_20dp"
-        android:textSize="14dp"
-        android:textAllCaps="false"
         android:background="@android:color/transparent"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/popupMessage"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/popupSeparator"
+        app:layout_constraintTop_toBottomOf="@id/popupMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

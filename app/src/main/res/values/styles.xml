@@ -92,8 +92,18 @@
     </style>
 
     <!-- =========================================================================================== -->
-    <!-- Spinner                                                                                     -->
+    <!-- Dialog                                                                                     -->
     <!-- =========================================================================================== -->
+
+    <!-- DIALOG -->
+    <style name="AppDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <!--    #WINDOW PARAMS <<<<<<<<<<<<<<<<-->
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@drawable/white_card</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 
     <!-- =========================================================================================== -->
     <!-- Button                                                                                      -->
