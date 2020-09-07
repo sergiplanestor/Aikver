@@ -18,7 +18,7 @@ This app have been developed totally in Kotlin.
   **Presentation layer:** where all UI components are placed like widgets, Activities / Fragment or ViewModels.
   
   **Framework layer:** all Android Framerworks implementation's are located here such as Firebase or Shared Preference data source.
-  #### Module 2: Core:
+  #### Module 2: Core
   ____
   **Data layer:** here are placed all datasources, models from service (called entites) and the repository interface.
   
