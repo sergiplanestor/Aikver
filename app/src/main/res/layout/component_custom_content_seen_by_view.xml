@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/seenByTitle"
+        style="@style/Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/users_that_have_seen_this"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="@dimen/text_18" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/seenByRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        tools:itemCount="1"
+        tools:listitem="@layout/row_user_group_member_view" />
+
+    <revolhope.splanes.com.aikver.presentation.common.widget.emptystate.EmptyStateView
+        android:id="@+id/emptyStateSeenBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:visibility="gone"
+        app:imageSize="85"
+        app:mode="dark"
+        app:subtitle="@string/dont_know_what_see" />
+
+    <TextView
+        android:id="@+id/seenButton"
+        style="@style/AppButtonLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/seen_by" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:alpha=".1"
+        android:background="@color/colorPrimaryDark" />
+
+
+</LinearLayout>

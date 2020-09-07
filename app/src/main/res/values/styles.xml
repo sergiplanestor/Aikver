@@ -1,14 +1,14 @@
 <resources>
 
-<!-- =========================================================================================== -->
-<!-- App Themes                                                                                  -->
-<!-- =========================================================================================== -->
-    
+    <!-- =========================================================================================== -->
+    <!-- App Themes                                                                                  -->
+    <!-- =========================================================================================== -->
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="android:fontFamily">@font/baloothambi2_regular</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
@@ -16,102 +16,173 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="android:fontFamily">@font/baloothambi2_regular</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Text Styles                                                                                 -->
-<!-- =========================================================================================== -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/baloothambi2_regular</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <!-- =========================================================================================== -->
+    <!-- Text Styles                                                                                 -->
+    <!-- =========================================================================================== -->
 
     <style name="Text">
-        <item name="android:fontFamily">@font/comfortaa_medium</item>
+        <item name="android:fontFamily">@font/baloothambi2_regular</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16dp</item>
     </style>
 
-    <style name="Text.Light">
-        <item name="android:fontFamily">@font/comfortaa_light</item>
-    </style>
-
     <style name="Text.SemiBold">
-        <item name="android:fontFamily">@font/comfortaa_semibold</item>
+        <item name="android:fontFamily">@font/baloothambi2_medium</item>
     </style>
 
     <style name="Text.Bold">
-        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="android:fontFamily">@font/baloothambi2_semibold</item>
     </style>
 
-    <style name="Text.White">
-        <item name="android:textColor">@android:color/white</item>
+    <style name="Text.Title" parent="Text.SemiBold">
+        <item name="android:textColor">@color/colorAccentDark</item>
+        <item name="android:textSize">@dimen/text_20</item>
     </style>
 
     <style name="Header">
-        <item name="android:fontFamily">@font/comfortaa_semibold</item>
+        <item name="android:fontFamily">@font/baloothambi2_medium</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">25dp</item>
     </style>
 
-    <style name="Header.Small">
-        <item name="android:textSize">18dp</item>
-    </style>
-
     <style name="Header.Splash">
         <item name="android:fontFamily">@font/pacifico_regular</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">50dp</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Bottom Sheet Dialog                                                                         -->
-<!-- =========================================================================================== -->
+    <!-- =========================================================================================== -->
+    <!-- Toolbar                                                                                     -->
+    <!-- =========================================================================================== -->
+
+    <style name="ToolbarMenuText">
+        <item name="android:fontFamily">@font/pacifico_regular</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:fontFamily">@style/Text.SemiBold</item>
+    </style>
+
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="ToolbarTheme">
+        <item name="android:fontFamily">@font/baloothambi2_medium</item>
+        <item name="android:textSize">26dp</item>
+    </style>
+
+    <!-- =========================================================================================== -->
+    <!-- SearchView                                                                     -->
+    <!-- =========================================================================================== -->
 
     <style name="SearchViewStyle">
         <item name="queryBackground">@null</item>
         <item name="android:queryBackground">@null</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Spinner                                                                                     -->
-<!-- =========================================================================================== -->
+    <!-- =========================================================================================== -->
+    <!-- Dialog                                                                                     -->
+    <!-- =========================================================================================== -->
 
-    <style name="AppSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
-
+    <!-- DIALOG -->
+    <style name="AppDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <!--    #WINDOW PARAMS <<<<<<<<<<<<<<<<-->
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@drawable/white_card</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Button                                                                                      -->
-<!-- =========================================================================================== -->
+    <!-- =========================================================================================== -->
+    <!-- Button                                                                                      -->
+    <!-- =========================================================================================== -->
 
     <style name="AppButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="strokeColor">@android:color/white</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="strokeColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="rippleColor">@color/colorAccent</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Pop up                                                                                      -->
-<!-- =========================================================================================== -->
-
-    <style name="AppPopupTheme">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowBackground">@drawable/component_popup_bkg</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
+    <style name="AppButton.Delete" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@android:color/holo_red_dark</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="rippleColor">@color/colorRedAlpha</item>
     </style>
 
-<!-- =========================================================================================== -->
-<!-- Bottom Sheet Dialog                                                                         -->
-<!-- =========================================================================================== -->
+    <style name="AppButtonLink" parent="Text">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:padding">4dp</item>
+    </style>
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <!-- =========================================================================================== -->
+    <!-- Bottom Sheet Dialog                                                                         -->
+    <!-- =========================================================================================== -->
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_bkg</item>
+    </style>
+
+    <!-- =========================================================================================== -->
+    <!-- TextInput                                                                                   -->
+    <!-- =========================================================================================== -->
+
+    <style name="AppTextInputLayout.Simple" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="android:colorAccent">@color/colorPrimaryDark</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/colorPrimaryDark</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTextInputLayout.White" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/selector_text_input_white</item>
+        <item name="hintTextColor">@color/selector_text_input_white</item>
+        <item name="android:colorAccent">@color/whiteAlpha90</item>
+        <item name="android:textColorHint">@color/whiteAlpha90</item>
+    </style>
+
+    <style name="AppTextInputText">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_primary_dark</item>
+        <item name="android:textColorHighlight">@color/colorAccent</item>
+        <item name="theme">@style/AppTextInputTextTheme</item>
+    </style>
+
+    <style name="AppTextInputText.White">
+        <item name="android:textColor">@color/whiteAlpha90</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_white</item>
+        <item name="android:textColorHighlight">@color/whiteAlpha50</item>
+        <item name="android:textColorHint">@color/whiteAlpha90</item>
+        <item name="hintTextColor">@color/whiteAlpha90</item>
+        <item name="theme">@style/AppTextInputTextTheme.White</item>
+    </style>
+
+    <style name="AppTextInputTextTheme">
+        <item name="android:colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTextInputTextTheme.White">
+        <item name="android:colorControlActivated">@color/whiteAlpha90</item>
+        <item name="android:colorControlNormal">@color/whiteAlpha90</item>
     </style>
 
 </resources>

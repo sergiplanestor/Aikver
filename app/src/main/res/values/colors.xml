@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#546E7A</color>
+    <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#455A64</color>
-    <color name="colorAccent">#00B8D4</color>
+    <color name="colorAccent">#80CBC4</color>
+    <color name="colorAccentSecond">#1DE9B6</color>
+    <color name="colorAccentDark">#00897B</color><!--00897B-->
 
-    <color name="backgroundDark">#37474F</color>
+    <color name="colorRedAlpha">#EF9A9A</color>
+    <color name="colorPrimaryDarkAlpha50">#80455A64</color>
+    <color name="colorAccentDarkAlpha50">#8000897B</color>
+
+    <!-- Check uses -->
     <color name="backgroundLight">#78909C</color>
+    <color name="colorGray">#757575</color>
+    <color name="colorDarkGray">#616161</color>
 
-    <color name="colorAccentAlpha">#8000B8D4</color>
+    <color name="whiteAlpha20">#33FFFFFF</color>
     <color name="whiteAlpha50">#80FFFFFF</color>
     <color name="whiteAlpha75">#BFFFFFFF</color>
     <color name="whiteAlpha90">#E6FFFFFF</color>
     <color name="blackAlpha20">#33000000</color>
-    <color name="blackAlpha50">#80000000</color>
-    <color name="blackAlpha75">#BF000000</color>
 
     <color name="colorScore">#FFB300</color>
     <color name="colorScoreDark">#FFA000</color>
     <color name="colorScoreDarkAlpha70">#B3FFA000</color>
+
+    <color name="colorGreenSuccess">#00CA8D</color>
+    <color name="colorRedError">#FF6666</color>
 
 </resources>

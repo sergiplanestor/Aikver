@@ -1,38 +1,165 @@
 <resources>
     <string name="app_name">Aikver</string>
     <string name="register">Registro</string>
-    <string name="register_help">Introduce tu nombre para poder identificarte!</string>
-    <string name="register_field_hint">Nombre de usuario</string>
+    <string name="login">Login</string>
+    <string name="register_user_field_hint">Nombre de usuario</string>
+    <string name="register_username_description">
+        Bienvenid@ a Aikver, únicamente es necesario que introduzcas un nombre para poder identificarte.
+    </string>
+    <string name="register_group_description">
+        De manera opcional puedes crear tu propio grupo, al cual tus amigos y conocidos podrán unirse y empezar
+        a compartir series y peliculas. Si lo prefieres, puedes unirte a más grupos o crear los tuyos propios más adelante
+        en la sección de usuario!
+    </string>
+    <string name="register_link">Registrarme</string>
+    <string name="register_user_not_registered">
+        No se ha encontrado ningún usuario almacenado, inicia sesión manualmente o regístrate.
+    </string>
+    <string name="login_long">Iniciar sesión</string>
+    <string name="login_username_description">
+        Introduce tu nombre de usuario para poder iniciar sesión
+    </string>
+    <string name="profile_profile">Usuario:</string>
+    <string name="profile_selected_group">Grupo seleccionado:</string>
+    <string name="profile_no_selected_group">
+        Vaya, parece que no tienes ningún grupo seleccionado aún.
+        Para empezar a añadir contenido, crea un grupo haciendo click aquí
+    </string>
+    <string name="profile_group_members_title">Miembros del grupo:</string>
+    <string name="profile_user_num_of_content">
+        Grupos: %d\nContenido añadido: %d\n\nCreado: %s
+    </string>
+    <string name="profile_admin_group">Administrar grupos</string>
+    <string name="profile_create_group">Crear grupo</string>
+    <string name="profile_delete_group">Eliminar grupo</string>
+    <string name="profile_add_group_title">Añadir grupo</string>
+    <string name="profile_avatar_choose_eyes">Tipo de ojos</string>
+    <string name="profile_avatar_choose_nose">Tipo de nariz</string>
+    <string name="profile_avatar_choose_mouth">Tipo de boca</string>
+    <string name="mouth">boca</string>
+    <string name="eyes">ojos</string>
+    <string name="nose">nariz</string>
+    <string name="profile_avatar_choose_color">Color:</string>
+    <string name="profile_avatar_activity_title">Personaliza tu Avatar</string>
+    <string name="profile_add_member_hint">Nombre de usuario</string>
+    <string name="profile_add_member_title">Añadir miembro</string>
+    <string name="profile_admin_groups_title">Administra tus grupos</string>
+    <string name="profile_add_group_hint">Nombre del grupo</string>
+    <string name="profile_manage_groups_empty_state">
+        Todavia no tienes ningún grupo,\n¡Adelante, crea el tuyo!
+    </string>
+    <string name="member_num">%d Miembro/s</string>
+    <string name="admin">Admin</string>
+    <string name="you">Tú</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="confirmation">Confirmación</string>
+    <string name="profile_change_selected_group_confirmation">
+        Estás a punto de cambiar el grupo seleccionado. ¿Quieres continuar?
+    </string>
+    <string name="profile_delete_member_from_group_confirmation">
+        ¿Seguro que deseas eliminar a este usuario del grupo?
+    </string>
+    <string name="profile_delete_group_confirmation">
+        ¿Seguro que deseas eliminar este grupo? Esta acción no se podrá deshacer.
+    </string>
+    <string name="select">Seleccionar</string>
+    <string name="delete">Eliminar</string>
+    <string name="add_content_search_placeholder">
+        Escribe el título en el buscador para poder añadir tus series o películas favoritas
+    </string>
+    <string name="add_content_search_no_result">
+        Oops, parece que no se ha encontrado ningún resultado :(
+    </string>
+    <string name="content_details_original_title">Título original</string>
+    <string name="content_details_status_rumored">Rumor</string>
+    <string name="content_details_status_planned">Planificada</string>
+    <string name="content_details_status_in_production">En producción</string>
+    <string name="content_details_status_post_production">En post-producción</string>
+    <string name="content_details_status_released">Terminada</string>
+    <string name="content_details_status_canceled">Cancelada</string>
+    <string name="content_details_status_in_progress">En curso</string>
+    <string name="content_details_status_ended">Finalizada</string>
+    <string name="content_details_status_unknown">Desconocido</string>
+    <string name="content_details_original_title_info">%s, país %s</string>
+    <string name="content_details_genres_title">Géneros</string>
+    <string name="content_details_overview_title">Sinopsis</string>
+    <string name="content_details_related_content_title">%s relacionadas</string>
+    <string name="content_details_overview_see_more">Ver más</string>
+    <string name="content_details_overview_see_less">Ver menos</string>
+    <string name="content_details_episodes_title">Episodios</string>
+    <string name="content_details_episodes_info1">Serie %s.</string>
+    <string name="content_details_episodes_info2">
+        Dispone de %s temporada/s con un total de %s episodio/s.%s
+    </string>
+    <string name="content_details_seasons_info">%d temporada</string>
+    <string name="content_details_vote_title">@string/punctuation</string>
+    <string name="content_details_homepage">Página web</string>
+    <string name="content_details_vote_info">
+        Popularidad: %s\n\nNúmero de votos: %s
+    </string>
+    <string name="content_additional_info_title">
+        Añade de manera opcional un poco más de información:
+    </string>
+    <string name="content_details_movie_runtime">%d\'</string>
+    <string name="content_seen">Contenido visto?</string>
+    <string name="serie_network">Plataforma</string>
+    <string name="comment_hint">Comentario</string>
+    <string name="content_comments_title">Comparte algún comentario con tu grupo:</string>
+    <string name="content_recommend_to_title">¿Quieres recomendar este contenido a alguien en particular de tu grupo?</string>
+    <string name="punctuation">Puntuación</string>
+    <string name="films">Peliculas</string>
+    <string name="series">Series</string>
+    <string name="new_content_added">¡Nuevo contenido añadido!</string>
+    <string name="error_short">Oops..ha habido un error</string>
+    <string name="users_picked">Usuarios seleccionados:</string>
+    <string name="no_recommendations">¡Sin recomendaciones!</string>
+    <string name="dashboard_popular_content_title">Series y peliculas populares</string>
+    <string name="dashboard_recommended_content_title">Recomendado para ti</string>
+    <string name="users_that_have_seen_this">Usuarios que han visto esta %s:</string>
+    <string name="seen_by">%s vista</string>
+    <string name="users_punctuation">Puntuación de los usuarios:</string>
+    <string name="score_now">¡Puntúala ahora!</string>
+    <string name="some_users_comment">Algunos usuarios han comentado este contenido</string>
+    <string name="see_comments">Ver comentarios</string>
+    <string name="comments">Comentarios</string>
+    <string name="content_added_by">%s añadida por:</string>
+    <string name="serie">Serie</string>
+    <string name="film">Película</string>
+    <string name="content_seen_by_nobody">Nadie ha visto esta %s</string>
+    <string name="dont_know_what_see">¿No sabes que ver? ¡Atrévete!</string>
+    <string name="content_no_scored">Nadie ha puntuado aún esta %s</string>
+    <string name="share_your_opinion">¡Animate a dar tu opinión!</string>
+    <string name="no_comments">Todavía no hay comentarios</string>
+    <string name="comment_now_admiration">¡Escribe tu comentario!</string>
+    <string name="comment_now">Escribe tu comentario</string>
+    <string name="share_your_score">Puntua esta %s y compártela con el grupo</string>
+    <string name="send_score">Puntuar</string>
+    <string name="find">Buscar</string>
+    <string name="group_content_empty">Tu grupo no ha añadido contenido aún. ¡Animate!</string>
+    <string name="ouch">Ouch :(</string>
+    <string name="default_error">Vaya.. Parece que algo ha ido mal</string>
+    <string name="type_of">Tipos de %s</string>
+    <string name="edit">Editar</string>
+    <string name="optional_field">Campo opcional</string>
+    <string name="register_group_field_hint">Nombre del grupo</string>
     <string name="done">Hecho</string>
-    <string name="platform_title">Plataforma:</string>
-    <string name="platform">Plataforma</string>
-    <string name="punctuation_title">Puntuación:</string>
-    <string name="ask_punctuation">Puntuar serie:</string>
     <string name="add">Añadir</string>
-    <string name="add_activity_title">Nueva serie</string>
-    <string name="filter_activity_title">Series filtradas</string>
     <string name="error_title">Oops..</string>
     <string name="error_message_default">Parece que algo ha ido mal. Vuelve a intentarlo más tarde</string>
     <string name="ok">Aceptar</string>
     <string name="score_view_placeholder">%d / 10</string>
     <string name="error_blank_field">Campo obligatorio.</string>
-    <string name="add_serie_title">Rellena los siguientes campos:</string>
-    <string name="serie">Serie</string>
-    <string name="category_title">Categoria:</string>
-    <string name="category">Categoria</string>
-    <string name="template_user_creator">Añadida por %s, %s</string>
-    <string name="template_scorers">Han puntuado esta serie %d persona/s</string>
-    <string name="already_scored">¡Ya puntuada!</string>
     <string name="result_ok_title">¡Serie puntuada!</string>
     <string name="result_ok_description">Tu puntuación ha sido registrada :)</string>
     <string name="result_ko_title">¡Vaya!</string>
     <string name="result_ko_description">Parece que ha habido un error..</string>
     <string name="splash_text_connecting">Conectando…</string>
     <string name="splash_text_error">Oops.. Error de conexión…</string>
-    <string name="delete_confirmation_title">Confirmación</string>
-    <string name="delete_confirmation_message">¿Seguro que quieres eliminar esta serie?</string>
-    <string name="delete_confirmation_ok">Eliminar</string>
-    <string name="delete_confirmation_cancel">Cancelar</string>
-    <string name="dashboard_last_added_title">Últimas añadidas:</string>
-    <string name="dashboard_all_series_title">Todas la series:</string>
+    <string name="cancel">Cancelar</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_dashboard">Contenido</string>
+    <string name="title_search">Buscador</string>
+    <string name="error_punctuation_blank_field">Debes indicar la puntuación</string>
 </resources>

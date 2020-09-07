@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="PlatformViewer">
-        <attr name="showTitle" format="boolean" />
-        <attr name="imageSize" format="dimension" />
+    <attr name="title" format="string" />
+
+    <declare-styleable name="SwitcherView">
+        <attr name="rightOption" format="string" />
+        <attr name="leftOption" format="string" />
+        <attr name="defaultOptionSelected" format="enum">
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
     </declare-styleable>
 
+    <declare-styleable name="ContentPagerView">
+        <attr name="title" />
+        <attr name="shimmer" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyStateView">
+        <attr name="title" />
+        <attr name="subtitle" format="string" />
+        <attr name="actionText" format="string" />
+        <attr name="imageSize" format="integer|dimension" />
+        <attr name="mode" format="enum">
+            <enum name="light" value="0" />
+            <enum name="dark" value="1" />
+        </attr>
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeLayout">
+        <attr name="AniBackColor" format="color" />
+        <attr name="AniForeColor" format="color" />
+        <attr name="CircleSmaller" format="integer"/>
+    </declare-styleable>
 </resources>
