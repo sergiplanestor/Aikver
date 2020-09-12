@@ -186,7 +186,7 @@ class ContentRepositoryImpl(
                         addAll(movies.toMutableList().filterRepeated())
                         sortWith(compareBy { it.dateAdded })
                     }.also(CacheContentDataSource::insertGroupContent)
-                }
+                } ?: emptyList()
             }
         } else {
             CacheContentDataSource.fetchGroupContent()

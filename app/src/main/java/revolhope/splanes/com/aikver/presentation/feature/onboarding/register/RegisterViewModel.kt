@@ -21,13 +21,18 @@ class RegisterViewModel(
 
     fun register(username: String?, userGroup: String?) {
         if (!username.isNullOrBlank()) {
-            launchAsync {
-                handleResponse(
-                    state = registerUserUseCase.invoke(
-                        RegisterUserUseCase.Request(username, userGroup)
-                    )
-                )?.let { _registerResult.postValue(it) }
+            if (checkUsername(username)) {
+                launchAsync {
+                    handleResponse(
+                        state = registerUserUseCase.invoke(
+                            RegisterUserUseCase.Request(username.trim(), userGroup)
+                        )
+                    )?.let { _registerResult.postValue(it) }
+                }
+            } else {
+                postError("El nombre de usuario no puede contener carácteres especiales")
             }
+
         } else {
             _registerResult.value = false
         }
@@ -40,4 +45,7 @@ class RegisterViewModel(
             )?.let { _user.postValue(it) }
         }
     }
+
+    private fun checkUsername(username: String): Boolean =
+        username.matches(Regex("^[a-zA-Z0-9]{1,50}\$"))
 }

@@ -34,13 +34,9 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
 
         observe(viewModel.registerResult) {
             if (it) viewModel.getUser()
-            else {
-                hideLoader()
-                (activity as OnBoardingActivity?)?.showError()
-            }
+            else (activity as? OnBoardingActivity)?.showError()
         }
         observe(viewModel.user) {
-            hideLoader()
             with(activity as OnBoardingActivity?) {
                 if (it != null) this?.navToDashBoard()
                 else this?.showError()
@@ -49,7 +45,6 @@ class RegisterFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        showLoader()
         viewModel.register(
             usernameInputEditText.text?.toString(),
             groupInputEditText.text?.toString()

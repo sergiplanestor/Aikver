@@ -20,15 +20,13 @@ class LoginViewModel(
     private val _userLoginResult = MutableLiveData<Boolean>()
     val userLoginResult: MutableLiveData<Boolean> get() = _userLoginResult
 
-    private var user: User? = null
-
     fun doLogin(username: String) {
         launchAsync {
             val userLogin =
                 UserLogin(
                     "",
-                    "$username@xyz.com",
-                    sha256(username)
+                    "${username.trim()}@xyz.com",
+                    sha256(username.trim())
                 )
             val isLoginSuccess = handleResponse(
                 doLoginUseCase.invoke(DoLoginUseCase.Request(userLogin))
@@ -36,7 +34,7 @@ class LoginViewModel(
             if (isLoginSuccess) {
                 handleResponse(
                     state = fetchUserByNameUseCase.invoke(
-                        FetchUserByNameUseCase.Request(username)
+                        FetchUserByNameUseCase.Request(username.trim())
                     )
                 )?.let {
                     userLogin.id = it.id

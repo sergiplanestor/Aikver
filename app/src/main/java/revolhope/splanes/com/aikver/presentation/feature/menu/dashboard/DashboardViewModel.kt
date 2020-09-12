@@ -54,12 +54,12 @@ class DashboardViewModel(
         launchAsync(showLoader = false) {
             val result = handleResponse(
                 state = fetchGroupContentUseCase.invoke(FetchGroupContentUseCase.Request(force))
-            )
+            ) ?: emptyList()
             val user = handleResponse(
                 state = fetchUserUseCase.invoke(FetchUserUseCase.Request())
             )
             _recommendedContent.postValue(
-                result?.filter { content ->
+                result.filter { content ->
                     content.recommendedTo.any { it.userId == user?.id }
                 }
             )
