@@ -11,7 +11,7 @@
         android:layout_height="35dp"
         android:layout_margin="@dimen/margin_12dp"
         android:background="@drawable/card_outlined_accent"
-        android:checkedButton="@+id/serie"
+        android:checkedButton="@id/serie"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:background="@color/selector_component_content_selector"
+            android:background="@drawable/selector_component_content_selector"
             android:button="@null"
             android:gravity="center"
             android:text="@string/films" />
@@ -41,7 +41,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:background="@color/selector_component_content_selector"
+            android:background="@drawable/selector_component_content_selector"
             android:button="@null"
             android:gravity="center"
             android:text="@string/series" />

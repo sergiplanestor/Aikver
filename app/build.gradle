@@ -14,7 +14,7 @@ android {
         applicationId "revolhope.splanes.com.aikver"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 2
+        versionCode 4
         versionName versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
